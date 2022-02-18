@@ -49,9 +49,6 @@ class _HomeState extends State<Home> {
 
   String shiftName = "null";
 
-  String selectedDesign = "null";
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,15 +91,7 @@ class _HomeState extends State<Home> {
                             autofocus: true,
                             showCursor: false,
                             keyboardType: TextInputType.number,
-                            // inputFormatters: <TextInputFormatter>[
-                            //   FilteringTextInputFormatter.digitsOnly
-                            // ],
                             textAlign: TextAlign.center,
-                            // style: TextStyle(
-                            //     fontSize: 17.0,
-                            //     height: 3.0,
-                            //     color: Colors.black
-                            // ),
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Number of pieces produced',
@@ -173,17 +162,6 @@ class ColorField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TextInputAction textInputAction = TextInputAction.next;
-    // if(){
-    //
-    // }
-    // else
-    // if (title == "Yellow") {
-    //   textInputAction = TextInputAction.done;
-    // } else {
-    //   textInputAction = TextInputAction.next;
-    // }
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
