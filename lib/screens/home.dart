@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:ftm_service_app/widgets/time_and_date.dart';
 
 enum ShiftName { morning, evening, night }
 
@@ -12,7 +13,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   late String _rBlue = "0.0",
       _rBrown = "0.0",
       _rBeige = "0.0",
@@ -61,6 +61,7 @@ class _HomeState extends State<Home> {
           fontWeight: FontWeight.bold,
           fontSize: 21.0,
         ),
+        centerTitle: true,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -68,6 +69,28 @@ class _HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Card(
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                  side: const BorderSide(color: Colors.blue, width: 2),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                margin: const EdgeInsets.all(20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: const [
+                    // Text(
+                    //   'Operator',
+                    //   style: TextStyle(fontSize: 18, color: Colors.black),
+                    // ),
+                    TimeAndDate(),
+                    // Text(
+                    //   'First Shift',
+                    //   style: TextStyle(fontSize: 18, color: Colors.black),
+                    // ),
+                  ],
+                ),
+              ),
               Container(
                 padding: const EdgeInsets.all(8.0),
                 margin: const EdgeInsets.all(15.0),
@@ -76,55 +99,31 @@ class _HomeState extends State<Home> {
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // const TimeAndDate(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 200.0,
-                          height: 65.0,
-                          padding: const EdgeInsets.all(10),
-                          child: TextField(
-                            textInputAction: TextInputAction.next,
-                            controller: mNumber,
-                            autofocus: true,
-                            showCursor: false,
-                            keyboardType: TextInputType.number,
-                            textAlign: TextAlign.center,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Number of pieces produced',
-                              labelStyle: TextStyle(
-                                  fontSize: 12.0,
-                                  height: 1.0,
-                                  color: Colors.black),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    ColorField(
+
+                    MyTextFieldCustomized(
                         title: "Blue",
                         color: Colors.blue,
                         controller: mBlue,
                         value: _rBlue),
-                    ColorField(
+                    MyTextFieldCustomized(
                         title: "Brown",
                         color: Colors.brown,
                         controller: mBrown,
                         value: _rBrown),
-                    ColorField(
+                    MyTextFieldCustomized(
                         title: "Beige",
                         color: Colors.deepOrangeAccent,
                         controller: mBeige,
                         value: _rBeige),
-                    ColorField(
+                    MyTextFieldCustomized(
                         title: "Black",
                         color: Colors.black,
                         controller: mBlack,
                         value: _rBlack),
-                    ColorField(
+                    MyTextFieldCustomized(
                         title: "Yellow",
                         color: Colors.yellow.shade800,
                         controller: mYellow,
@@ -146,8 +145,8 @@ class _HomeState extends State<Home> {
   }
 }
 
-class ColorField extends StatelessWidget {
-  ColorField({
+class MyTextFieldCustomized extends StatelessWidget {
+  MyTextFieldCustomized({
     Key? key,
     required this.controller,
     required this.title,
