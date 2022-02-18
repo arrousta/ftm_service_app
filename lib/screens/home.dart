@@ -13,37 +13,38 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  late String _rBlue = "0.0",
-      _rBrown = "0.0",
-      _rBeige = "0.0",
-      _rBlack = "0.0",
-      _rYellow = "0.0";
+  late String _dispenser1A = "0.0",
+      _dispenser1B = "0.0",
+      _dispenser2A = "0.0",
+      _dispenser2B = "0.0",
+      _dispenser3A = "0.0",
+      _dispenser3B = "0.0";
 
   int fractionDigits = 2;
 
-  final mNumber = TextEditingController();
-  final mBlue = TextEditingController();
-  final mBrown = TextEditingController();
-  final mBeige = TextEditingController();
-  final mBlack = TextEditingController();
-  final mYellow = TextEditingController();
+  final dispenser1A = TextEditingController();
+  final dispenser1B = TextEditingController();
+  final dispenser2A = TextEditingController();
+  final dispenser2B = TextEditingController();
+  final dispenser3A = TextEditingController();
+  final dispenser3B = TextEditingController();
 
   void _incrementCounter() {
     setState(() {
-      double number = double.parse(mNumber.text);
-      double blue = double.parse(mBlue.text);
-      double brown = double.parse(mBrown.text);
-      double beige = double.parse(mBeige.text);
-      double black = double.parse(mBlack.text);
-      double yellow = double.parse(mYellow.text);
+      double dis1 = double.parse(dispenser1A.text);
+      double dis2 = double.parse(dispenser1B.text);
+      double dis3 = double.parse(dispenser2A.text);
+      double dis4 = double.parse(dispenser2B.text);
+      double dis5 = double.parse(dispenser3A.text);
+      double dis6 = double.parse(dispenser3B.text);
 
-      String mResult = (number * 65 * 65 * 0.0001).toStringAsFixed(4);
-      double result = double.parse(mResult);
-      _rBlue = (result * blue * 0.01).toStringAsFixed(fractionDigits);
-      _rBrown = (result * brown * 0.01).toStringAsFixed(fractionDigits);
-      _rBeige = (result * beige * 0.01).toStringAsFixed(fractionDigits);
-      _rBlack = (result * black * 0.01).toStringAsFixed(fractionDigits);
-      _rYellow = (result * yellow * 0.01).toStringAsFixed(fractionDigits);
+      double result = 1.0;
+      _dispenser1A = (result * dis1 * 0.01).toStringAsFixed(fractionDigits);
+      _dispenser1B = (result * dis2 * 0.01).toStringAsFixed(fractionDigits);
+      _dispenser2A = (result * dis3 * 0.01).toStringAsFixed(fractionDigits);
+      _dispenser2B = (result * dis4 * 0.01).toStringAsFixed(fractionDigits);
+      _dispenser3A = (result * dis5 * 0.01).toStringAsFixed(fractionDigits);
+      _dispenser3B = (result * dis6 * 0.01).toStringAsFixed(fractionDigits);
     });
   }
 
@@ -92,8 +93,8 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.all(8.0),
-                margin: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(6.0),
+                margin: const EdgeInsets.all(12.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10.0),
@@ -101,33 +102,88 @@ class _HomeState extends State<Home> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // const TimeAndDate(),
+                    const Text('Dispenser1'),
+                    Card(
+                      color: Colors.blueGrey.shade100,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      margin: const EdgeInsets.all(20.0),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            MyTextFieldCustomized(
+                                title: "A",
+                                color: Colors.red,
+                                controller: dispenser1A,
+                                value: _dispenser1A),
+                            MyTextFieldCustomized(
+                                title: "B",
+                                color: Colors.red,
+                                controller: dispenser1B,
+                                value: _dispenser1B),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 18.0,
+                    ),
+                    const Text('Dispenser2'),
+                    Card(
+                      color: Colors.blueGrey.shade100,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      margin: const EdgeInsets.all(20.0),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            MyTextFieldCustomized(
+                                title: "A",
+                                color: Colors.red,
+                                controller: dispenser2A,
+                                value: _dispenser2A),
+                            MyTextFieldCustomized(
+                                title: "B",
+                                color: Colors.red,
+                                controller: dispenser2B,
+                                value: _dispenser2B),
+                          ],
+                        ),
+                      ),
+                    ),
 
-                    MyTextFieldCustomized(
-                        title: "Blue",
-                        color: Colors.blue,
-                        controller: mBlue,
-                        value: _rBlue),
-                    MyTextFieldCustomized(
-                        title: "Brown",
-                        color: Colors.brown,
-                        controller: mBrown,
-                        value: _rBrown),
-                    MyTextFieldCustomized(
-                        title: "Beige",
-                        color: Colors.deepOrangeAccent,
-                        controller: mBeige,
-                        value: _rBeige),
-                    MyTextFieldCustomized(
-                        title: "Black",
-                        color: Colors.black,
-                        controller: mBlack,
-                        value: _rBlack),
-                    MyTextFieldCustomized(
-                        title: "Yellow",
-                        color: Colors.yellow.shade800,
-                        controller: mYellow,
-                        value: _rYellow),
+                    const SizedBox(
+                      height: 18.0,
+                    ),
+                    const Text('Dispenser3'),
+                    Card(
+                      color: Colors.blueGrey.shade100,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      margin: const EdgeInsets.all(20.0),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            MyTextFieldCustomized(
+                                title: "A",
+                                color: Colors.red,
+                                controller: dispenser3A,
+                                value: _dispenser3A),
+                            MyTextFieldCustomized(
+                                title: "B",
+                                color: Colors.red,
+                                controller: dispenser3B,
+                                value: _dispenser3B),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -165,9 +221,9 @@ class MyTextFieldCustomized extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Container(
-          width: 150.0,
-          height: 60.0,
-          padding: const EdgeInsets.all(10),
+          width: 110.0,
+          height: 40.0,
+          padding: const EdgeInsets.all(3),
           child: TextField(
             // textInputAction: textInputAction,
             textInputAction: TextInputAction.next,
@@ -182,6 +238,7 @@ class MyTextFieldCustomized extends StatelessWidget {
               FilteringTextInputFormatter.digitsOnly
             ],
             decoration: InputDecoration(
+                fillColor: Colors.white,
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: color),
                 ),
@@ -197,13 +254,24 @@ class MyTextFieldCustomized extends StatelessWidget {
                 )),
           ),
         ),
-        const Text(
-          ' ---> Result:   ',
-        ),
-        Text(
-          // '$_counter',
-          '$value',
-          style: Theme.of(context).textTheme.headline6,
+        Card(
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+            side: const BorderSide(color: Colors.blue, width: 1),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          margin: const EdgeInsets.all(6.0),
+          child: Container(
+            alignment: Alignment.centerLeft,
+            margin: const EdgeInsets.only(left: 8.0),
+            width: 100.0,
+            height: 34.0,
+            child: Text(
+              // '$_counter',
+              '$value',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ),
         ),
       ],
     );
