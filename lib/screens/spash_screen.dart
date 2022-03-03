@@ -7,14 +7,7 @@ import 'package:ftm_service_app/constractor.dart';
 import 'package:ftm_service_app/services/network_adapter.dart';
 import 'package:ftm_service_app/structures/user.dart';
 
-class MyHttpOverrides extends HttpOverrides {
-  @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-  }
-}
+
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -77,7 +70,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    HttpOverrides.global = MyHttpOverrides();
     futureUser = fetchUser();
     getInternetStatus();
   }

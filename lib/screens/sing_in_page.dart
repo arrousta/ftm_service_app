@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ftm_service_app/screens/dispenser_page.dart';
 import 'package:ftm_service_app/widgets/input_fields.dart';
 import 'package:ftm_service_app/constractor.dart';
 import 'package:page_transition/page_transition.dart';
@@ -57,9 +58,7 @@ class _SignInPageState extends State<SignInPage> {
                       ftmPasswordInput('Password'),
                       TextButton(
                         onPressed: () {
-
                           //ToDo : Forgot Password onPressed Here ...
-
                         },
                         child: const Text('Forgot Password?',
                             style: contrastTextBold),
@@ -67,14 +66,29 @@ class _SignInPageState extends State<SignInPage> {
                       ElevatedButton(
                         //TODO : SignInPage : after user press Enter button Send Data To Server And Check authentication :
                         onPressed: () {
+                          bool authentication = false;
+                          String _user = personnelCodeController.text;
+                          String _pass = passwordController.text;
+                          String _userRes = "100";
+                          String _passRes = "1000";
+                          if (_user == _userRes && _pass == _passRes) {
 
-                          print(personnelCodeController.text); // Print name current value
-                          print(passwordController.text); // Print password current value
+                            authentication = true;
+                          }
 
-                          // if(authentication == true) {
-                          //   // Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: Dashboard()));
-                          // }
+                          print(_user); // Print name current value
+                          print(_pass); // Print password current value
 
+                          if (authentication == true) {
+                            print("helll");
+                            Navigator.pushReplacement(
+                                context,
+                                PageTransition(
+                                    type: PageTransitionType.rightToLeft,
+                                    child: const DispenserPage(
+                                      title: "dis",
+                                    )));
+                          }
                         },
                         child: const Text("Enter"),
                         style: ElevatedButton.styleFrom(
