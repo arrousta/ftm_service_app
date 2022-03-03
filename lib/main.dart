@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ftm_service_app/screens/home_page.dart';
+import 'package:ftm_service_app/screens/spash_screen.dart';
 import 'screens/confirmation_page.dart';
 import 'screens/sign_up_page.dart';
 import 'screens/sing_in_page.dart';
@@ -24,10 +25,11 @@ class MyApp extends StatelessWidget {
       home: const HomePage(pageTitle: 'FTM.CO'),
       initialRoute: '/.',
       routes: {
-        '/.': (BuildContext context) => HomePage(pageTitle: 'SignInPage',),
+        '/.': (BuildContext context) => SplashScreen(),
+        '/home': (BuildContext context) => const HomePage(pageTitle: 'Home',),
         '/signin': (BuildContext context) =>  SignInPage(pageTitle: 'SignInPage',),
-        '/signup': (BuildContext context) =>   SignUpPage(pageTitle: 'SignUpPage',),
-        '/confirmpage': (BuildContext context) =>   ConfirmationPage(pageTitle: 'ConfirmationPage',),
+        '/signup': (BuildContext context) =>   const SignUpPage(pageTitle: 'SignUpPage',),
+        '/confirmpage': (BuildContext context) =>   const ConfirmationPage(pageTitle: 'ConfirmationPage',),
       },
     );
   }
