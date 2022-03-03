@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import './colors.dart';
+
+import '../constractor.dart';
 
 TextButton ftmFlatBtn(String text, onPressed) {
   return TextButton(

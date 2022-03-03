@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ftm_service_app/shared/buttons.dart';
-import 'package:ftm_service_app/shared/colors.dart';
-import 'package:ftm_service_app/shared/styles.dart';
+import 'package:ftm_service_app/widgets/buttons.dart';
+import 'package:ftm_service_app/constractor.dart';
 
 import 'package:page_transition/page_transition.dart';
 import 'sign_up_page.dart';

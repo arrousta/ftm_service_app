@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ftm_service_app/screens/dispenser_page.dart';
-import 'package:ftm_service_app/shared/colors.dart';
-import 'package:ftm_service_app/shared/inputFields.dart';
-import 'package:ftm_service_app/shared/styles.dart';
+import 'package:ftm_service_app/widgets/input_fields.dart';
+import 'package:ftm_service_app/constractor.dart';
 import 'package:page_transition/page_transition.dart';
 import 'sing_in_page.dart';
 

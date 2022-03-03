@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import './colors.dart';
-import './styles.dart';
+import '../constractor.dart';
 
 TextEditingController nameController = TextEditingController(); // Full Name
 TextEditingController passwordController = TextEditingController(); // Password
