@@ -10,6 +10,8 @@ class TimeAndDate extends StatefulWidget {
 }
 
 class _TimeAndDateState extends State<TimeAndDate> {
+  String operator = "null";
+
   String _timeString = "";
   String _dateString = "";
   String shiftName = "";
@@ -23,7 +25,7 @@ class _TimeAndDateState extends State<TimeAndDate> {
   }
 
   @override
-  void initState() {
+  initState() {
     _dateString = _formatDate(DateTime.now());
     Timer.periodic(const Duration(seconds: 1), (Timer t) => _getDate());
     _timeString = _formatTime(DateTime.now());
@@ -34,9 +36,11 @@ class _TimeAndDateState extends State<TimeAndDate> {
   void _getDate() {
     final DateTime now = DateTime.now();
     final String formattedDate = _formatDate(now);
-    setState(() {
-      _dateString = formattedDate;
-    });
+    if (mounted) {
+      setState(() {
+        _dateString = formattedDate;
+      });
+    }
   }
 
   void _getTime() {
@@ -57,10 +61,12 @@ class _TimeAndDateState extends State<TimeAndDate> {
     } else {
       partOfDay = "Third";
     }
-    setState(() {
-      _timeString = formattedTime;
-      shiftName = partOfDay;
-    });
+    if (mounted) {
+      setState(() {
+        _timeString = formattedTime;
+        shiftName = partOfDay;
+      });
+    }
   }
 
   @override
@@ -70,8 +76,8 @@ class _TimeAndDateState extends State<TimeAndDate> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            "Operator",
+          Text(
+            "Operator: $operator",
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           const SizedBox(
