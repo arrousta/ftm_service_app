@@ -18,6 +18,9 @@ dependencies:
   flutter_spinkit: ^5.1.0
   shared_preferences: ^2.0.13
 
+  flutter_localizations:
+    sdk: flutter
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -27,6 +30,7 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+
   fonts:
     - family: Poppins
       fonts:
@@ -37,6 +41,11 @@ flutter:
     - family: Pacifico
       fonts:
         - asset: fonts/Pacifico.ttf
+    - family: Yekan
+      fonts:
+        - asset: fonts/Yekan.ttf
   assets:
     - images/ftm.png
+    - locale/fa.json
+    - locale/en.json
 

@@ -127,16 +127,7 @@ class _DispenserPageState extends State<DispenserPage> {
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
-        // appBar: AppBar(
-        //   backgroundColor: const Color(0xffc7c7c7),
-        //   elevation: 0.0,
-        //   titleTextStyle: const TextStyle(
-        //     color: Colors.black,
-        //     fontWeight: FontWeight.bold,
-        //     fontSize: 21.0,
-        //   ),
-        //   centerTitle: true,
-        // ),
+
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
@@ -189,7 +180,7 @@ class _DispenserPageState extends State<DispenserPage> {
                 //-------------------------------------------------------------------------------------------
                 Container(
                   padding: const EdgeInsets.all(3.0),
-                  margin: const EdgeInsets.all(8.0),
+                  margin: const EdgeInsets.all(3.0),
                   decoration: BoxDecoration(
                     color: Color(0xffdbdbde),
                     borderRadius: BorderRadius.circular(15.0),
@@ -197,14 +188,17 @@ class _DispenserPageState extends State<DispenserPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        'Dispenser1',
-                        style: kHeader7,
+                      const Padding(
+                        padding: EdgeInsets.all(2.0),
+                        child: Text(
+                          'Dispenser1',
+                          style: kHeader7,
+                        ),
                       ),
                       Container(
                         margin: const EdgeInsets.all(10.0),
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(3.0),
                           child: Column(
                             children: [
                               Row(

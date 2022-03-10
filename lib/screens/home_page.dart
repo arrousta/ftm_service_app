@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ftm_service_app/translations.dart';
 import 'package:ftm_service_app/widgets/buttons.dart';
 import 'package:ftm_service_app/constractor.dart';
 
@@ -29,7 +30,7 @@ class _HomePageState extends State<HomePage> {
           Container(
             margin: const EdgeInsets.only(bottom: 10, top: 0),
             //TODO : change the name of Start page And Font Style :
-            child: const Text('Welcome !', style: kLogoStyle),
+            child: Text(Translations.of(context).text('welcome'), style: kLogoStyle),
           ),
           Container(
             width: 200,

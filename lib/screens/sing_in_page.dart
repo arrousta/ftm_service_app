@@ -27,7 +27,6 @@ class _SignInPageState extends State<SignInPage> {
   String password = "";
 
   Future<bool> futureGet(String _user, String _pass) async {
-
     futureInputUser = signInUser(
         url: 'https://app.srahmadi.ir/usersignin.php',
         userName: _user,
@@ -101,19 +100,15 @@ class _SignInPageState extends State<SignInPage> {
                              setState(() {
                               userName = personnelCodeController.text;
                               password = passwordController.text;
-                              print(userName+password);
-
                               futureGet(userName, password).then((value) {
                                 String name = "";
                                 name += user.name ?? "name error";
                                 name+= " ";
                                 name += user.family ?? "name error";
 
-                                print("user: "+user.name.toString());
                                 if (user.name == null) {
                                   showSnackBar(context,
                                       'Personnel Code or Password is incorrect');
-                                  print("System: User is null");
                                   print(user.name);
 
                                 } else {
