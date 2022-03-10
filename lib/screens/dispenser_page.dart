@@ -1,15 +1,18 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:ftm_service_app/widgets/input_fields.dart';
 import 'package:ftm_service_app/constractor.dart';
-import 'package:ftm_service_app/widgets/time_and_date.dart';
+import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
 import 'payment_page.dart';
 
 enum ShiftName { morning, evening, night }
 
 class DispenserPage extends StatefulWidget {
-  const DispenserPage({Key? key, required this.title}) : super(key: key);
-  final String title;
+  const DispenserPage({Key? key, required this.operator}) : super(key: key);
+  final String operator;
 
   @override
   State<DispenserPage> createState() => _DispenserPageState();
@@ -19,6 +22,12 @@ class DispenserPage extends StatefulWidget {
 //Todo : Delete this section if not use :
 
 class _DispenserPageState extends State<DispenserPage> {
+
+  String operatorName = "";
+  String _timeString = "";
+  String _dateString = "";
+  String shiftName = "";
+
   late String _dispenser1A = "0.0",
       _dispenser1B = "0.0",
       _dispenser2A = "0.0",
@@ -55,276 +64,393 @@ class _DispenserPageState extends State<DispenserPage> {
   }
 //*************************************************************************************
 
+  String _formatDate(DateTime dateTime) {
+    return DateFormat('MM/dd/yyyy').format(dateTime);
+  }
 
-  String shiftName = "null";
+  String _formatTime(DateTime dateTime) {
+    return DateFormat('HH:mm:ss').format(dateTime);
+  }
+
+  @override
+  initState() {
+    operatorName = widget.operator;
+    _dateString = _formatDate(DateTime.now());
+    Timer.periodic(const Duration(seconds: 1), (Timer t) => _getDate());
+    _timeString = _formatTime(DateTime.now());
+    Timer.periodic(const Duration(seconds: 1), (Timer t) => _getTime());
+    super.initState();
+  }
+
+  void _getDate() {
+    final DateTime now = DateTime.now();
+    final String formattedDate = _formatDate(now);
+    // print(formattedDate);
+    if (mounted) {
+      setState(() {
+        _dateString = formattedDate;
+      });
+    }
+  }
+
+  void _getTime() {
+    final DateTime now = DateTime.now();
+    final String formattedTime = _formatTime(now);
+    String hour = "";
+    late String partOfDay;
+
+    for (int i = 0; i < 2; i++) {
+      hour += formattedTime[i];
+    }
+    int _hour = int.parse(hour);
+
+    if (7 <= _hour && _hour < 14) {
+      partOfDay = "First";
+    } else if (14 <= _hour && _hour < 22) {
+      partOfDay = "Second";
+    } else {
+      partOfDay = "Third";
+    }
+    if (mounted) {
+      setState(() {
+        _timeString = formattedTime;
+        shiftName = partOfDay;
+      });
+    }
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xffc7c7c7),
-        elevation: 0.0,
-        title: Text(widget.title),
-        titleTextStyle: const TextStyle(
-          color: Colors.black,
-          fontWeight: FontWeight.bold,
-          fontSize: 21.0,
-        ),
-        centerTitle: true,
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Card(
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                  side: const BorderSide(color: Colors.blue, width: 2),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                margin: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
-                    // Text(
-                    //   'Operator',
-                    //   style: TextStyle(fontSize: 18, color: Colors.black),
-                    // ),
-                    TimeAndDate(),
-                    // Text(
-                    //   'First Shift',
-                    //   style: TextStyle(fontSize: 18, color: Colors.black),
-                    // ),
-                  ],
-                ),
-              ),
-              //-------------------------------------------------------------------------------------------
-              Container(
-                padding: const EdgeInsets.all(3.0),
-                margin: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  color: Color(0xffdbdbde),
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Dispenser1',
-                      style: h7,
-                    ),
-                    Container(
-                      margin: const EdgeInsets.all(10.0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
+    return WillPopScope(
+      onWillPop: _onBackPressed,
+      child: Scaffold(
+        // appBar: AppBar(
+        //   backgroundColor: const Color(0xffc7c7c7),
+        //   elevation: 0.0,
+        //   titleTextStyle: const TextStyle(
+        //     color: Colors.black,
+        //     fontWeight: FontWeight.bold,
+        //     fontSize: 21.0,
+        //   ),
+        //   centerTitle: true,
+        // ),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Card(
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    side: const BorderSide(color: kPrimaryColor, width: 2),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  margin: const EdgeInsets.all(8.0),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        const Text(
+                          "Operator: ",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(
+                          width: 1.0,
+                        ),
+                        Text(
+                          widget.operator,
+                        ),
+                        const SizedBox(
+                          width: 6.0,
+                        ),
+                        Column(
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  'A',
-                                  style: h7,
-                                ),
-                                Container(
-                                  width: 140.0,
-                                  height: 50.0,
-                                  padding: const EdgeInsets.all(3),
-                                  child: ftmDispenser1AInput('Enter Number'),
-                                ),
-                                Container(
-                                  width: 140.0,
-                                  height: 50.0,
-                                  child: const CardWidget(
-                                    value: '0.0',
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  'B',
-                                  style: h7,
-                                ),
-                                Container(
-                                  width: 140.0,
-                                  height: 50.0,
-                                  padding: const EdgeInsets.all(3),
-                                  child: ftmDispenser1BInput('Enter Number'),
-                                ),
-                                Container(
-                                  width: 140.0,
-                                  height: 50.0,
-                                  child: const CardWidget(
-                                    value: '0.1',
-                                  ),
-                                ),
-                              ],
-                            ),
+                            Text(_dateString),
+                            Text(_timeString),
                           ],
                         ),
+                        const SizedBox(
+                          width: 6.0,
+                        ),
+                        const Text(
+                          "Shift: ",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(shiftName),
+                      ],
+                    ),
+                  ),
+                ),
+                //-------------------------------------------------------------------------------------------
+                Container(
+                  padding: const EdgeInsets.all(3.0),
+                  margin: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    color: Color(0xffdbdbde),
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Dispenser1',
+                        style: kHeader7,
                       ),
-                      decoration: dispenserPlateDecoration,
-                    ),
-                    //-------------------------------------------------------------------------------------
-                    const SizedBox(
-                      height: 18.0,
-                    ),
-                    const Text(
-                      'Dispenser2',
-                      style: h7,
-                    ),
+                      Container(
+                        margin: const EdgeInsets.all(10.0),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    'A',
+                                    style: kHeader7,
+                                  ),
+                                  Container(
+                                    width: 140.0,
+                                    height: 50.0,
+                                    padding: const EdgeInsets.all(3),
+                                    child: ftmDispenser1AInput('Enter Number'),
+                                  ),
+                                  Container(
+                                    width: 140.0,
+                                    height: 50.0,
+                                    child: const CardWidget(
+                                      value: '0.0',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    'B',
+                                    style: kHeader7,
+                                  ),
+                                  Container(
+                                    width: 140.0,
+                                    height: 50.0,
+                                    padding: const EdgeInsets.all(3),
+                                    child: ftmDispenser1BInput('Enter Number'),
+                                  ),
+                                  Container(
+                                    width: 140.0,
+                                    height: 50.0,
+                                    child: const CardWidget(
+                                      value: '0.1',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        decoration: dispenserPlateDecoration,
+                      ),
+                      //-------------------------------------------------------------------------------------
+                      const SizedBox(
+                        height: 18.0,
+                      ),
+                      const Text(
+                        'Dispenser2',
+                        style: kHeader7,
+                      ),
 
-                    Container(
-                      margin: const EdgeInsets.all(10.0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  'A',
-                                  style: h7,
-                                ),
-                                Container(
-                                  width: 140.0,
-                                  height: 50.0,
-                                  padding: const EdgeInsets.all(3),
-                                  child: ftmDispenser2AInput('Enter Number'),
-                                ),
-                                Container(
-                                  width: 140.0,
-                                  height: 50.0,
-                                  child: const CardWidget(
-                                    value: '0.0',
+                      Container(
+                        margin: const EdgeInsets.all(10.0),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    'A',
+                                    style: kHeader7,
                                   ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  'B',
-                                  style: h7,
-                                ),
-                                Container(
-                                  width: 140.0,
-                                  height: 50.0,
-                                  padding: const EdgeInsets.all(3),
-                                  child: ftmDispenser2BInput('Enter Number'),
-                                ),
-                                Container(
-                                  width: 140.0,
-                                  height: 50.0,
-                                  child: const CardWidget(
-                                    value: '0.1',
+                                  Container(
+                                    width: 140.0,
+                                    height: 50.0,
+                                    padding: const EdgeInsets.all(3),
+                                    child: ftmDispenser2AInput('Enter Number'),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                  Container(
+                                    width: 140.0,
+                                    height: 50.0,
+                                    child: const CardWidget(
+                                      value: '0.0',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    'B',
+                                    style: kHeader7,
+                                  ),
+                                  Container(
+                                    width: 140.0,
+                                    height: 50.0,
+                                    padding: const EdgeInsets.all(3),
+                                    child: ftmDispenser2BInput('Enter Number'),
+                                  ),
+                                  Container(
+                                    width: 140.0,
+                                    height: 50.0,
+                                    child: const CardWidget(
+                                      value: '0.1',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
+                        decoration: dispenserPlateDecoration,
                       ),
-                      decoration: dispenserPlateDecoration,
-                    ),
-                    const SizedBox(
-                      height: 18.0,
-                    ),
-                    const Text(
-                      'Dispenser3',
-                      style: h7,
-                    ),
-                    Container(
-                      margin: const EdgeInsets.all(10.0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  'A',
-                                  style: h7,
-                                ),
-                                Container(
-                                  width: 140.0,
-                                  height: 50.0,
-                                  padding: const EdgeInsets.all(3),
-                                  child: ftmDispenser3AInput('Enter Number'),
-                                ),
-                                Container(
-                                  width: 140.0,
-                                  height: 50.0,
-                                  child: const CardWidget(
-                                    value: '0.0',
+                      const SizedBox(
+                        height: 18.0,
+                      ),
+                      const Text(
+                        'Dispenser3',
+                        style: kHeader7,
+                      ),
+                      Container(
+                        margin: const EdgeInsets.all(10.0),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    'A',
+                                    style: kHeader7,
                                   ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  'B',
-                                  style: h7,
-                                ),
-                                Container(
-                                  width: 140.0,
-                                  height: 50.0,
-                                  padding: const EdgeInsets.all(3),
-                                  child: ftmDispenser3BInput('Enter Number'),
-                                ),
-                                Container(
-                                  width: 140.0,
-                                  height: 50.0,
-                                  child: const CardWidget(
-                                    value: '0.1',
+                                  Container(
+                                    width: 140.0,
+                                    height: 50.0,
+                                    padding: const EdgeInsets.all(3),
+                                    child: ftmDispenser3AInput('Enter Number'),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                  Container(
+                                    width: 140.0,
+                                    height: 50.0,
+                                    child: const CardWidget(
+                                      value: '0.0',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    'B',
+                                    style: kHeader7,
+                                  ),
+                                  Container(
+                                    width: 140.0,
+                                    height: 50.0,
+                                    padding: const EdgeInsets.all(3),
+                                    child: ftmDispenser3BInput('Enter Number'),
+                                  ),
+                                  Container(
+                                    width: 140.0,
+                                    height: 50.0,
+                                    child: const CardWidget(
+                                      value: '0.1',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
+                        decoration: dispenserPlateDecoration,
                       ),
-                      decoration: dispenserPlateDecoration,
-                    ),
-                    const SizedBox(
-                      height: 8.0,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        //TODO: Receive Data from Dispensers Field and do Calculations :
+                      const SizedBox(
+                        height: 8.0,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          //TODO: Receive Data from Dispensers Field and do Calculations :
 
-                        print(dispenserA1Controller.text); // Print name current value
-                        print(dispenserB1Controller.text); // Print name current value
-                        print(dispenserA2Controller.text); // Print name current value
-                        print(dispenserB2Controller.text); // Print name current value
-                        print(dispenserA3Controller.text); // Print name current value
-                        print(dispenserB3Controller.text); // Print name current value
-                        Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: const Payment(title: 'Payment Page',)));
-                      },
-                      child: const Text("Next Step"),
-                      style: ElevatedButton.styleFrom(
-                        primary: primaryColor,
-                        padding: const EdgeInsets.all(13),
+                          print(dispenserA1Controller
+                              .text); // Print name current value
+                          print(dispenserB1Controller
+                              .text); // Print name current value
+                          print(dispenserA2Controller
+                              .text); // Print name current value
+                          print(dispenserB2Controller
+                              .text); // Print name current value
+                          print(dispenserA3Controller
+                              .text); // Print name current value
+                          print(dispenserB3Controller
+                              .text); // Print name current value
+                          Navigator.pushReplacement(
+                              context,
+                              PageTransition(
+                                  type: PageTransitionType.rightToLeft,
+                                  child: const Payment(
+                                    title: 'Payment Page',
+                                  )));
+                        },
+                        child: const Text("Next Step"),
+                        style: ElevatedButton.styleFrom(
+                          primary: kPrimaryColor,
+                          padding: const EdgeInsets.all(13),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  Future<bool> _onBackPressed() async {
+    return await showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            // title: const Text("Error"),
+            content: const Text('Do you want to exit?'),
+
+            actions: <Widget>[
+              TextButton(
+                child: const Text("No"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              TextButton(
+                child: const Text("Yes"),
+                onPressed: () {
+                  SystemNavigator.pop();
+                },
+              ),
+            ],
+          );
+        });
   }
 }
 

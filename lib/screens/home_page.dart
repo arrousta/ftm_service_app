@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
           Container(
             margin: const EdgeInsets.only(bottom: 10, top: 0),
             //TODO : change the name of Start page And Font Style :
-            child: const Text('Welcome !', style: logoStyle),
+            child: const Text('Welcome !', style: kLogoStyle),
           ),
           Container(
             width: 200,
@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
                   PageTransition(
                       // Page Transition Function
                       type: PageTransitionType.leftToRightWithFade,
-                      duration: const Duration(seconds: 1),
+                      duration: const Duration(seconds:  1),
                       child: SignInPage(
                         pageTitle: 'SignInPage',
                       )));
@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       )),
-      backgroundColor: bgColor2,
+      backgroundColor: kBackgroundColor2,
     );
   }
 }

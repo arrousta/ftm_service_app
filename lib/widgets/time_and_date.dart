@@ -3,14 +3,14 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
 class TimeAndDate extends StatefulWidget {
-  const TimeAndDate({Key? key}) : super(key: key);
-
+   TimeAndDate({Key? key, required String? operator}) : super(key: key);
+String? operator;
   @override
   _TimeAndDateState createState() => _TimeAndDateState();
 }
 
 class _TimeAndDateState extends State<TimeAndDate> {
-  String operator = "null";
+  String _operator = "error";
 
   String _timeString = "";
   String _dateString = "";
@@ -71,13 +71,15 @@ class _TimeAndDateState extends State<TimeAndDate> {
 
   @override
   Widget build(BuildContext context) {
+
+    _operator = widget.operator ?? "Null";
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Operator: $operator",
+            "Operator: $_operator",
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           const SizedBox(

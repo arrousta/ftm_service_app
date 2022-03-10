@@ -85,7 +85,7 @@ class _HomeState extends State<Home> {
                     //   'Operator',
                     //   style: TextStyle(fontSize: 18, color: Colors.black),
                     // ),
-                    TimeAndDate(),
+                    // TimeAndDate(),
                     // Text(
                     //   'First Shift',
                     //   style: TextStyle(fontSize: 18, color: Colors.black),

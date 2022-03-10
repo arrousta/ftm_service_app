@@ -2,11 +2,8 @@ import 'dart:convert';
 import 'package:ftm_service_app/structures/user.dart';
 import 'package:http/http.dart' as http;
 
-
-Future<User> fetchUser() async {
-  final response =
-      await http.get(Uri.parse('https://app.srahmadi.ir/getuser.php'));
-
+Future<User> fetchData({required String url}) async {
+  final response = await http.get(Uri.parse(url));
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
@@ -18,17 +15,20 @@ Future<User> fetchUser() async {
   }
 }
 
-Future<User> createUser(String phone) async {
+Future<User> signInUser(
+    {required String url,
+    required String userName,
+    required String password}) async {
   final response = await http.post(
-    Uri.parse('https://app.srahmadi.ir/usersignup.php'),
+    Uri.parse(url),
     headers: {
       "Accept": "application/json",
       "Content-Type": "application/x-www-form-urlencoded",
     },
     encoding: Encoding.getByName('utf-8'),
     body: <String, String>{
-      'operator': "Ali",
-      'phone': phone,
+      'personnel_id': userName,
+      'password': password,
     },
   );
   if (response.statusCode == 201) {
@@ -42,6 +42,6 @@ Future<User> createUser(String phone) async {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
     String errorCode = response.statusCode.toString();
-    throw Exception('Failed to create user: $errorCode');
+    throw Exception('Failed to connect: $errorCode');
   }
 }

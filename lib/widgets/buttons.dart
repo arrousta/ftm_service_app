@@ -7,10 +7,10 @@ TextButton ftmFlatBtn(String text, onPressed) {
     onPressed: onPressed,
     child: Text(
       text,
-      style: const TextStyle(color: white),
+      style: const TextStyle(color: kWhite),
     ),
     style: TextButton.styleFrom(
-      primary: primaryColor,
+      primary: kPrimaryColor,
       backgroundColor: const Color(0xff4469c6),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
     ),
@@ -20,9 +20,9 @@ TextButton ftmFlatBtn(String text, onPressed) {
 OutlinedButton ftmOutlineBtn(String text, onPressed) {
   return OutlinedButton(
     onPressed: onPressed,
-    child: Text(text, style: const TextStyle(color: primaryColor)),
+    child: Text(text, style: const TextStyle(color: kPrimaryColor)),
     style: OutlinedButton.styleFrom(
-      side: const BorderSide(color: primaryColor),
+      side: const BorderSide(color: kPrimaryColor),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
     ),
   );

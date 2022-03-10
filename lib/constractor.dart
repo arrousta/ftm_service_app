@@ -1,73 +1,73 @@
 import 'package:flutter/material.dart';
 
 //Colors used in project
-const Color bgColor = Color(0xfff4f7fa);
-const Color bgColor2 = Colors.white;
+const Color kBackgroundColor1 = Color(0xfff4f7fa);
+const Color kBackgroundColor2 = Colors.white;
 //  const Color primaryColor = Colors.green;
-const Color primaryColor = Color(0xff4469c6);
-const Color white = Colors.white;
-const Color darkText = Colors.black54;
-const Color highlightColor = Colors.green;
+const Color kPrimaryColor = Color(0xff4469c6);
+const Color kWhite = Colors.white;
+const Color kTextDark = Colors.black54;
+const Color kHighlightColor = Colors.green;
 
-const Color dispenserColor = Colors.red;
+const Color kDispenserColor = Colors.red;
 
 
 //Text Style
 //TODO : App Logo Style :
-const logoStyle = TextStyle(
+const kLogoStyle = TextStyle(
     fontFamily: 'Pacifico',
     fontSize: 30,
     color: Colors.black54,
     letterSpacing: 5);
 
-const logoWhiteStyle = TextStyle(
+const kLogoWhiteStyle = TextStyle(
     fontFamily: 'Pacifico',
     fontSize: 21,
     letterSpacing: 2,
     color: Colors.white);
-const whiteText = TextStyle(color: Colors.white, fontFamily: 'Poppins');
-const disabledText = TextStyle(color: Colors.grey, fontFamily: 'Poppins');
-const contrastText = TextStyle(color: primaryColor, fontFamily: 'Poppins');
-const contrastTextBold = TextStyle(
-    color: primaryColor, fontFamily: 'Poppins', fontWeight: FontWeight.w600);
+const kTextWhite = TextStyle(color: Colors.white, fontFamily: 'Poppins');
+const kTextDisabled = TextStyle(color: Colors.grey, fontFamily: 'Poppins');
+const kTextContrast = TextStyle(color: kPrimaryColor, fontFamily: 'Poppins');
+const kTextBoldContrast = TextStyle(
+    color: kPrimaryColor, fontFamily: 'Poppins', fontWeight: FontWeight.w600);
 
-const h3 = TextStyle(
+const kHeader3 = TextStyle(
     color: Colors.black,
     fontSize: 24,
     fontWeight: FontWeight.w800,
     fontFamily: 'Poppins');
 
-const h4 = TextStyle(
+const kHeader4 = TextStyle(
     color: Colors.black,
     fontSize: 18,
     fontWeight: FontWeight.w700,
     fontFamily: 'Poppins');
 
-const h5 = TextStyle(
+const kHeader5 = TextStyle(
     color: Colors.black,
     fontSize: 18,
     fontWeight: FontWeight.w500,
     fontFamily: 'Poppins');
 
-const h6 = TextStyle(
+const kHeader6 = TextStyle(
     color: Colors.black,
     fontSize: 16,
     fontWeight: FontWeight.w500,
     fontFamily: 'Poppins');
 
-const h7 = TextStyle(
+const kHeader7 = TextStyle(
     color: Colors.black,
     fontSize: 16,
     fontWeight: FontWeight.w500,
     fontFamily: 'Poppins-Regular');
 
-const priceText = TextStyle(
+const kTextPrice = TextStyle(
     color: Colors.black,
     fontSize: 19,
     fontWeight: FontWeight.w800,
     fontFamily: 'Poppins');
 
-const foodNameText = TextStyle(
+const kTextName = TextStyle(
     color: Colors.black,
     fontSize: 17,
     fontWeight: FontWeight.w600,
@@ -92,7 +92,7 @@ TextStyle(fontFamily: 'Poppins', color: Color(0xff444444));
 const inputFieldPasswordTextStyle = TextStyle(
     fontFamily: 'Poppins', fontWeight: FontWeight.w500, letterSpacing: 3);
 
-const inputFieldHintPaswordTextStyle = TextStyle(
+const inputFieldHintPasswordTextStyle = TextStyle(
     fontFamily: 'Poppins', color: Color(0xff444444), letterSpacing: 2);
 
 const inputFieldTextStyleDispenser =
@@ -103,7 +103,7 @@ TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w100 , color: Colors.red
 //////////////////////////////////
 
 const authPlateDecoration = BoxDecoration(
-    color: white,
+    color: kWhite,
     boxShadow: [
       BoxShadow(
           color: Color.fromRGBO(0, 0, 0, .1),
@@ -115,7 +115,7 @@ const authPlateDecoration = BoxDecoration(
         bottomEnd: Radius.circular(20), bottomStart: Radius.circular(20)));
 
 const dispenserPlateDecoration = BoxDecoration(
-    color: white,
+    color: kWhite,
     boxShadow: [
       BoxShadow(
           color: Color.fromRGBO(0, 0, 0, .1),
@@ -132,7 +132,7 @@ const dispenserPlateDecoration = BoxDecoration(
 const inputFieldFocusedBorderStyle = OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(6)),
     borderSide: BorderSide(
-      color: primaryColor,
+      color: kPrimaryColor,
     ));
 
 const inputFieldDefaultBorderStyle = OutlineInputBorder(

@@ -21,7 +21,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: white,
+        backgroundColor: kWhite,
         title: const Text('Sign Up',
             style: TextStyle(
                 color: Colors.grey, fontFamily: 'Poppins', fontSize: 15)),
@@ -32,7 +32,7 @@ class _SignUpPageState extends State<SignUpPage> {
               Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: SignInPage(pageTitle: 'SignInPage',)));
 
             },
-            child: const Text('Sign In', style: contrastText),
+            child: const Text('Sign In', style: kTextContrast),
           )
         ],
       ),
@@ -47,7 +47,7 @@ class _SignUpPageState extends State<SignUpPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                const Text('Welcome to FTM.CO!', style: h3),
+                const Text('Welcome to FTM.CO!', style: kHeader3),
                 const Text('Let\'s get started', style: taglineText),
                 ftmFullNameTextInput('Full Name'),
                 ftmPersonalCodeInput('Personnel Code'),
@@ -73,7 +73,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 },
                 child: const Text("Enter"),
                 style: ElevatedButton.styleFrom(
-                  primary: primaryColor,
+                  primary: kPrimaryColor,
                   padding: const EdgeInsets.all(15),
                 ),
               ),

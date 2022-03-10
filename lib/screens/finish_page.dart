@@ -27,7 +27,7 @@ class _FinishPageState extends State<FinishPage> {
             Container(
               margin: const EdgeInsets.only(bottom: 10, top: 0),
               //TODO : change the name of Start page And Font Style :
-              child: const Text('همکار گرامی خسته نباشید', style: logoStyle),
+              child: const Text('همکار گرامی خسته نباشید', style: kLogoStyle),
             ),
           ],
         ),

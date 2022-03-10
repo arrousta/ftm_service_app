@@ -56,26 +56,26 @@ class _SplashScreenState extends State<SplashScreen> {
   //   );
   // }
 
-  String futureGet() {
-    futureUser = fetchUser();
-    futureUser.then((value) {
-      if (value.operator != null) {
-        print(value.operator);
-        return value.operator;
-      }
-    });
-    return "null";
-  }
+  // String futureGet() {
+  //   futureUser = fetchData();
+  //   futureUser.then((value) {
+  //     if (value.name != null) {
+  //       print(value.name);
+  //       return value.name;
+  //     }
+  //   });
+  //   return "null";
+  // }
 
   @override
   void initState() {
     super.initState();
-    futureUser = fetchUser();
+    // futureUser = fetchData();
     getInternetStatus();
   }
 
   void getInternetStatus() async {
-    String operator = futureGet();
+    // String operator = futureGet();
     Duration duration = const Duration(seconds: 3);
     await Future.delayed(duration, () {
       Navigator.pushAndRemoveUntil(
@@ -91,6 +91,8 @@ class _SplashScreenState extends State<SplashScreen> {
       );
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +111,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
         ],
       )),
-      backgroundColor: bgColor2,
+      backgroundColor: kBackgroundColor2,
     );
   }
 

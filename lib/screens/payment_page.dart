@@ -49,7 +49,7 @@ class _PaymentState extends State<Payment> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    TimeAndDate(),
+                    // TimeAndDate(),
                     SizedBox(
                       height: 2.0,
                       width: 330,
@@ -63,7 +63,7 @@ class _PaymentState extends State<Payment> {
                       height: 40.0,
                       child: const Text(
                         'The total cost of fuel in your shift',
-                        style: h5,
+                        style: kHeader5,
                       ),
                     ),
                   ],
@@ -91,7 +91,7 @@ class _PaymentState extends State<Payment> {
                               children: [
                                 const Text(
                                   'Total function of your shift: ',
-                                  style: h7,
+                                  style: kHeader7,
                                 ),
                                 Container(
                                   //TODO : Calcute Total function of the shift
@@ -119,7 +119,7 @@ class _PaymentState extends State<Payment> {
                               children: [
                                 const Text(
                                   'Total cost of your shift : ',
-                                  style: h7,
+                                  style: kHeader7,
                                 ),
                                 Container(
                                   //TODO : Calcute Total cost of the shift
@@ -157,7 +157,7 @@ class _PaymentState extends State<Payment> {
                               children: [
                                 const Text(
                                   'Enter the value of the \ncard reader function',
-                                  style: h7,
+                                  style: kHeader7,
                                   textAlign: TextAlign.center,
                                 ),
                                 const SizedBox(
@@ -203,7 +203,7 @@ class _PaymentState extends State<Payment> {
                               children: [
                                 const Text(
                                   'The amount of cash \n you have to pay  ',
-                                  style: h7,
+                                  style: kHeader7,
                                   textAlign: TextAlign.center,
                                 ),
                                 const SizedBox(
@@ -238,7 +238,7 @@ class _PaymentState extends State<Payment> {
                       },
                       child: const Text("Next Step"),
                       style: ElevatedButton.styleFrom(
-                        primary: primaryColor,
+                        primary: kPrimaryColor,
                         padding: const EdgeInsets.all(13),
                       ),
                     ),
@@ -278,7 +278,7 @@ class CardWidget extends StatelessWidget {
           // '$_counter',
           '$value',
           //'کارکرد 0.0',
-          style: h7,
+          style: kHeader7,
         ),
       ),
     );

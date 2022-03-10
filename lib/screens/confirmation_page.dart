@@ -20,7 +20,7 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: white,
+          backgroundColor: kWhite,
           title: const Text('Confirmation SMS',
               style: TextStyle(
                   color: Colors.grey, fontFamily: 'Poppins', fontSize: 15)),
@@ -36,7 +36,7 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
                           pageTitle: 'SignInPage',
                         )));
               },
-              child: const Text('Sign In', style: contrastText),
+              child: const Text('Sign In', style: kTextContrast),
             )
           ],
         ),
@@ -52,7 +52,7 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       const Text('Please wait to receive text message from Us',
-                          style: h7),
+                          style: kHeader7),
                       const Text('Enter Received Code here :',
                           style: taglineText2),
                       ftmConfirmCodeInput('Enter Received Code'),
@@ -70,15 +70,15 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
                           context,
                           PageTransition(
                             type: PageTransitionType.rightToLeft,
-                            child: const DispenserPage(
-                              title: 'Dispenser Page',
+                            child:  DispenserPage(
+                              operator: 'Dispenser Page',
                             ),
                           ),
                         );
                       },
                       child: const Text("Send Code"),
                       style: ElevatedButton.styleFrom(
-                        primary: primaryColor,
+                        primary: kPrimaryColor,
                         padding: const EdgeInsets.all(15),
                       ),
                     ),

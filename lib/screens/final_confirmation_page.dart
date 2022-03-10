@@ -52,7 +52,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                       height: 70.0,
                       child: const Text(
                         'If there is a mistake in the entered data,\n press the edit key and correct the data',
-                        style: h5,
+                        style: kHeader5,
                       ),
                     ),
                   ],
@@ -71,7 +71,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                   children: [
                     const Text(
                       'Dispenser1',
-                      style: h7,
+                      style: kHeader7,
                     ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
@@ -84,7 +84,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                               children: [
                                 const Text(
                                   'A',
-                                  style: h7,
+                                  style: kHeader7,
                                 ),
                                 Container(
                                   //TODO : get dispenser1 A Data
@@ -99,7 +99,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                                 ),
                                 const Text(
                                   'B',
-                                  style: h7,
+                                  style: kHeader7,
                                 ),
                                 Container(
                                   //TODO : get dispenser1 B Data
@@ -119,7 +119,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                     //-----------------------------------------------------------------------------------------
                     const Text(
                       'Dispenser2',
-                      style: h7,
+                      style: kHeader7,
                     ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
@@ -132,7 +132,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                               children: [
                                 const Text(
                                   'A',
-                                  style: h7,
+                                  style: kHeader7,
                                 ),
                                 Container(
                                   //TODO : get dispenser2 A Data
@@ -147,7 +147,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                                 ),
                                 const Text(
                                   'B',
-                                  style: h7,
+                                  style: kHeader7,
                                 ),
                                 Container(
                                   //TODO : get dispenser2 B Data
@@ -167,7 +167,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                     //--------------------------------------------------------------------------------------------------------
                     const Text(
                       'Dispenser3',
-                      style: h7,
+                      style: kHeader7,
                     ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
@@ -180,7 +180,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                               children: [
                                 const Text(
                                   'A',
-                                  style: h7,
+                                  style: kHeader7,
                                 ),
                                 Container(
                                   //TODO : get dispenser3 A Data
@@ -195,7 +195,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                                 ),
                                 const Text(
                                   'B',
-                                  style: h7,
+                                  style: kHeader7,
                                 ),
                                 Container(
                                   //TODO : get dispenser3 B Data
@@ -233,7 +233,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                               children: [
                                 const Text(
                                   'Total function of your shift: ',
-                                  style: h7,
+                                  style: kHeader7,
                                 ),
                                 Container(
                                   //TODO : Calcute Total function of the shift
@@ -277,7 +277,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                               children: [
                                 const Text(
                                   'Total cost of your shift : ',
-                                  style: h7,
+                                  style: kHeader7,
                                 ),
                                 Container(
                                   //TODO : Calcute Total cost of the shift
@@ -306,11 +306,11 @@ class _FinalConfirmState extends State<FinalConfirm> {
                           onPressed: () {
                             //TODO: Go to Edit Again :
 
-                            Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: const DispenserPage(title: 'Dispenser Page',)));
+                            Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: DispenserPage(operator: 'Dispenser Page',)));
                           },
                           child: const Text("EDIT" , style: TextStyle( fontSize: 15,fontFamily: 'Poppins-Regular',),),
                           style: ElevatedButton.styleFrom(
-                            primary: primaryColor,
+                            primary: kPrimaryColor,
                             padding: const EdgeInsets.symmetric(vertical: 13.0 , horizontal: 30.0),
                           ),
                         ),
@@ -325,7 +325,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                           },
                           child: const Text("FINISH" , style: TextStyle( fontSize: 15,fontFamily: 'Poppins-Regular',),),
                           style: ElevatedButton.styleFrom(
-                            primary: primaryColor,
+                            primary: kPrimaryColor,
                             padding: const EdgeInsets.symmetric(vertical: 13.0 , horizontal: 30.0),
                           ),
                         ),
@@ -367,7 +367,7 @@ class CardWidget extends StatelessWidget {
           // '$_counter',
           '$value',
           //'کارکرد 0.0',
-          style: h7,
+          style: kHeader7,
         ),
       ),
     );
