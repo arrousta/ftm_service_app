@@ -44,6 +44,8 @@ class _HomeState extends State<Home> {
       endDispenser3A = (int.parse(dispenser3A.text) - int.parse(startDispenser3A)).toString();
       endDispenser3B = (int.parse(dispenser3B.text) - int.parse(startDispenser3B)).toString();
 
+
+
     });
   }
 
@@ -83,7 +85,7 @@ class _HomeState extends State<Home> {
                     //   'Operator',
                     //   style: TextStyle(fontSize: 18, color: Colors.black),
                     // ),
-                    TimeAndDate(),
+                    // TimeAndDate(),
                     // Text(
                     //   'First Shift',
                     //   style: TextStyle(fontSize: 18, color: Colors.black),
