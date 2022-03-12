@@ -13,38 +13,39 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  late String _dispenser1A = "0.0",
-      _dispenser1B = "0.0",
-      _dispenser2A = "0.0",
-      _dispenser2B = "0.0",
-      _dispenser3A = "0.0",
-      _dispenser3B = "0.0";
+  late String endDispenser1A = "0",
+      endDispenser1B = "0",
+      endDispenser2A = "0",
+      endDispenser2B = "0",
+      endDispenser3A = "0",
+      endDispenser3B = "0";
 
-  int fractionDigits = 2;
+  final String startDispenser1A = "22361",
+      startDispenser1B = "487347",
+      startDispenser2A = "668703",
+      startDispenser2B = "866302",
+      startDispenser3A = "2757459",
+      startDispenser3B = "2825774";
 
-  final dispenser1A = TextEditingController();
-  final dispenser1B = TextEditingController();
-  final dispenser2A = TextEditingController();
-  final dispenser2B = TextEditingController();
-  final dispenser3A = TextEditingController();
-  final dispenser3B = TextEditingController();
+  final dispenser1A = TextEditingController(text: "0");
+  final dispenser1B = TextEditingController(text: "0");
+  final dispenser2A = TextEditingController(text: "0");
+  final dispenser2B = TextEditingController(text: "0");
+  final dispenser3A = TextEditingController(text: "0");
+  final dispenser3B = TextEditingController(text: "0");
 
   void _incrementCounter() {
     setState(() {
-      double dis1 = double.parse(dispenser1A.text);
-      double dis2 = double.parse(dispenser1B.text);
-      double dis3 = double.parse(dispenser2A.text);
-      double dis4 = double.parse(dispenser2B.text);
-      double dis5 = double.parse(dispenser3A.text);
-      double dis6 = double.parse(dispenser3B.text);
 
-      double result = 1.0;
-      _dispenser1A = (result * dis1 * 0.01).toStringAsFixed(fractionDigits);
-      _dispenser1B = (result * dis2 * 0.01).toStringAsFixed(fractionDigits);
-      _dispenser2A = (result * dis3 * 0.01).toStringAsFixed(fractionDigits);
-      _dispenser2B = (result * dis4 * 0.01).toStringAsFixed(fractionDigits);
-      _dispenser3A = (result * dis5 * 0.01).toStringAsFixed(fractionDigits);
-      _dispenser3B = (result * dis6 * 0.01).toStringAsFixed(fractionDigits);
+      endDispenser1A = (int.parse(dispenser1A.text) - int.parse(startDispenser1A)).toString();
+      endDispenser1B = (int.parse(dispenser1B.text) - int.parse(startDispenser1B)).toString();
+      endDispenser2A = (int.parse(dispenser2A.text) - int.parse(startDispenser2A)).toString();
+      endDispenser2B = (int.parse(dispenser2B.text) - int.parse(startDispenser2B)).toString();
+      endDispenser3A = (int.parse(dispenser3A.text) - int.parse(startDispenser3A)).toString();
+      endDispenser3B = (int.parse(dispenser3B.text) - int.parse(startDispenser3B)).toString();
+
+
+
     });
   }
 
@@ -84,7 +85,7 @@ class _HomeState extends State<Home> {
                     //   'Operator',
                     //   style: TextStyle(fontSize: 18, color: Colors.black),
                     // ),
-                    TimeAndDate(),
+                    // TimeAndDate(),
                     // Text(
                     //   'First Shift',
                     //   style: TextStyle(fontSize: 18, color: Colors.black),
@@ -117,12 +118,12 @@ class _HomeState extends State<Home> {
                                 title: "A",
                                 color: Colors.red,
                                 controller: dispenser1A,
-                                value: _dispenser1A),
+                                value: endDispenser1A),
                             MyTextFieldCustomized(
                                 title: "B",
                                 color: Colors.red,
                                 controller: dispenser1B,
-                                value: _dispenser1B),
+                                value: endDispenser1B),
                           ],
                         ),
                       ),
@@ -145,12 +146,12 @@ class _HomeState extends State<Home> {
                                 title: "A",
                                 color: Colors.red,
                                 controller: dispenser2A,
-                                value: _dispenser2A),
+                                value: endDispenser2A),
                             MyTextFieldCustomized(
                                 title: "B",
                                 color: Colors.red,
                                 controller: dispenser2B,
-                                value: _dispenser2B),
+                                value: endDispenser2B),
                           ],
                         ),
                       ),
@@ -174,12 +175,12 @@ class _HomeState extends State<Home> {
                                 title: "A",
                                 color: Colors.red,
                                 controller: dispenser3A,
-                                value: _dispenser3A),
+                                value: endDispenser3A),
                             MyTextFieldCustomized(
                                 title: "B",
                                 color: Colors.red,
                                 controller: dispenser3B,
-                                value: _dispenser3B),
+                                value: endDispenser3B),
                           ],
                         ),
                       ),
@@ -273,6 +274,36 @@ class MyTextFieldCustomized extends StatelessWidget {
             ),
           ),
         ),
+        Card(
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+            side: const BorderSide(color: Colors.blue, width: 1),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: Container(
+            alignment: Alignment.centerLeft,
+            margin: const EdgeInsets.symmetric(horizontal: 3.0),
+            width: 52,
+            height: 34.0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Icon(Icons.camera_alt, size: 12,),
+                SizedBox(
+                  width: 2,
+                ),
+                Text(
+                  // '$_counter',
+                  'Image',
+                  style: TextStyle(
+                    fontSize: 12,
+                  )
+                ),
+              ],
+            ),
+          ),
+        ),
+
       ],
     );
   }

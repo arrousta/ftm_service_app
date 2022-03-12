@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.farzintavanesh.ftm_service_app">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="ftm_service_app"
         android:icon="@mipmap/ic_launcher">

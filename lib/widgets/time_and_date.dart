@@ -3,13 +3,15 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
 class TimeAndDate extends StatefulWidget {
-  const TimeAndDate({Key? key}) : super(key: key);
-
+   TimeAndDate({Key? key, required String? operator}) : super(key: key);
+String? operator;
   @override
   _TimeAndDateState createState() => _TimeAndDateState();
 }
 
 class _TimeAndDateState extends State<TimeAndDate> {
+  String _operator = "error";
+
   String _timeString = "";
   String _dateString = "";
   String shiftName = "";
@@ -23,7 +25,7 @@ class _TimeAndDateState extends State<TimeAndDate> {
   }
 
   @override
-  void initState() {
+  initState() {
     _dateString = _formatDate(DateTime.now());
     Timer.periodic(const Duration(seconds: 1), (Timer t) => _getDate());
     _timeString = _formatTime(DateTime.now());
@@ -34,9 +36,11 @@ class _TimeAndDateState extends State<TimeAndDate> {
   void _getDate() {
     final DateTime now = DateTime.now();
     final String formattedDate = _formatDate(now);
-    setState(() {
-      _dateString = formattedDate;
-    });
+    if (mounted) {
+      setState(() {
+        _dateString = formattedDate;
+      });
+    }
   }
 
   void _getTime() {
@@ -57,21 +61,25 @@ class _TimeAndDateState extends State<TimeAndDate> {
     } else {
       partOfDay = "Third";
     }
-    setState(() {
-      _timeString = formattedTime;
-      shiftName = partOfDay;
-    });
+    if (mounted) {
+      setState(() {
+        _timeString = formattedTime;
+        shiftName = partOfDay;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+
+    _operator = widget.operator ?? "Null";
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            "Operator",
+          Text(
+            "Operator: $_operator",
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           const SizedBox(
