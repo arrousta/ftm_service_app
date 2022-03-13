@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ftm_service_app/screens/dispenser_page.dart';
+import 'package:ftm_service_app/screens/start_shift_page.dart';
 import 'package:ftm_service_app/services/network_adapter.dart';
 import 'package:ftm_service_app/structures/user.dart';
 import 'package:ftm_service_app/widgets/input_fields.dart';
@@ -86,6 +87,16 @@ class _SignInPageState extends State<SignInPage> {
                         TextButton(
                           onPressed: () {
                             //ToDo : Forgot Password onPressed Here ...
+//**********************************************************************************************************
+                            Navigator.pushReplacement(
+                              context,
+                              PageTransition(
+                                type: PageTransitionType.rightToLeft,
+                                child: StartShift(title: 'Start Shift',
+                                ),
+                              ),
+                            );
+//**********************************************************************************************************
                           },
                           child: const Text('Forgot Password?',
                               style: kTextBoldContrast),
