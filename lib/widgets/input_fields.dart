@@ -26,7 +26,7 @@ TextEditingController dispenserB3Controller =
     TextEditingController(); // dispenser B3
 
 TextEditingController paymentController =
-TextEditingController(); // dispenser B3
+    TextEditingController(); // dispenser B3
 
 textFieldContainer ftmFullNameTextInput(String hintText,
     {onTap, onChanged, onEditingComplete, onSubmitted}) {
@@ -36,7 +36,7 @@ textFieldContainer ftmFullNameTextInput(String hintText,
     onEditingComplete: onEditingComplete,
     onSubmitted: onSubmitted,
     cursorColor: kPrimaryColor,
-    style : inputFieldTextStyle,
+    style: inputFieldTextStyle,
     controller: nameController,
     keyboardType: TextInputType.text,
     hintText: hintText,
@@ -79,7 +79,7 @@ textFieldContainer ftmNationalCodeInput(String hintText,
     onEditingComplete: onEditingComplete,
     onSubmitted: onSubmitted,
     cursorColor: kPrimaryColor,
-    style : inputFieldTextStyle,
+    style: inputFieldTextStyle,
     controller: nationalCodeController,
     keyboardType: TextInputType.number,
     hintText: hintText,
@@ -98,7 +98,7 @@ textFieldContainer ftmPersonalCodeInput(String hintText,
     onEditingComplete: onEditingComplete,
     onSubmitted: onSubmitted,
     cursorColor: kPrimaryColor,
-    style : inputFieldTextStyle,
+    style: inputFieldTextStyle,
     controller: personnelCodeController,
     keyboardType: TextInputType.number,
     hintText: hintText,
@@ -117,7 +117,7 @@ textFieldContainer ftmPhoneNumInput(String hintText,
     onEditingComplete: onEditingComplete,
     onSubmitted: onSubmitted,
     cursorColor: kPrimaryColor,
-    style : inputFieldTextStyle,
+    style: inputFieldTextStyle,
     controller: phoneNumCodeController,
     keyboardType: TextInputType.phone,
     hintText: hintText,
@@ -136,7 +136,7 @@ textFieldContainer ftmConfirmCodeInput(String hintText,
     onEditingComplete: onEditingComplete,
     onSubmitted: onSubmitted,
     cursorColor: kPrimaryColor,
-    style : inputFieldTextStyle,
+    style: inputFieldTextStyle,
     controller: confirmCodeController,
     keyboardType: TextInputType.number,
     hintText: hintText,
@@ -154,15 +154,15 @@ textFieldContainer ftmDispenser1AInput(String hintText,
     onChanged: onChanged,
     onEditingComplete: onEditingComplete,
     onSubmitted: onSubmitted,
-    cursorColor: kDispenserColor,
-    style : inputFieldTextStyleDispenser,
+    cursorColor: kPrimaryColor,
+    style: inputFieldTextStyleDispenser,
     controller: dispenserA1Controller,
     keyboardType: TextInputType.number,
     hintText: hintText,
-    hintStyle: inputFieldTextStyleDispenser,
-    horizontal: 10,
+    hintStyle: inputFieldHintTextStyleDispenser,
+    horizontal: 5,
     vertical: 5,
-    marginTop: 5,
+    marginTop: 0,
   );
 }
 
@@ -173,15 +173,15 @@ textFieldContainer ftmDispenser1BInput(String hintText,
     onChanged: onChanged,
     onEditingComplete: onEditingComplete,
     onSubmitted: onSubmitted,
-    cursorColor: kDispenserColor,
-    style : inputFieldTextStyleDispenser,
+    cursorColor: kPrimaryColor,
+    style: inputFieldTextStyleDispenser,
     controller: dispenserB1Controller,
     keyboardType: TextInputType.number,
     hintText: hintText,
-    hintStyle: inputFieldTextStyleDispenser,
-    horizontal: 10,
+    hintStyle: inputFieldHintTextStyleDispenser,
+    horizontal: 5,
     vertical: 5,
-    marginTop: 5,
+    marginTop: 0,
   );
 }
 
@@ -192,15 +192,15 @@ textFieldContainer ftmDispenser2AInput(String hintText,
     onChanged: onChanged,
     onEditingComplete: onEditingComplete,
     onSubmitted: onSubmitted,
-    cursorColor: kDispenserColor,
-    style : inputFieldTextStyleDispenser,
+    cursorColor: kPrimaryColor,
+    style: inputFieldTextStyleDispenser,
     controller: dispenserA2Controller,
     keyboardType: TextInputType.number,
     hintText: hintText,
-    hintStyle: inputFieldTextStyleDispenser,
-    horizontal: 10,
+    hintStyle: inputFieldHintTextStyleDispenser,
+    horizontal: 5,
     vertical: 5,
-    marginTop: 5,
+    marginTop: 0,
   );
 }
 
@@ -211,15 +211,15 @@ textFieldContainer ftmDispenser2BInput(String hintText,
     onChanged: onChanged,
     onEditingComplete: onEditingComplete,
     onSubmitted: onSubmitted,
-    cursorColor: kDispenserColor,
-    style : inputFieldTextStyleDispenser,
+    cursorColor: kPrimaryColor,
+    style: inputFieldTextStyleDispenser,
     controller: dispenserB2Controller,
     keyboardType: TextInputType.number,
     hintText: hintText,
-    hintStyle: inputFieldTextStyleDispenser,
-    horizontal: 10,
+    hintStyle: inputFieldHintTextStyleDispenser,
+    horizontal: 5,
     vertical: 5,
-    marginTop: 5,
+    marginTop: 0,
   );
 }
 
@@ -230,15 +230,15 @@ textFieldContainer ftmDispenser3AInput(String hintText,
     onChanged: onChanged,
     onEditingComplete: onEditingComplete,
     onSubmitted: onSubmitted,
-    cursorColor: kDispenserColor,
-    style : inputFieldTextStyleDispenser,
+    cursorColor: kPrimaryColor,
+    style: inputFieldTextStyleDispenser,
     controller: dispenserA3Controller,
     keyboardType: TextInputType.number,
     hintText: hintText,
-    hintStyle: inputFieldTextStyleDispenser,
-    horizontal: 10,
+    hintStyle: inputFieldHintTextStyleDispenser,
+    horizontal: 5,
     vertical: 5,
-    marginTop: 5,
+    marginTop: 0,
   );
 }
 
@@ -249,15 +249,15 @@ textFieldContainer ftmDispenser3BInput(String hintText,
     onChanged: onChanged,
     onEditingComplete: onEditingComplete,
     onSubmitted: onSubmitted,
-    cursorColor: kDispenserColor,
-    style : inputFieldTextStyleDispenser,
+    cursorColor: kPrimaryColor,
+    style: inputFieldTextStyleDispenser,
     controller: dispenserB3Controller,
     keyboardType: TextInputType.number,
     hintText: hintText,
-    hintStyle: inputFieldTextStyleDispenser,
-    horizontal: 10,
+    hintStyle: inputFieldHintTextStyleDispenser,
+    horizontal: 5,
     vertical: 5,
-    marginTop: 5,
+    marginTop: 0,
   );
 }
 
@@ -268,8 +268,8 @@ textFieldContainer ftmPaymentInput(String hintText,
     onChanged: onChanged,
     onEditingComplete: onEditingComplete,
     onSubmitted: onSubmitted,
-    cursorColor: kDispenserColor,
-    style : inputFieldTextStyleDispenser,
+    cursorColor: kPrimaryColor,
+    style: inputFieldTextStyleDispenser,
     controller: paymentController,
     keyboardType: TextInputType.number,
     hintText: hintText,
@@ -282,23 +282,22 @@ textFieldContainer ftmPaymentInput(String hintText,
 
 //---------------------------------- textFieldContainer ------------------------------
 class textFieldContainer extends StatelessWidget {
-  const textFieldContainer(
-      {Key? key,
-      required this.onTap,
-      required this.onChanged,
-      required this.onEditingComplete,
-      required this.onSubmitted,
-      required this.cursorColor,
-      required this.style,
-      required this.controller,
-      required this.keyboardType,
-      required this.hintText,
-      required this.hintStyle,
-      required this.horizontal,
-      required this.vertical,
-      required this.marginTop,
-      })
-      : super(key: key);
+  const textFieldContainer({
+    Key? key,
+    required this.onTap,
+    required this.onChanged,
+    required this.onEditingComplete,
+    required this.onSubmitted,
+    required this.cursorColor,
+    required this.style,
+    required this.controller,
+    required this.keyboardType,
+    required this.hintText,
+    required this.hintStyle,
+    required this.horizontal,
+    required this.vertical,
+    required this.marginTop,
+  }) : super(key: key);
 
   final dynamic onTap;
   final dynamic onChanged;
@@ -310,10 +309,9 @@ class textFieldContainer extends StatelessWidget {
   final dynamic keyboardType;
   final dynamic hintText;
   final dynamic hintStyle;
-  final double horizontal ;
-  final double vertical ;
-  final double marginTop ;
-
+  final double horizontal;
+  final double vertical;
+  final double marginTop;
 
   @override
   Widget build(BuildContext context) {
@@ -332,8 +330,8 @@ class textFieldContainer extends StatelessWidget {
             hintText: hintText,
             hintStyle: hintStyle,
             focusedBorder: inputFieldFocusedBorderStyle,
-            contentPadding:
-                 EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
+            contentPadding: EdgeInsets.symmetric(
+                horizontal: horizontal, vertical: vertical),
             border: inputFieldDefaultBorderStyle),
       ),
     );

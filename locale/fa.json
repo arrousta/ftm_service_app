@@ -1,6 +1,44 @@
+
 {
   "title": "صفحه اصلی",
-  "SnackBar_Login_Error": "نام کاربری یا رمز عبور اشتباه است",
-  "welcome": "خوش آمدید !"
-
-}
+  "snackBar_Login_Error": "نام کاربری یا رمز عبور اشتباه است",
+  "welcome_home": "خوش آمدید !",
+  "sing_in": "ورود",
+  "sing_out": "خروج",
+  "sing_up": "ثبت نام",
+  "forgot_password": "فراموشی رمز عبور",
+  
+  "start_shft": "شروع شیفت کاری",
+  
+  "welcome_ftm": "به سامانه شرکت فرزین توانش مهرساد خوش آمدید",
+  "lets_get_start": "بزن بریم",
+  "full_name": "نام و نام خانوادگی",
+  "personnel_code": "کد پرسنلی",
+  "national_code": "کد ملی",
+  "phone_number": "شماره موبایل",
+  "password": "رمز عبور",
+  "enter": "تایید",
+  
+  "confirmation_sms": "پیام تایید ثبت نام",
+  "confirmation_sms_message1": "لطفا تا زمان دریافت پیامک تایید منتظر بمانید",
+  "confirmation_sms_message2": "کد دریافتی را اینجا وارد کنید:",
+  "confirmation_sms_message3": "کد را وارد نمایید",
+  "send_code": "تایید کد دریافتی",
+  
+  "operator": "اپراتور",
+  "shift": "شیفت",
+  "dispenser": "دیسپنسر",
+  "enter_number": "شماره کنتور",
+  "next_step": "مرحله بعد",
+  "function": "کارکرد",
+  
+  "payment_message": "مجموع کل هزینه و کارکرد شیفت",
+  "payment_function_mess": "مجموع کارکرد شیفت",
+  "payment_cost_mess": "مجموع هزینه",
+  "payment_user_mess": "عدد نهایی کارت خوان را وارد نمایید",
+  "payment_cash_mess": "مقدار هزینه نقدی که باید پرداخت نمایید",
+  
+  "final_confirm_mess": "لطفا مقدارهای وارد شده را کنترل نمایید و درصورت وجود اشتباه کلید ویرایش را بزنید ، مسؤلیت داده های وارد شده پس از تایید نهایی و اتمام شیفت به عهده شما میباشد",
+  "edit_data": "ویرایش داده ها",
+  "finish": "پایان شیفت"
+ }

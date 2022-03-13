@@ -30,12 +30,12 @@ class _HomePageState extends State<HomePage> {
           Container(
             margin: const EdgeInsets.only(bottom: 10, top: 0),
             //TODO : change the name of Start page And Font Style :
-            child: Text(Translations.of(context).text('welcome'), style: kLogoStyle),
+            child: Text(Translations.of(context).text('welcome_home'), style: kLogoStyle),
           ),
           Container(
             width: 200,
             margin: const EdgeInsets.only(bottom: 0),
-            child: ftmFlatBtn('Sign In', () {
+            child: ftmFlatBtn(Translations.of(context).text('sing_in'), () {
               Navigator.pushReplacement(
                   context,
                   PageTransition(
@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
           Container(
             width: 200,
             padding: const EdgeInsets.all(0),
-            child: ftmOutlineBtn('Sign Up', () {
+            child: ftmOutlineBtn(Translations.of(context).text('sing_up'), () {
               Navigator.pushReplacement(
                   context,
                   PageTransition(

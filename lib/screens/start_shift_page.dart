@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:ftm_service_app/shared/colors.dart';
-import 'package:ftm_service_app/shared/styles.dart';
+import 'package:ftm_service_app/constractor.dart';
 import 'package:page_transition/page_transition.dart';
 import 'dispenser_page.dart';
 import 'finish_page.dart';
 
 enum ShiftName { morning, evening, night }
 
-class FinalConfirm extends StatefulWidget {
-  const FinalConfirm({Key? key, required this.title}) : super(key: key);
+class StartShift extends StatefulWidget {
+  const StartShift({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
-  State<FinalConfirm> createState() => _FinalConfirmState();
+  State<StartShift> createState() => _StartShiftState();
 }
 
-class _FinalConfirmState extends State<FinalConfirm> {
+class _StartShiftState extends State<StartShift> {
   String shiftName = "null";
 
   @override
@@ -53,7 +52,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                       height: 70.0,
                       child: const Text(
                         'If there is a mistake in the entered data,\n press the edit key and correct the data',
-                        style: h5,
+                        style: kHeader5,
                       ),
                     ),
                   ],
@@ -72,7 +71,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                   children: [
                     const Text(
                       'Dispenser1',
-                      style: h7,
+                      style: kHeader7,
                     ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
@@ -85,7 +84,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                               children: [
                                 const Text(
                                   'A',
-                                  style: h7,
+                                  style: kHeader7,
                                 ),
                                 Container(
                                   //TODO : get dispenser1 A Data
@@ -100,7 +99,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                                 ),
                                 const Text(
                                   'B',
-                                  style: h7,
+                                  style: kHeader7,
                                 ),
                                 Container(
                                   //TODO : get dispenser1 B Data
@@ -120,7 +119,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                     //-----------------------------------------------------------------------------------------
                     const Text(
                       'Dispenser2',
-                      style: h7,
+                      style: kHeader7,
                     ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
@@ -133,7 +132,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                               children: [
                                 const Text(
                                   'A',
-                                  style: h7,
+                                  style: kHeader7,
                                 ),
                                 Container(
                                   //TODO : get dispenser2 A Data
@@ -148,7 +147,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                                 ),
                                 const Text(
                                   'B',
-                                  style: h7,
+                                  style: kHeader7,
                                 ),
                                 Container(
                                   //TODO : get dispenser2 B Data
@@ -168,7 +167,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                     //--------------------------------------------------------------------------------------------------------
                     const Text(
                       'Dispenser3',
-                      style: h7,
+                      style: kHeader7,
                     ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
@@ -181,7 +180,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                               children: [
                                 const Text(
                                   'A',
-                                  style: h7,
+                                  style: kHeader7,
                                 ),
                                 Container(
                                   //TODO : get dispenser3 A Data
@@ -196,7 +195,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                                 ),
                                 const Text(
                                   'B',
-                                  style: h7,
+                                  style: kHeader7,
                                 ),
                                 Container(
                                   //TODO : get dispenser3 B Data
@@ -223,96 +222,42 @@ class _FinalConfirmState extends State<FinalConfirm> {
                       ),
                     ),
 
-                    Container(
-                      margin: const EdgeInsets.all(10.0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  'Total function of your shift: ',
-                                  style: h7,
-                                ),
-                                Container(
-                                  //TODO : Calcute Total function of the shift
-                                  width: 130.0,
-                                  height: 50.0,
-                                  child: const CardWidget(
-                                    value: '12345678910',
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      decoration: dispenserPlateDecoration,
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                      width: 330,
-                      child: Divider(
-                        color: Colors.blue.shade700,
-                        thickness: 1.5,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5.0,
-                      width: 340,
-                      child: Divider(
-                        color: Colors.blue.shade700,
-                        thickness: 1.5,
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.all(10.0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  'Total cost of your shift : ',
-                                  style: h7,
-                                ),
-                                Container(
-                                  //TODO : Calcute Total cost of the shift
-                                  width: 140.0,
-                                  height: 50.0,
-                                  child: const CardWidget(
-                                    value: '123123123',
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      decoration: dispenserPlateDecoration,
-                    ),
-
                     const SizedBox(
                       height: 8.0,
                     ),
 
-                    Row(
+                    Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ElevatedButton(
                           onPressed: () {
                             //TODO: Go to Edit Again :
 
-                            Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: const DispenserPage(title: 'Dispenser Page',)));
+                            Navigator.pushReplacement(
+                                context,
+                                PageTransition(
+                                    type: PageTransitionType.rightToLeft,
+                                    child: DispenserPage(
+                                      operator: 'Dispenser Page',
+                                      lastDispenserData1A: '11',
+                                      lastDispenserData1B: '12',
+                                      lastDispenserData2A: '13',
+                                      lastDispenserData2B: '14',
+                                      lastDispenserData3A: '15',
+                                      lastDispenserData3B: '16',
+                                    )));
                           },
-                          child: const Text("EDIT" , style: TextStyle( fontSize: 15,fontFamily: 'Poppins-Regular',),),
+                          child: const Text(
+                            "EDIT",
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: 'Poppins-Regular',
+                            ),
+                          ),
                           style: ElevatedButton.styleFrom(
-                            primary: primaryColor,
-                            padding: const EdgeInsets.symmetric(vertical: 13.0 , horizontal: 30.0),
+                            primary: kPrimaryColor,
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 13.0, horizontal: 30.0),
                           ),
                         ),
                         const SizedBox(
@@ -322,12 +267,25 @@ class _FinalConfirmState extends State<FinalConfirm> {
                           onPressed: () {
                             //TODO: Finish and Complete :
 
-                            Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: const FinishPage(pageTitle: 'Finish Page',)));
+                            Navigator.pushReplacement(
+                                context,
+                                PageTransition(
+                                    type: PageTransitionType.rightToLeft,
+                                    child: const FinishPage(
+                                      pageTitle: 'Finish Page',
+                                    )));
                           },
-                          child: const Text("FINISH" , style: TextStyle( fontSize: 15,fontFamily: 'Poppins-Regular',),),
+                          child: const Text(
+                            "Start Shift",
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: 'Poppins-Regular',
+                            ),
+                          ),
                           style: ElevatedButton.styleFrom(
-                            primary: primaryColor,
-                            padding: const EdgeInsets.symmetric(vertical: 13.0 , horizontal: 30.0),
+                            primary: kPrimaryColor,
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 13.0, horizontal: 30.0),
                           ),
                         ),
                       ],
@@ -368,7 +326,7 @@ class CardWidget extends StatelessWidget {
           // '$_counter',
           '$value',
           //'کارکرد 0.0',
-          style: h7,
+          style: kHeader7,
         ),
       ),
     );

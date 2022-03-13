@@ -70,8 +70,14 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
                           context,
                           PageTransition(
                             type: PageTransitionType.rightToLeft,
-                            child:  DispenserPage(
+                            child: DispenserPage(
                               operator: 'Dispenser Page',
+                              lastDispenserData1A: '10',
+                              lastDispenserData1B: '20',
+                              lastDispenserData2A: '30',
+                              lastDispenserData2B: '40',
+                              lastDispenserData3A: '50',
+                              lastDispenserData3B: '60',
                             ),
                           ),
                         );

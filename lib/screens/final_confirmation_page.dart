@@ -306,12 +306,31 @@ class _FinalConfirmState extends State<FinalConfirm> {
                           onPressed: () {
                             //TODO: Go to Edit Again :
 
-                            Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: DispenserPage(operator: 'Dispenser Page',)));
+                            Navigator.pushReplacement(
+                                context,
+                                PageTransition(
+                                    type: PageTransitionType.rightToLeft,
+                                    child: DispenserPage(
+                                      operator: 'Dispenser Page',
+                                      lastDispenserData1A: '1',
+                                      lastDispenserData1B: '2',
+                                      lastDispenserData2A: '3',
+                                      lastDispenserData2B: '4',
+                                      lastDispenserData3A: '5',
+                                      lastDispenserData3B: '6',
+                                    )));
                           },
-                          child: const Text("EDIT" , style: TextStyle( fontSize: 15,fontFamily: 'Poppins-Regular',),),
+                          child: const Text(
+                            "EDIT",
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: 'Poppins-Regular',
+                            ),
+                          ),
                           style: ElevatedButton.styleFrom(
                             primary: kPrimaryColor,
-                            padding: const EdgeInsets.symmetric(vertical: 13.0 , horizontal: 30.0),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 13.0, horizontal: 30.0),
                           ),
                         ),
                         const SizedBox(
@@ -321,12 +340,25 @@ class _FinalConfirmState extends State<FinalConfirm> {
                           onPressed: () {
                             //TODO: Finish and Complete :
 
-                            Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: const FinishPage(pageTitle: 'Finish Page',)));
+                            Navigator.pushReplacement(
+                                context,
+                                PageTransition(
+                                    type: PageTransitionType.rightToLeft,
+                                    child: const FinishPage(
+                                      pageTitle: 'Finish Page',
+                                    )));
                           },
-                          child: const Text("FINISH" , style: TextStyle( fontSize: 15,fontFamily: 'Poppins-Regular',),),
+                          child: const Text(
+                            "FINISH",
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: 'Poppins-Regular',
+                            ),
+                          ),
                           style: ElevatedButton.styleFrom(
                             primary: kPrimaryColor,
-                            padding: const EdgeInsets.symmetric(vertical: 13.0 , horizontal: 30.0),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 13.0, horizontal: 30.0),
                           ),
                         ),
                       ],
