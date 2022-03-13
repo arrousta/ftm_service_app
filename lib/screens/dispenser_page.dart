@@ -11,8 +11,24 @@ import 'payment_page.dart';
 enum ShiftName { morning, evening, night }
 
 class DispenserPage extends StatefulWidget {
-  const DispenserPage({Key? key, required this.operator}) : super(key: key);
+  DispenserPage({
+    Key? key,
+    required this.operator,
+    required this.lastDispenserData1A,
+    required this.lastDispenserData1B,
+    required this.lastDispenserData2A,
+    required this.lastDispenserData2B,
+    required this.lastDispenserData3A,
+    required this.lastDispenserData3B,
+  }) : super(key: key);
   final String operator;
+
+  String lastDispenserData1A;
+  String lastDispenserData1B;
+  String lastDispenserData2A;
+  String lastDispenserData2B;
+  String lastDispenserData3A;
+  String lastDispenserData3B;
 
   @override
   State<DispenserPage> createState() => _DispenserPageState();
@@ -27,38 +43,24 @@ class _DispenserPageState extends State<DispenserPage> {
   String _dateString = "";
   String shiftName = "";
 
-  late String _dispenser1A = "0.0",
-      _dispenser1B = "0.0",
-      _dispenser2A = "0.0",
-      _dispenser2B = "0.0",
-      _dispenser3A = "0.0",
-      _dispenser3B = "0.0";
+  String
+      _lastDispenser1A = "0.0",
+      _lastDispenser1B = "0.0",
+      _lastDispenser2A = "0.0",
+      _lastDispenser2B = "0.0",
+      _lastDispenser3A = "0.0",
+      _lastDispenser3B = "0.0";
 
-  int fractionDigits = 2;
 
-  final dispenser1A = TextEditingController();
-  final dispenser1B = TextEditingController();
-  final dispenser2A = TextEditingController();
-  final dispenser2B = TextEditingController();
-  final dispenser3A = TextEditingController();
-  final dispenser3B = TextEditingController();
 
   void _incrementCounter() {
     setState(() {
-      double dis1 = double.parse(dispenser1A.text);
-      double dis2 = double.parse(dispenser1B.text);
-      double dis3 = double.parse(dispenser2A.text);
-      double dis4 = double.parse(dispenser2B.text);
-      double dis5 = double.parse(dispenser3A.text);
-      double dis6 = double.parse(dispenser3B.text);
-
-      double result = 1.0;
-      _dispenser1A = (result * dis1 * 0.01).toStringAsFixed(fractionDigits);
-      _dispenser1B = (result * dis2 * 0.01).toStringAsFixed(fractionDigits);
-      _dispenser2A = (result * dis3 * 0.01).toStringAsFixed(fractionDigits);
-      _dispenser2B = (result * dis4 * 0.01).toStringAsFixed(fractionDigits);
-      _dispenser3A = (result * dis5 * 0.01).toStringAsFixed(fractionDigits);
-      _dispenser3B = (result * dis6 * 0.01).toStringAsFixed(fractionDigits);
+      _lastDispenser1A = widget.lastDispenserData1A;
+      _lastDispenser1B = widget.lastDispenserData1B;
+      _lastDispenser2A = widget.lastDispenserData2A;
+      _lastDispenser2B = widget.lastDispenserData2B;
+      _lastDispenser3A = widget.lastDispenserData3A;
+      _lastDispenser3B = widget.lastDispenserData3B;
     });
   }
 //*************************************************************************************

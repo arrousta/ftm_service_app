@@ -28,9 +28,7 @@ class _SignInPageState extends State<SignInPage> {
 
   Future<bool> futureGet(String _user, String _pass) async {
     futureInputUser = signInUser(
-        url: 'https://test.helyasi.ir/login',
-        userName: _user,
-        password: _pass);
+        url: 'https://test.helyasi.ir/login', userName: _user, password: _pass);
     await futureInputUser!.then((value) {
       if (value.name != null) {
         user.name = value.name;
@@ -41,8 +39,6 @@ class _SignInPageState extends State<SignInPage> {
     });
     return false;
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -97,20 +93,19 @@ class _SignInPageState extends State<SignInPage> {
                         ElevatedButton(
                           //TODO : SignInPage : after user press Enter button Send Data To Server And Check authentication :
                           onPressed: () async {
-                             setState(() {
+                            setState(() {
                               userName = personnelCodeController.text;
                               password = passwordController.text;
                               futureGet(userName, password).then((value) {
                                 String name = "";
                                 name += user.name ?? "name error";
-                                name+= " ";
+                                name += " ";
                                 name += user.family ?? "name error";
 
                                 if (user.name == null) {
                                   showSnackBar(context,
                                       'Personnel Code or Password is incorrect');
                                   print(user.name);
-
                                 } else {
                                   Navigator.pushReplacement(
                                     context,
@@ -118,17 +113,19 @@ class _SignInPageState extends State<SignInPage> {
                                       type: PageTransitionType.rightToLeft,
                                       child: DispenserPage(
                                         operator: name,
+                                        lastDispenserData1A: '100',
+                                        lastDispenserData1B: '101',
+                                        lastDispenserData2A: '102',
+                                        lastDispenserData2B: '103',
+                                        lastDispenserData3A: '104',
+                                        lastDispenserData3B: '105',
                                       ),
                                     ),
                                   );
                                 }
-
-                              }
-                              ).catchError((_){
+                              }).catchError((_) {
                                 print("error");
-                              }
-                              );
-
+                              });
                             });
                           },
                           child: const Text("Enter"),
