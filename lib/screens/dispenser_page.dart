@@ -77,7 +77,7 @@ class _DispenserPageState extends State<DispenserPage> {
 
      start = int.parse(startShift);
      end = int.parse(endSift);
-     end = end - start;
+     end -= start;
      result = end.toString();
     return result;
   }
