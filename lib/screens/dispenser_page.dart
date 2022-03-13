@@ -43,25 +43,49 @@ class _DispenserPageState extends State<DispenserPage> {
   String _dateString = "";
   String shiftName = "";
 
-  String
-      _lastDispenser1A = "0.0",
-      _lastDispenser1B = "0.0",
-      _lastDispenser2A = "0.0",
-      _lastDispenser2B = "0.0",
-      _lastDispenser3A = "0.0",
-      _lastDispenser3B = "0.0";
+  late String
+      _lastDispenser1A,
+      _lastDispenser1B,
+      _lastDispenser2A,
+      _lastDispenser2B,
+      _lastDispenser3A,
+      _lastDispenser3B;
+
+  late int
+      _startDispenser1A,
+      _startDispenser1B,
+      _startDispenser2A,
+      _startDispenser2B,
+      _startDispenser3A,
+      _startDispenser3B;
+
+  late int
+      _endDispenser1A,
+      _endDispenser1B,
+      _endDispenser2A,
+      _endDispenser2B,
+      _endDispenser3A,
+      _endDispenser3B;
+
+  late int
+      _resultDispenser1A,
+      _resultDispenser1B,
+      _resultDispenser2A,
+      _resultDispenser2B,
+      _resultDispenser3A,
+      _resultDispenser3B;
+
 
 
 
   void _incrementCounter() {
-    setState(() {
+
       _lastDispenser1A = widget.lastDispenserData1A;
       _lastDispenser1B = widget.lastDispenserData1B;
       _lastDispenser2A = widget.lastDispenserData2A;
       _lastDispenser2B = widget.lastDispenserData2B;
       _lastDispenser3A = widget.lastDispenserData3A;
       _lastDispenser3B = widget.lastDispenserData3B;
-    });
   }
 //*************************************************************************************
 
@@ -80,6 +104,7 @@ class _DispenserPageState extends State<DispenserPage> {
     Timer.periodic(const Duration(seconds: 1), (Timer t) => _getDate());
     _timeString = _formatTime(DateTime.now());
     Timer.periodic(const Duration(seconds: 1), (Timer t) => _getTime());
+    _incrementCounter();
     super.initState();
   }
 
@@ -227,7 +252,7 @@ class _DispenserPageState extends State<DispenserPage> {
                                         width: kBoxSizeWith,
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
-                                          value: '870853',
+                                          value: '$_lastDispenser1A',
                                         ),
                                       ),
                                       Text(
@@ -290,7 +315,7 @@ class _DispenserPageState extends State<DispenserPage> {
                                         width: kBoxSizeWith,
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
-                                          value: '870853',
+                                          value: '$_lastDispenser1B',
                                         ),
                                       ),
                                       Text(
@@ -374,7 +399,7 @@ class _DispenserPageState extends State<DispenserPage> {
                                         width: kBoxSizeWith,
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
-                                          value: '870853',
+                                          value: '$_lastDispenser2A',
                                         ),
                                       ),
                                       Text(
@@ -437,7 +462,7 @@ class _DispenserPageState extends State<DispenserPage> {
                                         width: kBoxSizeWith,
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
-                                          value: '870853',
+                                          value: '$_lastDispenser2B',
                                         ),
                                       ),
                                       Text(
@@ -521,7 +546,7 @@ class _DispenserPageState extends State<DispenserPage> {
                                         width: kBoxSizeWith,
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
-                                          value: '870853',
+                                          value: '$_lastDispenser3A',
                                         ),
                                       ),
                                       Text(
@@ -584,7 +609,7 @@ class _DispenserPageState extends State<DispenserPage> {
                                         width: kBoxSizeWith,
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
-                                          value: '870853',
+                                          value: '$_lastDispenser3B',
                                         ),
                                       ),
                                       Text(

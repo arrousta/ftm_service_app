@@ -233,12 +233,31 @@ class _StartShiftState extends State<StartShift> {
                           onPressed: () {
                             //TODO: Go to Edit Again :
 
-                            Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: DispenserPage(operator: 'Dispenser Page',)));
+                            Navigator.pushReplacement(
+                                context,
+                                PageTransition(
+                                    type: PageTransitionType.rightToLeft,
+                                    child: DispenserPage(
+                                      operator: 'Dispenser Page',
+                                      lastDispenserData1A: '11',
+                                      lastDispenserData1B: '12',
+                                      lastDispenserData2A: '13',
+                                      lastDispenserData2B: '14',
+                                      lastDispenserData3A: '15',
+                                      lastDispenserData3B: '16',
+                                    )));
                           },
-                          child: const Text("EDIT" , style: TextStyle( fontSize: 15,fontFamily: 'Poppins-Regular',),),
+                          child: const Text(
+                            "EDIT",
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: 'Poppins-Regular',
+                            ),
+                          ),
                           style: ElevatedButton.styleFrom(
                             primary: kPrimaryColor,
-                            padding: const EdgeInsets.symmetric(vertical: 13.0 , horizontal: 30.0),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 13.0, horizontal: 30.0),
                           ),
                         ),
                         const SizedBox(
@@ -248,12 +267,25 @@ class _StartShiftState extends State<StartShift> {
                           onPressed: () {
                             //TODO: Finish and Complete :
 
-                            Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: const FinishPage(pageTitle: 'Finish Page',)));
+                            Navigator.pushReplacement(
+                                context,
+                                PageTransition(
+                                    type: PageTransitionType.rightToLeft,
+                                    child: const FinishPage(
+                                      pageTitle: 'Finish Page',
+                                    )));
                           },
-                          child: const Text("Start Shift" , style: TextStyle( fontSize: 15,fontFamily: 'Poppins-Regular',),),
+                          child: const Text(
+                            "Start Shift",
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: 'Poppins-Regular',
+                            ),
+                          ),
                           style: ElevatedButton.styleFrom(
                             primary: kPrimaryColor,
-                            padding: const EdgeInsets.symmetric(vertical: 13.0 , horizontal: 30.0),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 13.0, horizontal: 30.0),
                           ),
                         ),
                       ],

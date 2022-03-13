@@ -135,6 +135,8 @@ class _SignInPageState extends State<SignInPage> {
                                   );
                                 }
                               }).catchError((_) {
+                                showSnackBar(context,
+                                    'Connecting Error');
                                 print("error");
                               });
                             });
