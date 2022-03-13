@@ -21,7 +21,14 @@ class _PaymentState extends State<Payment> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return
+        // WillPopScope(
+        // onWillPop: () async {
+        // Navigator.pop(context);
+        // return false;
+        // },
+        // child:
+        Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xffc7c7c7),
         elevation: 0.0,
@@ -232,9 +239,16 @@ class _PaymentState extends State<Payment> {
                       onPressed: () {
                         //TODO: Send Payment Data and Go to Next Step :
 
-                        print(paymentController.text); // Print name current value
+                        print(
+                            paymentController.text); // Print name current value
 
-                        Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: FinalConfirm(title: 'Final Confirmation',)));
+                        Navigator.pushReplacement(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.rightToLeft,
+                                child: FinalConfirm(
+                                  title: 'Final Confirmation',
+                                )));
                       },
                       child: const Text("Next Step"),
                       style: ElevatedButton.styleFrom(
@@ -249,6 +263,7 @@ class _PaymentState extends State<Payment> {
           ),
         ),
       ),
+      // ),
     );
   }
 }

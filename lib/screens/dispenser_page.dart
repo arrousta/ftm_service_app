@@ -172,7 +172,7 @@ class _DispenserPageState extends State<DispenserPage> {
                     ),
                   ),
                 ),
-                //-------------------------------------------------------------------------------------------
+                //-----------------------------------------------***Dispensers***-----------------------------------
                 Container(
                   padding: const EdgeInsets.all(3.0),
                   margin: const EdgeInsets.all(3.0),
@@ -243,9 +243,14 @@ class _DispenserPageState extends State<DispenserPage> {
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
                                           value:
-                                          '${dispenserA1Controller.text}',
+                                              '${dispenserA1Controller.text}',
                                         ),
                                       ),
+                                      SizedBox(
+                                        height: 12,
+                                      ),
+                                      ImageCardWidget(),
+
                                     ],
                                   ),
                                 ],
@@ -377,7 +382,7 @@ class _DispenserPageState extends State<DispenserPage> {
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
                                           value:
-                                          '${dispenserA2Controller.text}',
+                                              '${dispenserA2Controller.text}',
                                         ),
                                       ),
                                     ],
@@ -511,7 +516,7 @@ class _DispenserPageState extends State<DispenserPage> {
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
                                           value:
-                                          '${dispenserA3Controller.text}',
+                                              '${dispenserA3Controller.text}',
                                         ),
                                       ),
                                     ],
@@ -590,16 +595,17 @@ class _DispenserPageState extends State<DispenserPage> {
                         height: 8.0,
                       ),
                       ElevatedButton(
-                        child:  Row(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(Icons.arrow_back_ios_sharp),
                             SizedBox(
                               width: 10.0,
                             ),
-                            Text("تایید و ادامه", style: TextStyle(
-                              fontFamily: 'Yekan'
-                            ),),
+                            Text(
+                              "تایید و ادامه",
+                              style: TextStyle(fontFamily: 'Yekan'),
+                            ),
                           ],
                         ),
                         style: ElevatedButton.styleFrom(
@@ -680,24 +686,57 @@ class CardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              side: const BorderSide(color: kPrimaryColor, width: 1),
-              borderRadius: BorderRadius.circular(6),
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+        side: const BorderSide(color: kPrimaryColor, width: 1),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Container(
+        alignment: Alignment.center,
+        width: kBoxSizeWith,
+        height: kBoxSizeHeight,
+        child: Text(
+          '$value',
+          style: TextStyle(
+            fontSize: 17,
+            // fontWeight: FontWeight.bold,
+            fontFamily: 'Yekan',
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ImageCardWidget extends StatelessWidget {
+  const ImageCardWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+        side: const BorderSide(color: kPrimaryColor, width: 1),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Container(
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(6),
+        child: Row(
+          children: const [
+            Icon(Icons.camera_alt, size: 16, color: kPrimaryColor),
+            SizedBox(
+              width: 6,
             ),
-            child: Container(
-              alignment: Alignment.center,
-              width: 100.0,
-              height: 34.0,
-              child: Text(
-                '$value',
-                style: TextStyle(
-                  fontSize: 17,
-                  // fontWeight: FontWeight.bold,
-                  fontFamily: 'Yekan',
-                ),
-              ),
-            ),
+            Text(
+                // '$_counter',
+                'بارگزاری تصویر',
+                style: TextStyle(fontSize: 12, color: kPrimaryColor)),
+          ],
+        ),
+      ),
     );
   }
 }
