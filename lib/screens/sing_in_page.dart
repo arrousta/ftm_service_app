@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ftm_service_app/screens/dispenser_page.dart';
 import 'package:ftm_service_app/screens/loading_page.dart';
+import 'package:ftm_service_app/screens/panel_page.dart';
 import 'package:ftm_service_app/screens/start_shift_page.dart';
 import 'package:ftm_service_app/services/network_adapter.dart';
 import 'package:ftm_service_app/structures/user.dart';
@@ -93,7 +94,7 @@ class _SignInPageState extends State<SignInPage> {
                               context,
                               PageTransition(
                                 type: PageTransitionType.rightToLeft,
-                                child: StartShift(title: 'Start Shift',
+                                child: PanelPage(title: 'pannel',
                                 ),
                               ),
                             );
