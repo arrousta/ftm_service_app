@@ -22,7 +22,6 @@ class DispenserPage extends StatefulWidget {
 //Todo : Delete this section if not use :
 
 class _DispenserPageState extends State<DispenserPage> {
-
   String operatorName = "";
   String _timeString = "";
   String _dateString = "";
@@ -119,15 +118,11 @@ class _DispenserPageState extends State<DispenserPage> {
     }
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
-
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
@@ -177,209 +172,446 @@ class _DispenserPageState extends State<DispenserPage> {
                     ),
                   ),
                 ),
-                //-------------------------------------------------------------------------------------------
+                //-----------------------------------------------***Dispensers***-----------------------------------
                 Container(
                   padding: const EdgeInsets.all(3.0),
                   margin: const EdgeInsets.all(3.0),
                   decoration: BoxDecoration(
-                    color: Color(0xffdbdbde),
-                    borderRadius: BorderRadius.circular(15.0),
+                    color: kBackgroundColor3,
+                    borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      //-----------------------------------------Dispenser1------------------------------------------
                       const Padding(
                         padding: EdgeInsets.all(2.0),
                         child: Text(
-                          'Dispenser1',
+                          'Dispenser 1',
                           style: kHeader7,
                         ),
                       ),
-                      Container(
-                        margin: const EdgeInsets.all(10.0),
-                        child: Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          //-----------------------------------------1A------------------------------------------
+                          Container(
+                            margin: const EdgeInsets.all(6.0),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
                                 children: [
                                   const Text(
-                                    'A',
+                                    ' A: ',
                                     style: kHeader7,
                                   ),
-                                  Container(
-                                    width: 140.0,
-                                    height: 50.0,
-                                    padding: const EdgeInsets.all(3),
-                                    child: ftmDispenser1AInput('Enter Number'),
-                                  ),
-                                  Container(
-                                    width: 140.0,
-                                    height: 50.0,
-                                    child: const CardWidget(
-                                      value: '0.0',
-                                    ),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        "شروع شیفت:",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: kBoxSizeWith,
+                                        height: kBoxSizeHeight,
+                                        child: CardWidget(
+                                          value: '870853',
+                                        ),
+                                      ),
+                                      Text(
+                                        "پایان شیفت:",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: kFieldSizeWith,
+                                        height: kFieldSizeHeight,
+                                        child: ftmDispenser1AInput(
+                                            'عدد را وارد کنید'),
+                                      ),
+                                      Text(
+                                        "کارکرد:",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: kBoxSizeWith,
+                                        height: kBoxSizeHeight,
+                                        child: CardWidget(
+                                          value:
+                                              '${dispenserA1Controller.text}',
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 12,
+                                      ),
+                                      ImageCardWidget(),
+
+                                    ],
                                   ),
                                 ],
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text(
-                                    'B',
-                                    style: kHeader7,
-                                  ),
-                                  Container(
-                                    width: 140.0,
-                                    height: 50.0,
-                                    padding: const EdgeInsets.all(3),
-                                    child: ftmDispenser1BInput('Enter Number'),
-                                  ),
-                                  Container(
-                                    width: 140.0,
-                                    height: 50.0,
-                                    child: const CardWidget(
-                                      value: '0.1',
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                            ),
+                            decoration: dispenserPlateDecoration,
                           ),
-                        ),
-                        decoration: dispenserPlateDecoration,
+                          //-----------------------------------------1B------------------------------------------
+                          Container(
+                            margin: const EdgeInsets.all(6.0),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  const Text(
+                                    ' B: ',
+                                    style: kHeader7,
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        "شروع شیفت:",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: kBoxSizeWith,
+                                        height: kBoxSizeHeight,
+                                        child: CardWidget(
+                                          value: '870853',
+                                        ),
+                                      ),
+                                      Text(
+                                        "پایان شیفت:",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: kFieldSizeWith,
+                                        height: kFieldSizeHeight,
+                                        child: ftmDispenser1BInput(
+                                            'عدد را وارد کنید'),
+                                      ),
+                                      Text(
+                                        "کارکرد:",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: kBoxSizeWith,
+                                        height: kBoxSizeHeight,
+                                        child: CardWidget(
+                                          value:
+                                              '${dispenserB1Controller.text}',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            decoration: dispenserPlateDecoration,
+                          ),
+                        ],
                       ),
-                      //-------------------------------------------------------------------------------------
                       const SizedBox(
                         height: 18.0,
                       ),
-                      const Text(
-                        'Dispenser2',
-                        style: kHeader7,
+                      //-----------------------------------------Dispenser2------------------------------------------
+                      const Padding(
+                        padding: EdgeInsets.all(2.0),
+                        child: Text(
+                          'Dispenser 2',
+                          style: kHeader7,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          //-----------------------------------------2A------------------------------------------
+                          Container(
+                            margin: const EdgeInsets.all(6.0),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  const Text(
+                                    ' A: ',
+                                    style: kHeader7,
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        "شروع شیفت:",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: kBoxSizeWith,
+                                        height: kBoxSizeHeight,
+                                        child: CardWidget(
+                                          value: '870853',
+                                        ),
+                                      ),
+                                      Text(
+                                        "پایان شیفت:",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: kFieldSizeWith,
+                                        height: kFieldSizeHeight,
+                                        child: ftmDispenser2AInput(
+                                            'عدد را وارد کنید'),
+                                      ),
+                                      Text(
+                                        "کارکرد:",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: kBoxSizeWith,
+                                        height: kBoxSizeHeight,
+                                        child: CardWidget(
+                                          value:
+                                              '${dispenserA2Controller.text}',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            decoration: dispenserPlateDecoration,
+                          ),
+                          //-----------------------------------------2B------------------------------------------
+                          Container(
+                            margin: const EdgeInsets.all(6.0),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  const Text(
+                                    ' B: ',
+                                    style: kHeader7,
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        "شروع شیفت:",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: kBoxSizeWith,
+                                        height: kBoxSizeHeight,
+                                        child: CardWidget(
+                                          value: '870853',
+                                        ),
+                                      ),
+                                      Text(
+                                        "پایان شیفت:",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: kFieldSizeWith,
+                                        height: kFieldSizeHeight,
+                                        child: ftmDispenser2BInput(
+                                            'عدد را وارد کنید'),
+                                      ),
+                                      Text(
+                                        "کارکرد:",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: kBoxSizeWith,
+                                        height: kBoxSizeHeight,
+                                        child: CardWidget(
+                                          value:
+                                              '${dispenserB2Controller.text}',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            decoration: dispenserPlateDecoration,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 18.0,
+                      ),
+                      //-----------------------------------------Dispenser3------------------------------------------
+                      const Padding(
+                        padding: EdgeInsets.all(2.0),
+                        child: Text(
+                          'Dispenser 3',
+                          style: kHeader7,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          //-----------------------------------------3A------------------------------------------
+                          Container(
+                            margin: const EdgeInsets.all(6.0),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  const Text(
+                                    ' A: ',
+                                    style: kHeader7,
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        "شروع شیفت:",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: kBoxSizeWith,
+                                        height: kBoxSizeHeight,
+                                        child: CardWidget(
+                                          value: '870853',
+                                        ),
+                                      ),
+                                      Text(
+                                        "پایان شیفت:",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: kFieldSizeWith,
+                                        height: kFieldSizeHeight,
+                                        child: ftmDispenser3AInput(
+                                            'عدد را وارد کنید'),
+                                      ),
+                                      Text(
+                                        "کارکرد:",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: kBoxSizeWith,
+                                        height: kBoxSizeHeight,
+                                        child: CardWidget(
+                                          value:
+                                              '${dispenserA3Controller.text}',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            decoration: dispenserPlateDecoration,
+                          ),
+                          //-----------------------------------------3B------------------------------------------
+                          Container(
+                            margin: const EdgeInsets.all(6.0),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  const Text(
+                                    ' B: ',
+                                    style: kHeader7,
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        "شروع شیفت:",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: kBoxSizeWith,
+                                        height: kBoxSizeHeight,
+                                        child: CardWidget(
+                                          value: '870853',
+                                        ),
+                                      ),
+                                      Text(
+                                        "پایان شیفت:",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: kFieldSizeWith,
+                                        height: kFieldSizeHeight,
+                                        child: ftmDispenser3BInput(
+                                            'عدد را وارد کنید'),
+                                      ),
+                                      Text(
+                                        "کارکرد:",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: kBoxSizeWith,
+                                        height: kBoxSizeHeight,
+                                        child: CardWidget(
+                                          value:
+                                              '${dispenserB3Controller.text}',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            decoration: dispenserPlateDecoration,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 18.0,
                       ),
 
-                      Container(
-                        margin: const EdgeInsets.all(10.0),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text(
-                                    'A',
-                                    style: kHeader7,
-                                  ),
-                                  Container(
-                                    width: 140.0,
-                                    height: 50.0,
-                                    padding: const EdgeInsets.all(3),
-                                    child: ftmDispenser2AInput('Enter Number'),
-                                  ),
-                                  Container(
-                                    width: 140.0,
-                                    height: 50.0,
-                                    child: const CardWidget(
-                                      value: '0.0',
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text(
-                                    'B',
-                                    style: kHeader7,
-                                  ),
-                                  Container(
-                                    width: 140.0,
-                                    height: 50.0,
-                                    padding: const EdgeInsets.all(3),
-                                    child: ftmDispenser2BInput('Enter Number'),
-                                  ),
-                                  Container(
-                                    width: 140.0,
-                                    height: 50.0,
-                                    child: const CardWidget(
-                                      value: '0.1',
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        decoration: dispenserPlateDecoration,
-                      ),
-                      const SizedBox(
-                        height: 18.0,
-                      ),
-                      const Text(
-                        'Dispenser3',
-                        style: kHeader7,
-                      ),
-                      Container(
-                        margin: const EdgeInsets.all(10.0),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text(
-                                    'A',
-                                    style: kHeader7,
-                                  ),
-                                  Container(
-                                    width: 140.0,
-                                    height: 50.0,
-                                    padding: const EdgeInsets.all(3),
-                                    child: ftmDispenser3AInput('Enter Number'),
-                                  ),
-                                  Container(
-                                    width: 140.0,
-                                    height: 50.0,
-                                    child: const CardWidget(
-                                      value: '0.0',
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text(
-                                    'B',
-                                    style: kHeader7,
-                                  ),
-                                  Container(
-                                    width: 140.0,
-                                    height: 50.0,
-                                    padding: const EdgeInsets.all(3),
-                                    child: ftmDispenser3BInput('Enter Number'),
-                                  ),
-                                  Container(
-                                    width: 140.0,
-                                    height: 50.0,
-                                    child: const CardWidget(
-                                      value: '0.1',
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        decoration: dispenserPlateDecoration,
-                      ),
                       const SizedBox(
                         height: 8.0,
                       ),
                       ElevatedButton(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.arrow_back_ios_sharp),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            Text(
+                              "تایید و ادامه",
+                              style: TextStyle(fontFamily: 'Yekan'),
+                            ),
+                          ],
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          primary: kPrimaryColor,
+                          padding: const EdgeInsets.all(8),
+                        ),
                         onPressed: () {
                           //TODO: Receive Data from Dispensers Field and do Calculations :
 
@@ -403,11 +635,6 @@ class _DispenserPageState extends State<DispenserPage> {
                                     title: 'Payment Page',
                                   )));
                         },
-                        child: const Text("Next Step"),
-                        style: ElevatedButton.styleFrom(
-                          primary: kPrimaryColor,
-                          padding: const EdgeInsets.all(13),
-                        ),
                       ),
                     ],
                   ),
@@ -455,25 +682,59 @@ class CardWidget extends StatelessWidget {
   }) : super(key: key);
 
   final String value;
+
   @override
   Widget build(BuildContext context) {
     return Card(
       color: Colors.white,
       shape: RoundedRectangleBorder(
-        side: const BorderSide(color: Colors.blue, width: 2),
+        side: const BorderSide(color: kPrimaryColor, width: 1),
         borderRadius: BorderRadius.circular(6),
       ),
-      margin: const EdgeInsets.all(5.0),
       child: Container(
-        alignment: Alignment.centerLeft,
-        margin: const EdgeInsets.only(left: 10.0),
-        width: 100.0,
-        height: 34.0,
+        alignment: Alignment.center,
+        width: kBoxSizeWith,
+        height: kBoxSizeHeight,
         child: Text(
-          // '$_counter',
           '$value',
-          //'کارکرد 0.0',
-          style: Theme.of(context).textTheme.headline6,
+          style: TextStyle(
+            fontSize: 17,
+            // fontWeight: FontWeight.bold,
+            fontFamily: 'Yekan',
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ImageCardWidget extends StatelessWidget {
+  const ImageCardWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+        side: const BorderSide(color: kPrimaryColor, width: 1),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Container(
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(6),
+        child: Row(
+          children: const [
+            Icon(Icons.camera_alt, size: 16, color: kPrimaryColor),
+            SizedBox(
+              width: 6,
+            ),
+            Text(
+                // '$_counter',
+                'بارگزاری تصویر',
+                style: TextStyle(fontSize: 12, color: kPrimaryColor)),
+          ],
         ),
       ),
     );

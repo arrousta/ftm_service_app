@@ -1,5 +1,44 @@
+
 {
-  "title": "Home Page",
-  "SnackBar_Login_Error": "Personnel Code or Password is incorrect",
-  "welcome": "Welcome !"
-}
+  "title": "main page",
+  "snackBar_Login_Error": "Wrong username or password",
+  "welcome_home": "Welcome!",
+  "sing_in": "Sing in",
+  "sing_out": "Sing Out",
+  "sing_up": "Sing up",
+  "forgot_password": "Forgot Password",
+  
+  "start_shft": "Start Shift",
+  
+  "welcome_ftm": "Welcome to FTM.co!",
+  "lets_get_start": "Lets get started",
+  "full_name": "Full Name",
+  "personnel_code": "Personnel Code",
+  "national_code": "National Code",
+  "phone_number": "Phone Number",
+  "password": "Password",
+  "enter": "Enter",
+  
+  "confirmation_sms": "Confirmation SMS",
+  "confirmation_sms_message1": "Please wait to receive text message from Us",
+  "confirmation_sms_message2": "Enter Received Code here:",
+  "confirmation_sms_message3": "Enter Received Code",
+  "send_code": "Send Code",
+  
+  "operator": "Operator",
+  "shift": "Shift",
+  "dispenser": "Dispenser",
+  "enter_number": "Enter Number",
+  "next_step": "Next Step",
+  "function": "Function",
+  
+  "payment_message": "The total cost of fuel in your shift",
+  "payment_function_mess": "Total function of your shift:",
+  "payment_cost_mess": "Total cost of your shift",
+  "payment_user_mess": "Enter the value of the card reader function",
+  "payment_cash_mess": "The amount of cash you have to pay",
+  
+  "final_confirm_mess": "If there is a mistake in the entered data, press the Edit key and correct the data",
+  "edit_data": "EDIT",
+  "finish": "FINISH"
+ }

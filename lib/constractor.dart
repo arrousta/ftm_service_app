@@ -3,14 +3,23 @@ import 'package:flutter/material.dart';
 //Colors used in project
 const Color kBackgroundColor1 = Color(0xfff4f7fa);
 const Color kBackgroundColor2 = Colors.white;
+const Color kBackgroundColor3 = Color(0xffdbdbde);
 //  const Color primaryColor = Colors.green;
 const Color kPrimaryColor = Color(0xff4469c6);
 const Color kWhite = Colors.white;
 const Color kTextDark = Colors.black54;
-const Color kHighlightColor = Colors.green;
+const Color kTextPrimary = Color(0xFF222222);
+const Color kTextHint = Color(0xFF555555);
 
-const Color kDispenserColor = Colors.red;
+//////////////////////////////
+//////////Size////////////////
+//////////////////////////////
 
+const kFieldSizeWith = 130.0;
+const kFieldSizeHeight = 35.0;
+
+const kBoxSizeWith = 140.0;
+const kBoxSizeHeight = 45.0;
 
 //Text Style
 //TODO : App Logo Style :
@@ -73,8 +82,7 @@ const kTextName = TextStyle(
     fontWeight: FontWeight.w600,
     fontFamily: 'Poppins');
 
-const tabLinkStyle =
-TextStyle(fontWeight: FontWeight.w500);
+const tabLinkStyle = TextStyle(fontWeight: FontWeight.w500);
 
 const taglineText = TextStyle(color: Colors.grey, fontFamily: 'Poppins');
 const taglineText2 = TextStyle(color: Colors.red, fontFamily: 'Poppins');
@@ -84,10 +92,10 @@ const categoryText = TextStyle(
     fontFamily: 'Poppins');
 
 const inputFieldTextStyle =
-TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w500);
+    TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w500, color: kTextPrimary);
 
 const inputFieldHintTextStyle =
-TextStyle(fontFamily: 'Poppins', color: Color(0xff444444));
+    TextStyle(fontFamily: 'Poppins', color: Color(0xff444444));
 
 const inputFieldPasswordTextStyle = TextStyle(
     fontFamily: 'Poppins', fontWeight: FontWeight.w500, letterSpacing: 3);
@@ -95,8 +103,14 @@ const inputFieldPasswordTextStyle = TextStyle(
 const inputFieldHintPasswordTextStyle = TextStyle(
     fontFamily: 'Poppins', color: Color(0xff444444), letterSpacing: 2);
 
-const inputFieldTextStyleDispenser =
-TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w100 , color: Colors.red);
+const inputFieldTextStyleDispenser = TextStyle(
+    fontFamily: 'Yekan', fontWeight: FontWeight.w100, color: Color(0xFF222222));
+
+const inputFieldHintTextStyleDispenser = TextStyle(
+  fontFamily: 'Yekan',
+  fontSize: 14,
+  color: kTextHint,
+);
 
 ///////////////////////////////////
 /// BOX DECORATION STYLES
@@ -123,7 +137,7 @@ const dispenserPlateDecoration = BoxDecoration(
           spreadRadius: 5,
           offset: Offset(0, 1))
     ],
-    borderRadius: BorderRadiusDirectional.all(Radius.circular(20)));
+    borderRadius: BorderRadiusDirectional.all(Radius.circular(8)));
 
 /////////////////////////////////////
 /// INPUT FIELD DECORATION STYLES
