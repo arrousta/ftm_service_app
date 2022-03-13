@@ -75,7 +75,7 @@ class _DispenserPageState extends State<DispenserPage> {
 
      start = int.parse(startShift);
      end = int.parse(endSift);
-     end -= start;
+     end = end - start;
      result = end.toString();
     return result;
   }
@@ -283,7 +283,7 @@ class _DispenserPageState extends State<DispenserPage> {
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
                                           value:
-                                          _calculateDispenserResult(startShift: _startDispenser1A, endSift: ),
+                                          _calculateDispenserResult(startShift: _startDispenser1A, endSift: '158'),
                                         ),
                                       ),
                                       SizedBox(
