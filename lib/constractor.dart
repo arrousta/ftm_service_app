@@ -15,10 +15,10 @@ const Color kTextHint = Color(0xFF555555);
 //////////Size////////////////
 //////////////////////////////
 
-const kFieldSizeWith = 130.0;
+const kFieldSizeWith = 105.0;
 const kFieldSizeHeight = 35.0;
 
-const kBoxSizeWith = 140.0;
+const kBoxSizeWith = 115.0;
 const kBoxSizeHeight = 45.0;
 
 //Text Style

@@ -181,14 +181,22 @@ class _DispenserPageState extends State<DispenserPage> {
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       //-----------------------------------------Dispenser1------------------------------------------
-                      const Padding(
-                        padding: EdgeInsets.all(2.0),
-                        child: Text(
-                          'Dispenser 1',
-                          style: kHeader7,
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: 6),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: kPrimaryColor,
+                        ),
+                        child: const Padding(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 6, horizontal: 16),
+                          child: Text(
+                            'Dispenser 1',
+                            style: TextStyle(color: kBackgroundColor1),
+                          ),
                         ),
                       ),
                       Row(
@@ -250,7 +258,6 @@ class _DispenserPageState extends State<DispenserPage> {
                                         height: 12,
                                       ),
                                       ImageCardWidget(),
-
                                     ],
                                   ),
                                 ],
@@ -310,6 +317,10 @@ class _DispenserPageState extends State<DispenserPage> {
                                               '${dispenserB1Controller.text}',
                                         ),
                                       ),
+                                      SizedBox(
+                                        height: 12,
+                                      ),
+                                      ImageCardWidget(),
                                     ],
                                   ),
                                 ],
@@ -319,15 +330,20 @@ class _DispenserPageState extends State<DispenserPage> {
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 18.0,
-                      ),
                       //-----------------------------------------Dispenser2------------------------------------------
-                      const Padding(
-                        padding: EdgeInsets.all(2.0),
-                        child: Text(
-                          'Dispenser 2',
-                          style: kHeader7,
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: 6),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: kPrimaryColor,
+                        ),
+                        child: const Padding(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 6, horizontal: 16),
+                          child: Text(
+                            'Dispenser 2',
+                            style: TextStyle(color: kBackgroundColor1),
+                          ),
                         ),
                       ),
                       Row(
@@ -385,6 +401,10 @@ class _DispenserPageState extends State<DispenserPage> {
                                               '${dispenserA2Controller.text}',
                                         ),
                                       ),
+                                      SizedBox(
+                                        height: 12,
+                                      ),
+                                      ImageCardWidget(),
                                     ],
                                   ),
                                 ],
@@ -444,6 +464,10 @@ class _DispenserPageState extends State<DispenserPage> {
                                               '${dispenserB2Controller.text}',
                                         ),
                                       ),
+                                      SizedBox(
+                                        height: 12,
+                                      ),
+                                      ImageCardWidget(),
                                     ],
                                   ),
                                 ],
@@ -453,15 +477,20 @@ class _DispenserPageState extends State<DispenserPage> {
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 18.0,
-                      ),
                       //-----------------------------------------Dispenser3------------------------------------------
-                      const Padding(
-                        padding: EdgeInsets.all(2.0),
-                        child: Text(
-                          'Dispenser 3',
-                          style: kHeader7,
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: 6),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: kPrimaryColor,
+                        ),
+                        child: const Padding(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 6, horizontal: 16),
+                          child: Text(
+                            'Dispenser 3',
+                            style: TextStyle(color: kBackgroundColor1),
+                          ),
                         ),
                       ),
                       Row(
@@ -519,6 +548,10 @@ class _DispenserPageState extends State<DispenserPage> {
                                               '${dispenserA3Controller.text}',
                                         ),
                                       ),
+                                      SizedBox(
+                                        height: 12,
+                                      ),
+                                      ImageCardWidget(),
                                     ],
                                   ),
                                 ],
@@ -578,6 +611,10 @@ class _DispenserPageState extends State<DispenserPage> {
                                               '${dispenserB3Controller.text}',
                                         ),
                                       ),
+                                      SizedBox(
+                                        height: 12,
+                                      ),
+                                      ImageCardWidget(),
                                     ],
                                   ),
                                 ],
@@ -613,21 +650,7 @@ class _DispenserPageState extends State<DispenserPage> {
                           padding: const EdgeInsets.all(8),
                         ),
                         onPressed: () {
-                          //TODO: Receive Data from Dispensers Field and do Calculations :
-
-                          print(dispenserA1Controller
-                              .text); // Print name current value
-                          print(dispenserB1Controller
-                              .text); // Print name current value
-                          print(dispenserA2Controller
-                              .text); // Print name current value
-                          print(dispenserB2Controller
-                              .text); // Print name current value
-                          print(dispenserA3Controller
-                              .text); // Print name current value
-                          print(dispenserB3Controller
-                              .text); // Print name current value
-                          Navigator.pushReplacement(
+                          Navigator.push(
                               context,
                               PageTransition(
                                   type: PageTransitionType.rightToLeft,
