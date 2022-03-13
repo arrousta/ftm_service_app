@@ -69,6 +69,8 @@ class _DispenserPageState extends State<DispenserPage> {
       _resultDispenser3B;
 
    String _calculateDispenserResult({required String startShift, required String endSift}){
+
+     // calculate dispenser result
      int start = 0;
      int end = 0;
      String result;
