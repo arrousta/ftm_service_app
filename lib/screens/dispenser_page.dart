@@ -43,56 +43,48 @@ class _DispenserPageState extends State<DispenserPage> {
   String _dateString = "";
   String shiftName = "";
 
-  late String
-      _startDispenser1A,
+  late String _startDispenser1A,
       _startDispenser1B,
       _startDispenser2A,
       _startDispenser2B,
       _startDispenser3A,
       _startDispenser3B;
 
-
-  late int
-      _endDispenser1A,
+  late int _endDispenser1A,
       _endDispenser1B,
       _endDispenser2A,
       _endDispenser2B,
       _endDispenser3A,
       _endDispenser3B;
 
-  late int
-      _resultDispenser1A,
+  late int _resultDispenser1A,
       _resultDispenser1B,
       _resultDispenser2A,
       _resultDispenser2B,
       _resultDispenser3A,
       _resultDispenser3B;
 
-   String _calculateDispenserResult({required String startShift, required String endSift}){
+  String _calculateDispenserResult(
+      {required String startShift, required String endSift}) {
+    // calculate dispenser result
+    int start = 0;
+    int end = 0;
+    String result;
 
-     // calculate dispenser result
-     int start = 0;
-     int end = 0;
-     String result;
-
-     start = int.parse(startShift);
-     end = int.parse(endSift);
-     end -= start;
-     result = end.toString();
+    start = int.parse(startShift);
+    end = int.parse(endSift);
+    end -= start;
+    result = end.toString();
     return result;
   }
 
-
-
-
   void _setStartShiftData() {
-
-      _startDispenser1A = widget.lastDispenserData1A;
-      _startDispenser1B = widget.lastDispenserData1B;
-      _startDispenser2A = widget.lastDispenserData2A;
-      _startDispenser2B = widget.lastDispenserData2B;
-      _startDispenser3A = widget.lastDispenserData3A;
-      _startDispenser3B = widget.lastDispenserData3B;
+    _startDispenser1A = widget.lastDispenserData1A;
+    _startDispenser1B = widget.lastDispenserData1B;
+    _startDispenser2A = widget.lastDispenserData2A;
+    _startDispenser2B = widget.lastDispenserData2B;
+    _startDispenser3A = widget.lastDispenserData3A;
+    _startDispenser3B = widget.lastDispenserData3B;
   }
 //*************************************************************************************
 
@@ -284,8 +276,13 @@ class _DispenserPageState extends State<DispenserPage> {
                                         width: kBoxSizeWith,
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
-                                          value:
-                                          _calculateDispenserResult(startShift: _startDispenser1A, endSift: '158'),
+                                          value: (dispenser1AChangedValue >
+                                                  int.parse(_startDispenser1A))
+                                              ? _calculateDispenserResult(
+                                                  startShift: _startDispenser1A,
+                                                  endSift:
+                                                      '$dispenser1AChangedValue')
+                                              : "0",
                                         ),
                                       ),
                                       SizedBox(
@@ -347,8 +344,13 @@ class _DispenserPageState extends State<DispenserPage> {
                                         width: kBoxSizeWith,
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
-                                          value:
-                                              '${dispenserB1Controller.text}',
+                                          value: (dispenser1BChangedValue >
+                                              int.parse(_startDispenser1B))
+                                              ? _calculateDispenserResult(
+                                              startShift: _startDispenser1B,
+                                              endSift:
+                                              '$dispenser1BChangedValue')
+                                              : "0",
                                         ),
                                       ),
                                       SizedBox(
@@ -431,8 +433,13 @@ class _DispenserPageState extends State<DispenserPage> {
                                         width: kBoxSizeWith,
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
-                                          value:
-                                              '${dispenserA2Controller.text}',
+                                          value: (dispenser2AChangedValue >
+                                              int.parse(_startDispenser2A))
+                                              ? _calculateDispenserResult(
+                                              startShift: _startDispenser2A,
+                                              endSift:
+                                              '$dispenser2AChangedValue')
+                                              : "0",
                                         ),
                                       ),
                                       SizedBox(
@@ -494,8 +501,13 @@ class _DispenserPageState extends State<DispenserPage> {
                                         width: kBoxSizeWith,
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
-                                          value:
-                                              '${dispenserB2Controller.text}',
+                                          value: (dispenser2BChangedValue >
+                                              int.parse(_startDispenser2B))
+                                              ? _calculateDispenserResult(
+                                              startShift: _startDispenser2B,
+                                              endSift:
+                                              '$dispenser2BChangedValue')
+                                              : "0",
                                         ),
                                       ),
                                       SizedBox(
@@ -578,8 +590,13 @@ class _DispenserPageState extends State<DispenserPage> {
                                         width: kBoxSizeWith,
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
-                                          value:
-                                              '${dispenserA3Controller.text}',
+                                          value: (dispenser3AChangedValue >
+                                              int.parse(_startDispenser3A))
+                                              ? _calculateDispenserResult(
+                                              startShift: _startDispenser3A,
+                                              endSift:
+                                              '$dispenser3AChangedValue')
+                                              : "0",
                                         ),
                                       ),
                                       SizedBox(
@@ -641,8 +658,13 @@ class _DispenserPageState extends State<DispenserPage> {
                                         width: kBoxSizeWith,
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
-                                          value:
-                                              '${dispenserB3Controller.text}',
+                                          value: (dispenser3BChangedValue >
+                                              int.parse(_startDispenser3B))
+                                              ? _calculateDispenserResult(
+                                              startShift: _startDispenser3B,
+                                              endSift:
+                                              '$dispenser3BChangedValue')
+                                              : "0",
                                         ),
                                       ),
                                       SizedBox(

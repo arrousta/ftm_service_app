@@ -12,21 +12,28 @@ TextEditingController phoneNumCodeController =
 TextEditingController confirmCodeController =
     TextEditingController(); // Confirm SMS Code
 
-TextEditingController dispenserA1Controller =
+TextEditingController dispenser1AController =
     TextEditingController(); // dispenser A1
-TextEditingController dispenserB1Controller =
+TextEditingController dispenser1BController =
     TextEditingController(); // dispenser B1
-TextEditingController dispenserA2Controller =
+TextEditingController dispenser2AController =
     TextEditingController(); // dispenser A2
-TextEditingController dispenserB2Controller =
+TextEditingController dispenser2BController =
     TextEditingController(); // dispenser B2
-TextEditingController dispenserA3Controller =
+TextEditingController dispenser3AController =
     TextEditingController(); // dispenser A3
-TextEditingController dispenserB3Controller =
+TextEditingController dispenser3BController =
     TextEditingController(); // dispenser B3
 
 TextEditingController paymentController =
     TextEditingController(); // dispenser B3
+
+int dispenser1AChangedValue = 0;
+int dispenser1BChangedValue = 0;
+int dispenser2AChangedValue = 0;
+int dispenser2BChangedValue = 0;
+int dispenser3AChangedValue = 0;
+int dispenser3BChangedValue = 0;
 
 textFieldContainer ftmFullNameTextInput(String hintText,
     {onTap, onChanged, onEditingComplete, onSubmitted}) {
@@ -151,12 +158,18 @@ textFieldContainer ftmDispenser1AInput(String hintText,
     {onTap, onChanged, onEditingComplete, onSubmitted}) {
   return textFieldContainer(
     onTap: onTap,
-    onChanged: onChanged,
+    onChanged: (value){
+      if(value!= ''){
+        dispenser1AChangedValue = int.parse(value);
+      }else{
+        dispenser1AChangedValue = 0;
+      }
+    },
     onEditingComplete: onEditingComplete,
     onSubmitted: onSubmitted,
     cursorColor: kPrimaryColor,
     style: inputFieldTextStyleDispenser,
-    controller: dispenserA1Controller,
+    controller: dispenser1AController,
     keyboardType: TextInputType.number,
     hintText: hintText,
     hintStyle: inputFieldHintTextStyleDispenser,
@@ -170,12 +183,18 @@ textFieldContainer ftmDispenser1BInput(String hintText,
     {onTap, onChanged, onEditingComplete, onSubmitted}) {
   return textFieldContainer(
     onTap: onTap,
-    onChanged: onChanged,
+    onChanged: (value){
+      if(value!= ''){
+        dispenser1BChangedValue = int.parse(value);
+      }else{
+        dispenser1BChangedValue = 0;
+      }
+    },
     onEditingComplete: onEditingComplete,
     onSubmitted: onSubmitted,
     cursorColor: kPrimaryColor,
     style: inputFieldTextStyleDispenser,
-    controller: dispenserB1Controller,
+    controller: dispenser1BController,
     keyboardType: TextInputType.number,
     hintText: hintText,
     hintStyle: inputFieldHintTextStyleDispenser,
@@ -189,12 +208,18 @@ textFieldContainer ftmDispenser2AInput(String hintText,
     {onTap, onChanged, onEditingComplete, onSubmitted}) {
   return textFieldContainer(
     onTap: onTap,
-    onChanged: onChanged,
+    onChanged: (value){
+      if(value!= ''){
+        dispenser2AChangedValue = int.parse(value);
+      }else{
+        dispenser2AChangedValue = 0;
+      }
+    },
     onEditingComplete: onEditingComplete,
     onSubmitted: onSubmitted,
     cursorColor: kPrimaryColor,
     style: inputFieldTextStyleDispenser,
-    controller: dispenserA2Controller,
+    controller: dispenser2AController,
     keyboardType: TextInputType.number,
     hintText: hintText,
     hintStyle: inputFieldHintTextStyleDispenser,
@@ -208,12 +233,18 @@ textFieldContainer ftmDispenser2BInput(String hintText,
     {onTap, onChanged, onEditingComplete, onSubmitted}) {
   return textFieldContainer(
     onTap: onTap,
-    onChanged: onChanged,
+    onChanged: (value){
+      if(value!= ''){
+        dispenser2BChangedValue = int.parse(value);
+      }else{
+        dispenser2BChangedValue = 0;
+      }
+    },
     onEditingComplete: onEditingComplete,
     onSubmitted: onSubmitted,
     cursorColor: kPrimaryColor,
     style: inputFieldTextStyleDispenser,
-    controller: dispenserB2Controller,
+    controller: dispenser2BController,
     keyboardType: TextInputType.number,
     hintText: hintText,
     hintStyle: inputFieldHintTextStyleDispenser,
@@ -227,12 +258,18 @@ textFieldContainer ftmDispenser3AInput(String hintText,
     {onTap, onChanged, onEditingComplete, onSubmitted}) {
   return textFieldContainer(
     onTap: onTap,
-    onChanged: onChanged,
+    onChanged: (value){
+      if(value!= ''){
+        dispenser3AChangedValue = int.parse(value);
+      }else{
+        dispenser3AChangedValue = 0;
+      }
+    },
     onEditingComplete: onEditingComplete,
     onSubmitted: onSubmitted,
     cursorColor: kPrimaryColor,
     style: inputFieldTextStyleDispenser,
-    controller: dispenserA3Controller,
+    controller: dispenser3AController,
     keyboardType: TextInputType.number,
     hintText: hintText,
     hintStyle: inputFieldHintTextStyleDispenser,
@@ -246,12 +283,18 @@ textFieldContainer ftmDispenser3BInput(String hintText,
     {onTap, onChanged, onEditingComplete, onSubmitted}) {
   return textFieldContainer(
     onTap: onTap,
-    onChanged: onChanged,
+    onChanged: (value){
+      if(value!= ''){
+        dispenser3BChangedValue = int.parse(value);
+      }else{
+        dispenser3BChangedValue = 0;
+      }
+    },
     onEditingComplete: onEditingComplete,
     onSubmitted: onSubmitted,
     cursorColor: kPrimaryColor,
     style: inputFieldTextStyleDispenser,
-    controller: dispenserB3Controller,
+    controller: dispenser3BController,
     keyboardType: TextInputType.number,
     hintText: hintText,
     hintStyle: inputFieldHintTextStyleDispenser,

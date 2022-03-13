@@ -1,13 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ftm_service_app/screens/home_page.dart';
 import 'package:ftm_service_app/constractor.dart';
-import 'package:ftm_service_app/services/network_adapter.dart';
 import 'package:ftm_service_app/structures/user.dart';
-
-
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -76,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void getInternetStatus() async {
     // String operator = futureGet();
-    Duration duration = const Duration(seconds: 3);
+    Duration duration = const Duration(seconds: 1);
     await Future.delayed(duration, () {
       Navigator.pushAndRemoveUntil(
         context,

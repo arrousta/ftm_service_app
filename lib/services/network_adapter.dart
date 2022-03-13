@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:ftm_service_app/structures/dispensers.dart';
 import 'package:ftm_service_app/structures/user.dart';
 import 'package:http/http.dart' as http;
 
@@ -38,6 +39,36 @@ Future<User> signInUser(
   } else if (response.statusCode == 200) {
     // in My project statusCode  = 200
     return User.fromJson(jsonDecode(response.body));
+  } else {
+    // If the server did not return a 201 CREATED response,
+    // then throw an exception.
+    String errorCode = response.statusCode.toString();
+    throw Exception('Failed to connect: $errorCode');
+  }
+}
+
+Future<Dispensers> getDispenserData(
+    {required String url,
+    required String id,}) async {
+  final response = await http.post(
+    Uri.parse(url),
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    encoding: Encoding.getByName('utf-8'),
+    body: <String, String>{
+      'id': id,
+    },
+  );
+  if (response.statusCode == 201) {
+    // If the server did return a 201 CREATED response,
+    // then parse the JSON.
+
+    return Dispensers.fromJson(jsonDecode(response.body));
+  } else if (response.statusCode == 200) {
+    // in My project statusCode  = 200
+    return Dispensers.fromJson(jsonDecode(response.body));
   } else {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.

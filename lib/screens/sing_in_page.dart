@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ftm_service_app/screens/dispenser_page.dart';
+import 'package:ftm_service_app/screens/loading_page.dart';
 import 'package:ftm_service_app/screens/start_shift_page.dart';
 import 'package:ftm_service_app/services/network_adapter.dart';
 import 'package:ftm_service_app/structures/user.dart';
@@ -122,15 +123,9 @@ class _SignInPageState extends State<SignInPage> {
                                     context,
                                     PageTransition(
                                       type: PageTransitionType.rightToLeft,
-                                      child: DispenserPage(
-                                        operator: name,
-                                        lastDispenserData1A: '100',
-                                        lastDispenserData1B: '101',
-                                        lastDispenserData2A: '102',
-                                        lastDispenserData2B: '103',
-                                        lastDispenserData3A: '104',
-                                        lastDispenserData3B: '105',
-                                      ),
+                                      child: LoadingPage(
+                                        operatorName: name,
+                                      )
                                     ),
                                   );
                                 }
@@ -151,7 +146,7 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                   ],
                 ),
-                height: 300,
+                height: 500,
                 width: double.infinity,
                 decoration: authPlateDecoration,
               ),
