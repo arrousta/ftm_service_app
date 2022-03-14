@@ -139,6 +139,30 @@ const dispenserPlateDecoration = BoxDecoration(
     ],
     borderRadius: BorderRadiusDirectional.all(Radius.circular(8)));
 
+//*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+const panelPlateDecoration = BoxDecoration(
+    color:Colors.blueGrey,
+    boxShadow: [
+      BoxShadow(
+          color: Color.fromRGBO(0, 0, 0, .3),
+          blurRadius: 10,
+          spreadRadius: 5,
+          offset: Offset(0, 5))
+    ],
+    borderRadius: BorderRadiusDirectional.all(Radius.circular(8)));
+
+const buttonPanelPlateDecoration = BoxDecoration(
+    color:Colors.blueGrey,
+    boxShadow: [
+      BoxShadow(
+          color: Color.fromRGBO(0, 0, 0, .3),
+          blurRadius: 6,
+          spreadRadius: 4,
+          offset: Offset(0, 3))
+    ],
+    borderRadius: BorderRadiusDirectional.all(Radius.circular(8)));
+//*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+
 /////////////////////////////////////
 /// INPUT FIELD DECORATION STYLES
 ////////////////////////////////////

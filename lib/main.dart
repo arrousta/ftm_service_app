@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ftm_service_app/screens/home_page.dart';
+import 'package:ftm_service_app/screens/panel_page.dart';
 import 'package:ftm_service_app/screens/spash_screen.dart';
 import 'package:ftm_service_app/translations.dart';
 import 'screens/confirmation_page.dart';
@@ -60,6 +61,12 @@ class MyApp extends StatelessWidget {
         '/confirmpage': (BuildContext context) => const ConfirmationPage(
               pageTitle: 'ConfirmationPage',
             ),
+        //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+        '/panelpage': (BuildContext context) => const PanelPage( //TODO Alireza : added Route of panel screen
+          operator: 'operatorName',
+        ),
+        //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+
       },
     );
   }

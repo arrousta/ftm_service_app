@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ftm_service_app/screens/dispenser_page.dart';
 import 'package:ftm_service_app/screens/loading_page.dart';
+import 'package:ftm_service_app/screens/panel_page.dart';
 import 'package:ftm_service_app/screens/start_shift_page.dart';
 import 'package:ftm_service_app/services/network_adapter.dart';
 import 'package:ftm_service_app/structures/user.dart';
 import 'package:ftm_service_app/widgets/input_fields.dart';
 import 'package:ftm_service_app/constractor.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'sign_up_page.dart';
 
@@ -27,6 +29,16 @@ class _SignInPageState extends State<SignInPage> {
   Future<User>? futureInputUser;
   String userName = "";
   String password = "";
+
+  //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+  //TODO Alireza : _handleSubmitted for save user name:
+  void _handleSubmitted(user) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("username", user);
+    print("username saved");
+  }
+  //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+
 
   Future<bool> futureGet(String _user, String _pass) async {
     futureInputUser = signInUser(
@@ -89,14 +101,14 @@ class _SignInPageState extends State<SignInPage> {
                           onPressed: () {
                             //ToDo : Forgot Password onPressed Here ...
 //**********************************************************************************************************
-                            Navigator.pushReplacement(
-                              context,
-                              PageTransition(
-                                type: PageTransitionType.rightToLeft,
-                                child: StartShift(title: 'Start Shift',
-                                ),
-                              ),
-                            );
+//                             Navigator.pushReplacement(
+//                               context,
+//                               PageTransition(
+//                                 type: PageTransitionType.rightToLeft,
+//                                 child: PanelPage(pageTitle: 'pannel',
+//                                 ),
+//                               ),
+//                             );
 //**********************************************************************************************************
                           },
                           child: const Text('Forgot Password?',
@@ -119,6 +131,8 @@ class _SignInPageState extends State<SignInPage> {
                                       'Personnel Code or Password is incorrect');
                                   print(user.name);
                                 } else {
+                                  //Alireza : SharedPref define to save user data:
+                                  _handleSubmitted(name);
                                   Navigator.pushReplacement(
                                     context,
                                     PageTransition(
@@ -127,6 +141,13 @@ class _SignInPageState extends State<SignInPage> {
                                         operatorName: name,
                                       )
                                     ),
+                                    //Alireza : go to panel page
+                                    // PageTransition(
+                                    //     type: PageTransitionType.rightToLeft,
+                                    //     child: PanelPage(
+                                    //       operator: name,
+                                    //     )
+                                    // ),
                                   );
                                 }
                               }).catchError((_) {
