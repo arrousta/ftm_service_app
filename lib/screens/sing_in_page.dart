@@ -13,6 +13,7 @@ import 'package:ftm_service_app/constractor.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../translations.dart';
 import 'sign_up_page.dart';
 
 class SignInPage extends StatefulWidget {
@@ -62,7 +63,7 @@ class _SignInPageState extends State<SignInPage> {
           appBar: AppBar(
             elevation: 0,
             backgroundColor: kWhite,
-            title: const Text('Sign In',
+            title: Text(Translations.of(context).text('sing_in'),
                 style: TextStyle(
                     color: Colors.grey, fontFamily: 'Poppins', fontSize: 15)),
             actions: <Widget>[
@@ -77,7 +78,7 @@ class _SignInPageState extends State<SignInPage> {
                             pageTitle: 'SignUpPage',
                           )));
                 },
-                child: const Text('Sign Up', style: kTextContrast),
+                child: Text(Translations.of(context).text('sing_up'), style: kTextContrast),
               )
             ],
           ),
@@ -92,11 +93,11 @@ class _SignInPageState extends State<SignInPage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        const Text('Welcome Back!', style: kHeader3),
-                        const Text('Hi, let\'s authenticate',
+                        Text(Translations.of(context).text('welcome_home'), style: kHeader3),
+                        Text(Translations.of(context).text('lets_get_start'),
                             style: taglineText),
-                        ftmPersonalCodeInput('Personnel Code'),
-                        ftmPasswordInput('Password'),
+                        ftmPersonalCodeInput(Translations.of(context).text('personnel_code')),
+                        ftmPasswordInput(Translations.of(context).text('password')),
                         TextButton(
                           onPressed: () {
                             //ToDo : Forgot Password onPressed Here ...
@@ -111,7 +112,7 @@ class _SignInPageState extends State<SignInPage> {
 //                             );
 //**********************************************************************************************************
                           },
-                          child: const Text('Forgot Password?',
+                          child: Text(Translations.of(context).text('forgot_password'),
                               style: kTextBoldContrast),
                         ),
                         ElevatedButton(
@@ -135,19 +136,13 @@ class _SignInPageState extends State<SignInPage> {
                                   _handleSubmitted(name);
                                   Navigator.pushReplacement(
                                     context,
-                                    PageTransition(
-                                      type: PageTransitionType.rightToLeft,
-                                      child: LoadingPage(
-                                        operatorName: name,
-                                      )
-                                    ),
                                     //Alireza : go to panel page
-                                    // PageTransition(
-                                    //     type: PageTransitionType.rightToLeft,
-                                    //     child: PanelPage(
-                                    //       operator: name,
-                                    //     )
-                                    // ),
+                                    PageTransition(
+                                        type: PageTransitionType.rightToLeft,
+                                        child: PanelPage(
+                                          operator: name,
+                                        )
+                                    ),
                                   );
                                 }
                               }).catchError((_) {
@@ -157,10 +152,10 @@ class _SignInPageState extends State<SignInPage> {
                               });
                             });
                           },
-                          child: const Text("Enter"),
+                          child: Text(Translations.of(context).text("enter")),
                           style: ElevatedButton.styleFrom(
                             primary: kPrimaryColor,
-                            padding: const EdgeInsets.all(15),
+                            padding: const EdgeInsets.all(8),
                           ),
                         ),
                       ],

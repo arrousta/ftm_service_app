@@ -155,6 +155,11 @@ class _DispenserPageState extends State<DispenserPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+
+                // Time shift and operator name
+
+                /*
+
                 Card(
                   color: Colors.white,
                   shape: RoundedRectangleBorder(
@@ -198,6 +203,8 @@ class _DispenserPageState extends State<DispenserPage> {
                     ),
                   ),
                 ),
+
+                */
                 //-----------------------------------------------***Dispensers***-----------------------------------
                 Container(
                   padding: const EdgeInsets.all(3.0),
@@ -683,10 +690,6 @@ class _DispenserPageState extends State<DispenserPage> {
                       const SizedBox(
                         height: 18.0,
                       ),
-
-                      const SizedBox(
-                        height: 8.0,
-                      ),
                       ElevatedButton(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -794,26 +797,31 @@ class ImageCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.white,
-      shape: RoundedRectangleBorder(
-        side: const BorderSide(color: kPrimaryColor, width: 1),
-        borderRadius: BorderRadius.circular(6),
-      ),
-      child: Container(
-        alignment: Alignment.center,
-        padding: const EdgeInsets.all(6),
-        child: Row(
-          children: const [
-            Icon(Icons.camera_alt, size: 16, color: kPrimaryColor),
-            SizedBox(
-              width: 6,
-            ),
-            Text(
-                // '$_counter',
-                'بارگزاری تصویر',
-                style: TextStyle(fontSize: 12, color: kPrimaryColor)),
-          ],
+    return GestureDetector(
+      onTap: (){
+        print("Image Tap");
+      },
+      child: Card(
+        color: Colors.white,
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(color: kPrimaryColor, width: 1),
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: Container(
+          alignment: Alignment.center,
+          padding: const EdgeInsets.all(6),
+          child: Row(
+            children: const [
+              Icon(Icons.camera_alt, size: 16, color: kPrimaryColor),
+              SizedBox(
+                width: 6,
+              ),
+              Text(
+                  // '$_counter',
+                  'بارگزاری تصویر',
+                  style: TextStyle(fontSize: 12, color: kPrimaryColor)),
+            ],
+          ),
         ),
       ),
     );

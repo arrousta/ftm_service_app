@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:ftm_service_app/constractor.dart';
 import 'package:ftm_service_app/screens/start_shift_page.dart';
 import 'package:intl/intl.dart';
+import 'package:intl/locale.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../icon_content.dart';
@@ -30,7 +31,7 @@ class _PanelPageState extends State<PanelPage> {
 
   void _getTime() {
     final String formattedTime =
-        DateFormat('kk : mm : ss').format(DateTime.now()).toString();
+        DateFormat('kk : mm').format(DateTime.now()).toString();
     setState(() {
       _timeString = formattedTime;
     });
@@ -60,7 +61,7 @@ class _PanelPageState extends State<PanelPage> {
     //Navigator.pushNamed(context, '/login');
     print("username deleted");
     Navigator.pushNamedAndRemoveUntil(
-        context, '/signin', ModalRoute.withName('/signin'));
+        context, '/home', ModalRoute.withName('/home'));
   }
 //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ftm_service_app/screens/panel_page.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 //Alireza : Added landing function for save user info
@@ -27,8 +29,14 @@ class _LandingState extends State<Landing> {
           context, '/home', ModalRoute.withName('/home'));
     } else {
       print("_username is true");
-      Navigator.pushNamedAndRemoveUntil(
-          context, '/panelpage', ModalRoute.withName('/panelpage'));
+      // Navigator.pushNamedAndRemoveUntil(
+      //     context, '/panelpage', ModalRoute.withName('/panelpage'));
+      Navigator.pushReplacement(context, PageTransition(
+          type: PageTransitionType.leftToRightWithFade,
+          duration: const Duration(seconds: 1),
+          child: PanelPage(
+            operator: _username,
+          )));
     }
   }
 
