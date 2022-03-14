@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ftm_service_app/screens/home_page.dart';
 import 'package:ftm_service_app/constractor.dart';
+import 'package:ftm_service_app/screens/panel_page.dart';
 import 'package:ftm_service_app/structures/user.dart';
+
+import '../landing.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -77,17 +80,21 @@ class _SplashScreenState extends State<SplashScreen> {
         context,
         MaterialPageRoute(
           builder: (context) {
-            return HomePage(
-              pageTitle: "operator",
-            );
+            // return HomePage(
+            //   pageTitle: "operator",
+            // );
+            //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+            //TODO Alireza : check landing state for user data save
+            print("opening Landing...");
+            return Landing();
+            //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+
           },
         ),
         (route) => false,
       );
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +110,6 @@ class _SplashScreenState extends State<SplashScreen> {
             size: 50.0,
           ),
           // (futureUser == null) ? BuildButtonReload() : futureBuilderGet(context),
-
         ],
       )),
       backgroundColor: kBackgroundColor2,

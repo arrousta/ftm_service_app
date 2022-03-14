@@ -1,20 +1,68 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:ftm_service_app/constractor.dart';
+import 'package:ftm_service_app/screens/start_shift_page.dart';
+import 'package:intl/intl.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../icon_content.dart';
 import '../reusable_card.dart';
+import 'loading_page.dart';
 
 enum ShiftName { morning, evening, night }
 
 class PanelPage extends StatefulWidget {
-  const PanelPage({Key? key, required this.title}) : super(key: key);
-  final String title;
+  const PanelPage({
+    Key? key,
+    required this.operator,
+  }) : super(key: key);
+  final String operator;
 
   @override
   State<PanelPage> createState() => _PanelPageState();
 }
 
 class _PanelPageState extends State<PanelPage> {
-  String shiftName = "null";
+  String shiftName = " ";
+  String? _timeString;
+  String? _dateString;
+
+  void _getTime() {
+    final String formattedTime =
+        DateFormat('kk : mm : ss').format(DateTime.now()).toString();
+    setState(() {
+      _timeString = formattedTime;
+    });
+  }
+
+  void _getDate() {
+    final String formattedDate =
+        DateFormat('yyyy / MM / dd').format(DateTime.now()).toString();
+    setState(() {
+      _dateString = formattedDate;
+    });
+  }
+
+  @override
+  void initState() {
+    shiftName = widget.operator;
+    super.initState();
+    Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
+    Timer.periodic(Duration(seconds: 1), (Timer t) => _getDate());
+  }
+
+//*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+  //TODO Alireza : LogOut Function for delete user data :
+  void _handleLogout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove("username");
+    //Navigator.pushNamed(context, '/login');
+    print("username deleted");
+    Navigator.pushNamedAndRemoveUntil(
+        context, '/signin', ModalRoute.withName('/signin'));
+  }
+//*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
   @override
   Widget build(BuildContext context) {
@@ -35,36 +83,31 @@ class _PanelPageState extends State<PanelPage> {
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text("Zahra Nematollahi",
+                        children: [
+                          Text(widget.operator,
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 27,
+                                fontSize: 30,
                                 fontWeight: FontWeight.w700,
                                 fontFamily: 'Poppins',
                               )),
                         ],
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: const [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
                           Text(
-                            "22 / 12 / 1400",
+                            _dateString.toString(),
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 19.0,
                                 fontFamily: 'Poppins'),
                           ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: const [
                           Text(
-                            "12:33:25",
+                            _timeString.toString(),
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 19.0,
+                                fontSize: 39.0,
                                 fontFamily: 'Poppins'),
                           ),
                         ],
@@ -81,7 +124,17 @@ class _PanelPageState extends State<PanelPage> {
                     child: ReusableCard(
                       onPress: () {
                         //TODO : START SHIFT button
-                        setState(() {});
+                        setState(() {
+                          Navigator.pushReplacement(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.rightToLeft,
+                              child: const StartShift(
+                                title: 'StartShift',
+                              ),
+                            ),
+                          );
+                        });
                       },
                       colour: kPrimaryColor,
                       cardChild: const IconContent(
@@ -94,7 +147,14 @@ class _PanelPageState extends State<PanelPage> {
                     child: ReusableCard(
                       onPress: () {
                         //TODO : END SHIFT button
-                        setState(() {});
+                        setState(() {
+                          // PageTransition(
+                          //     type: PageTransitionType.rightToLeft,
+                          //     child: LoadingPage(
+                          //       //operatorName: name,
+                          //       operatorName: 'alireza',
+                          //     ));
+                        });
                       },
                       colour: kPrimaryColor,
                       cardChild: const IconContent(
@@ -142,7 +202,9 @@ class _PanelPageState extends State<PanelPage> {
                     child: ReusableCard(
                       onPress: () {
                         //TODO : LOG OUT button
-                        setState(() {});
+                        setState(() {
+                          _handleLogout();
+                        });
                       },
                       colour: kPrimaryColor,
                       cardChild: const IconContent(

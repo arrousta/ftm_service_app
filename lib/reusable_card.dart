@@ -13,7 +13,11 @@ class ReusableCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
+      hoverColor: Colors.black26,
+      splashColor: Colors.lightBlue.shade600,
+      focusColor: Colors.blue,
+      highlightColor: Colors.blueGrey.shade700,
       onTap: onPress,
       child: Container(
         height: 160,
