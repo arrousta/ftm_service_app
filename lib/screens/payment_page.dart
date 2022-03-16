@@ -2,15 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:ftm_service_app/widgets/input_fields.dart';
 import 'package:ftm_service_app/constractor.dart';
 import 'package:ftm_service_app/widgets/time_and_date.dart';
+import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
 
+import '../translations.dart';
 import 'final_confirmation_page.dart';
 
 enum ShiftName { morning, evening, night }
 
 class Payment extends StatefulWidget {
-  const Payment({Key? key, required this.title}) : super(key: key);
-  final String title;
+  const Payment(
+      {Key? key,
+      required this.total,
+      required this.dispenser1A,
+      required this.dispenser1B,
+      required this.dispenser2A,
+      required this.dispenser2B,
+      required this.dispenser3A,
+      required this.dispenser3B})
+      : super(key: key);
+
+  final String total;
+  final String dispenser1A;
+  final String dispenser1B;
+  final String dispenser2A;
+  final String dispenser2B;
+  final String dispenser3A;
+  final String dispenser3B;
 
   @override
   State<Payment> createState() => _PaymentState();
@@ -18,9 +36,20 @@ class Payment extends StatefulWidget {
 
 class _PaymentState extends State<Payment> {
   String shiftName = "null";
+  int aPrice = 6568;
 
   @override
   Widget build(BuildContext context) {
+    String totalShift = "";
+    totalShift = widget.total;
+    int totalInt = int.parse(totalShift);
+
+    var persianInUSFormat = NumberFormat.currency(locale: 'fa', symbol: '');
+    // var persianInUSFormat = NumberFormat.currency(locale: "fa", symbol: "ريال");
+
+    String totalWithFormat = persianInUSFormat.format(totalInt * aPrice);
+
+
     return WillPopScope(
       onWillPop: () async {
         Navigator.pop(context);
@@ -30,7 +59,7 @@ class _PaymentState extends State<Payment> {
         appBar: AppBar(
           backgroundColor: const Color(0xffc7c7c7),
           elevation: 0.0,
-          title: Text(widget.title),
+          title: Text("Payment Page"),
           titleTextStyle: const TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
@@ -66,8 +95,8 @@ class _PaymentState extends State<Payment> {
                       Container(
                         alignment: Alignment.center,
                         height: 40.0,
-                        child: const Text(
-                          'The total cost of fuel in your shift',
+                        child: Text(
+                          Translations.of(context).text("payment_message"),
                           style: kHeader5,
                         ),
                       ),
@@ -94,16 +123,17 @@ class _PaymentState extends State<Payment> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    'Total function of your shift: ',
+                                  Text(
+                                    Translations.of(context)
+                                        .text("payment_function_mess"),
                                     style: kHeader7,
                                   ),
                                   Container(
                                     //TODO : Calcute Total function of the shift
                                     width: 130.0,
                                     height: 50.0,
-                                    child: const CardWidget(
-                                      value: '12345678910',
+                                    child: CardWidget(
+                                      value: totalShift,
                                     ),
                                   ),
                                 ],
@@ -122,16 +152,17 @@ class _PaymentState extends State<Payment> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    'Total cost of your shift : ',
+                                  Text(
+                                    Translations.of(context)
+                                        .text("payment_cost_mess"),
                                     style: kHeader7,
                                   ),
                                   Container(
                                     //TODO : Calcute Total cost of the shift
                                     width: 140.0,
                                     height: 50.0,
-                                    child: const CardWidget(
-                                      value: '12345678910',
+                                    child: CardWidget(
+                                      value: totalWithFormat,
                                     ),
                                   ),
                                 ],
@@ -160,8 +191,9 @@ class _PaymentState extends State<Payment> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    'Enter the value of the \ncard reader function',
+                                  Text(
+                                    Translations.of(context)
+                                        .text("payment_user_mess"),
                                     style: kHeader7,
                                     textAlign: TextAlign.center,
                                   ),
@@ -172,7 +204,7 @@ class _PaymentState extends State<Payment> {
                                     width: 140.0,
                                     height: 50.0,
                                     padding: const EdgeInsets.all(3),
-                                    child: ftmPaymentInput('Enter Number'),
+                                    child: ftmPaymentInput('وارد کنید'),
                                   ),
                                 ],
                               ),
@@ -206,8 +238,9 @@ class _PaymentState extends State<Payment> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    'The amount of cash \n you have to pay  ',
+                                  Text(
+                                    Translations.of(context)
+                                        .text("payment_cash_mess"),
                                     style: kHeader7,
                                     textAlign: TextAlign.center,
                                   ),
@@ -218,8 +251,8 @@ class _PaymentState extends State<Payment> {
                                     //TODO : Calcute amount of cash have to pay
                                     width: 140.0,
                                     height: 50.0,
-                                    child: const CardWidget(
-                                      value: '12345678910',
+                                    child: CardWidget(
+                                      value: totalWithFormat,
                                     ),
                                   ),
                                 ],
@@ -240,18 +273,29 @@ class _PaymentState extends State<Payment> {
                           print(paymentController
                               .text); // Print name current value
 
-                          Navigator.pushReplacement(
+                          Navigator.push(
                               context,
                               PageTransition(
                                   type: PageTransitionType.rightToLeft,
                                   child: FinalConfirm(
                                     title: 'Final Confirmation',
+                                    dispenser1A: '${widget.dispenser1A}',
+                                    dispenser1B: '${widget.dispenser1B}',
+                                    dispenser2A: '${widget.dispenser2A}',
+                                    dispenser2B: '${widget.dispenser2B}',
+                                    dispenser3A: '${widget.dispenser3A}',
+                                    dispenser3B: '${widget.dispenser3B}',
                                   )));
                         },
-                        child: const Text("Next Step"),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(Translations.of(context).text("next_step")),
+                          ],
+                        ),
                         style: ElevatedButton.styleFrom(
                           primary: kPrimaryColor,
-                          padding: const EdgeInsets.all(13),
+                          padding: const EdgeInsets.all(8),
                         ),
                       ),
                     ],
@@ -288,10 +332,13 @@ class CardWidget extends StatelessWidget {
         width: 100.0,
         height: 34.0,
         child: Text(
-          // '$_counter',
           '$value',
-          //'کارکرد 0.0',
-          style: kHeader7,
+          locale: Locale('en'),
+          style: TextStyle(
+            fontFamily: 'Yekan',
+            fontWeight: FontWeight.bold,
+            fontSize: 17,
+          ),
         ),
       ),
     );

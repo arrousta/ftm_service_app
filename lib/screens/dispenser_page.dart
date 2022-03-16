@@ -144,8 +144,24 @@ class _DispenserPageState extends State<DispenserPage> {
     }
   }
 
+  int totalShift() {
+    int total = 0;
+
+    total += dispenser1AChangedValue - int.parse(widget.lastDispenserData1A);
+    total += dispenser1BChangedValue - int.parse(widget.lastDispenserData1B);
+    total += dispenser2AChangedValue - int.parse(widget.lastDispenserData2A);
+    total += dispenser2BChangedValue - int.parse(widget.lastDispenserData2B);
+    total += dispenser3AChangedValue - int.parse(widget.lastDispenserData3A);
+    total += dispenser3BChangedValue - int.parse(widget.lastDispenserData3B);
+    print(dispenser1AController.text);
+
+    return total;
+
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
@@ -155,7 +171,6 @@ class _DispenserPageState extends State<DispenserPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-
                 // Time shift and operator name
 
                 /*
@@ -352,11 +367,11 @@ class _DispenserPageState extends State<DispenserPage> {
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
                                           value: (dispenser1BChangedValue >
-                                              int.parse(_startDispenser1B))
+                                                  int.parse(_startDispenser1B))
                                               ? _calculateDispenserResult(
-                                              startShift: _startDispenser1B,
-                                              endSift:
-                                              '$dispenser1BChangedValue')
+                                                  startShift: _startDispenser1B,
+                                                  endSift:
+                                                      '$dispenser1BChangedValue')
                                               : "0",
                                         ),
                                       ),
@@ -441,11 +456,11 @@ class _DispenserPageState extends State<DispenserPage> {
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
                                           value: (dispenser2AChangedValue >
-                                              int.parse(_startDispenser2A))
+                                                  int.parse(_startDispenser2A))
                                               ? _calculateDispenserResult(
-                                              startShift: _startDispenser2A,
-                                              endSift:
-                                              '$dispenser2AChangedValue')
+                                                  startShift: _startDispenser2A,
+                                                  endSift:
+                                                      '$dispenser2AChangedValue')
                                               : "0",
                                         ),
                                       ),
@@ -509,11 +524,11 @@ class _DispenserPageState extends State<DispenserPage> {
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
                                           value: (dispenser2BChangedValue >
-                                              int.parse(_startDispenser2B))
+                                                  int.parse(_startDispenser2B))
                                               ? _calculateDispenserResult(
-                                              startShift: _startDispenser2B,
-                                              endSift:
-                                              '$dispenser2BChangedValue')
+                                                  startShift: _startDispenser2B,
+                                                  endSift:
+                                                      '$dispenser2BChangedValue')
                                               : "0",
                                         ),
                                       ),
@@ -598,11 +613,11 @@ class _DispenserPageState extends State<DispenserPage> {
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
                                           value: (dispenser3AChangedValue >
-                                              int.parse(_startDispenser3A))
+                                                  int.parse(_startDispenser3A))
                                               ? _calculateDispenserResult(
-                                              startShift: _startDispenser3A,
-                                              endSift:
-                                              '$dispenser3AChangedValue')
+                                                  startShift: _startDispenser3A,
+                                                  endSift:
+                                                      '$dispenser3AChangedValue')
                                               : "0",
                                         ),
                                       ),
@@ -666,11 +681,11 @@ class _DispenserPageState extends State<DispenserPage> {
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
                                           value: (dispenser3BChangedValue >
-                                              int.parse(_startDispenser3B))
+                                                  int.parse(_startDispenser3B))
                                               ? _calculateDispenserResult(
-                                              startShift: _startDispenser3B,
-                                              endSift:
-                                              '$dispenser3BChangedValue')
+                                                  startShift: _startDispenser3B,
+                                                  endSift:
+                                                      '$dispenser3BChangedValue')
                                               : "0",
                                         ),
                                       ),
@@ -709,13 +724,27 @@ class _DispenserPageState extends State<DispenserPage> {
                           padding: const EdgeInsets.all(8),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              PageTransition(
-                                  type: PageTransitionType.rightToLeft,
-                                  child: const Payment(
-                                    title: 'Payment Page',
-                                  )));
+                          int _total = totalShift();
+
+                          if (_total > 0) {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    type: PageTransitionType.rightToLeft,
+                                    child: Payment(
+                                      total: "$_total",
+                                      dispenser1A: '${dispenser1AController.text}',
+                                      dispenser1B: '${dispenser1BController.text}',
+                                      dispenser2A: '${dispenser2AController.text}',
+                                      dispenser2B: '${dispenser2BController.text}',
+                                      dispenser3A: '${dispenser3AController.text}',
+                                      dispenser3B: '${dispenser3BController.text}',
+                                    )));
+                          } else if (_total == 0) {
+                            print("***Total= $_total");
+                          } else {
+                            print("Error in total dispenser");
+                          }
                         },
                       ),
                     ],
@@ -798,7 +827,7 @@ class ImageCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         print("Image Tap");
       },
       child: Card(

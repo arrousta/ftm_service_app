@@ -7,8 +7,23 @@ import 'finish_page.dart';
 enum ShiftName { morning, evening, night }
 
 class FinalConfirm extends StatefulWidget {
-  const FinalConfirm({Key? key, required this.title}) : super(key: key);
+  const FinalConfirm(
+      {Key? key,
+      required this.title,
+      required this.dispenser1A,
+      required this.dispenser1B,
+      required this.dispenser2A,
+      required this.dispenser2B,
+      required this.dispenser3A,
+      required this.dispenser3B})
+      : super(key: key);
   final String title;
+  final String dispenser1A;
+  final String dispenser1B;
+  final String dispenser2A;
+  final String dispenser2B;
+  final String dispenser3A;
+  final String dispenser3B;
 
   @override
   State<FinalConfirm> createState() => _FinalConfirmState();
@@ -90,8 +105,8 @@ class _FinalConfirmState extends State<FinalConfirm> {
                                   //TODO : get dispenser1 A Data
                                   width: 130.0,
                                   height: 50.0,
-                                  child: const CardWidget(
-                                    value: '111111111',
+                                  child: CardWidget(
+                                    value: '${widget.dispenser1A}',
                                   ),
                                 ),
                                 SizedBox(
@@ -105,8 +120,8 @@ class _FinalConfirmState extends State<FinalConfirm> {
                                   //TODO : get dispenser1 B Data
                                   width: 130.0,
                                   height: 50.0,
-                                  child: const CardWidget(
-                                    value: '111111111',
+                                  child: CardWidget(
+                                    value: '${widget.dispenser1B}',
                                   ),
                                 ),
                               ],
@@ -138,8 +153,8 @@ class _FinalConfirmState extends State<FinalConfirm> {
                                   //TODO : get dispenser2 A Data
                                   width: 130.0,
                                   height: 50.0,
-                                  child: const CardWidget(
-                                    value: '22222222',
+                                  child: CardWidget(
+                                    value: '${widget.dispenser2A}',
                                   ),
                                 ),
                                 SizedBox(
@@ -153,8 +168,8 @@ class _FinalConfirmState extends State<FinalConfirm> {
                                   //TODO : get dispenser2 B Data
                                   width: 130.0,
                                   height: 50.0,
-                                  child: const CardWidget(
-                                    value: '22222222',
+                                  child: CardWidget(
+                                    value: '${widget.dispenser2B}',
                                   ),
                                 ),
                               ],
@@ -186,8 +201,8 @@ class _FinalConfirmState extends State<FinalConfirm> {
                                   //TODO : get dispenser3 A Data
                                   width: 130.0,
                                   height: 50.0,
-                                  child: const CardWidget(
-                                    value: '333333333',
+                                  child: CardWidget(
+                                    value: '${widget.dispenser3A}',
                                   ),
                                 ),
                                 SizedBox(
@@ -201,8 +216,8 @@ class _FinalConfirmState extends State<FinalConfirm> {
                                   //TODO : get dispenser3 B Data
                                   width: 130.0,
                                   height: 50.0,
-                                  child: const CardWidget(
-                                    value: '333333333',
+                                  child: CardWidget(
+                                    value: '${widget.dispenser3B}',
                                   ),
                                 ),
                               ],

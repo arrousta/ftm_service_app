@@ -8,8 +8,8 @@ import 'package:page_transition/page_transition.dart';
 import '../constractor.dart';
 
 class LoadingPage extends StatefulWidget {
-  LoadingPage({Key? key,required this.operatorName}) : super(key: key);
-  final String operatorName;
+  LoadingPage({Key? key,required this.id}) : super(key: key);
+  final String id;
 
   @override
   _LoadingPageState createState() => _LoadingPageState();
@@ -53,7 +53,7 @@ class _LoadingPageState extends State<LoadingPage> {
                     lastDispenserData2B: dispensers.dis_4.toString(),
                     lastDispenserData3A: dispensers.dis_5.toString(),
                     lastDispenserData3B: dispensers.dis_6.toString(),
-                    operator: widget.operatorName,
+                    operator: widget.id,
                   ),
                   type: PageTransitionType.rightToLeft));
         }

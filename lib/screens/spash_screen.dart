@@ -85,7 +85,6 @@ class _SplashScreenState extends State<SplashScreen> {
             // );
             //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
             //TODO Alireza : check landing state for user data save
-            print("opening Landing...");
             return Landing();
             //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 

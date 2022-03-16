@@ -2,14 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:ftm_service_app/constractor.dart';
+import 'package:ftm_service_app/screens/dispenser_page.dart';
+import 'package:ftm_service_app/screens/loading_page.dart';
 import 'package:ftm_service_app/screens/start_shift_page.dart';
 import 'package:intl/intl.dart';
-import 'package:intl/locale.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../icon_content.dart';
 import '../reusable_card.dart';
-import 'loading_page.dart';
 
 enum ShiftName { morning, evening, night }
 
@@ -48,9 +48,9 @@ class _PanelPageState extends State<PanelPage> {
   @override
   void initState() {
     shiftName = widget.operator;
-    super.initState();
     Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
     Timer.periodic(Duration(seconds: 1), (Timer t) => _getDate());
+    super.initState();
   }
 
 //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
@@ -126,7 +126,7 @@ class _PanelPageState extends State<PanelPage> {
                       onPress: () {
                         //TODO : START SHIFT button
                         setState(() {
-                          Navigator.pushReplacement(
+                          Navigator.push(
                             context,
                             PageTransition(
                               type: PageTransitionType.rightToLeft,
@@ -147,15 +147,11 @@ class _PanelPageState extends State<PanelPage> {
                   Expanded(
                     child: ReusableCard(
                       onPress: () {
-                        //TODO : END SHIFT button
-                        setState(() {
-                          // PageTransition(
-                          //     type: PageTransitionType.rightToLeft,
-                          //     child: LoadingPage(
-                          //       //operatorName: name,
-                          //       operatorName: 'alireza',
-                          //     ));
-                        });
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                                child: LoadingPage(id: '',),
+                                type: PageTransitionType.rightToLeft));
                       },
                       colour: kPrimaryColor,
                       cardChild: const IconContent(
@@ -172,8 +168,6 @@ class _PanelPageState extends State<PanelPage> {
                     child: ReusableCard(
                       onPress: () {
                         //TODO : PROFILE button
-
-                        setState(() {});
                       },
                       colour: kPrimaryColor,
                       cardChild: const IconContent(
@@ -186,7 +180,6 @@ class _PanelPageState extends State<PanelPage> {
                     child: ReusableCard(
                       onPress: () {
                         //TODO : TAKE LEAVE button
-                        setState(() {});
                       },
                       colour: kPrimaryColor,
                       cardChild: const IconContent(
@@ -218,7 +211,6 @@ class _PanelPageState extends State<PanelPage> {
                     child: ReusableCard(
                       onPress: () {
                         //TODO : SETTING button
-                        setState(() {});
                       },
                       colour: kPrimaryColor,
                       cardChild: const IconContent(
