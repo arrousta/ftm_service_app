@@ -33,12 +33,25 @@
   "function": "Function",
   
   "payment_message": "The total cost of fuel in your shift",
-  "payment_function_mess": "Total function of your shift:",
-  "payment_cost_mess": "Total cost of your shift",
-  "payment_user_mess": "Enter the value of the card reader function",
-  "payment_cash_mess": "The amount of cash you have to pay",
+  "payment_function_mess": "Total function \n of your shift:",
+  "payment_cost_mess": "Total cost \n of your shift",
+  "payment_user_mess": "Enter the value of \n the card reader function",
+  "payment_cash_mess": "The amount of cash \n you have to pay",
   
   "final_confirm_mess": "If there is a mistake in the entered data, press the Edit key and correct the data",
   "edit_data": "EDIT",
-  "finish": "FINISH"
+  "finish": "FINISH",
+
+  "close_app_mess": "Do you want to exit?",
+  "yes": "Yes",
+  "no": "No",
+
+  "start_shift_mess": "If there is a mistake in the entered data,\\n press the edit key and correct the data",
+  "attention": "attention...!",
+
+  "end_shift": "End Shift",
+  "take_leave": "Take Leave",
+  "profile": "Profile",
+  "setting": "Setting",
+  "log_out": "Log Out"
  }

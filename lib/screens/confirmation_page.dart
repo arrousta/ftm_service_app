@@ -3,6 +3,7 @@ import 'package:ftm_service_app/screens/dispenser_page.dart';
 import 'package:ftm_service_app/widgets/input_fields.dart';
 import 'package:ftm_service_app/constractor.dart';
 import 'package:page_transition/page_transition.dart';
+import '../translations.dart';
 import 'sing_in_page.dart';
 
 class ConfirmationPage extends StatefulWidget {
@@ -21,7 +22,7 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: kWhite,
-          title: const Text('Confirmation SMS',
+          title: Text(Translations.of(context).text("confirmation_sms"),
               style: TextStyle(
                   color: Colors.grey, fontFamily: 'Poppins', fontSize: 15)),
           actions: <Widget>[
@@ -36,7 +37,8 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
                           pageTitle: 'SignInPage',
                         )));
               },
-              child: const Text('Sign In', style: kTextContrast),
+              child: Text(Translations.of(context).text("sing_in"),
+                  style: kTextContrast),
             )
           ],
         ),
@@ -51,44 +53,53 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      const Text('Please wait to receive text message from Us',
+                      Text(
+                          Translations.of(context)
+                              .text("confirmation_sms_message1"),
                           style: kHeader7),
-                      const Text('Enter Received Code here :',
+                      Text(
+                          Translations.of(context)
+                              .text("confirmation_sms_message2"),
                           style: taglineText2),
-                      ftmConfirmCodeInput('Enter Received Code'),
+                      ftmConfirmCodeInput(Translations.of(context)
+                          .text("confirmation_sms_message3")),
+                      const SizedBox(
+                        height: 8.0,
+                      ),
+                      Positioned(
+                        bottom: 15,
+                        right: 8,
+                        //TODO : Confirm SMS : after user press Enter button Send Data To Server And Do Confirmation :
+                        child: ElevatedButton(
+                          onPressed: () {
+                            print(confirmCodeController
+                                .text); // Print name current value
+                            Navigator.pushReplacement(
+                              context,
+                              PageTransition(
+                                type: PageTransitionType.rightToLeft,
+                                child: DispenserPage(
+                                  operator: 'Dispenser Page',
+                                  lastDispenserData1A: '10',
+                                  lastDispenserData1B: '20',
+                                  lastDispenserData2A: '30',
+                                  lastDispenserData2B: '40',
+                                  lastDispenserData3A: '50',
+                                  lastDispenserData3B: '60',
+                                ),
+                              ),
+                            );
+                          },
+                          child:
+                              Text(Translations.of(context).text("send_code")),
+                          style: ElevatedButton.styleFrom(
+                            primary: kPrimaryColor,
+                            padding: const EdgeInsets.all(8),
+                          ),
+                        ),
+                      )
                     ],
                   ),
-                  Positioned(
-                    bottom: 15,
-                    right: 8,
-                    //TODO : Confirm SMS : after user press Enter button Send Data To Server And Do Confirmation :
-                    child: ElevatedButton(
-                      onPressed: () {
-                        print(confirmCodeController
-                            .text); // Print name current value
-                        Navigator.pushReplacement(
-                          context,
-                          PageTransition(
-                            type: PageTransitionType.rightToLeft,
-                            child: DispenserPage(
-                              operator: 'Dispenser Page',
-                              lastDispenserData1A: '10',
-                              lastDispenserData1B: '20',
-                              lastDispenserData2A: '30',
-                              lastDispenserData2B: '40',
-                              lastDispenserData3A: '50',
-                              lastDispenserData3B: '60',
-                            ),
-                          ),
-                        );
-                      },
-                      child: const Text("Send Code"),
-                      style: ElevatedButton.styleFrom(
-                        primary: kPrimaryColor,
-                        padding: const EdgeInsets.all(15),
-                      ),
-                    ),
-                  )
                 ],
               ),
               height: 220,
