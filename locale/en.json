@@ -8,8 +8,9 @@
   "sing_up": "Sing up",
   "forgot_password": "Forgot Password",
   
-  "start_shft": "Start Shift",
-  
+  "start_shift": "Start Shift",
+  "end_shift": "End Shift",
+
   "welcome_ftm": "Welcome to FTM.co!",
   "lets_get_start": "Lets get started",
   "full_name": "Full Name",
@@ -49,7 +50,6 @@
   "start_shift_mess": "If there is a mistake in the entered data,\\n press the edit key and correct the data",
   "attention": "attention...!",
 
-  "end_shift": "End Shift",
   "take_leave": "Take Leave",
   "profile": "Profile",
   "setting": "Setting",

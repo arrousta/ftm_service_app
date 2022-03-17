@@ -97,8 +97,8 @@ const categoryText = TextStyle(
     fontWeight: FontWeight.w700,
     fontFamily: 'Poppins');
 
-const inputFieldTextStyle =
-    TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.w500, color: kTextPrimary);
+const inputFieldTextStyle = TextStyle(
+    fontFamily: 'Poppins', fontWeight: FontWeight.w500, color: kTextPrimary);
 
 const inputFieldHintTextStyle =
     TextStyle(fontFamily: 'Poppins', color: Color(0xff444444));
@@ -135,19 +135,36 @@ const authPlateDecoration = BoxDecoration(
         bottomEnd: Radius.circular(20), bottomStart: Radius.circular(20)));
 
 const dispenserPlateDecoration = BoxDecoration(
-    color: kWhite,
-    boxShadow: [
-      BoxShadow(
-          color: Color.fromRGBO(0, 0, 0, .1),
-          blurRadius: 10,
-          spreadRadius: 5,
-          offset: Offset(0, 1))
-    ],
-    borderRadius: BorderRadiusDirectional.all(Radius.circular(8)));
+  color: kWhite,
+  boxShadow: [
+    BoxShadow(
+        color: Color.fromRGBO(0, 0, 0, .1),
+        blurRadius: 10,
+        spreadRadius: 5,
+        offset: Offset(0, 1))
+  ],
+  borderRadius: BorderRadiusDirectional.all(
+    Radius.circular(8),
+  ),
+);
+
+const dispensersPlateDecoration = BoxDecoration(
+  color: Color(0xFFBBBBBB),
+  boxShadow: [
+    BoxShadow(
+        color: Color.fromRGBO(0, 0, 0, .1),
+        blurRadius: 10,
+        spreadRadius: 5,
+        offset: Offset(0, 1))
+  ],
+  borderRadius: BorderRadiusDirectional.all(
+    Radius.circular(8),
+  ),
+);
 
 //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 const panelPlateDecoration = BoxDecoration(
-    color:Colors.blueGrey,
+    color: Colors.blueGrey,
     boxShadow: [
       BoxShadow(
           color: Color.fromRGBO(0, 0, 0, .3),
@@ -158,7 +175,7 @@ const panelPlateDecoration = BoxDecoration(
     borderRadius: BorderRadiusDirectional.all(Radius.circular(8)));
 
 const buttonPanelPlateDecoration = BoxDecoration(
-    color:Colors.blueGrey,
+    color: Colors.blueGrey,
     boxShadow: [
       BoxShadow(
           color: Color.fromRGBO(0, 0, 0, .3),

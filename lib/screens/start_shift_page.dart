@@ -39,7 +39,7 @@ class _StartShiftState extends State<StartShift> {
       appBar: AppBar(
         backgroundColor: const Color(0xffc7c7c7),
         elevation: 0.0,
-        title: Text(Translations.of(context).text("start_shft")),
+        title: Text(Translations.of(context).text("start_shift")),
         titleTextStyle: const TextStyle(
           color: Colors.black,
           fontWeight: FontWeight.bold,
@@ -296,7 +296,7 @@ class _StartShiftState extends State<StartShift> {
                                     )));
                           },
                           child: Text(
-                            Translations.of(context).text("start_shft"),
+                            Translations.of(context).text("start_shift"),
                             style: TextStyle(
                               fontSize: 15,
                               fontFamily: 'Yekan',

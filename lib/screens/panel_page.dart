@@ -31,77 +31,70 @@ class _PanelPageState extends State<PanelPage> {
   String? _dateString;
 
 
-  String _formatDate(DateTime dateTime) {
-    return DateFormat('MM/dd/yyyy').format(dateTime);
+  void _getTime() {
+    final String formattedTime =
+        DateFormat('kk:mm').format(DateTime.now()).toString();
+    setState(() {
+      _timeString = formattedTime;
+    });
+  }
+
+  void _getDate() {
+    final String formattedDate =
+        DateFormat('dd / mm / yyyy').format(DateTime.now()).toString();
+    setState(() {
+      _dateString = formattedDate;
+    });
   }
 
 
-  // void _getTime() {
-  //   final String formattedTime =
-  //       DateFormat('kk : mm').format(DateTime.now()).toString();
-  //   setState(() {
-  //     _timeString = formattedTime;
-  //   });
+  // String _formatDate(DateTime dateTime) {
+  //   return DateFormat('MM/dd/yyyy').format(dateTime);
+  // }
+  // String _formatTime(DateTime dateTime) {
+  //   return DateFormat('HH:mm').format(dateTime);
   // }
 
-  // void _getDate() {
-  //   var persianInUSFormat = NumberFormat.currency(locale: 'fa', symbol: '');
+  // void _setDate() {
+  //   final DateTime now = DateTime.now();
+  //   final String formattedDate = _formatDate(now);
   //
-  //   final String formattedDate =
-  //       DateFormat('yyyy / MM / dd').format(DateTime.now()).toString();
-  //   setState(() {
-  //     _dateString = formattedDate;
-  //   });
+  //     setState(() {
+  //       _dateString = formattedDate;
+  //     });
+  //
   // }
 
-
-  String _formatTime(DateTime dateTime) {
-    return DateFormat('HH:mm').format(dateTime);
-  }
-
-  void _setDate() {
-    final DateTime now = DateTime.now();
-    final String formattedDate = _formatDate(now);
-
-      setState(() {
-        _dateString = formattedDate;
-      });
-
-  }
-
-  void _setTime() {
-    final DateTime now = DateTime.now();
-    final String formattedTime = _formatTime(now);
-    String hour = "";
-    late String partOfDay;
-
-    for (int i = 0; i < 2; i++) {
-      hour += formattedTime[i];
-    }
-    int _hour = int.parse(hour);
-
-    if (7 <= _hour && _hour < 14) {
-      partOfDay = "First";
-    } else if (14 <= _hour && _hour < 22) {
-      partOfDay = "Second";
-    } else {
-      partOfDay = "Third";
-    }
-      setState(() {
-        _timeString = formattedTime;
-        shiftName = partOfDay;
-      });
-
-  }
+  // void _setTime() {
+  //   final DateTime now = DateTime.now();
+  //   final String formattedTime = _formatTime(now);
+  //   String hour = "";
+  //   late String partOfDay;
+  //
+  //   for (int i = 0; i < 2; i++) {
+  //     hour += formattedTime[i];
+  //   }
+  //   int _hour = int.parse(hour);
+  //
+  //   if (7 <= _hour && _hour < 14) {
+  //     partOfDay = "First";
+  //   } else if (14 <= _hour && _hour < 22) {
+  //     partOfDay = "Second";
+  //   } else {
+  //     partOfDay = "Third";
+  //   }
+  //     setState(() {
+  //       _timeString = formattedTime;
+  //       shiftName = partOfDay;
+  //     });
+  //
+  // }
 
   @override
   void initState() {
     shiftName = widget.operator;
-    _dateString = _formatDate(DateTime.now());
-    Timer.periodic(const Duration(seconds: 1), (Timer t) => _setDate());
-    _timeString = _formatTime(DateTime.now());
-    Timer.periodic(const Duration(seconds: 1), (Timer t) => _setTime());
-
+    Timer.periodic(const Duration(seconds: 1), (Timer t) => _getDate());
+    Timer.periodic(const Duration(seconds: 1), (Timer t) => _getTime());
     super.initState();
   }
 
@@ -190,7 +183,7 @@ class _PanelPageState extends State<PanelPage> {
                       colour: kPrimaryColor,
                       cardChild: IconContent(
                         icon: Icons.check,
-                        label: Translations.of(context).text("start_shft"),
+                        label: Translations.of(context).text("start_shift"),
                       ),
                     ),
                   ),

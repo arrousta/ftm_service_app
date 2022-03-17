@@ -41,7 +41,6 @@ class MyApp extends StatelessWidget {
       // supportedLocales: const [Locale('fa', ''), Locale('en', '')],
       debugShowCheckedModeBanner: false,
       title: 'FTM.CO',
-      darkTheme: ThemeData.dark(),
       theme: ThemeData(
         fontFamily: 'Yekan',
       ),

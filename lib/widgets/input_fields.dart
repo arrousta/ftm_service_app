@@ -157,17 +157,10 @@ textFieldContainer ftmConfirmCodeInput(String hintText,
   );
 }
 
-textFieldContainer ftmDispenser1AInput(String hintText,
-    {onTap, onChanged, onEditingComplete, onSubmitted}) {
+textFieldContainer ftmDispenser1AInput({required String hintText, required Function onChanged, onTap, onEditingComplete, onSubmitted}) {
   return textFieldContainer(
     onTap: onTap,
-    onChanged: (value) {
-      if (value != '') {
-        dispenser1AChangedValue = int.parse(value);
-      } else {
-        dispenser1AChangedValue = 0;
-      }
-    },
+    onChanged: onChanged,
     onEditingComplete: onEditingComplete,
     onSubmitted: onSubmitted,
     cursorColor: kPrimaryColor,
@@ -182,8 +175,7 @@ textFieldContainer ftmDispenser1AInput(String hintText,
   );
 }
 
-textFieldContainer ftmDispenser1BInput(String hintText,
-    {onTap, onChanged, onEditingComplete, onSubmitted}) {
+textFieldContainer ftmDispenser1BInput({required String hintText, onTap, required Function onChanged, onEditingComplete, onSubmitted}) {
   return textFieldContainer(
     onTap: onTap,
     onChanged: (value) {

@@ -1,11 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:ftm_service_app/screens/panel_page.dart';
 import 'package:ftm_service_app/widgets/input_fields.dart';
 import 'package:ftm_service_app/constructor.dart';
-import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
 import '../translations.dart';
 import 'payment_page.dart';
@@ -31,15 +29,14 @@ class EndShiftPage extends StatefulWidget {
   String lastDispenserData3B;
 
   @override
-  State<EndShiftPage> createState() => _EndShiftPageState();
+  _EndShiftPageState createState() => _EndShiftPageState();
 }
-
-//***************************************************************************************
-//Todo : Delete this section if not use :
 
 class _EndShiftPageState extends State<EndShiftPage> {
   String operatorName = "";
   String shiftName = "";
+
+  String result = '0';
 
   late String _startDispenser1A,
       _startDispenser1B,
@@ -49,16 +46,33 @@ class _EndShiftPageState extends State<EndShiftPage> {
       _startDispenser3B;
 
   String _calculateDispenserResult(
-      {required String startShift, required String endSift}) {
+      {required String startShift, required int endSift}) {
     int start = 0;
     int end = 0;
-    String result;
+    String _result;
 
     start = int.parse(startShift);
-    end = int.parse(endSift);
+    end = endSift;
     end -= start;
-    result = end.toString();
-    return result;
+    _result = end.toString();
+
+    return _result;
+  }
+
+  void _calculateDispenserResul(
+      {required String startShift, required int endSift}) {
+    int start = 0;
+    int end = 0;
+
+    start = int.parse(startShift);
+    end = endSift;
+    end -= start;
+
+    if (end > 0) {
+      result = end.toString();
+    } else {
+      result = '0';
+    }
   }
 
   void _setStartShiftData() {
@@ -70,13 +84,6 @@ class _EndShiftPageState extends State<EndShiftPage> {
     _startDispenser3B = widget.lastDispenserData3B;
   }
 //*************************************************************************************
-
-  @override
-  initState() {
-    operatorName = widget.operator;
-    _setStartShiftData();
-    super.initState();
-  }
 
   int totalShift() {
     int total = 0;
@@ -93,6 +100,7 @@ class _EndShiftPageState extends State<EndShiftPage> {
 
   @override
   Widget build(BuildContext context) {
+    _setStartShiftData();
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
@@ -130,458 +138,67 @@ class _EndShiftPageState extends State<EndShiftPage> {
                         ),
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           //-----------------------------------------1A------------------------------------------
-                          Container(
-                            margin: const EdgeInsets.all(6.0),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: [
-                                  const Text(
-                                    ' A: ',
-                                    style: kHeader7,
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        "شروع شیفت:",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      Container(
-                                        width: kBoxSizeWith,
-                                        height: kBoxSizeHeight,
-                                        child: CardWidget(
-                                          value: '$_startDispenser1A',
-                                        ),
-                                      ),
-                                      Text(
-                                        "پایان شیفت:",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      Container(
-                                        width: kFieldSizeWith,
-                                        height: kFieldSizeHeight,
-                                        child: ftmDispenser1AInput(
-                                            'عدد را وارد کنید'),
-                                      ),
-                                      Text(
-                                        "کارکرد:",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      Container(
-                                        width: kBoxSizeWith,
-                                        height: kBoxSizeHeight,
-                                        child: CardWidget(
-                                          value: (dispenser1AChangedValue >
-                                                  int.parse(_startDispenser1A))
-                                              ? _calculateDispenserResult(
-                                                  startShift: _startDispenser1A,
-                                                  endSift:
-                                                      '$dispenser1AChangedValue')
-                                              : "0",
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 12,
-                                      ),
-                                      ImageCardWidget(),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            decoration: dispenserPlateDecoration,
-                          ),
-                          //-----------------------------------------1B------------------------------------------
-                          Container(
-                            margin: const EdgeInsets.all(6.0),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: [
-                                  const Text(
-                                    ' B: ',
-                                    style: kHeader7,
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        "شروع شیفت:",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      Container(
-                                        width: kBoxSizeWith,
-                                        height: kBoxSizeHeight,
-                                        child: CardWidget(
-                                          value: '$_startDispenser1B',
-                                        ),
-                                      ),
-                                      Text(
-                                        "پایان شیفت:",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      Container(
-                                        width: kFieldSizeWith,
-                                        height: kFieldSizeHeight,
-                                        child: ftmDispenser1BInput(
-                                            'عدد را وارد کنید'),
-                                      ),
-                                      Text(
-                                        "کارکرد:",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      Container(
-                                        width: kBoxSizeWith,
-                                        height: kBoxSizeHeight,
-                                        child: CardWidget(
-                                          value: (dispenser1BChangedValue >
-                                                  int.parse(_startDispenser1B))
-                                              ? _calculateDispenserResult(
-                                                  startShift: _startDispenser1B,
-                                                  endSift:
-                                                      '$dispenser1BChangedValue')
-                                              : "0",
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 12,
-                                      ),
-                                      ImageCardWidget(),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            decoration: dispenserPlateDecoration,
-                          ),
+                          NozzleWidget(
+                              id: 1, title: 'A', startShift: _startDispenser1A),                          //-----------------------------------------1B------------------------------------------
+                          NozzleWidget(
+                              id: 2, title: 'B', startShift: _startDispenser1B),
                         ],
                       ),
                       //-----------------------------------------Dispenser2------------------------------------------
                       Container(
-                        margin: EdgeInsets.symmetric(vertical: 6),
+                        margin: const EdgeInsets.symmetric(vertical: 6),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16),
                           color: kPrimaryColor,
                         ),
                         child: Padding(
-                          padding:
-                              EdgeInsets.symmetric(vertical: 6, horizontal: 16),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 6, horizontal: 16),
                           child: Text(
                             Translations.of(context).text("dispenser") + " 2",
-                            style: TextStyle(color: kBackgroundColor1),
+                            style: const TextStyle(color: kBackgroundColor1),
                           ),
                         ),
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           //-----------------------------------------2A------------------------------------------
-                          Container(
-                            margin: const EdgeInsets.all(6.0),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: [
-                                  const Text(
-                                    ' A: ',
-                                    style: kHeader7,
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        "شروع شیفت:",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      Container(
-                                        width: kBoxSizeWith,
-                                        height: kBoxSizeHeight,
-                                        child: CardWidget(
-                                          value: '$_startDispenser2A',
-                                        ),
-                                      ),
-                                      Text(
-                                        "پایان شیفت:",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      Container(
-                                        width: kFieldSizeWith,
-                                        height: kFieldSizeHeight,
-                                        child: ftmDispenser2AInput(
-                                            'عدد را وارد کنید'),
-                                      ),
-                                      Text(
-                                        "کارکرد:",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      Container(
-                                        width: kBoxSizeWith,
-                                        height: kBoxSizeHeight,
-                                        child: CardWidget(
-                                          value: (dispenser2AChangedValue >
-                                                  int.parse(_startDispenser2A))
-                                              ? _calculateDispenserResult(
-                                                  startShift: _startDispenser2A,
-                                                  endSift:
-                                                      '$dispenser2AChangedValue')
-                                              : "0",
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 12,
-                                      ),
-                                      ImageCardWidget(),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            decoration: dispenserPlateDecoration,
-                          ),
+                          NozzleWidget(
+                              id: 3, title: 'A', startShift: _startDispenser2A),
                           //-----------------------------------------2B------------------------------------------
-                          Container(
-                            margin: const EdgeInsets.all(6.0),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: [
-                                  const Text(
-                                    ' B: ',
-                                    style: kHeader7,
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        "شروع شیفت:",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      Container(
-                                        width: kBoxSizeWith,
-                                        height: kBoxSizeHeight,
-                                        child: CardWidget(
-                                          value: '$_startDispenser2B',
-                                        ),
-                                      ),
-                                      Text(
-                                        "پایان شیفت:",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      Container(
-                                        width: kFieldSizeWith,
-                                        height: kFieldSizeHeight,
-                                        child: ftmDispenser2BInput(
-                                            'عدد را وارد کنید'),
-                                      ),
-                                      Text(
-                                        "کارکرد:",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      Container(
-                                        width: kBoxSizeWith,
-                                        height: kBoxSizeHeight,
-                                        child: CardWidget(
-                                          value: (dispenser2BChangedValue >
-                                                  int.parse(_startDispenser2B))
-                                              ? _calculateDispenserResult(
-                                                  startShift: _startDispenser2B,
-                                                  endSift:
-                                                      '$dispenser2BChangedValue')
-                                              : "0",
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 12,
-                                      ),
-                                      ImageCardWidget(),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            decoration: dispenserPlateDecoration,
-                          ),
+                          NozzleWidget(
+                              id: 4, title: 'B', startShift: _startDispenser2B),
                         ],
                       ),
                       //-----------------------------------------Dispenser3------------------------------------------
                       Container(
-                        margin: EdgeInsets.symmetric(vertical: 6),
+                        margin: const EdgeInsets.symmetric(vertical: 6),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16),
                           color: kPrimaryColor,
                         ),
                         child: Padding(
-                          padding:
-                              EdgeInsets.symmetric(vertical: 6, horizontal: 16),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 6, horizontal: 16),
                           child: Text(
                             Translations.of(context).text("dispenser") + " 3",
-                            style: TextStyle(color: kBackgroundColor1),
+                            style: const TextStyle(color: kBackgroundColor1),
                           ),
                         ),
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           //-----------------------------------------3A------------------------------------------
-                          Container(
-                            margin: const EdgeInsets.all(6.0),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: [
-                                  const Text(
-                                    ' A: ',
-                                    style: kHeader7,
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        "شروع شیفت:",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      Container(
-                                        width: kBoxSizeWith,
-                                        height: kBoxSizeHeight,
-                                        child: CardWidget(
-                                          value: '$_startDispenser3A',
-                                        ),
-                                      ),
-                                      Text(
-                                        "پایان شیفت:",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      Container(
-                                        width: kFieldSizeWith,
-                                        height: kFieldSizeHeight,
-                                        child: ftmDispenser3AInput(
-                                            'عدد را وارد کنید'),
-                                      ),
-                                      Text(
-                                        "کارکرد:",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      Container(
-                                        width: kBoxSizeWith,
-                                        height: kBoxSizeHeight,
-                                        child: CardWidget(
-                                          value: (dispenser3AChangedValue >
-                                                  int.parse(_startDispenser3A))
-                                              ? _calculateDispenserResult(
-                                                  startShift: _startDispenser3A,
-                                                  endSift:
-                                                      '$dispenser3AChangedValue')
-                                              : "0",
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 12,
-                                      ),
-                                      ImageCardWidget(),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            decoration: dispenserPlateDecoration,
-                          ),
+                          NozzleWidget(
+                              id: 5, title: 'A', startShift: _startDispenser3A),
                           //-----------------------------------------3B------------------------------------------
-                          Container(
-                            margin: const EdgeInsets.all(6.0),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: [
-                                  const Text(
-                                    ' B: ',
-                                    style: kHeader7,
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        "شروع شیفت:",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      Container(
-                                        width: kBoxSizeWith,
-                                        height: kBoxSizeHeight,
-                                        child: CardWidget(
-                                          value: '$_startDispenser3B',
-                                        ),
-                                      ),
-                                      Text(
-                                        "پایان شیفت:",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      Container(
-                                        width: kFieldSizeWith,
-                                        height: kFieldSizeHeight,
-                                        child: ftmDispenser3BInput(
-                                            'عدد را وارد کنید'),
-                                      ),
-                                      Text(
-                                        "کارکرد:",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      Container(
-                                        width: kBoxSizeWith,
-                                        height: kBoxSizeHeight,
-                                        child: CardWidget(
-                                          value: (dispenser3BChangedValue >
-                                                  int.parse(_startDispenser3B))
-                                              ? _calculateDispenserResult(
-                                                  startShift: _startDispenser3B,
-                                                  endSift:
-                                                      '$dispenser3BChangedValue')
-                                              : "0",
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 12,
-                                      ),
-                                      ImageCardWidget(),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            decoration: dispenserPlateDecoration,
-                          ),
+                          NozzleWidget(
+                              id: 6, title: 'B', startShift: _startDispenser3B),
                         ],
                       ),
                       const SizedBox(
@@ -590,7 +207,7 @@ class _EndShiftPageState extends State<EndShiftPage> {
                       ElevatedButton(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
+                          children: const [
                             Icon(Icons.arrow_back_ios_sharp),
                             SizedBox(
                               width: 10.0,
@@ -606,7 +223,13 @@ class _EndShiftPageState extends State<EndShiftPage> {
                           padding: const EdgeInsets.all(8),
                         ),
                         onPressed: () {
-                          int _total = totalShift();
+
+                          int _total = 1;
+
+                          for(int i = 0; i < endSiftList.length ; i++){
+                            _total += endSiftList[i];
+                            print(endSiftList[i]);
+                          }
 
                           if (_total > 0) {
                             Navigator.push(
@@ -614,19 +237,13 @@ class _EndShiftPageState extends State<EndShiftPage> {
                                 PageTransition(
                                     type: PageTransitionType.rightToLeft,
                                     child: Payment(
-                                      total: "$_total",
-                                      dispenser1A:
-                                          '${dispenser1AController.text}',
-                                      dispenser1B:
-                                          '${dispenser1BController.text}',
-                                      dispenser2A:
-                                          '${dispenser2AController.text}',
-                                      dispenser2B:
-                                          '${dispenser2BController.text}',
-                                      dispenser3A:
-                                          '${dispenser3AController.text}',
-                                      dispenser3B:
-                                          '${dispenser3BController.text}',
+                                      total: '$_total',
+                                      dispenser1A: '${endSiftList[1]}',
+                                      dispenser1B: '${endSiftList[2]}',
+                                      dispenser2A: '${endSiftList[3]}',
+                                      dispenser2B: '${endSiftList[4]}',
+                                      dispenser3A: '${endSiftList[5]}',
+                                      dispenser3B: '${endSiftList[6]}',
                                     )));
                           } else if (_total == 0) {
                             print("***Total= $_total");
@@ -659,11 +276,11 @@ class _EndShiftPageState extends State<EndShiftPage> {
               TextButton(
                 child: Text(Translations.of(context).text("yes")),
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                       context,
                       PageTransition(
                           child: PanelPage(
-                            operator: "Zzzz",
+                            operator: widget.operator,
                           ),
                           type: PageTransitionType.rightToLeft));
                 },
@@ -701,10 +318,9 @@ class CardWidget extends StatelessWidget {
         width: kBoxSizeWith,
         height: kBoxSizeHeight,
         child: Text(
-          '$value',
-          style: TextStyle(
+          value,
+          style: const TextStyle(
             fontSize: 17,
-            // fontWeight: FontWeight.bold,
             fontFamily: 'Yekan',
           ),
         ),
@@ -721,9 +337,7 @@ class ImageCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        print("Image Tap");
-      },
+      onTap: () {},
       child: Card(
         color: Colors.white,
         shape: RoundedRectangleBorder(
@@ -739,13 +353,131 @@ class ImageCardWidget extends StatelessWidget {
               SizedBox(
                 width: 6,
               ),
-              Text(
-                  // '$_counter',
-                  'بارگزاری تصویر',
+              Text('بارگزاری تصویر',
                   style: TextStyle(fontSize: 12, color: kPrimaryColor)),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+List<int> endSiftList = [0,0,0,0,0,0];
+
+class NozzleWidget extends StatefulWidget {
+  final int id;
+  final String title;
+  final String startShift;
+
+  const NozzleWidget(
+      {Key? key,
+      required this.id,
+      required this.title,
+      required this.startShift})
+      : super(key: key);
+
+  @override
+  _NozzleWidgetState createState() => _NozzleWidgetState();
+}
+
+class _NozzleWidgetState extends State<NozzleWidget> {
+  final TextEditingController _textEditingController = TextEditingController();
+  int _functionResult = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: dispensersPlateDecoration,
+      padding: const EdgeInsets.only(top: 3),
+      child: Column(
+        children: [
+          Text(
+            widget.title,
+            style: kHeader7,
+          ),
+          Container(
+            margin: const EdgeInsets.all(6.0),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Text(
+                    Translations.of(context).text('start_shift'),
+                    style: const TextStyle(
+                      fontSize: 12,
+                    ),
+                  ),
+                  SizedBox(
+                    width: kBoxSizeWith,
+                    height: kBoxSizeHeight,
+                    child: CardWidget(
+                      value: widget.startShift,
+                    ),
+                  ),
+                  Text(
+                    Translations.of(context).text('end_shift'),
+                    style: const TextStyle(
+                      fontSize: 12,
+                    ),
+                  ),
+                  SizedBox(
+                    width: kFieldSizeWith,
+                    height: kFieldSizeHeight,
+                    child: TextField(
+                      onChanged: (value) {
+                        setState(() {
+                          if (value != '') {
+                            _functionResult = int.parse(value);
+                            if(_functionResult >= int.parse(widget.startShift)) {
+                              endSiftList.insert(widget.id, _functionResult -
+                                  int.parse(widget.startShift));
+                              print(endSiftList[widget.id]);
+                            }
+                          } else {
+                            _functionResult = 0;
+                          }
+                        });
+                      },
+                      cursorColor: kPrimaryColor,
+                      style: inputFieldTextStyleDispenser,
+                      controller: _textEditingController,
+                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.next,
+                      decoration: InputDecoration(
+                          hintText:
+                              Translations.of(context).text('enter_number'),
+                          hintStyle: inputFieldHintTextStyleDispenser,
+                          focusedBorder: inputFieldFocusedBorderStyle,
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 5, vertical: 5),
+                          border: inputFieldDefaultBorderStyle),
+                    ),
+                  ),
+                  Text(
+                    Translations.of(context).text('function'),
+                    style: const TextStyle(
+                      fontSize: 12,
+                    ),
+                  ),
+                  SizedBox(
+                    width: kBoxSizeWith,
+                    height: kBoxSizeHeight,
+                    child: CardWidget(
+                      value: (_functionResult > int.parse(widget.startShift))
+                          ? "${_functionResult - int.parse(widget.startShift)}"
+                          : "0",
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  const ImageCardWidget(),
+                ],
+              ),
+            ),
+            decoration: dispenserPlateDecoration,
+          ),
+        ],
       ),
     );
   }
