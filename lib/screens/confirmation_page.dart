@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ftm_service_app/screens/dispenser_page.dart';
+import 'package:ftm_service_app/screens/end_shift_page.dart';
 import 'package:ftm_service_app/widgets/input_fields.dart';
-import 'package:ftm_service_app/constractor.dart';
+import 'package:ftm_service_app/constructor.dart';
 import 'package:page_transition/page_transition.dart';
 import '../translations.dart';
 import 'sing_in_page.dart';
@@ -78,7 +78,7 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
                               context,
                               PageTransition(
                                 type: PageTransitionType.rightToLeft,
-                                child: DispenserPage(
+                                child: EndShiftPage(
                                   operator: 'Dispenser Page',
                                   lastDispenserData1A: '10',
                                   lastDispenserData1B: '20',

@@ -2,14 +2,14 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ftm_service_app/screens/dispenser_page.dart';
+import 'package:ftm_service_app/screens/end_shift_page.dart';
 import 'package:ftm_service_app/screens/loading_page.dart';
 import 'package:ftm_service_app/screens/panel_page.dart';
 import 'package:ftm_service_app/screens/start_shift_page.dart';
 import 'package:ftm_service_app/services/network_adapter.dart';
 import 'package:ftm_service_app/structures/user.dart';
 import 'package:ftm_service_app/widgets/input_fields.dart';
-import 'package:ftm_service_app/constractor.dart';
+import 'package:ftm_service_app/constructor.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,7 +39,6 @@ class _SignInPageState extends State<SignInPage> {
     print("username saved");
   }
   //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-
 
   Future<bool> futureGet(String _user, String _pass) async {
     futureInputUser = signInUser(
@@ -78,7 +77,8 @@ class _SignInPageState extends State<SignInPage> {
                             pageTitle: 'SignUpPage',
                           )));
                 },
-                child: Text(Translations.of(context).text('sing_up'), style: kTextContrast),
+                child: Text(Translations.of(context).text('sing_up'),
+                    style: kTextContrast),
               )
             ],
           ),
@@ -93,11 +93,14 @@ class _SignInPageState extends State<SignInPage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Text(Translations.of(context).text('welcome_home'), style: kHeader3),
+                        Text(Translations.of(context).text('welcome_home'),
+                            style: kHeader3),
                         Text(Translations.of(context).text('lets_get_start'),
                             style: taglineText),
-                        ftmPersonalCodeInput(Translations.of(context).text('personnel_code')),
-                        ftmPasswordInput(Translations.of(context).text('password')),
+                        ftmPersonalCodeInput(
+                            Translations.of(context).text('personnel_code')),
+                        ftmPasswordInput(
+                            Translations.of(context).text('password')),
                         TextButton(
                           onPressed: () {
                             //ToDo : Forgot Password onPressed Here ...
@@ -112,7 +115,8 @@ class _SignInPageState extends State<SignInPage> {
 //                             );
 //**********************************************************************************************************
                           },
-                          child: Text(Translations.of(context).text('forgot_password'),
+                          child: Text(
+                              Translations.of(context).text('forgot_password'),
                               style: kTextBoldContrast),
                         ),
                         ElevatedButton(
@@ -141,13 +145,11 @@ class _SignInPageState extends State<SignInPage> {
                                         type: PageTransitionType.rightToLeft,
                                         child: PanelPage(
                                           operator: name,
-                                        )
-                                    ),
+                                        )),
                                   );
                                 }
                               }).catchError((_) {
-                                showSnackBar(context,
-                                    'Connecting Error');
+                                showSnackBar(context, 'Connecting Error');
                                 print("error");
                               });
                             });

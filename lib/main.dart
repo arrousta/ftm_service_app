@@ -37,13 +37,13 @@ class MyApp extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate
       ],
-      supportedLocales: const [Locale('fa', ''), Locale('en', '')],
+      supportedLocales: const [Locale('fa', '')],
+      // supportedLocales: const [Locale('fa', ''), Locale('en', '')],
       debugShowCheckedModeBanner: false,
       title: 'FTM.CO',
-      theme: ThemeData.light().copyWith(
-        primaryColor: const Color(0xffc7c7c7),
-        backgroundColor: const Color(0xffc7c7c7),
-        scaffoldBackgroundColor: const Color(0xffc7c7c7),
+      darkTheme: ThemeData.dark(),
+      theme: ThemeData(
+        fontFamily: 'Yekan',
       ),
       home: const HomePage(pageTitle: 'FTM.CO'),
       initialRoute: '/.',
@@ -61,11 +61,10 @@ class MyApp extends StatelessWidget {
         '/confirmpage': (BuildContext context) => const ConfirmationPage(
               pageTitle: 'ConfirmationPage',
             ),
-        //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-        '/panelpage': (BuildContext context) => const PanelPage( //TODO Alireza : added Route of panel screen
-          operator: 'operatorName',
-        ),
-        //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+
+        '/panelpage': (BuildContext context) => const PanelPage(
+              operator: 'operatorName',
+            ),
 
       },
     );

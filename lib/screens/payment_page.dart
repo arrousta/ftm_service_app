@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ftm_service_app/widgets/input_fields.dart';
-import 'package:ftm_service_app/constractor.dart';
+import 'package:ftm_service_app/constructor.dart';
 import 'package:ftm_service_app/widgets/time_and_date.dart';
 import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../translations.dart';
 import 'final_confirmation_page.dart';
-
-enum ShiftName { morning, evening, night }
 
 class Payment extends StatefulWidget {
   const Payment(
@@ -35,20 +33,19 @@ class Payment extends StatefulWidget {
 }
 
 class _PaymentState extends State<Payment> {
-  String shiftName = "null";
   int aPrice = 6568;
 
   @override
   Widget build(BuildContext context) {
-    String totalShift = "";
-    totalShift = widget.total;
-    int totalInt = int.parse(totalShift);
+    String totalShiftFunction = "";
+    totalShiftFunction = widget.total;
+    int totalInt = int.parse(totalShiftFunction);
 
     var persianInUSFormat = NumberFormat.currency(locale: 'fa', symbol: '');
     // var persianInUSFormat = NumberFormat.currency(locale: "fa", symbol: "ريال");
 
     String totalWithFormat = persianInUSFormat.format(totalInt * aPrice);
-
+    int totalWithoutFormat = totalInt * aPrice;
 
     return WillPopScope(
       onWillPop: () async {
@@ -56,17 +53,6 @@ class _PaymentState extends State<Payment> {
         return false;
       },
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: const Color(0xffc7c7c7),
-          elevation: 0.0,
-          //title: Text("Payment Page"),
-          titleTextStyle: const TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 21.0,
-          ),
-          centerTitle: true,
-        ),
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
@@ -76,28 +62,18 @@ class _PaymentState extends State<Payment> {
                 Card(
                   color: Colors.white,
                   shape: RoundedRectangleBorder(
-                    side: const BorderSide(color: Colors.blue, width: 2),
-                    borderRadius: BorderRadius.circular(10),
+                    side: const BorderSide(color: kPrimaryColor, width: 1),
+                    borderRadius: BorderRadius.circular(8),
                   ),
                   margin: const EdgeInsets.all(10.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      // TimeAndDate(),
-                      SizedBox(
-                        height: 2.0,
-                        width: 330,
-                        child: Divider(
-                          color: Colors.blue.shade700,
-                          thickness: 1.5,
-                        ),
-                      ),
                       Container(
                         alignment: Alignment.center,
                         height: 40.0,
                         child: Text(
                           Translations.of(context).text("payment_message"),
-                          style: kHeader5,
                         ),
                       ),
                     ],
@@ -109,7 +85,7 @@ class _PaymentState extends State<Payment> {
                   margin: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
                     color: const Color(0xffdbdbde),
-                    borderRadius: BorderRadius.circular(15.0),
+                    borderRadius: BorderRadius.circular(8),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -121,19 +97,18 @@ class _PaymentState extends State<Payment> {
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     Translations.of(context)
                                         .text("payment_function_mess"),
-                                    style: kHeader7,
                                   ),
-                                  Container(
-                                    //TODO : Calcute Total function of the shift
-                                    width: 140.0,
-                                    height: 50.0,
+                                  SizedBox(
+                                    width: kBoxSizeWith,
+                                    height: kBoxSizeHeight,
                                     child: CardWidget(
-                                      value: totalShift,
+                                      value: totalShiftFunction,
                                     ),
                                   ),
                                 ],
@@ -150,17 +125,16 @@ class _PaymentState extends State<Payment> {
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     Translations.of(context)
                                         .text("payment_cost_mess"),
-                                    style: kHeader7,
                                   ),
-                                  Container(
-                                    //TODO : Calcute Total cost of the shift
-                                    width: 140.0,
-                                    height: 50.0,
+                                  SizedBox(
+                                    width: kBoxSizeWith,
+                                    height: kBoxSizeHeight,
                                     child: CardWidget(
                                       value: totalWithFormat,
                                     ),
@@ -173,12 +147,12 @@ class _PaymentState extends State<Payment> {
                         decoration: dispenserPlateDecoration,
                       ),
                       //-------------------------------------------------------------------------------------
-                      SizedBox(
+                      const SizedBox(
                         height: 10.0,
                         width: 330,
                         child: Divider(
-                          color: Colors.blue.shade700,
-                          thickness: 1.5,
+                          color: kPrimaryColor,
+                          thickness: 1,
                         ),
                       ),
 
@@ -189,20 +163,17 @@ class _PaymentState extends State<Payment> {
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     Translations.of(context)
                                         .text("payment_user_mess"),
-                                    style: kHeader7,
                                     textAlign: TextAlign.center,
                                   ),
-                                  const SizedBox(
-                                    width: 18.0,
-                                  ),
                                   Container(
-                                    width: 140.0,
-                                    height: 50.0,
+                                    width: kBoxSizeWith,
+                                    height: kBoxSizeHeight,
                                     padding: const EdgeInsets.all(3),
                                     child: ftmPaymentInput('وارد کنید'),
                                   ),
@@ -213,22 +184,15 @@ class _PaymentState extends State<Payment> {
                         ),
                         decoration: dispenserPlateDecoration,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10.0,
                         width: 330,
                         child: Divider(
-                          color: Colors.blue.shade700,
-                          thickness: 1.5,
+                          color: kPrimaryColor,
+                          thickness: 1,
                         ),
                       ),
-                      SizedBox(
-                        height: 5.0,
-                        width: 340,
-                        child: Divider(
-                          color: Colors.blue.shade700,
-                          thickness: 1.5,
-                        ),
-                      ),
+
                       Container(
                         margin: const EdgeInsets.all(10.0),
                         child: Padding(
@@ -236,23 +200,20 @@ class _PaymentState extends State<Payment> {
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     Translations.of(context)
                                         .text("payment_cash_mess"),
-                                    style: kHeader7,
-                                    textAlign: TextAlign.center,
                                   ),
-                                  const SizedBox(
-                                    width: 18.0,
-                                  ),
-                                  Container(
-                                    //TODO : Calcute amount of cash have to pay
-                                    width: 140.0,
-                                    height: 50.0,
+                                  SizedBox(
+                                    width: kBoxSizeWith,
+                                    height: kBoxSizeHeight,
                                     child: CardWidget(
-                                      value: totalWithFormat,
+                                      value: persianInUSFormat.format(
+                                          totalWithoutFormat -
+                                              paymentChangeValue),
                                     ),
                                   ),
                                 ],
@@ -268,24 +229,26 @@ class _PaymentState extends State<Payment> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          //TODO: Send Payment Data and Go to Next Step :
-
-                          print(paymentController
-                              .text); // Print name current value
-
                           Navigator.push(
-                              context,
-                              PageTransition(
-                                  type: PageTransitionType.rightToLeft,
-                                  child: FinalConfirm(
-                                    title: 'Final Confirmation',
-                                    dispenser1A: '${widget.dispenser1A}',
-                                    dispenser1B: '${widget.dispenser1B}',
-                                    dispenser2A: '${widget.dispenser2A}',
-                                    dispenser2B: '${widget.dispenser2B}',
-                                    dispenser3A: '${widget.dispenser3A}',
-                                    dispenser3B: '${widget.dispenser3B}',
-                                  )));
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.rightToLeft,
+                              child: FinalConfirm(
+                                title: 'Final Confirmation',
+                                dispenser1A: widget.dispenser1A,
+                                dispenser1B: widget.dispenser1B,
+                                dispenser2A: widget.dispenser2A,
+                                dispenser2B: widget.dispenser2B,
+                                dispenser3A: widget.dispenser3A,
+                                dispenser3B: widget.dispenser3B,
+                                totalShiftFunction: '$totalInt',
+                                totalShiftCash: totalWithFormat,
+                                cardShiftCash: paymentController.text,
+                                handShiftCash:
+                                    '${totalWithoutFormat - int.parse(paymentController.text)}',
+                              ),
+                            ),
+                          );
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -322,7 +285,7 @@ class CardWidget extends StatelessWidget {
     return Card(
       color: Colors.white,
       shape: RoundedRectangleBorder(
-        side: const BorderSide(color: kPrimaryColor, width: 2),
+        side: const BorderSide(color: kPrimaryColor, width: 1),
         borderRadius: BorderRadius.circular(6),
       ),
       margin: const EdgeInsets.all(5.0),
@@ -332,9 +295,9 @@ class CardWidget extends StatelessWidget {
         width: kBoxSizeWith,
         height: kBoxSizeHeight,
         child: Text(
-          '$value',
-          locale: Locale('en'),
-          style: TextStyle(
+          value,
+          locale: const Locale('en'),
+          style: const TextStyle(
             fontFamily: 'Yekan',
             fontWeight: FontWeight.bold,
             fontSize: 17,

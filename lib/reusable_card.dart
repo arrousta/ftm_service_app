@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'constractor.dart';
+import 'constructor.dart';
 
 class ReusableCard extends StatelessWidget {
   //const ReusableCard({Key? key,}) : super(key: key);

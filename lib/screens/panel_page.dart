@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:ftm_service_app/constractor.dart';
-import 'package:ftm_service_app/screens/dispenser_page.dart';
+import 'package:ftm_service_app/constructor.dart';
+import 'package:ftm_service_app/screens/end_shift_page.dart';
 import 'package:ftm_service_app/screens/loading_page.dart';
 import 'package:ftm_service_app/screens/start_shift_page.dart';
 import 'package:intl/intl.dart';
@@ -11,8 +11,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../icon_content.dart';
 import '../reusable_card.dart';
 import '../translations.dart';
-
-enum ShiftName { morning, evening, night }
 
 class PanelPage extends StatefulWidget {
   const PanelPage({
@@ -26,33 +24,84 @@ class PanelPage extends StatefulWidget {
 }
 
 class _PanelPageState extends State<PanelPage> {
+
+
   String shiftName = " ";
   String? _timeString;
   String? _dateString;
 
-  void _getTime() {
-    final String formattedTime =
-        DateFormat('kk : mm').format(DateTime.now()).toString();
-    setState(() {
-      _timeString = formattedTime;
-    });
+
+  String _formatDate(DateTime dateTime) {
+    return DateFormat('MM/dd/yyyy').format(dateTime);
   }
 
-  void _getDate() {
-    var persianInUSFormat = NumberFormat.currency(locale: 'fa', symbol: '');
 
-    final String formattedDate =
-        DateFormat('yyyy / MM / dd').format(DateTime.now()).toString();
-    setState(() {
-      _dateString = formattedDate;
-    });
+  // void _getTime() {
+  //   final String formattedTime =
+  //       DateFormat('kk : mm').format(DateTime.now()).toString();
+  //   setState(() {
+  //     _timeString = formattedTime;
+  //   });
+  // }
+
+  // void _getDate() {
+  //   var persianInUSFormat = NumberFormat.currency(locale: 'fa', symbol: '');
+  //
+  //   final String formattedDate =
+  //       DateFormat('yyyy / MM / dd').format(DateTime.now()).toString();
+  //   setState(() {
+  //     _dateString = formattedDate;
+  //   });
+  // }
+
+
+  String _formatTime(DateTime dateTime) {
+    return DateFormat('HH:mm').format(dateTime);
+  }
+
+  void _setDate() {
+    final DateTime now = DateTime.now();
+    final String formattedDate = _formatDate(now);
+
+      setState(() {
+        _dateString = formattedDate;
+      });
+
+  }
+
+  void _setTime() {
+    final DateTime now = DateTime.now();
+    final String formattedTime = _formatTime(now);
+    String hour = "";
+    late String partOfDay;
+
+    for (int i = 0; i < 2; i++) {
+      hour += formattedTime[i];
+    }
+    int _hour = int.parse(hour);
+
+    if (7 <= _hour && _hour < 14) {
+      partOfDay = "First";
+    } else if (14 <= _hour && _hour < 22) {
+      partOfDay = "Second";
+    } else {
+      partOfDay = "Third";
+    }
+      setState(() {
+        _timeString = formattedTime;
+        shiftName = partOfDay;
+      });
+
   }
 
   @override
   void initState() {
     shiftName = widget.operator;
-    Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
-    Timer.periodic(Duration(seconds: 1), (Timer t) => _getDate());
+    _dateString = _formatDate(DateTime.now());
+    Timer.periodic(const Duration(seconds: 1), (Timer t) => _setDate());
+    _timeString = _formatTime(DateTime.now());
+    Timer.periodic(const Duration(seconds: 1), (Timer t) => _setTime());
+
     super.initState();
   }
 
@@ -133,9 +182,7 @@ class _PanelPageState extends State<PanelPage> {
                             context,
                             PageTransition(
                               type: PageTransitionType.rightToLeft,
-                              child: const StartShift(
-                                title: 'StartShift',
-                              ),
+                              child: LoadingPage(id: 'start')
                             ),
                           );
                         });
@@ -143,8 +190,7 @@ class _PanelPageState extends State<PanelPage> {
                       colour: kPrimaryColor,
                       cardChild: IconContent(
                         icon: Icons.check,
-                        label:  Translations.of(context)
-                            .text("start_shft"),
+                        label: Translations.of(context).text("start_shft"),
                       ),
                     ),
                   ),
@@ -154,14 +200,15 @@ class _PanelPageState extends State<PanelPage> {
                         Navigator.push(
                             context,
                             PageTransition(
-                                child: LoadingPage(id: '',),
+                                child: LoadingPage(
+                                  id: 'end',
+                                ),
                                 type: PageTransitionType.rightToLeft));
                       },
                       colour: kPrimaryColor,
                       cardChild: IconContent(
                         icon: Icons.call_missed_outgoing,
-                        label: Translations.of(context)
-                            .text("end_shift"),
+                        label: Translations.of(context).text("end_shift"),
                       ),
                     ),
                   ),
@@ -177,8 +224,7 @@ class _PanelPageState extends State<PanelPage> {
                       colour: kPrimaryColor,
                       cardChild: IconContent(
                         icon: Icons.account_box_outlined,
-                        label: Translations.of(context)
-                            .text("profile"),
+                        label: Translations.of(context).text("profile"),
                       ),
                     ),
                   ),
@@ -190,8 +236,7 @@ class _PanelPageState extends State<PanelPage> {
                       colour: kPrimaryColor,
                       cardChild: IconContent(
                         icon: Icons.free_breakfast_outlined,
-                        label: Translations.of(context)
-                            .text("take_leave"),
+                        label: Translations.of(context).text("take_leave"),
                       ),
                     ),
                   ),
@@ -210,8 +255,7 @@ class _PanelPageState extends State<PanelPage> {
                       colour: kPrimaryColor,
                       cardChild: IconContent(
                         icon: Icons.logout,
-                        label: Translations.of(context)
-                            .text("log_out"),
+                        label: Translations.of(context).text("log_out"),
                       ),
                     ),
                   ),
@@ -223,8 +267,7 @@ class _PanelPageState extends State<PanelPage> {
                       colour: kPrimaryColor,
                       cardChild: IconContent(
                         icon: Icons.settings,
-                        label:Translations.of(context)
-                            .text("setting"),
+                        label: Translations.of(context).text("setting"),
                       ),
                     ),
                   ),

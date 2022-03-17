@@ -1,22 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:ftm_service_app/constractor.dart';
+import 'package:ftm_service_app/constructor.dart';
+import 'package:ftm_service_app/screens/panel_page.dart';
 import 'package:page_transition/page_transition.dart';
 import '../translations.dart';
-import 'dispenser_page.dart';
+import 'end_shift_page.dart';
 import 'finish_page.dart';
 
-enum ShiftName { morning, evening, night }
-
 class StartShift extends StatefulWidget {
-  const StartShift({Key? key, required this.title}) : super(key: key);
+  const StartShift({
+    Key? key,
+    required this.title,
+    required this.lastDispenserData1A,
+    required this.lastDispenserData1B,
+    required this.lastDispenserData2A,
+    required this.lastDispenserData2B,
+    required this.lastDispenserData3A,
+    required this.lastDispenserData3B,
+  }) : super(key: key);
+
   final String title;
+
+  final String lastDispenserData1A;
+  final String lastDispenserData1B;
+  final String lastDispenserData2A;
+  final String lastDispenserData2B;
+  final String lastDispenserData3A;
+  final String lastDispenserData3B;
 
   @override
   State<StartShift> createState() => _StartShiftState();
 }
 
 class _StartShiftState extends State<StartShift> {
-  String shiftName = "null";
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +39,7 @@ class _StartShiftState extends State<StartShift> {
       appBar: AppBar(
         backgroundColor: const Color(0xffc7c7c7),
         elevation: 0.0,
-        title: Text(
-        Translations.of(context).text("start_shft")),
+        title: Text(Translations.of(context).text("start_shft")),
         titleTextStyle: const TextStyle(
           color: Colors.black,
           fontWeight: FontWeight.bold,
@@ -50,7 +64,8 @@ class _StartShiftState extends State<StartShift> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 12.0),
+                      margin:
+                          const EdgeInsets.symmetric(vertical: 5.0, horizontal: 12.0),
                       alignment: Alignment.center,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -81,7 +96,8 @@ class _StartShiftState extends State<StartShift> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                     Text(Translations.of(context).text("dispenser")+" 1",
+                    Text(
+                      Translations.of(context).text("dispenser") + " 1",
                       style: kHeader7,
                     ),
                     Container(
@@ -98,11 +114,10 @@ class _StartShiftState extends State<StartShift> {
                                   style: kHeader7,
                                 ),
                                 Container(
-                                  //TODO : get dispenser1 A Data
-                                  width: 130.0,
-                                  height: 50.0,
-                                  child: const CardWidget(
-                                    value: '111111111',
+                                  width: kBoxSizeWith,
+                                  height: kBoxSizeHeight,
+                                  child: CardWidget(
+                                    value: '${widget.lastDispenserData1A}',
                                   ),
                                 ),
                                 SizedBox(
@@ -113,11 +128,10 @@ class _StartShiftState extends State<StartShift> {
                                   style: kHeader7,
                                 ),
                                 Container(
-                                  //TODO : get dispenser1 B Data
-                                  width: 130.0,
-                                  height: 50.0,
-                                  child: const CardWidget(
-                                    value: '111111111',
+                                  width: kBoxSizeWith,
+                                  height: kBoxSizeHeight,
+                                  child: CardWidget(
+                                    value: '${widget.lastDispenserData1B}',
                                   ),
                                 ),
                               ],
@@ -128,8 +142,8 @@ class _StartShiftState extends State<StartShift> {
                       decoration: dispenserPlateDecoration,
                     ),
                     //-----------------------------------------------------------------------------------------
-                     Text(
-                       Translations.of(context).text("dispenser")+" 2",
+                    Text(
+                      Translations.of(context).text("dispenser") + " 2",
                       style: kHeader7,
                     ),
                     Container(
@@ -146,11 +160,10 @@ class _StartShiftState extends State<StartShift> {
                                   style: kHeader7,
                                 ),
                                 Container(
-                                  //TODO : get dispenser2 A Data
-                                  width: 130.0,
-                                  height: 50.0,
-                                  child: const CardWidget(
-                                    value: '22222222',
+                                  width: kBoxSizeWith,
+                                  height: kBoxSizeHeight,
+                                  child: CardWidget(
+                                    value: '${widget.lastDispenserData2A}',
                                   ),
                                 ),
                                 SizedBox(
@@ -161,11 +174,10 @@ class _StartShiftState extends State<StartShift> {
                                   style: kHeader7,
                                 ),
                                 Container(
-                                  //TODO : get dispenser2 B Data
-                                  width: 130.0,
-                                  height: 50.0,
-                                  child: const CardWidget(
-                                    value: '22222222',
+                                  width: kBoxSizeWith,
+                                  height: kBoxSizeHeight,
+                                  child: CardWidget(
+                                    value: '${widget.lastDispenserData2B}',
                                   ),
                                 ),
                               ],
@@ -176,8 +188,8 @@ class _StartShiftState extends State<StartShift> {
                       decoration: dispenserPlateDecoration,
                     ),
                     //--------------------------------------------------------------------------------------------------------
-                     Text(
-                      Translations.of(context).text("dispenser")+" 3",
+                    Text(
+                      Translations.of(context).text("dispenser") + " 3",
                       style: kHeader7,
                     ),
                     Container(
@@ -194,11 +206,10 @@ class _StartShiftState extends State<StartShift> {
                                   style: kHeader7,
                                 ),
                                 Container(
-                                  //TODO : get dispenser3 A Data
-                                  width: 130.0,
-                                  height: 50.0,
-                                  child: const CardWidget(
-                                    value: '333333333',
+                                  width: kBoxSizeWith,
+                                  height: kBoxSizeHeight,
+                                  child: CardWidget(
+                                    value: '${widget.lastDispenserData3A}',
                                   ),
                                 ),
                                 SizedBox(
@@ -209,11 +220,10 @@ class _StartShiftState extends State<StartShift> {
                                   style: kHeader7,
                                 ),
                                 Container(
-                                  //TODO : get dispenser3 B Data
-                                  width: 130.0,
-                                  height: 50.0,
-                                  child: const CardWidget(
-                                    value: '333333333',
+                                  width: kBoxSizeWith,
+                                  height: kBoxSizeHeight,
+                                  child: CardWidget(
+                                    value: '${widget.lastDispenserData3B}',
                                   ),
                                 ),
                               ],
@@ -248,21 +258,21 @@ class _StartShiftState extends State<StartShift> {
                                 context,
                                 PageTransition(
                                     type: PageTransitionType.rightToLeft,
-                                    child: DispenserPage(
+                                    child: EndShiftPage(
                                       operator: 'Dispenser Page',
-                                      lastDispenserData1A: '11',
-                                      lastDispenserData1B: '12',
-                                      lastDispenserData2A: '13',
-                                      lastDispenserData2B: '14',
-                                      lastDispenserData3A: '15',
-                                      lastDispenserData3B: '16',
+                                      lastDispenserData1A: '${widget.lastDispenserData1A}',
+                                      lastDispenserData1B: '${widget.lastDispenserData1B}',
+                                      lastDispenserData2A: '${widget.lastDispenserData2A}',
+                                      lastDispenserData2B: '${widget.lastDispenserData2B}',
+                                      lastDispenserData3A: '${widget.lastDispenserData3A}',
+                                      lastDispenserData3B: '${widget.lastDispenserData3B}',
                                     )));
                           },
                           child: Text(
                             Translations.of(context).text("edit_data"),
                             style: TextStyle(
                               fontSize: 15,
-                              fontFamily: 'Poppins-Regular',
+                              fontFamily: 'Yekan',
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
@@ -276,21 +286,20 @@ class _StartShiftState extends State<StartShift> {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            //TODO: Finish and Complete :
 
                             Navigator.pushReplacement(
                                 context,
                                 PageTransition(
                                     type: PageTransitionType.rightToLeft,
-                                    child: const FinishPage(
-                                      pageTitle: 'Finish Page',
+                                    child: const PanelPage(
+                                      operator: 'Zzzzz',
                                     )));
                           },
                           child: Text(
                             Translations.of(context).text("start_shft"),
                             style: TextStyle(
                               fontSize: 15,
-                              fontFamily: 'Poppins-Regular',
+                              fontFamily: 'Yekan',
                             ),
                           ),
                           style: ElevatedButton.styleFrom(

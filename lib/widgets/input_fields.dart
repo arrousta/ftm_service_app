@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../constractor.dart';
+import '../constructor.dart';
 
 TextEditingController nameController = TextEditingController(); // Full Name
 TextEditingController passwordController = TextEditingController(); // Password
@@ -28,12 +28,15 @@ TextEditingController dispenser3BController =
 TextEditingController paymentController =
     TextEditingController(); // dispenser B3
 
+int paymentChangeValue = 0;
+
 int dispenser1AChangedValue = 0;
 int dispenser1BChangedValue = 0;
 int dispenser2AChangedValue = 0;
 int dispenser2BChangedValue = 0;
 int dispenser3AChangedValue = 0;
 int dispenser3BChangedValue = 0;
+
 
 textFieldContainer ftmFullNameTextInput(String hintText,
     {onTap, onChanged, onEditingComplete, onSubmitted}) {
@@ -158,10 +161,10 @@ textFieldContainer ftmDispenser1AInput(String hintText,
     {onTap, onChanged, onEditingComplete, onSubmitted}) {
   return textFieldContainer(
     onTap: onTap,
-    onChanged: (value){
-      if(value!= ''){
+    onChanged: (value) {
+      if (value != '') {
         dispenser1AChangedValue = int.parse(value);
-      }else{
+      } else {
         dispenser1AChangedValue = 0;
       }
     },
@@ -183,10 +186,10 @@ textFieldContainer ftmDispenser1BInput(String hintText,
     {onTap, onChanged, onEditingComplete, onSubmitted}) {
   return textFieldContainer(
     onTap: onTap,
-    onChanged: (value){
-      if(value!= ''){
+    onChanged: (value) {
+      if (value != '') {
         dispenser1BChangedValue = int.parse(value);
-      }else{
+      } else {
         dispenser1BChangedValue = 0;
       }
     },
@@ -208,10 +211,10 @@ textFieldContainer ftmDispenser2AInput(String hintText,
     {onTap, onChanged, onEditingComplete, onSubmitted}) {
   return textFieldContainer(
     onTap: onTap,
-    onChanged: (value){
-      if(value!= ''){
+    onChanged: (value) {
+      if (value != '') {
         dispenser2AChangedValue = int.parse(value);
-      }else{
+      } else {
         dispenser2AChangedValue = 0;
       }
     },
@@ -233,10 +236,10 @@ textFieldContainer ftmDispenser2BInput(String hintText,
     {onTap, onChanged, onEditingComplete, onSubmitted}) {
   return textFieldContainer(
     onTap: onTap,
-    onChanged: (value){
-      if(value!= ''){
+    onChanged: (value) {
+      if (value != '') {
         dispenser2BChangedValue = int.parse(value);
-      }else{
+      } else {
         dispenser2BChangedValue = 0;
       }
     },
@@ -258,10 +261,10 @@ textFieldContainer ftmDispenser3AInput(String hintText,
     {onTap, onChanged, onEditingComplete, onSubmitted}) {
   return textFieldContainer(
     onTap: onTap,
-    onChanged: (value){
-      if(value!= ''){
+    onChanged: (value) {
+      if (value != '') {
         dispenser3AChangedValue = int.parse(value);
-      }else{
+      } else {
         dispenser3AChangedValue = 0;
       }
     },
@@ -283,10 +286,10 @@ textFieldContainer ftmDispenser3BInput(String hintText,
     {onTap, onChanged, onEditingComplete, onSubmitted}) {
   return textFieldContainer(
     onTap: onTap,
-    onChanged: (value){
-      if(value!= ''){
+    onChanged: (value) {
+      if (value != '') {
         dispenser3BChangedValue = int.parse(value);
-      }else{
+      } else {
         dispenser3BChangedValue = 0;
       }
     },
@@ -308,7 +311,13 @@ textFieldContainer ftmPaymentInput(String hintText,
     {onTap, onChanged, onEditingComplete, onSubmitted}) {
   return textFieldContainer(
     onTap: onTap,
-    onChanged: onChanged,
+    onChanged: (value){
+      if(value != ''){
+        paymentChangeValue = int.parse(value);
+      }else{
+        paymentChangeValue = 0;
+      }
+    },
     onEditingComplete: onEditingComplete,
     onSubmitted: onSubmitted,
     cursorColor: kPrimaryColor,

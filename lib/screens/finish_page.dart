@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ftm_service_app/constractor.dart';
+import 'package:ftm_service_app/constructor.dart';
 
 
 class FinishPage extends StatefulWidget {

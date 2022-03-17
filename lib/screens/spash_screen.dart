@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ftm_service_app/screens/home_page.dart';
-import 'package:ftm_service_app/constractor.dart';
+import 'package:ftm_service_app/constructor.dart';
 import 'package:ftm_service_app/screens/panel_page.dart';
 import 'package:ftm_service_app/structures/user.dart';
 

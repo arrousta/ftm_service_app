@@ -2,17 +2,16 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ftm_service_app/screens/panel_page.dart';
 import 'package:ftm_service_app/widgets/input_fields.dart';
-import 'package:ftm_service_app/constractor.dart';
+import 'package:ftm_service_app/constructor.dart';
 import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
 import '../translations.dart';
 import 'payment_page.dart';
 
-enum ShiftName { morning, evening, night }
-
-class DispenserPage extends StatefulWidget {
-  DispenserPage({
+class EndShiftPage extends StatefulWidget {
+  EndShiftPage({
     Key? key,
     required this.operator,
     required this.lastDispenserData1A,
@@ -32,16 +31,14 @@ class DispenserPage extends StatefulWidget {
   String lastDispenserData3B;
 
   @override
-  State<DispenserPage> createState() => _DispenserPageState();
+  State<EndShiftPage> createState() => _EndShiftPageState();
 }
 
 //***************************************************************************************
 //Todo : Delete this section if not use :
 
-class _DispenserPageState extends State<DispenserPage> {
+class _EndShiftPageState extends State<EndShiftPage> {
   String operatorName = "";
-  String _timeString = "";
-  String _dateString = "";
   String shiftName = "";
 
   late String _startDispenser1A,
@@ -51,23 +48,8 @@ class _DispenserPageState extends State<DispenserPage> {
       _startDispenser3A,
       _startDispenser3B;
 
-  late int _endDispenser1A,
-      _endDispenser1B,
-      _endDispenser2A,
-      _endDispenser2B,
-      _endDispenser3A,
-      _endDispenser3B;
-
-  late int _resultDispenser1A,
-      _resultDispenser1B,
-      _resultDispenser2A,
-      _resultDispenser2B,
-      _resultDispenser3A,
-      _resultDispenser3B;
-
   String _calculateDispenserResult(
       {required String startShift, required String endSift}) {
-    // calculate dispenser result
     int start = 0;
     int end = 0;
     String result;
@@ -89,60 +71,11 @@ class _DispenserPageState extends State<DispenserPage> {
   }
 //*************************************************************************************
 
-  String _formatDate(DateTime dateTime) {
-    return DateFormat('MM/dd/yyyy').format(dateTime);
-  }
-
-  String _formatTime(DateTime dateTime) {
-    return DateFormat('HH:mm:ss').format(dateTime);
-  }
-
   @override
   initState() {
     operatorName = widget.operator;
-    _dateString = _formatDate(DateTime.now());
-    Timer.periodic(const Duration(seconds: 1), (Timer t) => _getDate());
-    _timeString = _formatTime(DateTime.now());
-    Timer.periodic(const Duration(seconds: 1), (Timer t) => _getTime());
     _setStartShiftData();
     super.initState();
-  }
-
-  void _getDate() {
-    final DateTime now = DateTime.now();
-    final String formattedDate = _formatDate(now);
-    // print(formattedDate);
-    if (mounted) {
-      setState(() {
-        _dateString = formattedDate;
-      });
-    }
-  }
-
-  void _getTime() {
-    final DateTime now = DateTime.now();
-    final String formattedTime = _formatTime(now);
-    String hour = "";
-    late String partOfDay;
-
-    for (int i = 0; i < 2; i++) {
-      hour += formattedTime[i];
-    }
-    int _hour = int.parse(hour);
-
-    if (7 <= _hour && _hour < 14) {
-      partOfDay = "First";
-    } else if (14 <= _hour && _hour < 22) {
-      partOfDay = "Second";
-    } else {
-      partOfDay = "Third";
-    }
-    if (mounted) {
-      setState(() {
-        _timeString = formattedTime;
-        shiftName = partOfDay;
-      });
-    }
   }
 
   int totalShift() {
@@ -154,15 +87,12 @@ class _DispenserPageState extends State<DispenserPage> {
     total += dispenser2BChangedValue - int.parse(widget.lastDispenserData2B);
     total += dispenser3AChangedValue - int.parse(widget.lastDispenserData3A);
     total += dispenser3BChangedValue - int.parse(widget.lastDispenserData3B);
-    print(dispenser1AController.text);
 
     return total;
-
   }
 
   @override
   Widget build(BuildContext context) {
-
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
@@ -172,55 +102,6 @@ class _DispenserPageState extends State<DispenserPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // Time shift and operator name
-
-                /*
-
-                Card(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(color: kPrimaryColor, width: 2),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  margin: const EdgeInsets.all(8.0),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        const Text(
-                          "Operator: ",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(
-                          width: 1.0,
-                        ),
-                        Text(
-                          widget.operator,
-                        ),
-                        const SizedBox(
-                          width: 6.0,
-                        ),
-                        Column(
-                          children: [
-                            Text(_dateString),
-                            Text(_timeString),
-                          ],
-                        ),
-                        const SizedBox(
-                          width: 6.0,
-                        ),
-                        const Text(
-                          "Shift: ",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        Text(shiftName),
-                      ],
-                    ),
-                  ),
-                ),
-
-                */
                 //-----------------------------------------------***Dispensers***-----------------------------------
                 Container(
                   padding: const EdgeInsets.all(3.0),
@@ -234,18 +115,17 @@ class _DispenserPageState extends State<DispenserPage> {
                     children: [
                       //-----------------------------------------Dispenser1------------------------------------------
                       Container(
-                        margin: EdgeInsets.symmetric(vertical: 6),
+                        margin: const EdgeInsets.symmetric(vertical: 6),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16),
                           color: kPrimaryColor,
                         ),
                         child: Padding(
-                          padding:
-                              EdgeInsets.symmetric(vertical: 6, horizontal: 16),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 6, horizontal: 16),
                           child: Text(
-                            Translations.of(context)
-                                .text("dispenser")+" 1",
-                            style: TextStyle(color: kBackgroundColor1),
+                            Translations.of(context).text("dispenser") + " 1",
+                            style: const TextStyle(color: kBackgroundColor1),
                           ),
                         ),
                       ),
@@ -401,8 +281,7 @@ class _DispenserPageState extends State<DispenserPage> {
                           padding:
                               EdgeInsets.symmetric(vertical: 6, horizontal: 16),
                           child: Text(
-                              Translations.of(context)
-                                  .text("dispenser")+" 2",
+                            Translations.of(context).text("dispenser") + " 2",
                             style: TextStyle(color: kBackgroundColor1),
                           ),
                         ),
@@ -559,8 +438,7 @@ class _DispenserPageState extends State<DispenserPage> {
                           padding:
                               EdgeInsets.symmetric(vertical: 6, horizontal: 16),
                           child: Text(
-                              Translations.of(context)
-                                  .text("dispenser")+" 3",
+                            Translations.of(context).text("dispenser") + " 3",
                             style: TextStyle(color: kBackgroundColor1),
                           ),
                         ),
@@ -737,12 +615,18 @@ class _DispenserPageState extends State<DispenserPage> {
                                     type: PageTransitionType.rightToLeft,
                                     child: Payment(
                                       total: "$_total",
-                                      dispenser1A: '${dispenser1AController.text}',
-                                      dispenser1B: '${dispenser1BController.text}',
-                                      dispenser2A: '${dispenser2AController.text}',
-                                      dispenser2B: '${dispenser2BController.text}',
-                                      dispenser3A: '${dispenser3AController.text}',
-                                      dispenser3B: '${dispenser3BController.text}',
+                                      dispenser1A:
+                                          '${dispenser1AController.text}',
+                                      dispenser1B:
+                                          '${dispenser1BController.text}',
+                                      dispenser2A:
+                                          '${dispenser2AController.text}',
+                                      dispenser2B:
+                                          '${dispenser2BController.text}',
+                                      dispenser3A:
+                                          '${dispenser3AController.text}',
+                                      dispenser3B:
+                                          '${dispenser3BController.text}',
                                     )));
                           } else if (_total == 0) {
                             print("***Total= $_total");
@@ -769,22 +653,25 @@ class _DispenserPageState extends State<DispenserPage> {
         builder: (BuildContext context) {
           return AlertDialog(
             // title: const Text("Error"),
-            content: Text(Translations.of(context)
-                .text("close_app_mess")),
+            content: Text(Translations.of(context).text("close_app_mess")),
 
             actions: <Widget>[
               TextButton(
-                child: Text(Translations.of(context)
-                    .text("no")),
+                child: Text(Translations.of(context).text("yes")),
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: PanelPage(
+                            operator: "Zzzz",
+                          ),
+                          type: PageTransitionType.rightToLeft));
                 },
               ),
               TextButton(
-                child: Text(Translations.of(context)
-                    .text("yes")),
+                child: Text(Translations.of(context).text("no")),
                 onPressed: () {
-                  SystemNavigator.pop();
+                  Navigator.pop(context);
                 },
               ),
             ],
