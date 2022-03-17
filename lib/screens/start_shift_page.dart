@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ftm_service_app/constractor.dart';
 import 'package:page_transition/page_transition.dart';
+import '../translations.dart';
 import 'dispenser_page.dart';
 import 'finish_page.dart';
 
@@ -23,7 +24,8 @@ class _StartShiftState extends State<StartShift> {
       appBar: AppBar(
         backgroundColor: const Color(0xffc7c7c7),
         elevation: 0.0,
-        title: Text(widget.title),
+        title: Text(
+        Translations.of(context).text("start_shft")),
         titleTextStyle: const TextStyle(
           color: Colors.black,
           fontWeight: FontWeight.bold,
@@ -40,7 +42,7 @@ class _StartShiftState extends State<StartShift> {
               Card(
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
-                  side: const BorderSide(color: Colors.blue, width: 2),
+                  side: const BorderSide(color: Colors.red, width: 2),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 margin: const EdgeInsets.all(10.0),
@@ -48,11 +50,21 @@ class _StartShiftState extends State<StartShift> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
+                      margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 12.0),
                       alignment: Alignment.center,
-                      height: 70.0,
-                      child: const Text(
-                        'If there is a mistake in the entered data,\n press the edit key and correct the data',
-                        style: kHeader5,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            Translations.of(context).text("attention"),
+                            style: kAttention,
+                          ),
+                          Text(
+                            Translations.of(context).text("start_shift_mess"),
+                            style: kHeader5,
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -69,8 +81,7 @@ class _StartShiftState extends State<StartShift> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      'Dispenser1',
+                     Text(Translations.of(context).text("dispenser")+" 1",
                       style: kHeader7,
                     ),
                     Container(
@@ -117,8 +128,8 @@ class _StartShiftState extends State<StartShift> {
                       decoration: dispenserPlateDecoration,
                     ),
                     //-----------------------------------------------------------------------------------------
-                    const Text(
-                      'Dispenser2',
+                     Text(
+                       Translations.of(context).text("dispenser")+" 2",
                       style: kHeader7,
                     ),
                     Container(
@@ -165,8 +176,8 @@ class _StartShiftState extends State<StartShift> {
                       decoration: dispenserPlateDecoration,
                     ),
                     //--------------------------------------------------------------------------------------------------------
-                    const Text(
-                      'Dispenser3',
+                     Text(
+                      Translations.of(context).text("dispenser")+" 3",
                       style: kHeader7,
                     ),
                     Container(
@@ -247,8 +258,8 @@ class _StartShiftState extends State<StartShift> {
                                       lastDispenserData3B: '16',
                                     )));
                           },
-                          child: const Text(
-                            "EDIT",
+                          child: Text(
+                            Translations.of(context).text("edit_data"),
                             style: TextStyle(
                               fontSize: 15,
                               fontFamily: 'Poppins-Regular',
@@ -257,7 +268,7 @@ class _StartShiftState extends State<StartShift> {
                           style: ElevatedButton.styleFrom(
                             primary: kPrimaryColor,
                             padding: const EdgeInsets.symmetric(
-                                vertical: 13.0, horizontal: 30.0),
+                                vertical: 8.0, horizontal: 40.0),
                           ),
                         ),
                         const SizedBox(
@@ -275,8 +286,8 @@ class _StartShiftState extends State<StartShift> {
                                       pageTitle: 'Finish Page',
                                     )));
                           },
-                          child: const Text(
-                            "Start Shift",
+                          child: Text(
+                            Translations.of(context).text("start_shft"),
                             style: TextStyle(
                               fontSize: 15,
                               fontFamily: 'Poppins-Regular',
@@ -285,7 +296,7 @@ class _StartShiftState extends State<StartShift> {
                           style: ElevatedButton.styleFrom(
                             primary: kPrimaryColor,
                             padding: const EdgeInsets.symmetric(
-                                vertical: 13.0, horizontal: 30.0),
+                                vertical: 8.0, horizontal: 40.0),
                           ),
                         ),
                       ],
@@ -313,7 +324,7 @@ class CardWidget extends StatelessWidget {
     return Card(
       color: Colors.white,
       shape: RoundedRectangleBorder(
-        side: const BorderSide(color: Colors.teal, width: 2),
+        side: const BorderSide(color: kPrimaryColor, width: 2),
         borderRadius: BorderRadius.circular(6),
       ),
       margin: const EdgeInsets.all(5.0),
@@ -326,7 +337,11 @@ class CardWidget extends StatelessWidget {
           // '$_counter',
           '$value',
           //'کارکرد 0.0',
-          style: kHeader7,
+          style: TextStyle(
+            fontFamily: 'Yekan',
+            fontWeight: FontWeight.bold,
+            fontSize: 17,
+          ),
         ),
       ),
     );

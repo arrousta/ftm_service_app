@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ftm_service_app/widgets/input_fields.dart';
 import 'package:ftm_service_app/constractor.dart';
 import 'package:page_transition/page_transition.dart';
+import '../translations.dart';
 import 'sing_in_page.dart';
 import 'confirmation_page.dart';
 
@@ -21,7 +22,7 @@ class _SignUpPageState extends State<SignUpPage> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: kWhite,
-          title: const Text('Sign Up',
+          title: Text(Translations.of(context).text("sing_up"),
               style: TextStyle(
                   color: Colors.grey, fontFamily: 'Poppins', fontSize: 15)),
           actions: <Widget>[
@@ -36,7 +37,8 @@ class _SignUpPageState extends State<SignUpPage> {
                           pageTitle: 'SignInPage',
                         )));
               },
-              child: const Text('Sign In', style: kTextContrast),
+              child: Text(Translations.of(context).text("sing_in"),
+                  style: kTextContrast),
             )
           ],
         ),
@@ -49,51 +51,64 @@ class _SignUpPageState extends State<SignUpPage> {
                 children: <Widget>[
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      const Text('Welcome to FTM.CO!', style: kHeader3),
-                      const Text('Let\'s get started', style: taglineText),
-                      ftmFullNameTextInput('Full Name'),
-                      ftmPersonalCodeInput('Personnel Code'),
-                      ftmNationalCodeInput('National Code'),
-                      ftmPhoneNumInput('Phone Number'),
-                      ftmPasswordInput('Password')
+                      Text(Translations.of(context).text("welcome_ftm"),
+                          style: kHeader3),
+                      Text(Translations.of(context).text("lets_get_start"),
+                          style: taglineText),
+                      ftmFullNameTextInput(
+                          Translations.of(context).text("full_name")),
+                      ftmPersonalCodeInput(
+                          Translations.of(context).text("personnel_code")),
+                      ftmNationalCodeInput(
+                          Translations.of(context).text("national_code")),
+                      ftmPhoneNumInput(
+                          Translations.of(context).text("phone_number")),
+                      ftmPasswordInput(
+                          Translations.of(context).text("password")),
+                      // ],
+                      //),
+                      const SizedBox(
+                        height: 8.0,
+                      ),
+                      Positioned(
+                        bottom: 15,
+                        right: 8,
+                        //TODO : SignUpPage : after user press Enter button Send Data To Server And Save on DataBase :
+                        child: ElevatedButton(
+                          onPressed: () {
+                            print(nameController
+                                .text); // Print name current value
+                            print(personnelCodeController
+                                .text); // Print personnel Code current value
+                            print(nationalCodeController
+                                .text); // Print national Code current value
+                            print(phoneNumCodeController
+                                .text); // Print phone Num current value
+                            print(passwordController
+                                .text); // Print password current value
+
+                            Navigator.pushReplacement(
+                                context,
+                                PageTransition(
+                                    type: PageTransitionType.rightToLeft,
+                                    child: const ConfirmationPage(
+                                      pageTitle: 'ConfirmationPage',
+                                    )));
+                          },
+                          child: Text(Translations.of(context).text("enter")),
+                          style: ElevatedButton.styleFrom(
+                            primary: kPrimaryColor,
+                            padding: const EdgeInsets.all(8),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
-                  Positioned(
-                    bottom: 15,
-                    right: 8,
-                    //TODO : SignUpPage : after user press Enter button Send Data To Server And Save on DataBase :
-                    child: ElevatedButton(
-                      onPressed: () {
-                        print(nameController.text); // Print name current value
-                        print(personnelCodeController
-                            .text); // Print personnel Code current value
-                        print(nationalCodeController
-                            .text); // Print national Code current value
-                        print(phoneNumCodeController
-                            .text); // Print phone Num current value
-                        print(passwordController
-                            .text); // Print password current value
-
-                        Navigator.pushReplacement(
-                            context,
-                            PageTransition(
-                                type: PageTransitionType.rightToLeft,
-                                child: const ConfirmationPage(
-                                  pageTitle: 'ConfirmationPage',
-                                )));
-                      },
-                      child: const Text("Enter"),
-                      style: ElevatedButton.styleFrom(
-                        primary: kPrimaryColor,
-                        padding: const EdgeInsets.all(15),
-                      ),
-                    ),
-                  )
                 ],
               ),
-              height: 450,
+              height: 500,
               width: double.infinity,
               decoration: authPlateDecoration,
             ),

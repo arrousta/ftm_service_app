@@ -82,6 +82,12 @@ const kTextName = TextStyle(
     fontWeight: FontWeight.w600,
     fontFamily: 'Poppins');
 
+const kAttention = TextStyle(
+    color: Colors.red,
+    fontSize: 19,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'Poppins');
+
 const tabLinkStyle = TextStyle(fontWeight: FontWeight.w500);
 
 const taglineText = TextStyle(color: Colors.grey, fontFamily: 'Poppins');

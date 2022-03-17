@@ -6,6 +6,7 @@ import 'package:ftm_service_app/widgets/input_fields.dart';
 import 'package:ftm_service_app/constractor.dart';
 import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
+import '../translations.dart';
 import 'payment_page.dart';
 
 enum ShiftName { morning, evening, night }
@@ -238,11 +239,12 @@ class _DispenserPageState extends State<DispenserPage> {
                           borderRadius: BorderRadius.circular(16),
                           color: kPrimaryColor,
                         ),
-                        child: const Padding(
+                        child: Padding(
                           padding:
                               EdgeInsets.symmetric(vertical: 6, horizontal: 16),
                           child: Text(
-                            'Dispenser 1',
+                            Translations.of(context)
+                                .text("dispenser")+" 1",
                             style: TextStyle(color: kBackgroundColor1),
                           ),
                         ),
@@ -395,11 +397,12 @@ class _DispenserPageState extends State<DispenserPage> {
                           borderRadius: BorderRadius.circular(16),
                           color: kPrimaryColor,
                         ),
-                        child: const Padding(
+                        child: Padding(
                           padding:
                               EdgeInsets.symmetric(vertical: 6, horizontal: 16),
                           child: Text(
-                            'Dispenser 2',
+                              Translations.of(context)
+                                  .text("dispenser")+" 2",
                             style: TextStyle(color: kBackgroundColor1),
                           ),
                         ),
@@ -552,11 +555,12 @@ class _DispenserPageState extends State<DispenserPage> {
                           borderRadius: BorderRadius.circular(16),
                           color: kPrimaryColor,
                         ),
-                        child: const Padding(
+                        child: Padding(
                           padding:
                               EdgeInsets.symmetric(vertical: 6, horizontal: 16),
                           child: Text(
-                            'Dispenser 3',
+                              Translations.of(context)
+                                  .text("dispenser")+" 3",
                             style: TextStyle(color: kBackgroundColor1),
                           ),
                         ),
@@ -765,17 +769,20 @@ class _DispenserPageState extends State<DispenserPage> {
         builder: (BuildContext context) {
           return AlertDialog(
             // title: const Text("Error"),
-            content: const Text('Do you want to exit?'),
+            content: Text(Translations.of(context)
+                .text("close_app_mess")),
 
             actions: <Widget>[
               TextButton(
-                child: const Text("No"),
+                child: Text(Translations.of(context)
+                    .text("no")),
                 onPressed: () {
                   Navigator.pop(context);
                 },
               ),
               TextButton(
-                child: const Text("Yes"),
+                child: Text(Translations.of(context)
+                    .text("yes")),
                 onPressed: () {
                   SystemNavigator.pop();
                 },

@@ -10,6 +10,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../icon_content.dart';
 import '../reusable_card.dart';
+import '../translations.dart';
 
 enum ShiftName { morning, evening, night }
 
@@ -38,6 +39,8 @@ class _PanelPageState extends State<PanelPage> {
   }
 
   void _getDate() {
+    var persianInUSFormat = NumberFormat.currency(locale: 'fa', symbol: '');
+
     final String formattedDate =
         DateFormat('yyyy / MM / dd').format(DateTime.now()).toString();
     setState(() {
@@ -138,9 +141,10 @@ class _PanelPageState extends State<PanelPage> {
                         });
                       },
                       colour: kPrimaryColor,
-                      cardChild: const IconContent(
+                      cardChild: IconContent(
                         icon: Icons.check,
-                        label: 'START SHIFT',
+                        label:  Translations.of(context)
+                            .text("start_shft"),
                       ),
                     ),
                   ),
@@ -154,9 +158,10 @@ class _PanelPageState extends State<PanelPage> {
                                 type: PageTransitionType.rightToLeft));
                       },
                       colour: kPrimaryColor,
-                      cardChild: const IconContent(
+                      cardChild: IconContent(
                         icon: Icons.call_missed_outgoing,
-                        label: 'END SHIFT',
+                        label: Translations.of(context)
+                            .text("end_shift"),
                       ),
                     ),
                   ),
@@ -170,9 +175,10 @@ class _PanelPageState extends State<PanelPage> {
                         //TODO : PROFILE button
                       },
                       colour: kPrimaryColor,
-                      cardChild: const IconContent(
+                      cardChild: IconContent(
                         icon: Icons.account_box_outlined,
-                        label: 'PROFILE',
+                        label: Translations.of(context)
+                            .text("profile"),
                       ),
                     ),
                   ),
@@ -182,9 +188,10 @@ class _PanelPageState extends State<PanelPage> {
                         //TODO : TAKE LEAVE button
                       },
                       colour: kPrimaryColor,
-                      cardChild: const IconContent(
+                      cardChild: IconContent(
                         icon: Icons.free_breakfast_outlined,
-                        label: 'TAKE LEAVE',
+                        label: Translations.of(context)
+                            .text("take_leave"),
                       ),
                     ),
                   ),
@@ -201,9 +208,10 @@ class _PanelPageState extends State<PanelPage> {
                         });
                       },
                       colour: kPrimaryColor,
-                      cardChild: const IconContent(
+                      cardChild: IconContent(
                         icon: Icons.logout,
-                        label: 'LOG OUT',
+                        label: Translations.of(context)
+                            .text("log_out"),
                       ),
                     ),
                   ),
@@ -213,9 +221,10 @@ class _PanelPageState extends State<PanelPage> {
                         //TODO : SETTING button
                       },
                       colour: kPrimaryColor,
-                      cardChild: const IconContent(
+                      cardChild: IconContent(
                         icon: Icons.settings,
-                        label: 'SETTING',
+                        label:Translations.of(context)
+                            .text("setting"),
                       ),
                     ),
                   ),

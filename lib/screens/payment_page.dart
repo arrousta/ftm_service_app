@@ -59,7 +59,7 @@ class _PaymentState extends State<Payment> {
         appBar: AppBar(
           backgroundColor: const Color(0xffc7c7c7),
           elevation: 0.0,
-          title: Text("Payment Page"),
+          //title: Text("Payment Page"),
           titleTextStyle: const TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
@@ -121,7 +121,7 @@ class _PaymentState extends State<Payment> {
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     Translations.of(context)
@@ -130,7 +130,7 @@ class _PaymentState extends State<Payment> {
                                   ),
                                   Container(
                                     //TODO : Calcute Total function of the shift
-                                    width: 130.0,
+                                    width: 140.0,
                                     height: 50.0,
                                     child: CardWidget(
                                       value: totalShift,
@@ -150,7 +150,7 @@ class _PaymentState extends State<Payment> {
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     Translations.of(context)
@@ -189,7 +189,7 @@ class _PaymentState extends State<Payment> {
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     Translations.of(context)
@@ -236,7 +236,7 @@ class _PaymentState extends State<Payment> {
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     Translations.of(context)
@@ -322,15 +322,15 @@ class CardWidget extends StatelessWidget {
     return Card(
       color: Colors.white,
       shape: RoundedRectangleBorder(
-        side: const BorderSide(color: Colors.teal, width: 2),
+        side: const BorderSide(color: kPrimaryColor, width: 2),
         borderRadius: BorderRadius.circular(6),
       ),
       margin: const EdgeInsets.all(5.0),
       child: Container(
         alignment: Alignment.center,
         margin: const EdgeInsets.only(left: 2.0),
-        width: 100.0,
-        height: 34.0,
+        width: kBoxSizeWith,
+        height: kBoxSizeHeight,
         child: Text(
           '$value',
           locale: Locale('en'),
