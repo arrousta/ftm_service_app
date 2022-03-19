@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:ftm_service_app/screens/panel_page.dart';
+import 'package:ftm_service_app/screens/home_page.dart';
 import 'package:ftm_service_app/widgets/input_fields.dart';
 import 'package:ftm_service_app/constructor.dart';
 import 'package:page_transition/page_transition.dart';
@@ -44,36 +44,6 @@ class _EndShiftPageState extends State<EndShiftPage> {
       _startDispenser2B,
       _startDispenser3A,
       _startDispenser3B;
-
-  String _calculateDispenserResult(
-      {required String startShift, required int endSift}) {
-    int start = 0;
-    int end = 0;
-    String _result;
-
-    start = int.parse(startShift);
-    end = endSift;
-    end -= start;
-    _result = end.toString();
-
-    return _result;
-  }
-
-  void _calculateDispenserResul(
-      {required String startShift, required int endSift}) {
-    int start = 0;
-    int end = 0;
-
-    start = int.parse(startShift);
-    end = endSift;
-    end -= start;
-
-    if (end > 0) {
-      result = end.toString();
-    } else {
-      result = '0';
-    }
-  }
 
   void _setStartShiftData() {
     _startDispenser1A = widget.lastDispenserData1A;
@@ -279,8 +249,8 @@ class _EndShiftPageState extends State<EndShiftPage> {
                   Navigator.pushReplacement(
                       context,
                       PageTransition(
-                          child: PanelPage(
-                            operator: widget.operator,
+                          child: HomePage(
+                            operatorName: widget.operator,
                           ),
                           type: PageTransitionType.rightToLeft));
                 },
@@ -438,6 +408,8 @@ class _NozzleWidgetState extends State<NozzleWidget> {
                           }
                         });
                       },
+                      textAlign: TextAlign.center,
+                      textAlignVertical: TextAlignVertical.center,
                       cursorColor: kPrimaryColor,
                       style: inputFieldTextStyleDispenser,
                       controller: _textEditingController,

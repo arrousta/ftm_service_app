@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:ftm_service_app/constructor.dart';
-import 'package:ftm_service_app/screens/panel_page.dart';
+import 'package:ftm_service_app/screens/home_page.dart';
 import 'package:page_transition/page_transition.dart';
 import '../translations.dart';
 import 'end_shift_page.dart';
-import 'finish_page.dart';
 
 class StartShift extends StatefulWidget {
   const StartShift({
     Key? key,
-    required this.title,
+    required this.operatorName,
     required this.lastDispenserData1A,
     required this.lastDispenserData1B,
     required this.lastDispenserData2A,
@@ -18,7 +17,7 @@ class StartShift extends StatefulWidget {
     required this.lastDispenserData3B,
   }) : super(key: key);
 
-  final String title;
+  final String operatorName;
 
   final String lastDispenserData1A;
   final String lastDispenserData1B;
@@ -32,7 +31,6 @@ class StartShift extends StatefulWidget {
 }
 
 class _StartShiftState extends State<StartShift> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +54,7 @@ class _StartShiftState extends State<StartShift> {
               Card(
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
-                  side: const BorderSide(color: Colors.red, width: 2),
+                  side: const BorderSide(color: Colors.red, width: 1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 margin: const EdgeInsets.all(10.0),
@@ -64,8 +62,8 @@ class _StartShiftState extends State<StartShift> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
-                      margin:
-                          const EdgeInsets.symmetric(vertical: 5.0, horizontal: 12.0),
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 5.0, horizontal: 12.0),
                       alignment: Alignment.center,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -75,9 +73,11 @@ class _StartShiftState extends State<StartShift> {
                             Translations.of(context).text("attention"),
                             style: kAttention,
                           ),
+                          const SizedBox(
+                            height: 10,
+                          ),
                           Text(
                             Translations.of(context).text("start_shift_mess"),
-                            style: kHeader5,
                           ),
                         ],
                       ),
@@ -98,7 +98,6 @@ class _StartShiftState extends State<StartShift> {
                   children: [
                     Text(
                       Translations.of(context).text("dispenser") + " 1",
-                      style: kHeader7,
                     ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
@@ -113,25 +112,25 @@ class _StartShiftState extends State<StartShift> {
                                   'A',
                                   style: kHeader7,
                                 ),
-                                Container(
+                                SizedBox(
                                   width: kBoxSizeWith,
                                   height: kBoxSizeHeight,
                                   child: CardWidget(
-                                    value: '${widget.lastDispenserData1A}',
+                                    value: widget.lastDispenserData1A,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 20,
                                 ),
                                 const Text(
                                   'B',
                                   style: kHeader7,
                                 ),
-                                Container(
+                                SizedBox(
                                   width: kBoxSizeWith,
                                   height: kBoxSizeHeight,
                                   child: CardWidget(
-                                    value: '${widget.lastDispenserData1B}',
+                                    value: widget.lastDispenserData1B,
                                   ),
                                 ),
                               ],
@@ -144,7 +143,6 @@ class _StartShiftState extends State<StartShift> {
                     //-----------------------------------------------------------------------------------------
                     Text(
                       Translations.of(context).text("dispenser") + " 2",
-                      style: kHeader7,
                     ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
@@ -159,25 +157,25 @@ class _StartShiftState extends State<StartShift> {
                                   'A',
                                   style: kHeader7,
                                 ),
-                                Container(
+                                SizedBox(
                                   width: kBoxSizeWith,
                                   height: kBoxSizeHeight,
                                   child: CardWidget(
-                                    value: '${widget.lastDispenserData2A}',
+                                    value: widget.lastDispenserData2A,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 20,
                                 ),
                                 const Text(
                                   'B',
                                   style: kHeader7,
                                 ),
-                                Container(
+                                SizedBox(
                                   width: kBoxSizeWith,
                                   height: kBoxSizeHeight,
                                   child: CardWidget(
-                                    value: '${widget.lastDispenserData2B}',
+                                    value: widget.lastDispenserData2B,
                                   ),
                                 ),
                               ],
@@ -190,7 +188,6 @@ class _StartShiftState extends State<StartShift> {
                     //--------------------------------------------------------------------------------------------------------
                     Text(
                       Translations.of(context).text("dispenser") + " 3",
-                      style: kHeader7,
                     ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
@@ -205,25 +202,25 @@ class _StartShiftState extends State<StartShift> {
                                   'A',
                                   style: kHeader7,
                                 ),
-                                Container(
+                                SizedBox(
                                   width: kBoxSizeWith,
                                   height: kBoxSizeHeight,
                                   child: CardWidget(
-                                    value: '${widget.lastDispenserData3A}',
+                                    value: widget.lastDispenserData3A,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 20,
                                 ),
                                 const Text(
                                   'B',
                                   style: kHeader7,
                                 ),
-                                Container(
+                                SizedBox(
                                   width: kBoxSizeWith,
                                   height: kBoxSizeHeight,
                                   child: CardWidget(
-                                    value: '${widget.lastDispenserData3B}',
+                                    value: widget.lastDispenserData3B,
                                   ),
                                 ),
                               ],
@@ -234,82 +231,79 @@ class _StartShiftState extends State<StartShift> {
                       decoration: dispenserPlateDecoration,
                     ),
                     //-------------------------------------------------------------------------------------
-                    SizedBox(
-                      height: 10.0,
-                      width: 330,
-                      child: Divider(
-                        color: Colors.blue.shade700,
-                        thickness: 1.5,
-                      ),
-                    ),
-
                     const SizedBox(
                       height: 8.0,
                     ),
 
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            //TODO: Go to Edit Again :
-
-                            Navigator.pushReplacement(
-                                context,
-                                PageTransition(
-                                    type: PageTransitionType.rightToLeft,
-                                    child: EndShiftPage(
-                                      operator: 'Dispenser Page',
-                                      lastDispenserData1A: '${widget.lastDispenserData1A}',
-                                      lastDispenserData1B: '${widget.lastDispenserData1B}',
-                                      lastDispenserData2A: '${widget.lastDispenserData2A}',
-                                      lastDispenserData2B: '${widget.lastDispenserData2B}',
-                                      lastDispenserData3A: '${widget.lastDispenserData3A}',
-                                      lastDispenserData3B: '${widget.lastDispenserData3B}',
-                                    )));
-                          },
-                          child: Text(
-                            Translations.of(context).text("edit_data"),
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontFamily: 'Yekan',
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.rightToLeft,
+                                child: EndShiftPage(
+                                  operator: 'Dispenser Page',
+                                  lastDispenserData1A:
+                                      widget.lastDispenserData1A,
+                                  lastDispenserData1B:
+                                      widget.lastDispenserData1B,
+                                  lastDispenserData2A:
+                                      widget.lastDispenserData2A,
+                                  lastDispenserData2B:
+                                      widget.lastDispenserData2B,
+                                  lastDispenserData3A:
+                                      widget.lastDispenserData3A,
+                                  lastDispenserData3B:
+                                      widget.lastDispenserData3B,
+                                )));
+                      },
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              Translations.of(context).text("edit_data"),
+                              style: const TextStyle(
+                                fontSize: 15,
+                                fontFamily: 'Yekan',
+                              ),
                             ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            primary: kPrimaryColor,
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 8.0, horizontal: 40.0),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 50.0,
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-
-                            Navigator.pushReplacement(
-                                context,
-                                PageTransition(
-                                    type: PageTransitionType.rightToLeft,
-                                    child: const PanelPage(
-                                      operator: 'Zzzzz',
-                                    )));
-                          },
-                          child: Text(
-                            Translations.of(context).text("start_shift"),
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontFamily: 'Yekan',
-                            ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            primary: kPrimaryColor,
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 8.0, horizontal: 40.0),
-                          ),
-                        ),
-                      ],
+                          ]),
+                      style: ElevatedButton.styleFrom(
+                        primary: kPrimaryColor,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 40.0),
+                      ),
                     ),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.rightToLeft,
+                                child: HomePage(
+                                  operatorName: widget.operatorName,
+                                )));
+                      },
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              Translations.of(context).text("start_shift"),
+                              style: const TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
+                          ]),
+                      style: ElevatedButton.styleFrom(
+                        primary: kPrimaryColor,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 40.0),
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -344,9 +338,9 @@ class CardWidget extends StatelessWidget {
         height: 34.0,
         child: Text(
           // '$_counter',
-          '$value',
+          value,
           //'کارکرد 0.0',
-          style: TextStyle(
+          style: const TextStyle(
             fontFamily: 'Yekan',
             fontWeight: FontWeight.bold,
             fontSize: 17,

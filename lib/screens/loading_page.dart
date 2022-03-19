@@ -8,10 +8,11 @@ import 'package:page_transition/page_transition.dart';
 
 import '../constructor.dart';
 
-
 class LoadingPage extends StatefulWidget {
-  LoadingPage({Key? key,required this.id}) : super(key: key);
+  LoadingPage({Key? key, required this.id, required this.operatorName})
+      : super(key: key);
   final String id;
+  final String operatorName;
 
   @override
   _LoadingPageState createState() => _LoadingPageState();
@@ -33,7 +34,6 @@ class _LoadingPageState extends State<LoadingPage> {
         dispensers.dis_4 = value.dis_4;
         dispensers.dis_5 = value.dis_5;
         dispensers.dis_6 = value.dis_6;
-
 
         return true;
       }
@@ -63,7 +63,7 @@ class _LoadingPageState extends State<LoadingPage> {
           } else {
             print("**dispenser get data is error**");
           }
-        }else if (widget.id == 'start'){
+        } else if (widget.id == 'start') {
           if (dispensers.id != '') {
             Navigator.pushReplacement(
                 context,
@@ -75,7 +75,7 @@ class _LoadingPageState extends State<LoadingPage> {
                       lastDispenserData2B: dispensers.dis_4.toString(),
                       lastDispenserData3A: dispensers.dis_5.toString(),
                       lastDispenserData3B: dispensers.dis_6.toString(),
-                      title: widget.id,
+                      operatorName: widget.operatorName,
                     ),
                     type: PageTransitionType.rightToLeft));
           } else {
@@ -83,7 +83,7 @@ class _LoadingPageState extends State<LoadingPage> {
           }
         }
       }
-    }).catchError((_){
+    }).catchError((_) {
       print("loading error");
     });
     super.initState();

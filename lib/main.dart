@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:ftm_service_app/screens/welcome_page.dart';
 import 'package:ftm_service_app/screens/home_page.dart';
-import 'package:ftm_service_app/screens/panel_page.dart';
-import 'package:ftm_service_app/screens/spash_screen.dart';
+import 'package:ftm_service_app/screens/splash_screen.dart';
 import 'package:ftm_service_app/translations.dart';
 import 'screens/confirmation_page.dart';
 import 'screens/sign_up_page.dart';
@@ -29,8 +29,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var lang = Localizations.localeOf(context).languageCode;
-    // print(lang);
     return MaterialApp(
       localizationsDelegates: [
         AppLocalizationDelegate(),
@@ -44,27 +42,21 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Yekan',
       ),
-      home: const HomePage(pageTitle: 'FTM.CO'),
+      home: const WelcomePage(),
       initialRoute: '/.',
       routes: {
         '/.': (BuildContext context) => SplashScreen(),
-        '/home': (BuildContext context) => const HomePage(
-              pageTitle: 'Home',
-            ),
-        '/signin': (BuildContext context) => SignInPage(
-              pageTitle: 'SignInPage',
-            ),
-        '/signup': (BuildContext context) => const SignUpPage(
+        '/welcome': (BuildContext context) => const WelcomePage(),
+        '/sign_in': (BuildContext context) => const SignInPage(),
+        '/sign_up': (BuildContext context) => const SignUpPage(
               pageTitle: 'SignUpPage',
             ),
-        '/confirmpage': (BuildContext context) => const ConfirmationPage(
+        '/confirm_page': (BuildContext context) => const ConfirmationPage(
               pageTitle: 'ConfirmationPage',
             ),
-
-        '/panelpage': (BuildContext context) => const PanelPage(
-              operator: 'operatorName',
+        '/home': (BuildContext context) => const HomePage(
+              operatorName: 'operatorName',
             ),
-
       },
     );
   }

@@ -1,11 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ftm_service_app/screens/end_shift_page.dart';
-import 'package:ftm_service_app/screens/loading_page.dart';
-import 'package:ftm_service_app/screens/panel_page.dart';
-import 'package:ftm_service_app/screens/start_shift_page.dart';
+import 'package:ftm_service_app/screens/home_page.dart';
 import 'package:ftm_service_app/services/network_adapter.dart';
 import 'package:ftm_service_app/structures/user.dart';
 import 'package:ftm_service_app/widgets/input_fields.dart';
@@ -17,9 +12,7 @@ import '../translations.dart';
 import 'sign_up_page.dart';
 
 class SignInPage extends StatefulWidget {
-  final String pageTitle;
-
-  SignInPage({Key? key, required this.pageTitle}) : super(key: key);
+  const SignInPage({Key? key}) : super(key: key);
 
   @override
   _SignInPageState createState() => _SignInPageState();
@@ -32,7 +25,6 @@ class _SignInPageState extends State<SignInPage> {
   String password = "";
 
   //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-  //TODO Alireza : _handleSubmitted for save user name:
   void _handleSubmitted(user) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("username", user);
@@ -62,13 +54,14 @@ class _SignInPageState extends State<SignInPage> {
           appBar: AppBar(
             elevation: 0,
             backgroundColor: kWhite,
-            title: Text(Translations.of(context).text('sing_in'),
-                style: TextStyle(
-                    color: Colors.grey, fontFamily: 'Poppins', fontSize: 15)),
+            title: Text(
+              Translations.of(context).text('sing_in'),
+              style: const TextStyle(color: Colors.grey, fontSize: 15),
+            ),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacementNamed('/signup');
+                  Navigator.of(context).pushReplacementNamed('/sign_up');
                   Navigator.pushReplacement(
                       context,
                       PageTransition(
@@ -77,8 +70,10 @@ class _SignInPageState extends State<SignInPage> {
                             pageTitle: 'SignUpPage',
                           )));
                 },
-                child: Text(Translations.of(context).text('sing_up'),
-                    style: kTextContrast),
+                child: Text(
+                  Translations.of(context).text('sing_up'),
+                  style: const TextStyle(color: kPrimaryColor),
+                ),
               )
             ],
           ),
@@ -93,14 +88,20 @@ class _SignInPageState extends State<SignInPage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Text(Translations.of(context).text('welcome_home'),
-                            style: kHeader3),
+                        const SizedBox(
+                          height: 56,
+                        ),
                         Text(Translations.of(context).text('lets_get_start'),
                             style: taglineText),
+
+                        // Text(Translations.of(context).text('lets_get_start'),
+                        //     style: taglineText),
                         ftmPersonalCodeInput(
-                            Translations.of(context).text('personnel_code')),
+                          Translations.of(context).text('personnel_code'),
+                        ),
                         ftmPasswordInput(
-                            Translations.of(context).text('password')),
+                          Translations.of(context).text('password'),
+                        ),
                         TextButton(
                           onPressed: () {
                             //ToDo : Forgot Password onPressed Here ...
@@ -134,23 +135,19 @@ class _SignInPageState extends State<SignInPage> {
                                 if (user.name == null) {
                                   showSnackBar(context,
                                       'Personnel Code or Password is incorrect');
-                                  print(user.name);
                                 } else {
-                                  //Alireza : SharedPref define to save user data:
                                   _handleSubmitted(name);
                                   Navigator.pushReplacement(
                                     context,
-                                    //Alireza : go to panel page
                                     PageTransition(
                                         type: PageTransitionType.rightToLeft,
-                                        child: PanelPage(
-                                          operator: name,
+                                        child: HomePage(
+                                          operatorName: name,
                                         )),
                                   );
                                 }
                               }).catchError((_) {
                                 showSnackBar(context, 'Connecting Error');
-                                print("error");
                               });
                             });
                           },
@@ -180,17 +177,17 @@ class _SignInPageState extends State<SignInPage> {
         builder: (BuildContext context) {
           return AlertDialog(
             // title: const Text("Error"),
-            content: const Text('Do you want to exit?'),
+            content: Text(Translations.of(context).text("close_app_mess"),),
 
             actions: <Widget>[
               TextButton(
-                child: const Text("No"),
+                child: Text(Translations.of(context).text("no"),),
                 onPressed: () {
                   Navigator.pop(context);
                 },
               ),
               TextButton(
-                child: const Text("Yes"),
+                child: Text(Translations.of(context).text("yes"),),
                 onPressed: () {
                   SystemNavigator.pop();
                 },

@@ -22,20 +22,21 @@ class _SignUpPageState extends State<SignUpPage> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: kWhite,
-          title: Text(Translations.of(context).text("sing_up"),
-              style: TextStyle(
-                  color: Colors.grey, fontFamily: 'Poppins', fontSize: 15)),
+          title: Text(
+            Translations.of(context).text("sing_up"),
+            style: const TextStyle(color: Colors.grey, fontSize: 15),
+          ),
           actions: <Widget>[
             TextButton(
               onPressed: () {
-                Navigator.of(context).pushReplacementNamed('/signin');
+                Navigator.of(context).pushReplacementNamed('/sign_in');
                 Navigator.pushReplacement(
-                    context,
-                    PageTransition(
-                        type: PageTransitionType.rightToLeft,
-                        child: SignInPage(
-                          pageTitle: 'SignInPage',
-                        )));
+                  context,
+                  PageTransition(
+                    type: PageTransitionType.rightToLeft,
+                    child: const SignInPage(),
+                  ),
+                );
               },
               child: Text(Translations.of(context).text("sing_in"),
                   style: kTextContrast),

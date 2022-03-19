@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ftm_service_app/constructor.dart';
 
 class IconContent extends StatelessWidget {
   const IconContent({Key? key, required this.icon, required this.label}) : super(key: key);
@@ -11,7 +12,6 @@ class IconContent extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(
-          //FontAwesomeIcons.mars,
           icon,
           size: 80.0,
         ),
@@ -20,9 +20,9 @@ class IconContent extends StatelessWidget {
         ),
         Text(
           label,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18.0,
-            color: Colors.white,
+            color: kTextPrimary,
           ),
         )
       ],

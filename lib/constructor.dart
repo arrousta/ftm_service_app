@@ -15,10 +15,10 @@ const Color kTextHint = Color(0xFF555555);
 //////////Size////////////////
 //////////////////////////////
 
-const kFieldSizeWith = 105.0;
+const kFieldSizeWith = 115.0;
 const kFieldSizeHeight = 35.0;
 
-const kBoxSizeWith = 115.0;
+const kBoxSizeWith = 125.0;
 const kBoxSizeHeight = 45.0;
 
 //Text Style
@@ -37,14 +37,14 @@ const kLogoWhiteStyle = TextStyle(
 const kTextWhite = TextStyle(color: Colors.white, fontFamily: 'Poppins');
 const kTextDisabled = TextStyle(color: Colors.grey, fontFamily: 'Poppins');
 const kTextContrast = TextStyle(color: kPrimaryColor, fontFamily: 'Poppins');
-const kTextBoldContrast = TextStyle(
-    color: kPrimaryColor, fontFamily: 'Poppins', fontWeight: FontWeight.w600);
+const kTextBoldContrast =
+    TextStyle(color: kPrimaryColor, fontWeight: FontWeight.w300);
 
 const kHeader3 = TextStyle(
-    color: Colors.black,
-    fontSize: 24,
-    fontWeight: FontWeight.w800,
-    fontFamily: 'Poppins');
+  color: Colors.black,
+  fontSize: 24,
+  fontWeight: FontWeight.w800,
+);
 
 const kHeader4 = TextStyle(
     color: Colors.black,
@@ -83,14 +83,16 @@ const kTextName = TextStyle(
     fontFamily: 'Poppins');
 
 const kAttention = TextStyle(
-    color: Colors.red,
-    fontSize: 19,
-    fontWeight: FontWeight.w600,
-    fontFamily: 'Poppins');
+  color: Colors.red,
+  fontSize: 19,
+  fontWeight: FontWeight.w600,
+);
 
 const tabLinkStyle = TextStyle(fontWeight: FontWeight.w500);
 
-const taglineText = TextStyle(color: Colors.grey, fontFamily: 'Poppins');
+const taglineText = TextStyle(
+  color: Colors.grey,
+);
 const taglineText2 = TextStyle(color: Colors.red, fontFamily: 'Poppins');
 const categoryText = TextStyle(
     color: Color(0xff444444),
@@ -98,16 +100,15 @@ const categoryText = TextStyle(
     fontFamily: 'Poppins');
 
 const inputFieldTextStyle = TextStyle(
-    fontFamily: 'Poppins', fontWeight: FontWeight.w500, color: kTextPrimary);
+    fontWeight: FontWeight.w500, color: kTextPrimary, letterSpacing: 2);
 
-const inputFieldHintTextStyle =
-    TextStyle(fontFamily: 'Poppins', color: Color(0xff444444));
+const inputFieldHintTextStyle = TextStyle(color: Color(0xff444444));
 
-const inputFieldPasswordTextStyle = TextStyle(
-    fontFamily: 'Poppins', fontWeight: FontWeight.w500, letterSpacing: 3);
+const inputFieldPasswordTextStyle =
+    TextStyle(fontWeight: FontWeight.w500, letterSpacing: 3);
 
-const inputFieldHintPasswordTextStyle = TextStyle(
-    fontFamily: 'Poppins', color: Color(0xff444444), letterSpacing: 2);
+const inputFieldHintPasswordTextStyle =
+    TextStyle(color: Color(0xff444444));
 
 const inputFieldTextStyleDispenser = TextStyle(
     fontFamily: 'Yekan', fontWeight: FontWeight.w100, color: Color(0xFF222222));
@@ -175,7 +176,7 @@ const panelPlateDecoration = BoxDecoration(
     borderRadius: BorderRadiusDirectional.all(Radius.circular(8)));
 
 const buttonPanelPlateDecoration = BoxDecoration(
-    color: Colors.blueGrey,
+    color: kBackgroundColor2,
     boxShadow: [
       BoxShadow(
           color: Color.fromRGBO(0, 0, 0, .3),

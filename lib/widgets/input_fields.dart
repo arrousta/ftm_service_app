@@ -68,7 +68,7 @@ Container ftmPasswordInput(String hintText,
       onSubmitted: onSubmitted,
       obscureText: true,
       cursorColor: kPrimaryColor,
-      style: inputFieldHintPasswordTextStyle,
+      style: inputFieldPasswordTextStyle,
       controller: passwordController,
       decoration: InputDecoration(
           hintText: hintText,
@@ -77,6 +77,7 @@ Container ftmPasswordInput(String hintText,
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           border: inputFieldDefaultBorderStyle),
+      textAlign: TextAlign.center,
     ),
   );
 }
@@ -113,9 +114,9 @@ textFieldContainer ftmPersonalCodeInput(String hintText,
     keyboardType: TextInputType.number,
     hintText: hintText,
     hintStyle: inputFieldHintTextStyle,
-    horizontal: 20,
+    horizontal: 10,
     vertical: 10,
-    marginTop: 13,
+    marginTop: 13
   );
 }
 
@@ -154,148 +155,6 @@ textFieldContainer ftmConfirmCodeInput(String hintText,
     horizontal: 20,
     vertical: 10,
     marginTop: 13,
-  );
-}
-
-textFieldContainer ftmDispenser1AInput({required String hintText, required Function onChanged, onTap, onEditingComplete, onSubmitted}) {
-  return textFieldContainer(
-    onTap: onTap,
-    onChanged: onChanged,
-    onEditingComplete: onEditingComplete,
-    onSubmitted: onSubmitted,
-    cursorColor: kPrimaryColor,
-    style: inputFieldTextStyleDispenser,
-    controller: dispenser1AController,
-    keyboardType: TextInputType.number,
-    hintText: hintText,
-    hintStyle: inputFieldHintTextStyleDispenser,
-    horizontal: 5,
-    vertical: 5,
-    marginTop: 0,
-  );
-}
-
-textFieldContainer ftmDispenser1BInput({required String hintText, onTap, required Function onChanged, onEditingComplete, onSubmitted}) {
-  return textFieldContainer(
-    onTap: onTap,
-    onChanged: (value) {
-      if (value != '') {
-        dispenser1BChangedValue = int.parse(value);
-      } else {
-        dispenser1BChangedValue = 0;
-      }
-    },
-    onEditingComplete: onEditingComplete,
-    onSubmitted: onSubmitted,
-    cursorColor: kPrimaryColor,
-    style: inputFieldTextStyleDispenser,
-    controller: dispenser1BController,
-    keyboardType: TextInputType.number,
-    hintText: hintText,
-    hintStyle: inputFieldHintTextStyleDispenser,
-    horizontal: 5,
-    vertical: 5,
-    marginTop: 0,
-  );
-}
-
-textFieldContainer ftmDispenser2AInput(String hintText,
-    {onTap, onChanged, onEditingComplete, onSubmitted}) {
-  return textFieldContainer(
-    onTap: onTap,
-    onChanged: (value) {
-      if (value != '') {
-        dispenser2AChangedValue = int.parse(value);
-      } else {
-        dispenser2AChangedValue = 0;
-      }
-    },
-    onEditingComplete: onEditingComplete,
-    onSubmitted: onSubmitted,
-    cursorColor: kPrimaryColor,
-    style: inputFieldTextStyleDispenser,
-    controller: dispenser2AController,
-    keyboardType: TextInputType.number,
-    hintText: hintText,
-    hintStyle: inputFieldHintTextStyleDispenser,
-    horizontal: 5,
-    vertical: 5,
-    marginTop: 0,
-  );
-}
-
-textFieldContainer ftmDispenser2BInput(String hintText,
-    {onTap, onChanged, onEditingComplete, onSubmitted}) {
-  return textFieldContainer(
-    onTap: onTap,
-    onChanged: (value) {
-      if (value != '') {
-        dispenser2BChangedValue = int.parse(value);
-      } else {
-        dispenser2BChangedValue = 0;
-      }
-    },
-    onEditingComplete: onEditingComplete,
-    onSubmitted: onSubmitted,
-    cursorColor: kPrimaryColor,
-    style: inputFieldTextStyleDispenser,
-    controller: dispenser2BController,
-    keyboardType: TextInputType.number,
-    hintText: hintText,
-    hintStyle: inputFieldHintTextStyleDispenser,
-    horizontal: 5,
-    vertical: 5,
-    marginTop: 0,
-  );
-}
-
-textFieldContainer ftmDispenser3AInput(String hintText,
-    {onTap, onChanged, onEditingComplete, onSubmitted}) {
-  return textFieldContainer(
-    onTap: onTap,
-    onChanged: (value) {
-      if (value != '') {
-        dispenser3AChangedValue = int.parse(value);
-      } else {
-        dispenser3AChangedValue = 0;
-      }
-    },
-    onEditingComplete: onEditingComplete,
-    onSubmitted: onSubmitted,
-    cursorColor: kPrimaryColor,
-    style: inputFieldTextStyleDispenser,
-    controller: dispenser3AController,
-    keyboardType: TextInputType.number,
-    hintText: hintText,
-    hintStyle: inputFieldHintTextStyleDispenser,
-    horizontal: 5,
-    vertical: 5,
-    marginTop: 0,
-  );
-}
-
-textFieldContainer ftmDispenser3BInput(String hintText,
-    {onTap, onChanged, onEditingComplete, onSubmitted}) {
-  return textFieldContainer(
-    onTap: onTap,
-    onChanged: (value) {
-      if (value != '') {
-        dispenser3BChangedValue = int.parse(value);
-      } else {
-        dispenser3BChangedValue = 0;
-      }
-    },
-    onEditingComplete: onEditingComplete,
-    onSubmitted: onSubmitted,
-    cursorColor: kPrimaryColor,
-    style: inputFieldTextStyleDispenser,
-    controller: dispenser3BController,
-    keyboardType: TextInputType.number,
-    hintText: hintText,
-    hintStyle: inputFieldHintTextStyleDispenser,
-    horizontal: 5,
-    vertical: 5,
-    marginTop: 0,
   );
 }
 
@@ -377,6 +236,7 @@ class textFieldContainer extends StatelessWidget {
             contentPadding: EdgeInsets.symmetric(
                 horizontal: horizontal, vertical: vertical),
             border: inputFieldDefaultBorderStyle),
+        textAlign: TextAlign.center,
       ),
     );
   }

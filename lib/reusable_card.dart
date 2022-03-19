@@ -9,15 +9,14 @@ class ReusableCard extends StatelessWidget {
   final Color colour;
   final Widget cardChild;
   final Function()? onPress;
-  //final VoidCallback onPress;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       hoverColor: Colors.black26,
-      splashColor: Colors.lightBlue.shade600,
-      focusColor: Colors.blue,
-      highlightColor: Colors.blueGrey.shade700,
+      splashColor: Colors.white24,
+      focusColor: Colors.white60,
+      highlightColor: colour,
       onTap: onPress,
       child: Container(
         height: 160,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ftm_service_app/widgets/input_fields.dart';
 import 'package:ftm_service_app/constructor.dart';
-import 'package:ftm_service_app/widgets/time_and_date.dart';
 import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
 
