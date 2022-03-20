@@ -11,7 +11,7 @@ import 'payment_page.dart';
 class EndShiftPage extends StatefulWidget {
   EndShiftPage({
     Key? key,
-    required this.operator,
+    required this.operatorName,
     required this.lastDispenserData1A,
     required this.lastDispenserData1B,
     required this.lastDispenserData2A,
@@ -19,7 +19,7 @@ class EndShiftPage extends StatefulWidget {
     required this.lastDispenserData3A,
     required this.lastDispenserData3B,
   }) : super(key: key);
-  final String operator;
+  final String operatorName;
 
   String lastDispenserData1A;
   String lastDispenserData1B;
@@ -194,19 +194,18 @@ class _EndShiftPageState extends State<EndShiftPage> {
                         ),
                         onPressed: () {
 
-                          int _total = 1;
+                          int _total = 0;
 
                           for(int i = 0; i < endSiftList.length ; i++){
                             _total += endSiftList[i];
-                            print(endSiftList[i]);
                           }
-
                           if (_total > 0) {
                             Navigator.push(
                                 context,
                                 PageTransition(
                                     type: PageTransitionType.rightToLeft,
                                     child: Payment(
+                                      operatorName: widget.operatorName,
                                       total: '$_total',
                                       dispenser1A: '${endSiftList[1]}',
                                       dispenser1B: '${endSiftList[2]}',
@@ -216,7 +215,6 @@ class _EndShiftPageState extends State<EndShiftPage> {
                                       dispenser3B: '${endSiftList[6]}',
                                     )));
                           } else if (_total == 0) {
-                            print("***Total= $_total");
                           } else {
                             print("Error in total dispenser");
                           }
@@ -250,7 +248,7 @@ class _EndShiftPageState extends State<EndShiftPage> {
                       context,
                       PageTransition(
                           child: HomePage(
-                            operatorName: widget.operator,
+                            operatorName: widget.operatorName,
                           ),
                           type: PageTransitionType.rightToLeft));
                 },
@@ -333,7 +331,7 @@ class ImageCardWidget extends StatelessWidget {
   }
 }
 
-List<int> endSiftList = [0,0,0,0,0,0];
+List<int> endSiftList = [0,0,0,0,0,0,0];
 
 class NozzleWidget extends StatefulWidget {
   final int id;

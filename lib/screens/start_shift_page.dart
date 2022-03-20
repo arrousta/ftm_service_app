@@ -242,7 +242,7 @@ class _StartShiftState extends State<StartShift> {
                             PageTransition(
                                 type: PageTransitionType.rightToLeft,
                                 child: EndShiftPage(
-                                  operator: 'Dispenser Page',
+                                  operatorName: widget.operatorName,
                                   lastDispenserData1A:
                                       widget.lastDispenserData1A,
                                   lastDispenserData1B:

@@ -57,7 +57,7 @@ class _LoadingPageState extends State<LoadingPage> {
                       lastDispenserData2B: dispensers.dis_4.toString(),
                       lastDispenserData3A: dispensers.dis_5.toString(),
                       lastDispenserData3B: dispensers.dis_6.toString(),
-                      operator: widget.id,
+                      operatorName: widget.operatorName,
                     ),
                     type: PageTransitionType.rightToLeft));
           } else {

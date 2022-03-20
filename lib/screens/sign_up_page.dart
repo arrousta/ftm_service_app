@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:ftm_service_app/widgets/input_fields.dart';
 import 'package:ftm_service_app/constructor.dart';
 import 'package:page_transition/page_transition.dart';
@@ -18,7 +19,9 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: _onBackPressed,
+    child: Scaffold(
         appBar: AppBar(
           elevation: 0,
           backgroundColor: kWhite,
@@ -114,6 +117,35 @@ class _SignUpPageState extends State<SignUpPage> {
               decoration: authPlateDecoration,
             ),
           ],
-        ));
+        ),),);
+
   }
+  Future<bool> _onBackPressed() async {
+    return await showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            // title: const Text("Error"),
+            content: Text(Translations.of(context).text("close_app_mess")),
+
+            actions: <Widget>[
+              TextButton(
+                child: Text(Translations.of(context).text("no")),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              TextButton(
+                child: Text(Translations.of(context).text("yes")),
+                onPressed: () {
+                  SystemNavigator.pop();
+                },
+              ),
+            ],
+          );
+        });
+  }
+
+
 }

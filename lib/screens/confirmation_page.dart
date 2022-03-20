@@ -80,7 +80,7 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
                               PageTransition(
                                 type: PageTransitionType.rightToLeft,
                                 child: EndShiftPage(
-                                  operator: 'Dispenser Page',
+                                  operatorName: 'Dispenser Page',
                                   lastDispenserData1A: '10',
                                   lastDispenserData1B: '20',
                                   lastDispenserData2A: '30',

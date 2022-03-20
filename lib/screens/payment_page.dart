@@ -16,9 +16,11 @@ class Payment extends StatefulWidget {
       required this.dispenser2A,
       required this.dispenser2B,
       required this.dispenser3A,
-      required this.dispenser3B})
+      required this.dispenser3B,
+      required this.operatorName})
       : super(key: key);
 
+  final String operatorName;
   final String total;
   final String dispenser1A;
   final String dispenser1B;
@@ -33,6 +35,7 @@ class Payment extends StatefulWidget {
 
 class _PaymentState extends State<Payment> {
   int aPrice = 6568;
+  final TextEditingController _textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -170,11 +173,36 @@ class _PaymentState extends State<Payment> {
                                         .text("payment_user_mess"),
                                     textAlign: TextAlign.center,
                                   ),
-                                  Container(
-                                    width: kBoxSizeWith,
-                                    height: kBoxSizeHeight,
-                                    padding: const EdgeInsets.all(3),
-                                    child: ftmPaymentInput('وارد کنید'),
+                                  SizedBox(
+                                    width: kFieldSizeWith,
+                                    height: kFieldSizeHeight,
+                                    child: TextField(
+                                      onChanged: (value) {
+                                        setState(() {
+                                          if (value != '') {
+                                            paymentChangeValue =
+                                                int.parse(value);
+                                          }
+                                        });
+                                      },
+                                      textAlign: TextAlign.center,
+                                      textAlignVertical:
+                                          TextAlignVertical.center,
+                                      cursorColor: kPrimaryColor,
+                                      style: inputFieldTextStyleDispenser,
+                                      controller: _textEditingController,
+                                      keyboardType: TextInputType.number,
+                                      textInputAction: TextInputAction.next,
+                                      decoration: const InputDecoration(
+                                          hintText: 'وارد کنید',
+                                          hintStyle:
+                                              inputFieldHintTextStyleDispenser,
+                                          focusedBorder:
+                                              inputFieldFocusedBorderStyle,
+                                          contentPadding: EdgeInsets.symmetric(
+                                              horizontal: 5, vertical: 5),
+                                          border: inputFieldDefaultBorderStyle),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -233,7 +261,7 @@ class _PaymentState extends State<Payment> {
                             PageTransition(
                               type: PageTransitionType.rightToLeft,
                               child: FinalConfirm(
-                                title: 'Final Confirmation',
+                                operatorName: widget.operatorName,
                                 dispenser1A: widget.dispenser1A,
                                 dispenser1B: widget.dispenser1B,
                                 dispenser2A: widget.dispenser2A,
@@ -241,10 +269,10 @@ class _PaymentState extends State<Payment> {
                                 dispenser3A: widget.dispenser3A,
                                 dispenser3B: widget.dispenser3B,
                                 totalShiftFunction: '$totalInt',
-                                totalShiftCash: totalWithFormat,
-                                cardShiftCash: paymentController.text,
+                                totalShiftCash: '$totalWithoutFormat',
+                                cardShiftCash: _textEditingController.text,
                                 handShiftCash:
-                                    '${totalWithoutFormat - int.parse(paymentController.text)}',
+                                    '${totalWithoutFormat - int.parse(_textEditingController.text)}',
                               ),
                             ),
                           );
@@ -252,7 +280,9 @@ class _PaymentState extends State<Payment> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(Translations.of(context).text("next_step")),
+                            Text(
+                              Translations.of(context).text("next_step"),
+                            ),
                           ],
                         ),
                         style: ElevatedButton.styleFrom(
