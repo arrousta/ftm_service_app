@@ -18,6 +18,12 @@ class FinalConfirm extends StatefulWidget {
       required this.dispenser2B,
       required this.dispenser3A,
       required this.dispenser3B,
+      required this.dispenser1Ad,
+      required this.dispenser1Bd,
+      required this.dispenser2Ad,
+      required this.dispenser2Bd,
+      required this.dispenser3Ad,
+      required this.dispenser3Bd,
       required this.totalShiftFunction,
       required this.totalShiftCash,
       required this.handShiftCash,
@@ -33,6 +39,12 @@ class FinalConfirm extends StatefulWidget {
   final String dispenser2B;
   final String dispenser3A;
   final String dispenser3B;
+  final String dispenser1Ad;
+  final String dispenser1Bd;
+  final String dispenser2Ad;
+  final String dispenser2Bd;
+  final String dispenser3Ad;
+  final String dispenser3Bd;
 
   final String totalShiftFunction;
   final String totalShiftCash;
@@ -137,7 +149,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      Translations.of(context).text("dispenser") + " 1",
+                      Translations.of(context).text("dispenser_function") + " 1",
                     ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
@@ -189,7 +201,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                     ),
                     //-----------------------------------------------------------------------------------------
                     Text(
-                      Translations.of(context).text("dispenser") + " 2",
+                      Translations.of(context).text("dispenser_function") + " 2",
                     ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
@@ -241,7 +253,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                     ),
                     //--------------------------------------------------------------------------------------------------------
                     Text(
-                      Translations.of(context).text("dispenser") + " 3",
+                      Translations.of(context).text("dispenser_function") + " 3",
                     ),
                     Container(
                       margin: const EdgeInsets.all(10.0),

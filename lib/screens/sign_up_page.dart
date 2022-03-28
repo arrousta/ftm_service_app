@@ -32,7 +32,6 @@ class _SignUpPageState extends State<SignUpPage> {
           actions: <Widget>[
             TextButton(
               onPressed: () {
-                Navigator.of(context).pushReplacementNamed('/sign_in');
                 Navigator.pushReplacement(
                   context,
                   PageTransition(

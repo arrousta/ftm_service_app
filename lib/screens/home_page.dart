@@ -188,7 +188,7 @@ class _HomePageState extends State<HomePage> {
                       child: ReusableCard(
                         onPress: () {
                           setState(() {
-                            Navigator.push(
+                            Navigator.pushReplacement(
                               context,
                               PageTransition(
                                   type: PageTransitionType.rightToLeft,
@@ -209,7 +209,7 @@ class _HomePageState extends State<HomePage> {
                     Expanded(
                       child: ReusableCard(
                         onPress: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                               context,
                               PageTransition(
                                   child: LoadingPage(

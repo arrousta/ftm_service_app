@@ -17,6 +17,12 @@ class Payment extends StatefulWidget {
       required this.dispenser2B,
       required this.dispenser3A,
       required this.dispenser3B,
+      required this.dispenser1Ad,
+      required this.dispenser1Bd,
+      required this.dispenser2Ad,
+      required this.dispenser2Bd,
+      required this.dispenser3Ad,
+      required this.dispenser3Bd,
       required this.operatorName})
       : super(key: key);
 
@@ -28,6 +34,12 @@ class Payment extends StatefulWidget {
   final String dispenser2B;
   final String dispenser3A;
   final String dispenser3B;
+  final String dispenser1Ad;
+  final String dispenser1Bd;
+  final String dispenser2Ad;
+  final String dispenser2Bd;
+  final String dispenser3Ad;
+  final String dispenser3Bd;
 
   @override
   State<Payment> createState() => _PaymentState();
@@ -256,7 +268,7 @@ class _PaymentState extends State<Payment> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             PageTransition(
                               type: PageTransitionType.rightToLeft,
@@ -268,6 +280,12 @@ class _PaymentState extends State<Payment> {
                                 dispenser2B: widget.dispenser2B,
                                 dispenser3A: widget.dispenser3A,
                                 dispenser3B: widget.dispenser3B,
+                                dispenser1Ad: widget.dispenser1Ad,
+                                dispenser1Bd: widget.dispenser1Bd,
+                                dispenser2Ad: widget.dispenser2Ad,
+                                dispenser2Bd: widget.dispenser2Bd,
+                                dispenser3Ad: widget.dispenser3Ad,
+                                dispenser3Bd: widget.dispenser3Bd,
                                 totalShiftFunction: '$totalInt',
                                 totalShiftCash: '$totalWithoutFormat',
                                 cardShiftCash: _textEditingController.text,

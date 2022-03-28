@@ -67,7 +67,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       ),
                     ),
                   );
-                  Navigator.of(context).pushReplacementNamed('/sign_up');
+                  // Navigator.of(context).pushReplacementNamed('/sign_up');
                 },
               ),
             ),

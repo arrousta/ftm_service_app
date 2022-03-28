@@ -10,15 +10,16 @@ const Color kWhite = Colors.white;
 const Color kTextDark = Colors.black54;
 const Color kTextPrimary = Color(0xFF222222);
 const Color kTextHint = Color(0xFF555555);
+const Color kErrorBackground = Color(0xD2911C1C);
 
 //////////////////////////////
 //////////Size////////////////
 //////////////////////////////
 
-const kFieldSizeWith = 115.0;
+const kFieldSizeWith = 125.0;
 const kFieldSizeHeight = 35.0;
 
-const kBoxSizeWith = 125.0;
+const kBoxSizeWith = 135.0;
 const kBoxSizeHeight = 45.0;
 
 //Text Style

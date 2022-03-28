@@ -55,19 +55,6 @@ class _EndShiftPageState extends State<EndShiftPage> {
   }
 //*************************************************************************************
 
-  int totalShift() {
-    int total = 0;
-
-    total += dispenser1AChangedValue - int.parse(widget.lastDispenserData1A);
-    total += dispenser1BChangedValue - int.parse(widget.lastDispenserData1B);
-    total += dispenser2AChangedValue - int.parse(widget.lastDispenserData2A);
-    total += dispenser2BChangedValue - int.parse(widget.lastDispenserData2B);
-    total += dispenser3AChangedValue - int.parse(widget.lastDispenserData3A);
-    total += dispenser3BChangedValue - int.parse(widget.lastDispenserData3B);
-
-    return total;
-  }
-
   @override
   Widget build(BuildContext context) {
     _setStartShiftData();
@@ -112,7 +99,10 @@ class _EndShiftPageState extends State<EndShiftPage> {
                         children: [
                           //-----------------------------------------1A------------------------------------------
                           NozzleWidget(
-                              id: 1, title: 'A', startShift: _startDispenser1A),                          //-----------------------------------------1B------------------------------------------
+                              id: 1,
+                              title: 'A',
+                              startShift:
+                                  _startDispenser1A), //-----------------------------------------1B------------------------------------------
                           NozzleWidget(
                               id: 2, title: 'B', startShift: _startDispenser1B),
                         ],
@@ -193,28 +183,64 @@ class _EndShiftPageState extends State<EndShiftPage> {
                           padding: const EdgeInsets.all(8),
                         ),
                         onPressed: () {
-
                           int _total = 0;
+                          print(endSiftFunctionList.toString());
 
-                          for(int i = 0; i < endSiftList.length ; i++){
-                            _total += endSiftList[i];
+                          for (int i = 0; i < endSiftFunctionList.length; i++) {
+                            _total += endSiftFunctionList[i];
+                            // print("**change true: " + endSiftFunctionList[i].toString());
+
                           }
                           if (_total > 0) {
-                            Navigator.push(
+                            if (endSiftList[1] == 0 ||
+                                endSiftList[2] == 0 ||
+                                endSiftList[3] == 0 ||
+                                endSiftList[4] == 0 ||
+                                endSiftList[5] == 0 ||
+                                endSiftList[6] == 0) {
+                              print(endSiftList.toString());
+                              showSnackBar(
+                                  context, 'لطفا تمام دیسپنسرها را تکمیل کنید');
+                            } else if (endSiftList[1] <
+                                    int.parse(_startDispenser1A) ||
+                                endSiftList[2] <
+                                    int.parse(_startDispenser1B) ||
+                                endSiftList[3] <
+                                    int.parse(_startDispenser2A) ||
+                                endSiftList[4] <
+                                    int.parse(_startDispenser2B) ||
+                                endSiftList[5] <
+                                    int.parse(_startDispenser3A) ||
+                                endSiftList[6] <
+                                    int.parse(_startDispenser3B)) {
+                              showSnackBar(
+                                  context, "دیسپنسرها به درستی وارد نشده");
+                            } else {
+                              Navigator.push(
                                 context,
                                 PageTransition(
-                                    type: PageTransitionType.rightToLeft,
-                                    child: Payment(
-                                      operatorName: widget.operatorName,
-                                      total: '$_total',
-                                      dispenser1A: '${endSiftList[1]}',
-                                      dispenser1B: '${endSiftList[2]}',
-                                      dispenser2A: '${endSiftList[3]}',
-                                      dispenser2B: '${endSiftList[4]}',
-                                      dispenser3A: '${endSiftList[5]}',
-                                      dispenser3B: '${endSiftList[6]}',
-                                    )));
+                                  type: PageTransitionType.rightToLeft,
+                                  child: Payment(
+                                    operatorName: widget.operatorName,
+                                    total: '$_total',
+                                    dispenser1Ad: '${endSiftFunctionList[1]}',
+                                    dispenser1Bd: '${endSiftFunctionList[2]}',
+                                    dispenser2Ad: '${endSiftFunctionList[3]}',
+                                    dispenser2Bd: '${endSiftFunctionList[4]}',
+                                    dispenser3Ad: '${endSiftFunctionList[5]}',
+                                    dispenser3Bd: '${endSiftFunctionList[6]}',
+                                    dispenser1A: '${endSiftList[1]}',
+                                    dispenser1B: '${endSiftList[2]}',
+                                    dispenser2A: '${endSiftList[3]}',
+                                    dispenser2B: '${endSiftList[4]}',
+                                    dispenser3A: '${endSiftList[5]}',
+                                    dispenser3B: '${endSiftList[6]}',
+                                  ),
+                                ),
+                              );
+                            }
                           } else if (_total == 0) {
+                            showAlertDialog(context, "اعلام خرابی جایگاه");
                           } else {
                             print("Error in total dispenser");
                           }
@@ -238,7 +264,7 @@ class _EndShiftPageState extends State<EndShiftPage> {
         builder: (BuildContext context) {
           return AlertDialog(
             // title: const Text("Error"),
-            content: Text(Translations.of(context).text("close_app_mess")),
+            content: Text(Translations.of(context).text("close_page_mess")),
 
             actions: <Widget>[
               TextButton(
@@ -331,7 +357,8 @@ class ImageCardWidget extends StatelessWidget {
   }
 }
 
-List<int> endSiftList = [0,0,0,0,0,0,0];
+List<int> endSiftFunctionList = [0, 0, 0, 0, 0, 0, 0];
+List<int> endSiftList = [0, 0, 0, 0, 0, 0, 0];
 
 class NozzleWidget extends StatefulWidget {
   final int id;
@@ -396,12 +423,15 @@ class _NozzleWidgetState extends State<NozzleWidget> {
                         setState(() {
                           if (value != '') {
                             _functionResult = int.parse(value);
-                            if(_functionResult >= int.parse(widget.startShift)) {
-                              endSiftList.insert(widget.id, _functionResult -
-                                  int.parse(widget.startShift));
-                              print(endSiftList[widget.id]);
+                            if (_functionResult >=
+                                int.parse(widget.startShift)) {
+                              endSiftFunctionList[widget.id] = _functionResult - int.parse(widget.startShift);
+                              endSiftList[widget.id] = _functionResult;
+                            } else {
+                              endSiftList.insert(widget.id, _functionResult);
                             }
                           } else {
+
                             _functionResult = 0;
                           }
                         });
@@ -451,4 +481,55 @@ class _NozzleWidgetState extends State<NozzleWidget> {
       ),
     );
   }
+}
+
+showAlertDialog(BuildContext context, String operatorName) {
+  // set up the buttons
+  Widget cancelButton = TextButton(
+    child: Text("انصراف"),
+    onPressed: () {
+      Navigator.pop(context);
+    },
+  );
+  Widget continueButton = TextButton(
+    child: Text("تایید خرابی جایگاه"),
+    onPressed: () {
+      Navigator.pushReplacement(
+          context,
+          PageTransition(
+              child: HomePage(
+                operatorName: operatorName,
+              ),
+              type: PageTransitionType.fade));
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    content: Text(operatorName),
+    actions: [
+      cancelButton,
+      continueButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+
+void showSnackBar(BuildContext context, String text) {
+  final snackBar = SnackBar(
+    content: Text(
+      text,
+      style: TextStyle(fontFamily: 'Yekan'),
+    ),
+    backgroundColor: kErrorBackground,
+  );
+  ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }

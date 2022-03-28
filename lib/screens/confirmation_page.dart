@@ -29,7 +29,6 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
           actions: <Widget>[
             TextButton(
               onPressed: () {
-                Navigator.of(context).pushReplacementNamed('/sign_in');
                 Navigator.pushReplacement(
                   context,
                   PageTransition(
