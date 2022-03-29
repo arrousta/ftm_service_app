@@ -184,12 +184,8 @@ class _EndShiftPageState extends State<EndShiftPage> {
                         ),
                         onPressed: () {
                           int _total = 0;
-                          print(endSiftFunctionList.toString());
-
                           for (int i = 0; i < endSiftFunctionList.length; i++) {
                             _total += endSiftFunctionList[i];
-                            // print("**change true: " + endSiftFunctionList[i].toString());
-
                           }
                           if (_total > 0) {
                             if (endSiftList[1] == 0 ||
@@ -198,7 +194,6 @@ class _EndShiftPageState extends State<EndShiftPage> {
                                 endSiftList[4] == 0 ||
                                 endSiftList[5] == 0 ||
                                 endSiftList[6] == 0) {
-                              print(endSiftList.toString());
                               showSnackBar(
                                   context, 'لطفا تمام دیسپنسرها را تکمیل کنید');
                             } else if (endSiftList[1] <

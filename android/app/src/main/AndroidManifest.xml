@@ -2,8 +2,8 @@
     package="com.farzintavanesh.ftm_service_app">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="ftm_service_app"
-        android:icon="@mipmap/ic_launcher">
+        android:label="FTM.Co"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
