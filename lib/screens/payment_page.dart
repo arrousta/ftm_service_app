@@ -4,7 +4,7 @@ import 'package:ftm_service_app/constructor.dart';
 import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
 
-import '../translations.dart';
+import '../services/translations.dart';
 import 'final_confirmation_page.dart';
 
 class Payment extends StatefulWidget {

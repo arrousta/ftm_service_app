@@ -8,7 +8,7 @@ import 'package:ftm_service_app/constructor.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../translations.dart';
+import '../services/translations.dart';
 import 'sign_up_page.dart';
 
 class SignInPage extends StatefulWidget {

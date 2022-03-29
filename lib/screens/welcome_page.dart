@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ftm_service_app/translations.dart';
+import 'package:ftm_service_app/services/translations.dart';
 import 'package:ftm_service_app/widgets/buttons.dart';
 import 'package:ftm_service_app/constructor.dart';
 
@@ -23,7 +23,7 @@ class _WelcomePageState extends State<WelcomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Image.asset('images/ftm.png', width: 260, height: 210),
+            Image.asset('assets/images/ftm.png', width: 260, height: 210),
             Container(
               margin: const EdgeInsets.only(bottom: 10, top: 0),
               child: Text(

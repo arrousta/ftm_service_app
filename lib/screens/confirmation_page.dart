@@ -3,7 +3,7 @@ import 'package:ftm_service_app/screens/end_shift_page.dart';
 import 'package:ftm_service_app/widgets/input_fields.dart';
 import 'package:ftm_service_app/constructor.dart';
 import 'package:page_transition/page_transition.dart';
-import '../translations.dart';
+import '../services/translations.dart';
 import 'sing_in_page.dart';
 
 class ConfirmationPage extends StatefulWidget {

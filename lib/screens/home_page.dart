@@ -6,12 +6,12 @@ import 'package:ftm_service_app/constructor.dart';
 import 'package:ftm_service_app/screens/loading_page.dart';
 import 'package:ftm_service_app/screens/welcome_page.dart';
 import 'package:intl/intl.dart';
-import 'package:ftm_service_app/persian_date.dart';
+import 'package:ftm_service_app/widgets/persian_date.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../icon_content.dart';
-import '../reusable_card.dart';
-import '../translations.dart';
+import '../widgets/icon_content.dart';
+import '../widgets/reusable_card.dart';
+import '../services/translations.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -135,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                                   radius: 40.0,
                                   backgroundColor: Colors.blue,
                                   backgroundImage:
-                                      AssetImage("images/user.png"),
+                                      AssetImage("assets/images/user.png"),
                                 ),
                                 const SizedBox(
                                   height: 16,
@@ -183,46 +183,43 @@ class _HomePageState extends State<HomePage> {
                   onPress: () {},
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Expanded(
-                      child: ReusableCard(
-                        onPress: () {
-                          setState(() {
-                            Navigator.pushReplacement(
-                              context,
-                              PageTransition(
-                                  type: PageTransitionType.rightToLeft,
-                                  child: LoadingPage(
-                                    id: 'start',
-                                    operatorName: widget.operatorName,
-                                  )),
-                            );
-                          });
-                        },
-                        colour: kPrimaryColor,
-                        cardChild: IconContent(
-                          icon: Icons.check,
-                          label: Translations.of(context).text("start_shift"),
-                        ),
+                    ReusableCard(
+                      colour: kPrimaryColor,
+                      cardChild: IconContent(
+                        iconAddress: "assets/icon/gas-green.png",
+                        label: Translations.of(context).text("start_shift"),
                       ),
-                    ),
-                    Expanded(
-                      child: ReusableCard(
-                        onPress: () {
+                      onPress: () {
+                        setState(() {
                           Navigator.pushReplacement(
-                              context,
-                              PageTransition(
-                                  child: LoadingPage(
-                                    id: 'end',
-                                    operatorName: widget.operatorName,
-                                  ),
-                                  type: PageTransitionType.rightToLeft));
-                        },
-                        colour: kPrimaryColor,
-                        cardChild: IconContent(
-                          icon: Icons.call_missed_outgoing,
-                          label: Translations.of(context).text("end_shift"),
-                        ),
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.rightToLeft,
+                                child: LoadingPage(
+                                  id: 'start',
+                                  operatorName: widget.operatorName,
+                                )),
+                          );
+                        });
+                      },
+                    ),
+                    ReusableCard(
+                      onPress: () {
+                        Navigator.pushReplacement(
+                            context,
+                            PageTransition(
+                                child: LoadingPage(
+                                  id: 'end',
+                                  operatorName: widget.operatorName,
+                                ),
+                                type: PageTransitionType.rightToLeft));
+                      },
+                      colour: kPrimaryColor,
+                      cardChild: IconContent(
+                        iconAddress: "assets/icon/gas-red.png",
+                        label: Translations.of(context).text("end_shift"),
                       ),
                     ),
                   ],
@@ -236,7 +233,7 @@ class _HomePageState extends State<HomePage> {
                         },
                         colour: kPrimaryColor,
                         cardChild: IconContent(
-                          icon: Icons.account_box_outlined,
+                          iconAddress: "assets/icon/engineer.png",
                           label: Translations.of(context).text("profile"),
                         ),
                       ),
@@ -248,7 +245,7 @@ class _HomePageState extends State<HomePage> {
                         },
                         colour: kPrimaryColor,
                         cardChild: IconContent(
-                          icon: Icons.free_breakfast_outlined,
+                          iconAddress: "assets/icon/letter.png",
                           label: Translations.of(context).text("take_leave"),
                         ),
                       ),
@@ -261,7 +258,7 @@ class _HomePageState extends State<HomePage> {
                       child: ReusableCard(
                         colour: kPrimaryColor,
                         cardChild: IconContent(
-                          icon: Icons.logout,
+                          iconAddress: "assets/icon/flame.png",
                           label: Translations.of(context).text("log_out"),
                         ),
                         onPress: () {
@@ -278,7 +275,7 @@ class _HomePageState extends State<HomePage> {
                         },
                         colour: kPrimaryColor,
                         cardChild: IconContent(
-                          icon: Icons.settings,
+                          iconAddress: "assets/icon/maintenance.png",
                           label: Translations.of(context).text("setting"),
                         ),
                       ),

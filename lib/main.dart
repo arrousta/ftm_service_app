@@ -5,7 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ftm_service_app/screens/welcome_page.dart';
 import 'package:ftm_service_app/screens/home_page.dart';
 import 'package:ftm_service_app/screens/splash_screen.dart';
-import 'package:ftm_service_app/translations.dart';
+import 'package:ftm_service_app/services/translations.dart';
 import 'screens/confirmation_page.dart';
 import 'screens/sign_up_page.dart';
 import 'screens/sing_in_page.dart';

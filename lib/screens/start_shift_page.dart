@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ftm_service_app/constructor.dart';
 import 'package:ftm_service_app/screens/home_page.dart';
 import 'package:page_transition/page_transition.dart';
-import '../translations.dart';
+import '../services/translations.dart';
 import 'end_shift_page.dart';
 
 class StartShift extends StatefulWidget {
@@ -34,17 +34,17 @@ class _StartShiftState extends State<StartShift> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color(0xffc7c7c7),
-        elevation: 0.0,
-        title: Text(Translations.of(context).text("start_shift")),
-        titleTextStyle: const TextStyle(
-          color: Colors.black,
-          fontWeight: FontWeight.bold,
-          fontSize: 21.0,
-        ),
-        centerTitle: true,
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: const Color(0xffc7c7c7),
+      //   elevation: 0.0,
+      //   title: Text(Translations.of(context).text("start_shift")),
+      //   titleTextStyle: const TextStyle(
+      //     color: Colors.black,
+      //     fontWeight: FontWeight.bold,
+      //     fontSize: 21.0,
+      //   ),
+      //   centerTitle: true,
+      // ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

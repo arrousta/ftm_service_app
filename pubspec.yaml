@@ -54,8 +54,8 @@ flutter:
         - asset: fonts/Yekan.ttf
   assets:
     - assets/
-    - images/ftm.png
-    - images/
+    - assets/icon/
+    - assets/images/
     - locale/fa.json
     - locale/en.json
 

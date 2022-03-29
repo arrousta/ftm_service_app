@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'constructor.dart';
+import '../constructor.dart';
 
 class ReusableCard extends StatelessWidget {
   //const ReusableCard({Key? key,}) : super(key: key);
@@ -19,7 +19,8 @@ class ReusableCard extends StatelessWidget {
       highlightColor: colour,
       onTap: onPress,
       child: Container(
-        height: 160,
+        height: 150,
+        width: 110,
         child: cardChild,
         margin: const EdgeInsets.all(14.5),
           decoration: buttonPanelPlateDecoration,

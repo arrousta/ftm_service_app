@@ -112,7 +112,7 @@ class _SplashScreenState extends State<SplashScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Image.asset('images/ftm.png', width: 260, height: 210),
+          Image.asset('assets/images/ftm.png', width: 260, height: 210),
           const SpinKitCircle(
             color: Colors.indigo,
             size: 50.0,

@@ -6,7 +6,7 @@ import 'package:ftm_service_app/services/network_adapter.dart';
 import 'package:ftm_service_app/structures/dispensers.dart';
 import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
-import '../translations.dart';
+import '../services/translations.dart';
 import 'end_shift_page.dart';
 
 class FinalConfirm extends StatefulWidget {
