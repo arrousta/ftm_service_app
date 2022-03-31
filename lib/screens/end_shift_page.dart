@@ -72,7 +72,7 @@ class _EndShiftPageState extends State<EndShiftPage> {
                   padding: const EdgeInsets.all(3.0),
                   margin: const EdgeInsets.all(3.0),
                   decoration: BoxDecoration(
-                    color: kBackgroundColor3,
+                    color: kDarkBackgroundColor,
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: Column(
@@ -90,7 +90,8 @@ class _EndShiftPageState extends State<EndShiftPage> {
                               vertical: 6, horizontal: 16),
                           child: Text(
                             Translations.of(context).text("dispenser") + " 1",
-                            style: const TextStyle(color: kBackgroundColor1),
+                            style:
+                                const TextStyle(color: kLightBackgroundColor),
                           ),
                         ),
                       ),
@@ -119,7 +120,8 @@ class _EndShiftPageState extends State<EndShiftPage> {
                               vertical: 6, horizontal: 16),
                           child: Text(
                             Translations.of(context).text("dispenser") + " 2",
-                            style: const TextStyle(color: kBackgroundColor1),
+                            style:
+                                const TextStyle(color: kLightBackgroundColor),
                           ),
                         ),
                       ),
@@ -146,7 +148,8 @@ class _EndShiftPageState extends State<EndShiftPage> {
                               vertical: 6, horizontal: 16),
                           child: Text(
                             Translations.of(context).text("dispenser") + " 3",
-                            style: const TextStyle(color: kBackgroundColor1),
+                            style:
+                                const TextStyle(color: kLightBackgroundColor),
                           ),
                         ),
                       ),
@@ -198,16 +201,11 @@ class _EndShiftPageState extends State<EndShiftPage> {
                                   context, 'لطفا تمام دیسپنسرها را تکمیل کنید');
                             } else if (endSiftList[1] <
                                     int.parse(_startDispenser1A) ||
-                                endSiftList[2] <
-                                    int.parse(_startDispenser1B) ||
-                                endSiftList[3] <
-                                    int.parse(_startDispenser2A) ||
-                                endSiftList[4] <
-                                    int.parse(_startDispenser2B) ||
-                                endSiftList[5] <
-                                    int.parse(_startDispenser3A) ||
-                                endSiftList[6] <
-                                    int.parse(_startDispenser3B)) {
+                                endSiftList[2] < int.parse(_startDispenser1B) ||
+                                endSiftList[3] < int.parse(_startDispenser2A) ||
+                                endSiftList[4] < int.parse(_startDispenser2B) ||
+                                endSiftList[5] < int.parse(_startDispenser3A) ||
+                                endSiftList[6] < int.parse(_startDispenser3B)) {
                               showSnackBar(
                                   context, "دیسپنسرها به درستی وارد نشده");
                             } else {
@@ -420,13 +418,13 @@ class _NozzleWidgetState extends State<NozzleWidget> {
                             _functionResult = int.parse(value);
                             if (_functionResult >=
                                 int.parse(widget.startShift)) {
-                              endSiftFunctionList[widget.id] = _functionResult - int.parse(widget.startShift);
+                              endSiftFunctionList[widget.id] = _functionResult -
+                                  int.parse(widget.startShift);
                               endSiftList[widget.id] = _functionResult;
                             } else {
                               endSiftList.insert(widget.id, _functionResult);
                             }
                           } else {
-
                             _functionResult = 0;
                           }
                         });
@@ -439,6 +437,9 @@ class _NozzleWidgetState extends State<NozzleWidget> {
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
+                          focusColor: kPrimaryColor,
+                          fillColor: kTextWhiteColor,
+                          filled: true,
                           hintText:
                               Translations.of(context).text('enter_number'),
                           hintStyle: inputFieldHintTextStyleDispenser,
@@ -524,7 +525,7 @@ void showSnackBar(BuildContext context, String text) {
       text,
       style: TextStyle(fontFamily: 'Yekan'),
     ),
-    backgroundColor: kErrorBackground,
+    backgroundColor: kErrorColor,
   );
   ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }

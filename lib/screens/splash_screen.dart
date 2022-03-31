@@ -5,17 +5,20 @@ import 'package:ftm_service_app/screens/home_page.dart';
 import 'package:ftm_service_app/structures/user.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({Key? key,required this.version}) : super(key: key);
+  final String version;
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  late Future<User> futureUser;
+  late Future<User>? futureUser;
   String _username = "";
+  String version = "نسخه: ";
 
   // FutureBuilder<User> futureBuilderGet(BuildContext context) {
   //   return FutureBuilder<User>(
@@ -67,12 +70,12 @@ class _SplashScreenState extends State<SplashScreen> {
   //   return "null";
   // }
 
-  @override
-  void initState() {
-    // futureUser = fetchData();
-    getInternetStatus();
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   // futureUser = fetchData();
+  //   getInternetStatus();
+  //   super.initState();
+  // }
 
   _loadUserInfo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -105,6 +108,15 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   @override
+  void initState() {
+    getInternetStatus();
+    version = version + widget.version;
+    // PackageInfo.fromPlatform()
+    //     .then((PackageInfo packageInfo) => version = packageInfo.version);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
@@ -117,10 +129,17 @@ class _SplashScreenState extends State<SplashScreen> {
             color: Colors.indigo,
             size: 50.0,
           ),
+          const SizedBox(
+            height: 100,
+          ),
+          Text(
+            version,
+            style: const TextStyle(color: kPrimaryColor),
+          ),
           // (futureUser == null) ? BuildButtonReload() : futureBuilderGet(context),
         ],
       )),
-      backgroundColor: kBackgroundColor2,
+      backgroundColor: kLightBackgroundColor,
     );
   }
 

@@ -7,7 +7,7 @@ TextButton ftmFlatBtn(String text, onPressed) {
     onPressed: onPressed,
     child: Text(
       text,
-      style: const TextStyle(color: kWhite),
+      style: const TextStyle(color: kTextWhiteColor),
     ),
     style: TextButton.styleFrom(
       primary: kPrimaryColor,

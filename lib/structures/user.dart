@@ -1,35 +1,54 @@
 class User {
-  late String? id = "nullly";
-  late String? name = "nullly";
-  late String? family = "nullly";
-  late String? userId = "nullly";
-  late String? phone = "nullly";
-  late String? personnelId = "nullly";
-  late String? password = "nullly";
-  late String? role = "nullly";
-  late String? state = "nullly";
+  late int? id;
+  late String? firstName;
+  late String? lastName;
+  late String? userId;
+  late String? phone;
+  late String? personnelId;
+  late String? password;
+  late String? role;
+  late String? stateId;
+  late String? userDetail;
+  late String? token;
 
   User(
       {this.id,
-      this.name,
-      this.family,
+      this.firstName,
+      this.lastName,
       this.userId,
       this.phone,
       this.personnelId,
       this.password,
       this.role,
-      this.state});
+      this.stateId,
+      this.userDetail,
+      this.token});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-        id: json['id'],
-        name: json['name'],
-        family: json['family'],
-        userId: json['user_id'],
-        phone: json['phone'],
-        personnelId: json['personnel_id'],
-        password: json['password'],
-        role: json['role'],
-        state: json['state']);
+      id: json['info']['id'],
+      firstName: json['info']['first_name'],
+      lastName: json['info']['last_name'],
+      userId: json['info']['user_id'],
+      phone: json['info']['phone'],
+      role: json['info']['role'],
+      stateId: json['info']['state_id'],
+      userDetail: json['info']['user_detail'],
+      personnelId: json['info']['personnel_id'],
+      password: json['info']['password'],
+      token: json['token'],
+    );
+  }
+
+  String getRole(){
+    String _role = "";
+
+    if(role == "master"){
+      _role = "مدیر";
+  }else if (role == "operator"){
+      _role = "اپراتور";
+  }
+    return _role;
   }
 }
+

@@ -24,7 +24,7 @@ class _SignUpPageState extends State<SignUpPage> {
     child: Scaffold(
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: kWhite,
+          backgroundColor: kLightBackgroundColor,
           title: Text(
             Translations.of(context).text("sing_up"),
             style: const TextStyle(color: Colors.grey, fontSize: 15),

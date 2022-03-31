@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ftm_service_app/screens/home_page.dart';
 import 'package:ftm_service_app/services/network_adapter.dart';
+import 'package:ftm_service_app/services/shared_preference.dart';
 import 'package:ftm_service_app/structures/user.dart';
 import 'package:ftm_service_app/widgets/input_fields.dart';
 import 'package:ftm_service_app/constructor.dart';
@@ -19,26 +20,26 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+  SharedPreference sharedPreference = SharedPreference();
   User user = User();
   Future<User>? futureInputUser;
   String userName = "";
   String password = "";
 
   //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-  void _handleSubmitted(user) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("username", user);
-    print("username saved");
-  }
+  // void _handleSubmitted(user) async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   prefs.setString("username", user);
+  //   print("username saved");
+  // }
   //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
   Future<bool> futureGet(String _user, String _pass) async {
-    futureInputUser = signInUser(
-        url: 'https://app.srahmadi.ir/usersignin.php', userName: _user, password: _pass);
+    futureInputUser = signInUser(userName: _user, password: _pass);
     await futureInputUser!.then((value) {
-      if (value.name != null) {
-        user.name = value.name;
-        user.family = value.family;
+      if (value.id != null) {
+        user.firstName = value.firstName;
+        user.lastName = value.lastName;
         user.id = value.id;
         return true;
       }
@@ -54,10 +55,13 @@ class _SignInPageState extends State<SignInPage> {
           appBar: AppBar(
             automaticallyImplyLeading: false,
             elevation: 0,
-            backgroundColor: kWhite,
+            backgroundColor: kLightBackgroundColor,
             title: Text(
               Translations.of(context).text('sing_in'),
-              style: const TextStyle(color: Colors.grey, fontSize: 15,),
+              style: const TextStyle(
+                color: Colors.grey,
+                fontSize: 15,
+              ),
             ),
             actions: <Widget>[
               TextButton(
@@ -114,15 +118,16 @@ class _SignInPageState extends State<SignInPage> {
                               password = passwordController.text;
                               futureGet(userName, password).then((value) {
                                 String name = "";
-                                name += user.name ?? "name error";
+                                name += user.firstName ?? "name error";
                                 name += " ";
-                                name += user.family ?? "name error";
+                                name += user.lastName ?? "name error";
 
-                                if (user.name == null) {
+                                if (user.firstName == null) {
                                   showSnackBar(context,
                                       'Personnel Code or Password is incorrect');
                                 } else {
-                                  _handleSubmitted(name);
+                                  sharedPreference.save("username", name);
+                                  // _handleSubmitted(name);
                                   Navigator.pushReplacement(
                                     context,
                                     PageTransition(
@@ -163,17 +168,23 @@ class _SignInPageState extends State<SignInPage> {
         builder: (BuildContext context) {
           return AlertDialog(
             // title: const Text("Error"),
-            content: Text(Translations.of(context).text("close_app_mess"),),
+            content: Text(
+              Translations.of(context).text("close_app_mess"),
+            ),
 
             actions: <Widget>[
               TextButton(
-                child: Text(Translations.of(context).text("no"),),
+                child: Text(
+                  Translations.of(context).text("no"),
+                ),
                 onPressed: () {
                   Navigator.pop(context);
                 },
               ),
               TextButton(
-                child: Text(Translations.of(context).text("yes"),),
+                child: Text(
+                  Translations.of(context).text("yes"),
+                ),
                 onPressed: () {
                   SystemNavigator.pop();
                 },
@@ -189,7 +200,7 @@ class _SignInPageState extends State<SignInPage> {
       backgroundColor: kPrimaryColor,
       action: SnackBarAction(
         label: "Sign Up",
-        textColor: kTextDark,
+        textColor: kTextDarkColor,
         onPressed: () {
           Navigator.pushReplacement(
               context,

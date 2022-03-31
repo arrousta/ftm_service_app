@@ -91,12 +91,15 @@ class _LoadingPageState extends State<LoadingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: kBackgroundColor1,
-      body: Center(
-        child: SpinKitCircle(
-          color: kPrimaryColor,
-          size: 50.0,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: const Scaffold(
+        backgroundColor: kLightBackgroundColor,
+        body: Center(
+          child: SpinKitCircle(
+            color: kPrimaryColor,
+            size: 50.0,
+          ),
         ),
       ),
     );

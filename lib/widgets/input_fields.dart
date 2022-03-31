@@ -37,7 +37,6 @@ int dispenser2BChangedValue = 0;
 int dispenser3AChangedValue = 0;
 int dispenser3BChangedValue = 0;
 
-
 textFieldContainer ftmFullNameTextInput(String hintText,
     {onTap, onChanged, onEditingComplete, onSubmitted}) {
   return textFieldContainer(
@@ -60,7 +59,7 @@ textFieldContainer ftmFullNameTextInput(String hintText,
 Container ftmPasswordInput(String hintText,
     {onTap, onChanged, onEditingComplete, onSubmitted}) {
   return Container(
-    margin: const EdgeInsets.only(top: 13),
+    margin: const EdgeInsets.only(top: 16),
     child: TextField(
       onTap: onTap,
       onChanged: onChanged,
@@ -70,6 +69,7 @@ Container ftmPasswordInput(String hintText,
       cursorColor: kPrimaryColor,
       style: inputFieldPasswordTextStyle,
       controller: passwordController,
+      keyboardType: TextInputType.number,
       decoration: InputDecoration(
           hintText: hintText,
           hintStyle: inputFieldHintPasswordTextStyle,
@@ -104,20 +104,19 @@ textFieldContainer ftmNationalCodeInput(String hintText,
 textFieldContainer ftmPersonalCodeInput(String hintText,
     {onTap, onChanged, onEditingComplete, onSubmitted}) {
   return textFieldContainer(
-    onTap: onTap,
-    onChanged: onChanged,
-    onEditingComplete: onEditingComplete,
-    onSubmitted: onSubmitted,
-    cursorColor: kPrimaryColor,
-    style: inputFieldTextStyle,
-    controller: personnelCodeController,
-    keyboardType: TextInputType.number,
-    hintText: hintText,
-    hintStyle: inputFieldHintTextStyle,
-    horizontal: 10,
-    vertical: 10,
-    marginTop: 13
-  );
+      onTap: onTap,
+      onChanged: onChanged,
+      onEditingComplete: onEditingComplete,
+      onSubmitted: onSubmitted,
+      cursorColor: kPrimaryColor,
+      style: inputFieldTextStyle,
+      controller: personnelCodeController,
+      keyboardType: TextInputType.number,
+      hintText: hintText,
+      hintStyle: inputFieldHintTextStyle,
+      horizontal: 10,
+      vertical: 10,
+      marginTop: 13);
 }
 
 textFieldContainer ftmPhoneNumInput(String hintText,
@@ -162,10 +161,10 @@ textFieldContainer ftmPaymentInput(String hintText,
     {onTap, onChanged, onEditingComplete, onSubmitted}) {
   return textFieldContainer(
     onTap: onTap,
-    onChanged: (value){
-      if(value != ''){
+    onChanged: (value) {
+      if (value != '') {
         paymentChangeValue = int.parse(value);
-      }else{
+      } else {
         paymentChangeValue = 0;
       }
     },

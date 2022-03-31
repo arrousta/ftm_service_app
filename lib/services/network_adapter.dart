@@ -3,40 +3,47 @@ import 'package:ftm_service_app/structures/dispensers.dart';
 import 'package:ftm_service_app/structures/user.dart';
 import 'package:http/http.dart' as http;
 
-Future<User> fetchData({required String url}) async {
-  final response = await http.get(Uri.parse(url));
+Future<User> fetchData() async {
+  String auth = 'GRZmuYwO9gJ1jate1ZnJem18Gnq5MwrH';
+  Uri uri = Uri.parse("https://www.test.helyasi.ir/user?c=signin");
+  Map<String, String> headers = {
+    'Content-Type': 'application/json',
+    "mode": "safe",
+    "auth": auth
+  };
+  final response = await http.post(
+    uri,
+    headers: headers,
+    encoding: Encoding.getByName('utf-8'),
+  );
+
   if (response.statusCode == 200) {
-    // If the server did return a 200 OK response,
-    // then parse the JSON.
+    // in My project statusCode  = 200
+    print(response.body);
     return User.fromJson(jsonDecode(response.body));
   } else {
-    // If the server did not return a 200 OK response,
+    // If the server did not return a 201 CREATED response,
     // then throw an exception.
-    throw Exception('Failed to load User');
+    String errorCode = response.statusCode.toString();
+    throw Exception('Failed to connect: $errorCode');
   }
-}
+}Future<User> signInUser(
+    {required String userName, required String password}) async {
+  Uri uri = Uri.parse("https://www.test.helyasi.ir/user?c=signin");
+  Map<String, String> headers = {
+    'Content-Type': 'application/json',
+    "mode": "safe"
+  };
+  final msg = jsonEncode({"username": userName, "password": password});
 
-Future<User> signInUser(
-    {required String url,
-    required String userName,
-    required String password}) async {
   final response = await http.post(
-    Uri.parse(url),
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
+    uri,
+    headers: headers,
     encoding: Encoding.getByName('utf-8'),
-    body: <String, String>{
-      'username': userName,
-      'password': password,
-    },
+    body: msg,
   );
-  if (response.statusCode == 201) {
-    // If the server did return a 201 CREATED response,
-    // then parse the JSON.
-    return User.fromJson(jsonDecode(response.body));
-  } else if (response.statusCode == 200) {
+
+  if (response.statusCode == 200) {
     // in My project statusCode  = 200
     return User.fromJson(jsonDecode(response.body));
   } else {

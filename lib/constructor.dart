@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
 //Colors used in project
-const Color kBackgroundColor1 = Color(0xfff4f7fa);
-const Color kBackgroundColor2 = Colors.white;
-const Color kBackgroundColor3 = Color(0xffdbdbde);
-//  const Color primaryColor = Colors.green;
+const Color kLightBackgroundColor = Color(0xfff4f7fa);
+const Color kDarkBackgroundColor = Color(0xffdbdbde);
 const Color kPrimaryColor = Color(0xff4469c6);
-const Color kWhite = Colors.white;
-const Color kTextDark = Colors.black54;
-const Color kTextPrimary = Color(0xFF222222);
-const Color kTextHint = Color(0xFF555555);
-const Color kErrorBackground = Color(0xD2911C1C);
+const Color kTextDarkColor = Colors.black54;
+const Color kTextWhiteColor = Colors.white;
+const Color kTextPrimaryColor = Color(0xFF222222);
+const Color kTextHintColor = Color(0xFF555555);
+const Color kErrorColor = Color(0xD2911C1C);
+const Color kBoxBackgroundColor = Color(0xFFA0A0A0);
+
+const Color kRedColor = Color(0xAAE42825);
+const Color kGreenColor = Color(0xFF5CBA95);
 
 //////////////////////////////
 //////////Size////////////////
@@ -22,7 +24,20 @@ const kFieldSizeHeight = 35.0;
 const kBoxSizeWith = 135.0;
 const kBoxSizeHeight = 45.0;
 
-//Text Style
+
+
+//////////////////////////////
+//////////Text Style//////////
+//////////////////////////////
+
+const kMainTextStyle = TextStyle(
+color: kTextPrimaryColor,
+fontFamily: 'Yekan',
+fontSize: 14.0,
+fontWeight: FontWeight.w700
+);
+
+///////////Text Style/////////
 //TODO : App Logo Style :
 const kLogoStyle = TextStyle(
     fontFamily: 'Pacifico',
@@ -95,29 +110,36 @@ const taglineText = TextStyle(
   color: Colors.grey,
 );
 const taglineText2 = TextStyle(color: Colors.red, fontFamily: 'Poppins');
+
 const categoryText = TextStyle(
     color: Color(0xff444444),
     fontWeight: FontWeight.w700,
     fontFamily: 'Poppins');
 
 const inputFieldTextStyle = TextStyle(
-    fontWeight: FontWeight.w500, color: kTextPrimary, letterSpacing: 2);
+    fontWeight: FontWeight.w500, color: kTextPrimaryColor, letterSpacing: 2);
 
-const inputFieldHintTextStyle = TextStyle(color: Color(0xff444444));
+const inputFieldHintTextStyle = TextStyle(
+  color: Color(0xff444444),
+);
 
 const inputFieldPasswordTextStyle =
-    TextStyle(fontWeight: FontWeight.w500, letterSpacing: 3);
+    TextStyle(fontWeight: FontWeight.w500, letterSpacing: 3,locale: Locale('en'));
 
-const inputFieldHintPasswordTextStyle =
-    TextStyle(color: Color(0xff444444));
+const inputFieldHintPasswordTextStyle = TextStyle(
+  color: Color(0xff444444),
+);
 
 const inputFieldTextStyleDispenser = TextStyle(
-    fontFamily: 'Yekan', fontWeight: FontWeight.w100, color: Color(0xFF222222));
+  fontFamily: 'Yekan',
+  fontWeight: FontWeight.w100,
+  color: kTextPrimaryColor,
+);
 
 const inputFieldHintTextStyleDispenser = TextStyle(
   fontFamily: 'Yekan',
   fontSize: 14,
-  color: kTextHint,
+  color: kTextHintColor,
 );
 
 ///////////////////////////////////
@@ -125,7 +147,7 @@ const inputFieldHintTextStyleDispenser = TextStyle(
 //////////////////////////////////
 
 const authPlateDecoration = BoxDecoration(
-    color: kWhite,
+    color: kLightBackgroundColor,
     boxShadow: [
       BoxShadow(
           color: Color.fromRGBO(0, 0, 0, .1),
@@ -137,7 +159,7 @@ const authPlateDecoration = BoxDecoration(
         bottomEnd: Radius.circular(20), bottomStart: Radius.circular(20)));
 
 const dispenserPlateDecoration = BoxDecoration(
-  color: kWhite,
+  color: kLightBackgroundColor,
   boxShadow: [
     BoxShadow(
         color: Color.fromRGBO(0, 0, 0, .1),
@@ -177,15 +199,18 @@ const panelPlateDecoration = BoxDecoration(
     borderRadius: BorderRadiusDirectional.all(Radius.circular(8)));
 
 const buttonPanelPlateDecoration = BoxDecoration(
-    color: kBackgroundColor2,
-    boxShadow: [
-      BoxShadow(
-          color: Color.fromRGBO(0, 0, 0, .3),
-          blurRadius: 6,
-          spreadRadius: 4,
-          offset: Offset(0, 3))
-    ],
-    borderRadius: BorderRadiusDirectional.all(Radius.circular(8)));
+  color: kLightBackgroundColor,
+  boxShadow: [
+    BoxShadow(
+        color: Color.fromRGBO(0, 0, 0, .3),
+        blurRadius: 6,
+        spreadRadius: 4,
+        offset: Offset(0, 3))
+  ],
+  borderRadius: BorderRadiusDirectional.all(
+    Radius.circular(8),
+  ),
+);
 //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
 /////////////////////////////////////
@@ -193,10 +218,18 @@ const buttonPanelPlateDecoration = BoxDecoration(
 ////////////////////////////////////
 
 const inputFieldFocusedBorderStyle = OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(6)),
-    borderSide: BorderSide(
-      color: kPrimaryColor,
-    ));
+  borderRadius: BorderRadius.all(
+    Radius.circular(6),
+  ),
+  borderSide: BorderSide(
+    color: kPrimaryColor,
+
+  ),
+);
 
 const inputFieldDefaultBorderStyle = OutlineInputBorder(
-    gapPadding: 0, borderRadius: BorderRadius.all(Radius.circular(6)));
+  gapPadding: 0,
+  borderRadius: BorderRadius.all(
+    Radius.circular(6),
+  ),
+);

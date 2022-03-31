@@ -3,7 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ftm_service_app/constructor.dart';
+import 'package:ftm_service_app/screens/call_page.dart';
+import 'package:ftm_service_app/screens/info_page.dart';
 import 'package:ftm_service_app/screens/loading_page.dart';
+import 'package:ftm_service_app/screens/profile_page.dart';
 import 'package:ftm_service_app/screens/welcome_page.dart';
 import 'package:intl/intl.dart';
 import 'package:ftm_service_app/widgets/persian_date.dart';
@@ -13,7 +16,7 @@ import '../widgets/icon_content.dart';
 import '../widgets/reusable_card.dart';
 import '../services/translations.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({
     Key? key,
     required this.operatorName,
@@ -21,10 +24,129 @@ class HomePage extends StatefulWidget {
   final String operatorName;
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: kLightBackgroundColor,
+      appBar: AppBar(
+        backgroundColor: kLightBackgroundColor,
+        elevation: 0,
+        foregroundColor: kTextDarkColor,
+        actions: <Widget>[
+          const Image(
+            height: 80,
+            width: 80,
+            image: AssetImage("assets/images/ftm-logo.png"),
+          ),
+          const SizedBox(
+            width: 110,
+          ),
+          IconButton(
+            icon: Image.asset("assets/icon/notifications-off.png"),
+            onPressed: () {},
+          ),
+        ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              margin: EdgeInsets.zero,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(colors: <Color>[
+                  kDarkBackgroundColor,
+                  Colors.blueGrey,
+                ]),
+              ),
+              child: Stack(
+                alignment: Alignment.bottomRight,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const CircleAvatar(
+                        radius: 26,
+                        backgroundColor: Colors.blue,
+                        child: Image(
+                          image: AssetImage("assets/images/user.png"),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      const Text("سلام، کاربر!"),
+                      const Divider(),
+                      GestureDetector(
+                        onTap: () {},
+                        child: const Text(
+                          "خروج از حساب کاربری",
+                          style: TextStyle(color: kErrorColor, fontSize: 10),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const Divider(),
+            ListTile(
+              title: Row(
+                children: const [
+                  Icon(Icons.call),
+                  Padding(
+                    padding: EdgeInsets.only(right: 8),
+                    child: Text('تماس با ما'),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  PageTransition(
+                      child: const CallPage(),
+                      type: PageTransitionType.rightToLeft),
+                );
+              },
+            ),
+            ListTile(
+              title: Row(
+                children: const [
+                  Icon(Icons.info),
+                  Padding(
+                    padding: EdgeInsets.only(right: 8.0),
+                    child: Text('درباره ما'),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  PageTransition(
+                      child: const InfoPage(),
+                      type: PageTransitionType.rightToLeft),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+      body: HomePageBody(operatorName: operatorName),
+    );
+  }
 }
 
-class _HomePageState extends State<HomePage> {
+class HomePageBody extends StatefulWidget {
+  const HomePageBody({
+    Key? key,
+    required this.operatorName,
+  }) : super(key: key);
+  final String operatorName;
+
+  @override
+  State<HomePageBody> createState() => _HomePageBodyState();
+}
+
+class _HomePageBodyState extends State<HomePageBody> {
   String operatorName = "";
 
   //---------------------Data And Time------------------------------------------
@@ -110,180 +232,182 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: _onBackPressed,
-      child: Scaffold(
-        backgroundColor: kBackgroundColor2,
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                //-------------------------------------------------------------------------------------------
-                ReusableCard(
-                  colour: kBackgroundColor2,
-                  cardChild: Container(
-                    height: 150.0,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Column(
-                              children: [
-                                const CircleAvatar(
-                                  radius: 40.0,
-                                  backgroundColor: Colors.blue,
-                                  backgroundImage:
-                                      AssetImage("assets/images/user.png"),
+      child: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              //-------------------------------------------------------------------------------------------
+              ReusableCard(
+                colour: kLightBackgroundColor,
+                onPress: () {},
+                cardChild: Container(
+                  height: 150.0,
+                  decoration: panelPlateDecoration,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Column(
+                            children: [
+                              const CircleAvatar(
+                                radius: 40.0,
+                                backgroundColor: Colors.blue,
+                                backgroundImage:
+                                    AssetImage("assets/images/user.png"),
+                              ),
+                              const SizedBox(
+                                height: 16,
+                              ),
+                              Text(
+                                operatorName,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w300,
                                 ),
-                                const SizedBox(
-                                  height: 16,
-                                ),
-                                Text(
-                                  operatorName,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w300,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  _timeString.toString(),
-                                  style: const TextStyle(
-                                      color: Colors.white, fontSize: 50.0),
-                                ),
-                                Text(
-                                  convertDate(_dateString.toString()),
-                                  // _dateString.toString(),
-                                  style: const TextStyle(
-                                      color: Colors.white, fontSize: 19.0),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  shiftName,
-                                  style: const TextStyle(
-                                      color: Colors.white, fontSize: 14.0),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    decoration: panelPlateDecoration,
+                              ),
+                            ],
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                _timeString.toString(),
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 50.0),
+                              ),
+                              Text(
+                                convertDate(_dateString.toString()),
+                                // _dateString.toString(),
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 19.0),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                shiftName,
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 14.0),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                  onPress: () {},
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ReusableCard(
-                      colour: kPrimaryColor,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ReusableCard(
+                    colour: kGreenColor,
+                    cardChild: IconContent(
+                      iconAddress: "assets/icon/gas-green.png",
+                      label: Translations.of(context).text("start_shift"),
+                    ),
+                    onPress: () {
+                      setState(() {
+                        Navigator.pushReplacement(
+                          context,
+                          PageTransition(
+                              type: PageTransitionType.rightToLeft,
+                              child: LoadingPage(
+                                id: 'start',
+                                operatorName: widget.operatorName,
+                              )),
+                        );
+                      });
+                    },
+                  ),
+                  ReusableCard(
+                    colour: kRedColor,
+                    cardChild: IconContent(
+                      iconAddress: "assets/icon/gas-red.png",
+                      label: Translations.of(context).text("end_shift"),
+                    ),
+                    onPress: () {
+                      Navigator.pushReplacement(
+                          context,
+                          PageTransition(
+                              child: LoadingPage(
+                                id: 'end',
+                                operatorName: widget.operatorName,
+                              ),
+                              type: PageTransitionType.rightToLeft));
+                    },
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: ReusableCard(
+                      onPress: () {
+                        Navigator.push(
+                          context,
+                          PageTransition(
+                              child: MiCard(),
+                              type: PageTransitionType.leftToRight),
+                        );
+                      },
+                      colour: kBoxBackgroundColor,
                       cardChild: IconContent(
-                        iconAddress: "assets/icon/gas-green.png",
-                        label: Translations.of(context).text("start_shift"),
+                        iconAddress: "assets/icon/engineer.png",
+                        label: Translations.of(context).text("profile"),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: ReusableCard(
+                      onPress: () {
+                        //TODO : TAKE LEAVE button
+                      },
+                      colour: kBoxBackgroundColor,
+                      cardChild: IconContent(
+                        iconAddress: "assets/icon/letter.png",
+                        label: Translations.of(context).text("take_leave"),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: ReusableCard(
+                      colour: kBoxBackgroundColor,
+                      cardChild: IconContent(
+                        iconAddress: "assets/icon/flame.png",
+                        label: Translations.of(context).text("log_out"),
                       ),
                       onPress: () {
                         setState(() {
-                          Navigator.pushReplacement(
-                            context,
-                            PageTransition(
-                                type: PageTransitionType.rightToLeft,
-                                child: LoadingPage(
-                                  id: 'start',
-                                  operatorName: widget.operatorName,
-                                )),
-                          );
+                          _handleLogout();
                         });
                       },
                     ),
-                    ReusableCard(
+                  ),
+                  Expanded(
+                    child: ReusableCard(
                       onPress: () {
-                        Navigator.pushReplacement(
-                            context,
-                            PageTransition(
-                                child: LoadingPage(
-                                  id: 'end',
-                                  operatorName: widget.operatorName,
-                                ),
-                                type: PageTransitionType.rightToLeft));
+                        //TODO : SETTING button
                       },
-                      colour: kPrimaryColor,
+                      colour: kBoxBackgroundColor,
                       cardChild: IconContent(
-                        iconAddress: "assets/icon/gas-red.png",
-                        label: Translations.of(context).text("end_shift"),
+                        iconAddress: "assets/icon/maintenance.png",
+                        label: Translations.of(context).text("setting"),
                       ),
                     ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: ReusableCard(
-                        onPress: () {
-                          //TODO : PROFILE button
-                        },
-                        colour: kPrimaryColor,
-                        cardChild: IconContent(
-                          iconAddress: "assets/icon/engineer.png",
-                          label: Translations.of(context).text("profile"),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: ReusableCard(
-                        onPress: () {
-                          //TODO : TAKE LEAVE button
-                        },
-                        colour: kPrimaryColor,
-                        cardChild: IconContent(
-                          iconAddress: "assets/icon/letter.png",
-                          label: Translations.of(context).text("take_leave"),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: ReusableCard(
-                        colour: kPrimaryColor,
-                        cardChild: IconContent(
-                          iconAddress: "assets/icon/flame.png",
-                          label: Translations.of(context).text("log_out"),
-                        ),
-                        onPress: () {
-                          setState(() {
-                            _handleLogout();
-                          });
-                        },
-                      ),
-                    ),
-                    Expanded(
-                      child: ReusableCard(
-                        onPress: () {
-                          //TODO : SETTING button
-                        },
-                        colour: kPrimaryColor,
-                        cardChild: IconContent(
-                          iconAddress: "assets/icon/maintenance.png",
-                          label: Translations.of(context).text("setting"),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
