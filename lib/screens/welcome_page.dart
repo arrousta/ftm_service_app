@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:ftm_service_app/main.dart';
 import 'package:ftm_service_app/services/translations.dart';
 import 'package:ftm_service_app/widgets/buttons.dart';
 import 'package:ftm_service_app/constructor.dart';
@@ -24,14 +25,59 @@ class _WelcomePageState extends State<WelcomePage> {
     });
   }
 
+  void _changeLanguage(String langCode) {
+    Locale _temp;
+    switch (langCode) {
+      case 'en':
+        _temp = const Locale('en', 'US');
+        print("1: " + _temp.languageCode);
+        break;
+
+      case 'fa':
+        _temp = const Locale('fa', 'IR');
+        print("2: " + _temp.languageCode);
+        break;
+
+      default:
+        _temp = const Locale('fa', 'IR');
+        print("3: " + _temp.languageCode);
+    }
+
+    setLocale(_temp);
+    MyApp.locale = _temp;
+    Navigator.pushReplacement(
+      context,
+      PageTransition(
+          child: const MyApp(
+            version: "0.0.0.0",
+          ),
+          type: PageTransitionType.fade),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       locale: _locale,
-
-
-      // supportedLocales: const [Locale('fa', 'IR')],
-
+      localizationsDelegates: [
+        AppLocalizationDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate
+      ],
+      localeResolutionCallback: (deviceLocale, supportedLocales) {
+        for (var locale in supportedLocales) {
+          if (locale.languageCode == deviceLocale!.languageCode &&
+              locale.countryCode == deviceLocale.countryCode) {
+            return deviceLocale;
+          }
+          return supportedLocales.first;
+        }
+      },
+      supportedLocales: const [
+        Locale('fa', 'IR'),
+        Locale('en', 'US'),
+      ],
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(
@@ -91,11 +137,15 @@ class _WelcomePageState extends State<WelcomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _changeLanguage('en');
+                    },
                     child: const Text('English'),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _changeLanguage('fa');
+                    },
                     child: const Text('فارسی'),
                   ),
                 ],

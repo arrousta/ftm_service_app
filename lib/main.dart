@@ -7,7 +7,6 @@ import 'package:ftm_service_app/screens/home_page.dart';
 import 'package:ftm_service_app/screens/splash_screen.dart';
 import 'package:ftm_service_app/services/translations.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'screens/confirmation_page.dart';
 import 'screens/sign_up_page.dart';
 import 'screens/sing_in_page.dart';
 
@@ -31,9 +30,12 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key, required this.version}) : super(key: key);
   final String version;
+  static late Locale locale = const Locale('fa','IR');
   @override
   Widget build(BuildContext context) {
+    print("00: "+ locale.languageCode);
     return MaterialApp(
+      locale: locale,
       localizationsDelegates: [
         AppLocalizationDelegate(),
         GlobalMaterialLocalizations.delegate,
@@ -41,9 +43,9 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate
       ],
       localeResolutionCallback: (deviceLocale, supportedLocales) {
-        for(var locale in supportedLocales){
+        for (var locale in supportedLocales) {
           if (locale.languageCode == deviceLocale!.languageCode &&
-              locale.countryCode == deviceLocale.countryCode){
+              locale.countryCode == deviceLocale.countryCode) {
             return deviceLocale;
           }
           return supportedLocales.first;
