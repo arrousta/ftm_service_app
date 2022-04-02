@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
   static late Locale locale = const Locale('fa','IR');
   @override
   Widget build(BuildContext context) {
-    print("00: "+ locale.languageCode);
     return MaterialApp(
       locale: locale,
       localizationsDelegates: [

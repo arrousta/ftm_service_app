@@ -30,17 +30,14 @@ class _WelcomePageState extends State<WelcomePage> {
     switch (langCode) {
       case 'en':
         _temp = const Locale('en', 'US');
-        print("1: " + _temp.languageCode);
         break;
 
       case 'fa':
         _temp = const Locale('fa', 'IR');
-        print("2: " + _temp.languageCode);
         break;
 
       default:
         _temp = const Locale('fa', 'IR');
-        print("3: " + _temp.languageCode);
     }
 
     setLocale(_temp);

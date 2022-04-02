@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const URL = "https://www.test.helyasi.ir";
+
 //Colors used in project
 const Color kLightBackgroundColor = Color(0xfff4f7fa);
 const Color kDarkBackgroundColor = Color(0xffdbdbde);

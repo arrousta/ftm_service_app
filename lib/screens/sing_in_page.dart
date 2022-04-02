@@ -21,29 +21,28 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   SharedPreference sharedPreference = SharedPreference();
+
   User user = User();
   Future<User>? futureInputUser;
+
   String userName = "";
   String password = "";
 
-  //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-  // void _handleSubmitted(user) async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   prefs.setString("username", user);
-  //   print("username saved");
-  // }
-  //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-
   Future<bool> futureGet(String _user, String _pass) async {
     futureInputUser = signInUser(userName: _user, password: _pass);
+
     await futureInputUser!.then((value) {
       if (value.id != null) {
+        user.id = value.id;
         user.firstName = value.firstName;
         user.lastName = value.lastName;
-        user.id = value.id;
+        user.role = value.role;
+        user.token = value.token;
+
         return true;
       }
     });
+
     return false;
   }
 
@@ -118,16 +117,22 @@ class _SignInPageState extends State<SignInPage> {
                               password = passwordController.text;
                               futureGet(userName, password).then((value) {
                                 String name = "";
+                                String token = "";
+
                                 name += user.firstName ?? "name error";
                                 name += " ";
                                 name += user.lastName ?? "name error";
+
+                                token = user.token ?? "**null token";
 
                                 if (user.firstName == null) {
                                   showSnackBar(context,
                                       'Personnel Code or Password is incorrect');
                                 } else {
+                                  //TODO:share2
                                   sharedPreference.save("username", name);
-                                  // _handleSubmitted(name);
+                                  sharedPreference.save("token", token);
+
                                   Navigator.pushReplacement(
                                     context,
                                     PageTransition(
