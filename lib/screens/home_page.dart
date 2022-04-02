@@ -8,6 +8,7 @@ import 'package:ftm_service_app/screens/info_page.dart';
 import 'package:ftm_service_app/screens/loading_page.dart';
 import 'package:ftm_service_app/screens/profile_page.dart';
 import 'package:ftm_service_app/screens/welcome_page.dart';
+import 'package:ftm_service_app/services/shared_preference.dart';
 import 'package:intl/intl.dart';
 import 'package:ftm_service_app/widgets/persian_date.dart';
 import 'package:page_transition/page_transition.dart';
@@ -100,12 +101,14 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               onTap: () {
+                Navigator.pop(context);
                 Navigator.push(
                   context,
                   PageTransition(
                       child: const CallPage(),
-                      type: PageTransitionType.rightToLeft),
+                      type: PageTransitionType.leftToRight),
                 );
+                // Navigator.pop(context);
               },
             ),
             ListTile(
@@ -147,6 +150,7 @@ class HomePageBody extends StatefulWidget {
 }
 
 class _HomePageBodyState extends State<HomePageBody> {
+  SharedPreference sharedPreference = SharedPreference();
   String operatorName = "";
 
   //---------------------Data And Time------------------------------------------
@@ -216,17 +220,14 @@ class _HomePageBodyState extends State<HomePageBody> {
     super.initState();
   }
 
-//*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
   void _handleLogout() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove("username");
+    sharedPreference.remove("username");
     Navigator.pushReplacement(
       context,
       PageTransition(
           child: const WelcomePage(), type: PageTransitionType.leftToRight),
     );
   }
-//*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
   @override
   Widget build(BuildContext context) {
@@ -303,7 +304,7 @@ class _HomePageBodyState extends State<HomePageBody> {
                 ),
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ReusableCard(
                     colour: kGreenColor,
@@ -318,13 +319,14 @@ class _HomePageBodyState extends State<HomePageBody> {
                           PageTransition(
                               type: PageTransitionType.rightToLeft,
                               child: LoadingPage(
-                                id: 'start',
+                                keyPage: 'start',
                                 operatorName: widget.operatorName,
                               )),
                         );
                       });
                     },
                   ),
+
                   ReusableCard(
                     colour: kRedColor,
                     cardChild: IconContent(
@@ -336,7 +338,7 @@ class _HomePageBodyState extends State<HomePageBody> {
                           context,
                           PageTransition(
                               child: LoadingPage(
-                                id: 'end',
+                                keyPage: 'end',
                                 operatorName: widget.operatorName,
                               ),
                               type: PageTransitionType.rightToLeft));
@@ -344,6 +346,7 @@ class _HomePageBodyState extends State<HomePageBody> {
                   ),
                 ],
               ),
+
               Row(
                 children: [
                   Expanded(
@@ -388,6 +391,7 @@ class _HomePageBodyState extends State<HomePageBody> {
                       ),
                       onPress: () {
                         setState(() {
+
                           _handleLogout();
                         });
                       },

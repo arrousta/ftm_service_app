@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ftm_service_app/constructor.dart';
 import 'package:ftm_service_app/screens/home_page.dart';
+import 'package:ftm_service_app/services/shared_preference.dart';
 import 'package:ftm_service_app/structures/user.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -78,8 +79,12 @@ class _SplashScreenState extends State<SplashScreen> {
   // }
 
   _loadUserInfo() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    _username = (prefs.getString('username') ?? "");
+    //TODO:share1
+    SharedPreference sharedPreference = SharedPreference();
+    _username = sharedPreference.read('username');
+    print(_username);
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // _username = (prefs.getString('username') ?? "");
     if (_username == "") {
       Navigator.pushNamedAndRemoveUntil(
           context, '/welcome', ModalRoute.withName('/welcome'));
@@ -98,7 +103,6 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void getInternetStatus() async {
-    // String operator = futureGet();
     Duration duration = const Duration(seconds: 1);
     await Future.delayed(duration, () {
       //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
@@ -111,8 +115,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     getInternetStatus();
     version = version + widget.version;
-    // PackageInfo.fromPlatform()
-    //     .then((PackageInfo packageInfo) => version = packageInfo.version);
+
     super.initState();
   }
 

@@ -1,11 +1,13 @@
 import 'dart:convert';
+import 'package:ftm_service_app/constructor.dart';
 import 'package:ftm_service_app/structures/dispensers.dart';
+import 'package:ftm_service_app/structures/shift_data.dart';
 import 'package:ftm_service_app/structures/user.dart';
 import 'package:http/http.dart' as http;
 
 Future<User> fetchData() async {
   String auth = 'GRZmuYwO9gJ1jate1ZnJem18Gnq5MwrH';
-  Uri uri = Uri.parse("https://www.test.helyasi.ir/user?c=signin");
+  Uri uri = Uri.parse(URL+"/user?c=signin");
   Map<String, String> headers = {
     'Content-Type': 'application/json',
     "mode": "safe",
@@ -27,9 +29,12 @@ Future<User> fetchData() async {
     String errorCode = response.statusCode.toString();
     throw Exception('Failed to connect: $errorCode');
   }
-}Future<User> signInUser(
+}
+
+
+Future<User> signInUser(
     {required String userName, required String password}) async {
-  Uri uri = Uri.parse("https://www.test.helyasi.ir/user?c=signin");
+  Uri uri = Uri.parse(URL+"/user?c=signin");
   Map<String, String> headers = {
     'Content-Type': 'application/json',
     "mode": "safe"
@@ -127,6 +132,36 @@ Future<Dispensers> getDispenserData({
   } else if (response.statusCode == 200) {
     // in My project statusCode  = 200
     return Dispensers.fromJson(jsonDecode(response.body));
+  } else {
+    // If the server did not return a 201 CREATED response,
+    // then throw an exception.
+    String errorCode = response.statusCode.toString();
+    throw Exception('Failed to connect: $errorCode');
+  }
+}
+
+
+Future<ShiftData> getShiftData({
+  required String auth,
+}) async {
+  Uri uri = Uri.parse(URL+"/data?c=last");
+  Map<String, String> headers = {
+    'Content-Type': 'application/json',
+    "auth": auth
+  };
+
+  final response = await http.post(
+    uri,
+    headers: headers,
+    encoding: Encoding.getByName('utf-8'),
+  );
+  if (response.statusCode == 201) {
+    // If the server did return a 201 CREATED response,
+    // then parse the JSON.
+    return ShiftData.fromJson(jsonDecode(response.body));
+  } else if (response.statusCode == 200) {
+    // in My project statusCode  = 200
+    return ShiftData.fromJson(jsonDecode(response.body));
   } else {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
