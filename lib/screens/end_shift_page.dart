@@ -170,13 +170,14 @@ class _EndShiftPageState extends State<EndShiftPage> {
                       ElevatedButton(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
+                          children: [
                             Icon(Icons.arrow_back_ios_sharp),
                             SizedBox(
                               width: 10.0,
                             ),
                             Text(
-                              "تایید و ادامه",
+                              Translations.of(context)
+                                  .text("confirm_and_continue"),
                               style: TextStyle(fontFamily: 'Yekan'),
                             ),
                           ],
@@ -198,7 +199,10 @@ class _EndShiftPageState extends State<EndShiftPage> {
                                 endSiftList[5] == 0 ||
                                 endSiftList[6] == 0) {
                               showSnackBar(
-                                  context, 'لطفا تمام دیسپنسرها را تکمیل کنید');
+                                context,
+                                Translations.of(context)
+                                    .text("dispenser_data_warning1"),
+                              );
                             } else if (endSiftList[1] <
                                     int.parse(_startDispenser1A) ||
                                 endSiftList[2] < int.parse(_startDispenser1B) ||
@@ -207,7 +211,10 @@ class _EndShiftPageState extends State<EndShiftPage> {
                                 endSiftList[5] < int.parse(_startDispenser3A) ||
                                 endSiftList[6] < int.parse(_startDispenser3B)) {
                               showSnackBar(
-                                  context, "دیسپنسرها به درستی وارد نشده");
+                                context,
+                                Translations.of(context)
+                                    .text("dispenser_data_warning2"),
+                              );
                             } else {
                               Navigator.push(
                                 context,
@@ -233,7 +240,11 @@ class _EndShiftPageState extends State<EndShiftPage> {
                               );
                             }
                           } else if (_total == 0) {
-                            showAlertDialog(context, "اعلام خرابی جایگاه");
+                            showAlertDialog(
+                              context,
+                              Translations.of(context)
+                                  .text("breakdown_dispenser"),
+                            );
                           } else {
                             print("Error in total dispenser");
                           }
@@ -335,12 +346,12 @@ class ImageCardWidget extends StatelessWidget {
           alignment: Alignment.center,
           padding: const EdgeInsets.all(6),
           child: Row(
-            children: const [
+            children: [
               Icon(Icons.camera_alt, size: 16, color: kPrimaryColor),
               SizedBox(
                 width: 6,
               ),
-              Text('بارگزاری تصویر',
+              Text(Translations.of(context).text("upload_image"),
                   style: TextStyle(fontSize: 12, color: kPrimaryColor)),
             ],
           ),
@@ -482,13 +493,17 @@ class _NozzleWidgetState extends State<NozzleWidget> {
 showAlertDialog(BuildContext context, String operatorName) {
   // set up the buttons
   Widget cancelButton = TextButton(
-    child: Text("انصراف"),
+    child: Text(
+      Translations.of(context).text("cancel"),
+    ),
     onPressed: () {
       Navigator.pop(context);
     },
   );
   Widget continueButton = TextButton(
-    child: Text("تایید خرابی جایگاه"),
+    child: Text(
+      Translations.of(context).text("confirm_breakdown_dispenser"),
+    ),
     onPressed: () {
       Navigator.pushReplacement(
           context,

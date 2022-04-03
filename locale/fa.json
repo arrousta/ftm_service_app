@@ -6,7 +6,7 @@
   "sing_out": "خروج",
   "sing_up": "ثبت نام",
   "forgot_password": "فراموشی رمز عبور",
-  
+
   "start_shift": "شروع شیفت",
   "end_shift": "پایان شیفت",
 
@@ -18,7 +18,7 @@
   "phone_number": "شماره موبایل",
   "password": "رمز عبور",
   "enter": "تایید",
-  
+
   "confirmation_sms": "پیام تایید ثبت نام",
   "confirmation_sms_message1": "لطفا تا زمان دریافت پیامک تایید منتظر بمانید",
   "confirmation_sms_message2": "کد دریافتی را اینجا وارد کنید:",
@@ -29,7 +29,7 @@
   "shift": "شیفت",
   "dispenser": "دیسپنسر",
   "dispenser_function": "کارکرد دیسپنسر",
-  "enter_number": "شماره کنتور",
+  "enter_number": "وارد کنید",
   "next_step": "مرحله بعد",
   "function": "کارکرد",
   
@@ -38,7 +38,9 @@
   "payment_cost_mess": "مجموع فروش (ریال) :",
   "payment_user_mess": "کارت خوان را وارد نمایید (ريال) :",
   "payment_cash_mess": "مقدار وجه نقدی که \n باید پرداخت نمایید(ريال) :",
-  
+  "cash": "نقدی",
+  "card_reader": "کارت خوان",
+
   "final_confirm_mess": "لطفا مقدارهای وارد شده را کنترل نمایید و درصورت وجود اشتباه کلید ویرایش را بزنید ، مسؤلیت داده های وارد شده پس از تایید نهایی و اتمام شیفت به عهده شما میباشد.",
   "edit_data": "ویرایش داده ها",
   "finish": "پایان شیفت",
@@ -47,11 +49,35 @@
   "close_page_mess": "آیا میخواهید از این صفحه خارج شوید؟",
   "yes": "بله",
   "no": "خیر",
+  "exit_app": "خروج از برنامه",
+  "login_main_page": "ورود به صفحه اصلی",
+  "god_bless_you": "خدا قوت!",
 
   "start_shift_mess": "لطفا مقدارهای وارد شده توسط شیفت قبلی را کنترل نمایید و درصورت وجود مغایرت کلید ویرایش را بزنید .",
+  "start_shift_mess_warning": "مسئولیت عدم صحت اطلاعات با شماست. آیا اطلاعات را تایید می کنید؟",
   "attention": "توجه...!",
+  "warning": "اخطار",
   "take_leave": "ثبت مرخصی",
   "profile": "مشخصات کاربر",
   "setting": "تنظیمات",
-  "log_out": "خروج از حساب"
+  "log_out": "خروج از حساب کاربری",
+
+  "contact_us": "تماس با ما",
+  "call_number": "شماره تماس:",
+  "tel1": "09171502049",
+  "tel1_local_code": "tel:+989171502049",
+  "tel2": "09227073767",
+  "tel2_local_code": "tel:+989227073767",
+  "tel3": "09175363564",
+  "tel3_local_code": "tel:+989175363564",
+
+  "confirm_and_continue": "تایید و ادامه",
+  "dispenser_data_warning1": "لطفا تمام دیسپنسرها را تکمیل کنید",
+  "dispenser_data_warning2": "دیسپنسرها به درستی وارد نشده",
+  "breakdown_dispenser": "اعلام خرابی جایگاه",
+  "confirm_breakdown_dispenser": "تایید خرابی جایگاه",
+  "upload_image": "بارگزاری تصویر",
+  "cancel": "انصراف",
+  "hi_user": "سلام، کاربر!",
+  "about": "درباره ما"
 }

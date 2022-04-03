@@ -461,13 +461,13 @@ class CardWidget extends StatelessWidget {
 showAlertDialog(BuildContext context, String operatorName) {
   // set up the buttons
   Widget cancelButton = TextButton(
-    child: Text("خیر"),
+    child: Text(Translations.of(context).text("no"),),
     onPressed: () {
       Navigator.pop(context);
     },
   );
   Widget continueButton = TextButton(
-    child: Text("بله"),
+    child: Text(Translations.of(context).text("yes"),),
     onPressed: () {
       Navigator.pushReplacement(
         context,
@@ -482,14 +482,14 @@ showAlertDialog(BuildContext context, String operatorName) {
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
-    title: const Text(
-      "اخطار",
+    title:  Text(
+      Translations.of(context).text("warning"),
       style: TextStyle(
         color: kErrorColor,
       ),
     ),
     content:
-        Text("مسئولیت عدم صحت اطلاعات با شماست. آیا اطلاعات را تایید می کنید؟"),
+        Text(Translations.of(context).text("start_shift_mess_warning"),),
     actions: [
       cancelButton,
       continueButton,

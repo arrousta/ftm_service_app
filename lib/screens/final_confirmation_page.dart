@@ -149,7 +149,8 @@ class _FinalConfirmState extends State<FinalConfirm> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      Translations.of(context).text("dispenser_function") + " 1",
+                      Translations.of(context).text("dispenser_function") +
+                          " 1",
                     ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
@@ -201,7 +202,8 @@ class _FinalConfirmState extends State<FinalConfirm> {
                     ),
                     //-----------------------------------------------------------------------------------------
                     Text(
-                      Translations.of(context).text("dispenser_function") + " 2",
+                      Translations.of(context).text("dispenser_function") +
+                          " 2",
                     ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
@@ -253,7 +255,8 @@ class _FinalConfirmState extends State<FinalConfirm> {
                     ),
                     //--------------------------------------------------------------------------------------------------------
                     Text(
-                      Translations.of(context).text("dispenser_function") + " 3",
+                      Translations.of(context).text("dispenser_function") +
+                          " 3",
                     ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
@@ -358,7 +361,9 @@ class _FinalConfirmState extends State<FinalConfirm> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('نقدی'),
+                                Text(
+                                  Translations.of(context).text("cash"),
+                                ),
                                 SizedBox(
                                   width: kBoxSizeWith,
                                   height: kBoxSizeHeight,
@@ -388,7 +393,9 @@ class _FinalConfirmState extends State<FinalConfirm> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('کارت خوان'),
+                                Text(
+                                  Translations.of(context).text("card_reader"),
+                                ),
                                 SizedBox(
                                   width: kBoxSizeWith,
                                   height: kBoxSizeHeight,
@@ -552,13 +559,17 @@ class CardWidget extends StatelessWidget {
 showAlertDialog(BuildContext context, String operatorName) {
   // set up the buttons
   Widget cancelButton = TextButton(
-    child: Text("خروج از برنامه"),
+    child: Text(
+      Translations.of(context).text("exit_app"),
+    ),
     onPressed: () {
       SystemNavigator.pop();
     },
   );
   Widget continueButton = TextButton(
-    child: Text("ورود به صفحه اصلی"),
+    child: Text(
+      Translations.of(context).text("login_main_page"),
+    ),
     onPressed: () {
       Navigator.pushReplacement(
           context,
@@ -572,7 +583,7 @@ showAlertDialog(BuildContext context, String operatorName) {
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
-    content: Text("خسته نباشید!"),
+    content: Text(Translations.of(context).text("god_bless_you"),),
     actions: [
       cancelButton,
       continueButton,

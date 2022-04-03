@@ -205,8 +205,8 @@ class _PaymentState extends State<Payment> {
                                       controller: _textEditingController,
                                       keyboardType: TextInputType.number,
                                       textInputAction: TextInputAction.next,
-                                      decoration: const InputDecoration(
-                                          hintText: 'وارد کنید',
+                                      decoration: InputDecoration(
+                                          hintText: Translations.of(context).text("enter_number"),
                                           hintStyle:
                                               inputFieldHintTextStyleDispenser,
                                           focusedBorder:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ftm_service_app/services/translations.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CallPage extends StatelessWidget {
@@ -21,7 +22,7 @@ class CallPage extends StatelessWidget {
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children:  [
+              children: [
                 const Image(
                   image: AssetImage("assets/images/ftm.png"),
                   height: 100,
@@ -29,13 +30,15 @@ class CallPage extends StatelessWidget {
                 const SizedBox(
                   height: 26,
                 ),
-                const Text("شماره تماس:"),
+                Text(Translations.of(context).text("call_number")),
                 const SizedBox(
                   height: 16,
                 ),
-                TextButton(onPressed: () => _launcherCaller("tel:+989171502049"),
-                  child: const Text(
-                    "09171502049",
+                TextButton(
+                  onPressed: () => _launcherCaller(
+                      Translations.of(context).text("tel1_local_code")),
+                  child: Text(
+                    Translations.of(context).text("tel1"),
                     locale: Locale('EN'),
                     style: TextStyle(
                       fontFamily: 'Poppins',
@@ -44,9 +47,11 @@ class CallPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                TextButton(onPressed: () => _launcherCaller("tel:+989227073767"),
-                  child: const Text(
-                    "09227073767",
+                TextButton(
+                  onPressed: () => _launcherCaller(
+                      Translations.of(context).text("tel2_local_code")),
+                  child: Text(
+                    Translations.of(context).text("tel2"),
                     locale: Locale('EN'),
                     style: TextStyle(
                       fontFamily: 'Poppins',
@@ -55,9 +60,11 @@ class CallPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                TextButton(onPressed: () => _launcherCaller("tel:+989175363564"),
-                  child: const Text(
-                    "09175363564",
+                TextButton(
+                  onPressed: () => _launcherCaller(
+                      Translations.of(context).text("tel3_local_code")),
+                  child: Text(
+                    Translations.of(context).text("tel3"),
                     locale: Locale('EN'),
                     style: TextStyle(
                       fontFamily: 'Poppins',
@@ -66,7 +73,6 @@ class CallPage extends StatelessWidget {
                     ),
                   ),
                 ),
-
               ],
             ),
           ),
@@ -75,4 +81,3 @@ class CallPage extends StatelessWidget {
     );
   }
 }
-//test a commit form Alireza

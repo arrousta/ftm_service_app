@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ftm_service_app/services/network_adapter.dart';
+import 'package:ftm_service_app/services/translations.dart';
 import 'package:ftm_service_app/structures/user.dart';
 
 import '../constructor.dart';
@@ -112,7 +113,7 @@ class _BodyState extends State<Body> {
               height: 10.0,
             ),
             Text(
-              'خوش آمدید به اپلیکیشن ما',
+              Translations.of(context).text("welcome_home"),
               style: TextStyle(
                 fontFamily: 'Yekan',
                 fontSize: 20.0,

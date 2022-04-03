@@ -75,12 +75,14 @@ class HomePage extends StatelessWidget {
                       const SizedBox(
                         height: 8,
                       ),
-                      const Text("سلام، کاربر!"),
+                      Text(
+                        Translations.of(context).text("hi_user"),
+                      ),
                       const Divider(),
                       GestureDetector(
                         onTap: () {},
-                        child: const Text(
-                          "خروج از حساب کاربری",
+                        child: Text(
+                          Translations.of(context).text("log_out"),
                           style: TextStyle(color: kErrorColor, fontSize: 10),
                         ),
                       ),
@@ -92,11 +94,11 @@ class HomePage extends StatelessWidget {
             const Divider(),
             ListTile(
               title: Row(
-                children: const [
+                children: [
                   Icon(Icons.call),
                   Padding(
                     padding: EdgeInsets.only(right: 8),
-                    child: Text('تماس با ما'),
+                    child: Text(Translations.of(context).text("contact_us")),
                   ),
                 ],
               ),
@@ -113,11 +115,11 @@ class HomePage extends StatelessWidget {
             ),
             ListTile(
               title: Row(
-                children: const [
+                children: [
                   Icon(Icons.info),
                   Padding(
                     padding: EdgeInsets.only(right: 8.0),
-                    child: Text('درباره ما'),
+                    child: Text(Translations.of(context).text("about")),
                   ),
                 ],
               ),
@@ -326,7 +328,6 @@ class _HomePageBodyState extends State<HomePageBody> {
                       });
                     },
                   ),
-
                   ReusableCard(
                     colour: kRedColor,
                     cardChild: IconContent(
@@ -391,7 +392,6 @@ class _HomePageBodyState extends State<HomePageBody> {
                       ),
                       onPress: () {
                         setState(() {
-
                           _handleLogout();
                         });
                       },
