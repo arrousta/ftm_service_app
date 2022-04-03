@@ -369,7 +369,9 @@ class _FinalConfirmState extends State<FinalConfirm> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('نقدی'),
+                                Text(
+                                  Translations.of(context).text("cash"),
+                                ),
                                 SizedBox(
                                   width: kBoxSizeWith,
                                   height: kBoxSizeHeight,
@@ -399,7 +401,9 @@ class _FinalConfirmState extends State<FinalConfirm> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('کارت خوان'),
+                                Text(
+                                  Translations.of(context).text("card_reader"),
+                                ),
                                 SizedBox(
                                   width: kBoxSizeWith,
                                   height: kBoxSizeHeight,
@@ -566,13 +570,17 @@ class CardWidget extends StatelessWidget {
 showAlertDialog(BuildContext context, String operatorName) {
   // set up the buttons
   Widget cancelButton = TextButton(
-    child: Text("خروج از برنامه"),
+    child: Text(
+      Translations.of(context).text("exit_app"),
+    ),
     onPressed: () {
       SystemNavigator.pop();
     },
   );
   Widget continueButton = TextButton(
-    child: Text("ورود به صفحه اصلی"),
+    child: Text(
+      Translations.of(context).text("login_main_page"),
+    ),
     onPressed: () {
       Navigator.pushReplacement(
           context,
@@ -586,7 +594,7 @@ showAlertDialog(BuildContext context, String operatorName) {
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
-    content: Text("خسته نباشید!"),
+    content: Text(Translations.of(context).text("god_bless_you"),),
     actions: [
       cancelButton,
       continueButton,

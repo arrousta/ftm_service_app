@@ -38,20 +38,47 @@
   "payment_cost_mess": "Total cost \n of your shift",
   "payment_user_mess": "Enter the value of \n the card reader function",
   "payment_cash_mess": "The amount of cash \n you have to pay",
+  "cash": "Cash",
+  "card_reader": "Card Reader",
   
   "final_confirm_mess": "If there is a mistake in the entered data, press the Edit key and correct the data",
   "edit_data": "EDIT",
   "finish": "FINISH",
 
   "close_app_mess": "Do you want to exit?",
+  "close_page_mess": "Do you want to close this page?",
   "yes": "Yes",
   "no": "No",
+  "exit_app": "Exit application",
+  "login_main_page": "Login to the main page",
+  "god_bless_you": "God Bless You!",
 
   "start_shift_mess": "If there is a mistake in the entered data,\\n press the edit key and correct the data",
+  "start_shift_mess_warning": "You are responsible for the inaccuracy of the information. Do you confirm the information?",
   "attention": "attention...!",
+  "warning": "Warning",
 
   "take_leave": "Take Leave",
   "profile": "Profile",
   "setting": "Setting",
-  "log_out": "Log Out"
+  "log_out": "Log Out",
+
+  "contact_us": "Contact Us",
+  "call_number": "Call Number:",
+  "tel1": "09171502049",
+  "tel1_local_code": "tel:+989171502049",
+  "tel2": "09227073767",
+  "tel2_local_code": "tel:+989227073767",
+  "tel3": "09175363564",
+  "tel3_local_code": "tel:+989175363564",
+
+  "confirm_and_continue": "Confirm and Continue",
+  "dispenser_data_warning1": "Please complete all dispensers",
+  "dispenser_data_warning2": "Dispensers not inserted correctly",
+  "breakdown_dispenser": "Declaration of breakdown dispenser",
+  "confirm_breakdown_dispenser": "Confirmation breakdown dispenser",
+  "upload_image": "Upload Image",
+  "cancel": "Cancel",
+  "hi_user": "Hi User!",
+  "about": "About"
  }
