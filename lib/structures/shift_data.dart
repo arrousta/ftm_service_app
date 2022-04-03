@@ -1,5 +1,5 @@
 class ShiftData {
-  late String? id;
+  late int? id;
   late String? user;
   late String? state_id;
   late String? start_shift;

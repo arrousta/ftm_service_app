@@ -1,9 +1,9 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreference {
-  read(String key) async {
+  Future<String> read(String key) async {
     final prefs = await SharedPreferences.getInstance();
-    return (prefs.getString(key));
+    return (prefs.getString(key)) ?? "";
   }
 
   save(String key, value) async {

@@ -81,8 +81,7 @@ class _SplashScreenState extends State<SplashScreen> {
   _loadUserInfo() async {
     //TODO:share1
     SharedPreference sharedPreference = SharedPreference();
-    _username = sharedPreference.read('username');
-    print(_username);
+    _username = await sharedPreference.read('username');
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     // _username = (prefs.getString('username') ?? "");
     if (_username == "") {

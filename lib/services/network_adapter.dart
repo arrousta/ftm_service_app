@@ -109,39 +109,9 @@ Future<Dispensers> setShiftData({
   }
 }
 
-Future<Dispensers> getDispenserData({
-  required String url,
-  required String id,
-}) async {
-  final response = await http.post(
-    Uri.parse(url),
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    encoding: Encoding.getByName('utf-8'),
-    body: <String, String>{
-      'id': id,
-    },
-  );
-  if (response.statusCode == 201) {
-    // If the server did return a 201 CREATED response,
-    // then parse the JSON.
-
-    return Dispensers.fromJson(jsonDecode(response.body));
-  } else if (response.statusCode == 200) {
-    // in My project statusCode  = 200
-    return Dispensers.fromJson(jsonDecode(response.body));
-  } else {
-    // If the server did not return a 201 CREATED response,
-    // then throw an exception.
-    String errorCode = response.statusCode.toString();
-    throw Exception('Failed to connect: $errorCode');
-  }
-}
-
 
 Future<ShiftData> getShiftData({
+
   required String auth,
 }) async {
   Uri uri = Uri.parse(URL+"/data?c=last");
@@ -155,11 +125,7 @@ Future<ShiftData> getShiftData({
     headers: headers,
     encoding: Encoding.getByName('utf-8'),
   );
-  if (response.statusCode == 201) {
-    // If the server did return a 201 CREATED response,
-    // then parse the JSON.
-    return ShiftData.fromJson(jsonDecode(response.body));
-  } else if (response.statusCode == 200) {
+  if (response.statusCode == 200) {
     // in My project statusCode  = 200
     return ShiftData.fromJson(jsonDecode(response.body));
   } else {

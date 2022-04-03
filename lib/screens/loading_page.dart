@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ftm_service_app/screens/end_shift_page.dart';
-import 'package:ftm_service_app/screens/sing_in_page.dart';
 import 'package:ftm_service_app/screens/start_shift_page.dart';
 import 'package:ftm_service_app/services/network_adapter.dart';
 import 'package:ftm_service_app/services/shared_preference.dart';
-import 'package:ftm_service_app/structures/dispensers.dart';
 import 'package:ftm_service_app/structures/shift_data.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -24,7 +22,6 @@ class LoadingPage extends StatefulWidget {
 class _LoadingPageState extends State<LoadingPage> {
   SharedPreference sharedPreference = SharedPreference();
   Future<ShiftData>? futureGetShiftData;
-  // Dispensers dispensers = Dispensers();
   ShiftData shiftData = ShiftData();
 
   Future<bool> fetchShiftData(String auth) async {
@@ -44,34 +41,13 @@ class _LoadingPageState extends State<LoadingPage> {
     return true;
   }
 
-  // Future<bool> getData(String id) async {
-  //   futureGetDispenserData = getDispenserData(
-  //       url: 'https://app.srahmadi.ir/getdispenserdata.php', id: id);
-  //   await futureGetDispenserData!.then((value) {
-  //     if (value.id != null) {
-  //       dispensers.id = value.id;
-  //       dispensers.dis_1 = value.dis_1;
-  //       dispensers.dis_2 = value.dis_2;
-  //       dispensers.dis_3 = value.dis_3;
-  //       dispensers.dis_4 = value.dis_4;
-  //       dispensers.dis_5 = value.dis_5;
-  //       dispensers.dis_6 = value.dis_6;
-  //
-  //       return true;
-  //     }
-  //   });
-  //   return true;
-  // }
-
-  @override
-  void initState() {
-    //TODO:share3
-    String token = sharedPreference.read("token").toString();
-    print(token);
+  _loadUserInfo() async {
+    SharedPreference sharedPreference = SharedPreference();
+    String token = await sharedPreference.read("token");
     fetchShiftData(token).then((value) {
       if (value) {
         if (widget.keyPage == 'end') {
-          if (shiftData.id != '') {
+          if (shiftData.id != null) {
             Navigator.pushReplacement(
                 context,
                 PageTransition(
@@ -89,7 +65,7 @@ class _LoadingPageState extends State<LoadingPage> {
             print("**dispenser get data is error**");
           }
         } else if (widget.keyPage == 'start') {
-          if (shiftData.id != '') {
+          if (shiftData.id != null) {
             Navigator.pushReplacement(
                 context,
                 PageTransition(
@@ -108,9 +84,15 @@ class _LoadingPageState extends State<LoadingPage> {
           }
         }
       }
-    }).catchError((_) {
-      print("loading error");
+    }).catchError((e) {
+      print("loading error: " + e );
     });
+  }
+
+  @override
+  void initState() {
+    _loadUserInfo();
+
     super.initState();
   }
 
