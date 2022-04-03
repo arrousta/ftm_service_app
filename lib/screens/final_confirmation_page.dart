@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:ftm_service_app/constructor.dart';
 import 'package:ftm_service_app/screens/home_page.dart';
 import 'package:ftm_service_app/services/network_adapter.dart';
-import 'package:ftm_service_app/structures/dispensers.dart';
+import 'package:ftm_service_app/services/shared_preference.dart';
+import 'package:ftm_service_app/structures/shift_data.dart';
 import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
 import '../services/translations.dart';
@@ -58,38 +59,45 @@ class FinalConfirm extends StatefulWidget {
 class _FinalConfirmState extends State<FinalConfirm> {
   var persianInUSFormat = NumberFormat.currency(locale: 'fa', symbol: '');
 
-  final Dispensers _dispensers = Dispensers();
-  Future<Dispensers>? futureInputUser;
-  Future<bool> futureGet() async {
-    String user = "1";
-    String dis_1 = widget.dispenser1A;
-    String dis_2 = widget.dispenser1B;
-    String dis_3 = widget.dispenser2A;
-    String dis_4 = widget.dispenser2B;
-    String dis_5 = widget.dispenser3A;
-    String dis_6 = widget.dispenser3B;
-    String hcash = widget.handShiftCash;
-    String ccash = widget.cardShiftCash;
-    String total_cash = widget.totalShiftCash;
-    String sum_dis = widget.totalShiftFunction;
-    print("***" + total_cash);
+  final ShiftData shiftData = ShiftData();
+  Future<ShiftData>? futureShiftData;
 
-    futureInputUser = setShiftData(
-        url: 'https://app.srahmadi.ir/setshiftdata.php',
-        user: user,
-        dis_1: dis_1,
-        dis_2: dis_2,
-        dis_3: dis_3,
-        dis_4: dis_4,
-        dis_5: dis_5,
-        dis_6: dis_6,
-        sum_dis: sum_dis,
-        total_cash: total_cash,
-        hcash: hcash,
-        ccash: ccash);
-    await futureInputUser!.then((value) {
-      if (value.id != null) {
-        _dispensers.id = value.id;
+  Future<bool> futureSendShiftData() async {
+    SharedPreference sharedPreference = SharedPreference();
+    String auth = await sharedPreference.read('token');
+
+    shiftData.id = 1;
+    shiftData.user = widget.operatorName;
+    shiftData.state_id = '1';
+    shiftData.start_shift = '1';
+    shiftData.end_shift = '2';
+    shiftData.nozzle_1 = widget.dispenser1A;
+    shiftData.nozzle_2 = widget.dispenser1B;
+    shiftData.nozzle_3 = widget.dispenser2A;
+    shiftData.nozzle_4 = widget.dispenser2B;
+    shiftData.nozzle_5 = widget.dispenser3A;
+    shiftData.nozzle_6 = widget.dispenser3B;
+    shiftData.nozzle_7 = '';
+    shiftData.nozzle_8 = '';
+    shiftData.result_1 = widget.dispenser1Ad;
+    shiftData.result_2 = widget.dispenser1Bd;
+    shiftData.result_3 = widget.dispenser2Ad;
+    shiftData.result_4 = widget.dispenser1Bd;
+    shiftData.result_5 = widget.dispenser3Ad;
+    shiftData.result_6 = widget.dispenser1Bd;
+    shiftData.result_7 = '';
+    shiftData.result_8 = '';
+    shiftData.hand_cash = widget.handShiftCash;
+    shiftData.card_cash = widget.cardShiftCash;
+    shiftData.total_shift_cash = widget.totalShiftCash;
+    shiftData.total_shift_result = widget.totalShiftFunction;
+    shiftData.contradiction = '';
+    shiftData.confirm = '00001';
+
+    futureShiftData = setShiftData(auth: auth, shiftData: shiftData);
+    await futureShiftData!.then((value) {
+      if (value.datasaved != null) {
+        shiftData.datasaved = value.datasaved;
         return true;
       }
     });
@@ -149,7 +157,8 @@ class _FinalConfirmState extends State<FinalConfirm> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      Translations.of(context).text("dispenser_function") + " 1",
+                      Translations.of(context).text("dispenser_function") +
+                          " 1",
                     ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
@@ -201,7 +210,8 @@ class _FinalConfirmState extends State<FinalConfirm> {
                     ),
                     //-----------------------------------------------------------------------------------------
                     Text(
-                      Translations.of(context).text("dispenser_function") + " 2",
+                      Translations.of(context).text("dispenser_function") +
+                          " 2",
                     ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
@@ -253,7 +263,8 @@ class _FinalConfirmState extends State<FinalConfirm> {
                     ),
                     //--------------------------------------------------------------------------------------------------------
                     Text(
-                      Translations.of(context).text("dispenser_function") + " 3",
+                      Translations.of(context).text("dispenser_function") +
+                          " 3",
                     ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
@@ -480,12 +491,15 @@ class _FinalConfirmState extends State<FinalConfirm> {
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            futureGet().then((value) {
-                              String id = '';
-                              id = _dispensers.id.toString();
-                              if (id != '') {
+                            futureSendShiftData().then((value) {
+                              bool response;
+                              response = shiftData.datasaved ?? false;
+
+                              if (response) {
                                 showAlertDialog(context, widget.operatorName);
-                                print(id);
+
+                              } else {
+                                print("**response null");
                               }
                             });
                           },

@@ -27,6 +27,7 @@ class ShiftData {
   late String? contradiction;
   late String? confirm;
   late String? save_date;
+  late bool? datasaved;
 
   ShiftData(
       {this.id,
@@ -56,7 +57,9 @@ class ShiftData {
       this.total_shift_cash,
       this.contradiction,
       this.confirm,
-      this.save_date});
+      this.save_date,
+      this.datasaved});
+
 
   factory ShiftData.fromJson(Map<String, dynamic> json) {
     return ShiftData(
@@ -88,6 +91,7 @@ class ShiftData {
       contradiction: json['contradiction'],
       confirm: json['confirm'],
       save_date: json['save_date'],
+      datasaved: json['datasaved'],
     );
   }
 }

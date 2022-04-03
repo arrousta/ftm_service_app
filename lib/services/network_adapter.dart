@@ -1,40 +1,38 @@
 import 'dart:convert';
 import 'package:ftm_service_app/constructor.dart';
-import 'package:ftm_service_app/structures/dispensers.dart';
 import 'package:ftm_service_app/structures/shift_data.dart';
 import 'package:ftm_service_app/structures/user.dart';
 import 'package:http/http.dart' as http;
 
-Future<User> fetchData() async {
-  String auth = 'GRZmuYwO9gJ1jate1ZnJem18Gnq5MwrH';
-  Uri uri = Uri.parse(URL+"/user?c=signin");
-  Map<String, String> headers = {
-    'Content-Type': 'application/json',
-    "mode": "safe",
-    "auth": auth
-  };
-  final response = await http.post(
-    uri,
-    headers: headers,
-    encoding: Encoding.getByName('utf-8'),
-  );
-
-  if (response.statusCode == 200) {
-    // in My project statusCode  = 200
-    print(response.body);
-    return User.fromJson(jsonDecode(response.body));
-  } else {
-    // If the server did not return a 201 CREATED response,
-    // then throw an exception.
-    String errorCode = response.statusCode.toString();
-    throw Exception('Failed to connect: $errorCode');
-  }
-}
-
+// Future<User> fetchData() async {
+//   String auth = 'GRZmuYwO9gJ1jate1ZnJem18Gnq5MwrH';
+//   Uri uri = Uri.parse(URL + "/user?c=signin");
+//   Map<String, String> headers = {
+//     'Content-Type': 'application/json',
+//     "mode": "safe",
+//     "auth": auth
+//   };
+//   final response = await http.post(
+//     uri,
+//     headers: headers,
+//     encoding: Encoding.getByName('utf-8'),
+//   );
+//
+//   if (response.statusCode == 200) {
+//     // in My project statusCode  = 200
+//     print(response.body);
+//     return User.fromJson(jsonDecode(response.body));
+//   } else {
+//     // If the server did not return a 201 CREATED response,
+//     // then throw an exception.
+//     String errorCode = response.statusCode.toString();
+//     throw Exception('Failed to connect: $errorCode');
+//   }
+// }
 
 Future<User> signInUser(
     {required String userName, required String password}) async {
-  Uri uri = Uri.parse(URL+"/user?c=signin");
+  Uri uri = Uri.parse(URL + "/user?c=signin");
   Map<String, String> headers = {
     'Content-Type': 'application/json',
     "mode": "safe"
@@ -59,48 +57,59 @@ Future<User> signInUser(
   }
 }
 
-Future<Dispensers> setShiftData({
-  required String url,
-  required String user,
-  required String dis_1,
-  required String dis_2,
-  required String dis_3,
-  required String dis_4,
-  required String dis_5,
-  required String dis_6,
-  required String hcash,
-  required String ccash,
-  required String total_cash,
-  required String sum_dis,
+Future<ShiftData> setShiftData({
+  required String auth,
+  required ShiftData shiftData,
+
 }) async {
+  Uri uri = Uri.parse(URL + "/data?c=import");
+  Map<String, String> headers = {
+    "Content-Type" : "application/json",
+    "mode" : "byApp",
+    "auth" : auth
+  };
+  Map<String, Map<String, dynamic>> data = {
+    'shiftData' : {
+      'id' : shiftData.id,
+      'user' : shiftData.user,
+      'state_id' : shiftData.state_id,
+      'start_shift' : shiftData.start_shift,
+      'end_shift' : shiftData.end_shift,
+      'nozzle_1': shiftData.nozzle_1,
+      'nozzle_2': shiftData.nozzle_2,
+      'nozzle_3': shiftData.nozzle_3,
+      'nozzle_4': shiftData.nozzle_4,
+      'nozzle_5': shiftData.nozzle_5,
+      'nozzle_6': shiftData.nozzle_6,
+      'nozzle_7': shiftData.nozzle_7,
+      'nozzle_8': shiftData.nozzle_8,
+      'result_1': shiftData.result_1,
+      'result_2': shiftData.result_2,
+      'result_3': shiftData.result_3,
+      'result_4': shiftData.result_4,
+      'result_5': shiftData.result_5,
+      'result_6': shiftData.result_6,
+      'result_7': shiftData.result_7,
+      'result_8': shiftData.result_8,
+      'hand_cash' : shiftData.hand_cash,
+      'card_cash' : shiftData.card_cash,
+      'total_shift_cash' : shiftData.total_shift_cash,
+      'total_shift_result' : shiftData.total_shift_result,
+      'contradiction' : shiftData.contradiction,
+      'confirm' : shiftData.confirm
+    }
+  };
+  final msg = jsonEncode(data);
+
   final response = await http.post(
-    Uri.parse(url),
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
+    uri,
+    headers: headers,
     encoding: Encoding.getByName('utf-8'),
-    body: <String, String>{
-      'user': user,
-      'dis_1': dis_1,
-      'dis_2': dis_2,
-      'dis_3': dis_3,
-      'dis_4': dis_4,
-      'dis_5': dis_5,
-      'dis_6': dis_6,
-      'sum_dis': sum_dis,
-      'hcash': hcash,
-      'ccash': ccash,
-      'total_cash': total_cash,
-    },
+    body: msg
   );
-  if (response.statusCode == 201) {
-    // If the server did return a 201 CREATED response,
-    // then parse the JSON.
-    return Dispensers.fromJson(jsonDecode(response.body));
-  } else if (response.statusCode == 200) {
+  if (response.statusCode == 200) {
     // in My project statusCode  = 200
-    return Dispensers.fromJson(jsonDecode(response.body));
+    return ShiftData.fromJson(jsonDecode(response.body));
   } else {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
@@ -109,12 +118,10 @@ Future<Dispensers> setShiftData({
   }
 }
 
-
 Future<ShiftData> getShiftData({
-
   required String auth,
 }) async {
-  Uri uri = Uri.parse(URL+"/data?c=last");
+  Uri uri = Uri.parse(URL + "/data?c=last");
   Map<String, String> headers = {
     'Content-Type': 'application/json',
     "auth": auth
