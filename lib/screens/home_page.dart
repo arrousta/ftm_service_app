@@ -12,7 +12,6 @@ import 'package:ftm_service_app/services/shared_preference.dart';
 import 'package:intl/intl.dart';
 import 'package:ftm_service_app/widgets/persian_date.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/icon_content.dart';
 import '../widgets/reusable_card.dart';
 import '../services/translations.dart';
@@ -23,6 +22,16 @@ class HomePage extends StatelessWidget {
     required this.operatorName,
   }) : super(key: key);
   final String operatorName;
+
+  void _handleLogout(BuildContext context) async {
+    SharedPreference sharedPreference = SharedPreference();
+    sharedPreference.remove("username");
+    Navigator.pushReplacement(
+      context,
+      PageTransition(
+          child: const WelcomePage(), type: PageTransitionType.leftToRight),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +75,7 @@ class HomePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const CircleAvatar(
-                        radius: 26,
+                        radius: 30,
                         backgroundColor: Colors.blue,
                         child: Image(
                           image: AssetImage("assets/images/user.png"),
@@ -76,20 +85,86 @@ class HomePage extends StatelessWidget {
                         height: 8,
                       ),
                       Text(
-                        Translations.of(context).text("hi_user"),
+                        Translations.of(context).text("hi_user") +
+                            operatorName +
+                            " !",
                       ),
                       const Divider(),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          _handleLogout(context);
+                        },
                         child: Text(
                           Translations.of(context).text("log_out"),
-                          style: TextStyle(color: kErrorColor, fontSize: 10),
+                          style: TextStyle(color: kErrorColor, fontSize: 11),
                         ),
                       ),
                     ],
                   ),
                 ],
               ),
+            ),
+            ListTile(
+              title: Row(
+                children: [
+                  Icon(Icons.supervised_user_circle),
+                  Padding(
+                    padding: EdgeInsets.only(right: 8),
+                    child: Text(Translations.of(context).text("profile")),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  PageTransition(
+                      child: MiCard(), type: PageTransitionType.leftToRight),
+                );
+                // Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Row(
+                children: [
+                  Icon(Icons.coffee),
+                  Padding(
+                    padding: EdgeInsets.only(right: 8),
+                    child: Text(Translations.of(context).text("take_leave")),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.pop(context);
+                // Navigator.push(
+                //   context,
+                //   PageTransition(
+                //       child: MiCard(),
+                //       type: PageTransitionType.leftToRight),
+                // );
+                // Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Row(
+                children: [
+                  Icon(Icons.settings),
+                  Padding(
+                    padding: EdgeInsets.only(right: 8),
+                    child: Text(Translations.of(context).text("setting")),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.pop(context);
+                // Navigator.push(
+                //   context,
+                //   PageTransition(
+                //       child: MiCard(),
+                //       type: PageTransitionType.leftToRight),
+                // );
+                // Navigator.pop(context);
+              },
             ),
             const Divider(),
             ListTile(
@@ -222,15 +297,6 @@ class _HomePageBodyState extends State<HomePageBody> {
     super.initState();
   }
 
-  void _handleLogout() async {
-    sharedPreference.remove("username");
-    Navigator.pushReplacement(
-      context,
-      PageTransition(
-          child: const WelcomePage(), type: PageTransitionType.leftToRight),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -256,11 +322,21 @@ class _HomePageBodyState extends State<HomePageBody> {
                         children: [
                           Column(
                             children: [
-                              const CircleAvatar(
-                                radius: 40.0,
-                                backgroundColor: Colors.blue,
-                                backgroundImage:
-                                    AssetImage("assets/images/user.png"),
+                              GestureDetector(
+                                onTap: () async {
+                                  await Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        child: MiCard(),
+                                        type: PageTransitionType.leftToRight),
+                                  );
+                                },
+                                child: const CircleAvatar(
+                                  radius: 40.0,
+                                  backgroundColor: Colors.blue,
+                                  backgroundImage:
+                                      AssetImage("assets/images/user.png"),
+                                ),
                               ),
                               const SizedBox(
                                 height: 16,
@@ -301,113 +377,64 @@ class _HomePageBodyState extends State<HomePageBody> {
                           ),
                         ],
                       ),
+                      SizedBox(
+                        height: 5.0,
+                        width: 160.0,
+                        child: Divider(
+                          color: Colors.teal.shade100,
+                        ),
+                      ),
+                      Text(
+                        "جایگاه صغاد",
+                        style: const TextStyle(
+                            color: Colors.white, fontSize: 18.0),
+                      ),
                     ],
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 26,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ReusableCard(
-                    colour: kGreenColor,
-                    cardChild: IconContent(
-                      iconAddress: "assets/icon/gas-green.png",
-                      label: Translations.of(context).text("start_shift"),
-                    ),
+                  IconContent(
+                    color: kGreenColor,
+                    iconAddress: "assets/icon/gas-green.png",
+                    label: Translations.of(context).text("start_shift"),
                     onPress: () {
-                      setState(() {
-                        Navigator.pushReplacement(
-                          context,
-                          PageTransition(
+                      setState(
+                        () {
+                          Navigator.pushReplacement(
+                            context,
+                            PageTransition(
                               type: PageTransitionType.rightToLeft,
                               child: LoadingPage(
                                 keyPage: 'start',
                                 operatorName: widget.operatorName,
-                              )),
-                        );
-                      });
+                              ),
+                            ),
+                          );
+                        },
+                      );
                     },
                   ),
-                  ReusableCard(
-                    colour: kRedColor,
-                    cardChild: IconContent(
-                      iconAddress: "assets/icon/gas-red.png",
-                      label: Translations.of(context).text("end_shift"),
-                    ),
+                  IconContent(
+                    color: kRedColor,
+                    iconAddress: "assets/icon/gas-red.png",
+                    label: Translations.of(context).text("end_shift"),
                     onPress: () {
                       Navigator.pushReplacement(
-                          context,
-                          PageTransition(
-                              child: LoadingPage(
-                                keyPage: 'end',
-                                operatorName: widget.operatorName,
-                              ),
-                              type: PageTransitionType.rightToLeft));
+                        context,
+                        PageTransition(
+                            child: LoadingPage(
+                              keyPage: 'end',
+                              operatorName: widget.operatorName,
+                            ),
+                            type: PageTransitionType.rightToLeft),
+                      );
                     },
-                  ),
-                ],
-              ),
-
-              Row(
-                children: [
-                  Expanded(
-                    child: ReusableCard(
-                      onPress: () {
-                        Navigator.push(
-                          context,
-                          PageTransition(
-                              child: MiCard(),
-                              type: PageTransitionType.leftToRight),
-                        );
-                      },
-                      colour: kBoxBackgroundColor,
-                      cardChild: IconContent(
-                        iconAddress: "assets/icon/engineer.png",
-                        label: Translations.of(context).text("profile"),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: ReusableCard(
-                      onPress: () {
-                        //TODO : TAKE LEAVE button
-                      },
-                      colour: kBoxBackgroundColor,
-                      cardChild: IconContent(
-                        iconAddress: "assets/icon/letter.png",
-                        label: Translations.of(context).text("take_leave"),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: ReusableCard(
-                      colour: kBoxBackgroundColor,
-                      cardChild: IconContent(
-                        iconAddress: "assets/icon/flame.png",
-                        label: Translations.of(context).text("log_out"),
-                      ),
-                      onPress: () {
-                        setState(() {
-                          _handleLogout();
-                        });
-                      },
-                    ),
-                  ),
-                  Expanded(
-                    child: ReusableCard(
-                      onPress: () {
-                        //TODO : SETTING button
-                      },
-                      colour: kBoxBackgroundColor,
-                      cardChild: IconContent(
-                        iconAddress: "assets/icon/maintenance.png",
-                        label: Translations.of(context).text("setting"),
-                      ),
-                    ),
                   ),
                 ],
               ),

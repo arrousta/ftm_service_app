@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ftm_service_app/services/translations.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
+
 
 class CallPage extends StatelessWidget {
   const CallPage({Key? key}) : super(key: key);
-
-  _launcherCaller(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +28,7 @@ class CallPage extends StatelessWidget {
                   height: 16,
                 ),
                 TextButton(
-                  onPressed: () => _launcherCaller(
+                  onPressed: () => UrlLauncher.launch(
                       Translations.of(context).text("tel1_local_code")),
                   child: Text(
                     Translations.of(context).text("tel1"),
@@ -48,7 +41,7 @@ class CallPage extends StatelessWidget {
                   ),
                 ),
                 TextButton(
-                  onPressed: () => _launcherCaller(
+                  onPressed: () => UrlLauncher.launch(
                       Translations.of(context).text("tel2_local_code")),
                   child: Text(
                     Translations.of(context).text("tel2"),
@@ -61,7 +54,7 @@ class CallPage extends StatelessWidget {
                   ),
                 ),
                 TextButton(
-                  onPressed: () => _launcherCaller(
+                  onPressed: () => UrlLauncher.launch(
                       Translations.of(context).text("tel3_local_code")),
                   child: Text(
                     Translations.of(context).text("tel3"),
@@ -81,4 +74,3 @@ class CallPage extends StatelessWidget {
     );
   }
 }
-//test a commit form Alireza

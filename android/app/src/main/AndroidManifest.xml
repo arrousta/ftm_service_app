@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.farzintavanesh.ftm_service_app">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
    <application
         android:label="FTM.Co"
         android:icon="@mipmap/launcher_icon">
