@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ftm_service_app/screens/end_shift_page.dart';
+import 'package:ftm_service_app/screens/home_page.dart';
 import 'package:ftm_service_app/screens/start_shift_page.dart';
 import 'package:ftm_service_app/services/network_adapter.dart';
 import 'package:ftm_service_app/services/shared_preference.dart';
@@ -85,7 +86,8 @@ class _LoadingPageState extends State<LoadingPage> {
         }
       }
     }).catchError((e) {
-      print("loading error: " + e );
+      showSnackBar(context,"اتصال برقرار نشد", widget.operatorName);
+      print("loading error: " + e);
     });
   }
 
@@ -111,4 +113,27 @@ class _LoadingPageState extends State<LoadingPage> {
       ),
     );
   }
+}
+
+void showSnackBar(BuildContext context, String text, String operatorName) {
+  final snackBar = SnackBar(
+    content: Text(
+      text,
+      style: const TextStyle(fontFamily: 'Yekan'),
+    ),
+    backgroundColor: kErrorColor,
+    duration: const Duration(seconds: 60),
+    action: SnackBarAction(
+      onPressed: () {
+        Navigator.pushReplacement(
+          context,
+          PageTransition(
+              child: HomePage(operatorName: operatorName),
+              type: PageTransitionType.rightToLeft),
+        );
+      },
+      label: 'بازگشت به صفحه اصلی',
+    ),
+  );
+  ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }

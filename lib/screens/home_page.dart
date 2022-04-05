@@ -42,10 +42,13 @@ class HomePage extends StatelessWidget {
         elevation: 0,
         foregroundColor: kTextDarkColor,
         actions: <Widget>[
-          const Image(
-            height: 80,
-            width: 80,
-            image: AssetImage("assets/images/ftm-logo.png"),
+          const Hero(
+            tag: "ftm-logo",
+            child: Image(
+              height: 80,
+              width: 80,
+              image: AssetImage("assets/images/ftm-logo.png"),
+            ),
           ),
           const SizedBox(
             width: 110,
@@ -96,7 +99,8 @@ class HomePage extends StatelessWidget {
                         },
                         child: Text(
                           Translations.of(context).text("log_out"),
-                          style: TextStyle(color: kErrorColor, fontSize: 11),
+                          style:
+                              const TextStyle(color: kErrorColor, fontSize: 11),
                         ),
                       ),
                     ],
@@ -107,9 +111,9 @@ class HomePage extends StatelessWidget {
             ListTile(
               title: Row(
                 children: [
-                  Icon(Icons.supervised_user_circle),
+                  const Icon(Icons.supervised_user_circle),
                   Padding(
-                    padding: EdgeInsets.only(right: 8),
+                    padding: const EdgeInsets.only(right: 8),
                     child: Text(Translations.of(context).text("profile")),
                   ),
                 ],
@@ -127,9 +131,9 @@ class HomePage extends StatelessWidget {
             ListTile(
               title: Row(
                 children: [
-                  Icon(Icons.coffee),
+                  const Icon(Icons.coffee),
                   Padding(
-                    padding: EdgeInsets.only(right: 8),
+                    padding: const EdgeInsets.only(right: 8),
                     child: Text(Translations.of(context).text("take_leave")),
                   ),
                 ],
@@ -148,9 +152,9 @@ class HomePage extends StatelessWidget {
             ListTile(
               title: Row(
                 children: [
-                  Icon(Icons.settings),
+                  const Icon(Icons.settings),
                   Padding(
-                    padding: EdgeInsets.only(right: 8),
+                    padding: const EdgeInsets.only(right: 8),
                     child: Text(Translations.of(context).text("setting")),
                   ),
                 ],
@@ -170,9 +174,9 @@ class HomePage extends StatelessWidget {
             ListTile(
               title: Row(
                 children: [
-                  Icon(Icons.call),
+                  const Icon(Icons.call),
                   Padding(
-                    padding: EdgeInsets.only(right: 8),
+                    padding: const EdgeInsets.only(right: 8),
                     child: Text(Translations.of(context).text("contact_us")),
                   ),
                 ],
@@ -191,9 +195,9 @@ class HomePage extends StatelessWidget {
             ListTile(
               title: Row(
                 children: [
-                  Icon(Icons.info),
+                  const Icon(Icons.info),
                   Padding(
-                    padding: EdgeInsets.only(right: 8.0),
+                    padding: const EdgeInsets.only(right: 8.0),
                     child: Text(Translations.of(context).text("about")),
                   ),
                 ],
@@ -299,6 +303,7 @@ class _HomePageBodyState extends State<HomePageBody> {
 
   @override
   Widget build(BuildContext context) {
+    bool isStarted = false;
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: SafeArea(
@@ -401,28 +406,33 @@ class _HomePageBodyState extends State<HomePageBody> {
                 children: [
                   IconContent(
                     color: kGreenColor,
-                    iconAddress: "assets/icon/gas-green.png",
+                    iconAddress: "assets/icon/fuel-start.png",
                     label: Translations.of(context).text("start_shift"),
                     onPress: () {
-                      setState(
-                        () {
-                          Navigator.pushReplacement(
-                            context,
-                            PageTransition(
-                              type: PageTransitionType.rightToLeft,
-                              child: LoadingPage(
-                                keyPage: 'start',
-                                operatorName: widget.operatorName,
+                      if (isStarted) {
+                        showSnackBar(context, "شیفت شما هنوز به پایان نرسیده است");
+                      } else {
+                        setState(
+                          () {
+
+                            Navigator.pushReplacement(
+                              context,
+                              PageTransition(
+                                type: PageTransitionType.rightToLeft,
+                                child: LoadingPage(
+                                  keyPage: 'start',
+                                  operatorName: widget.operatorName,
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                      );
+                            );
+                          },
+                        );
+                      }
                     },
                   ),
                   IconContent(
                     color: kRedColor,
-                    iconAddress: "assets/icon/gas-red.png",
+                    iconAddress: "assets/icon/fuel-end.png",
                     label: Translations.of(context).text("end_shift"),
                     onPress: () {
                       Navigator.pushReplacement(
@@ -469,4 +479,16 @@ class _HomePageBodyState extends State<HomePageBody> {
           );
         });
   }
+
 }
+void showSnackBar(BuildContext context, String text) {
+  final snackBar = SnackBar(
+    content: Text(
+      text,
+      style: TextStyle(fontFamily: 'Yekan'),
+    ),
+    backgroundColor: kErrorColor,
+  );
+  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+}
+

@@ -49,13 +49,12 @@ class _IconContentState extends State<IconContent> {
               child: CircleAvatar(
                 radius: 45,
                 backgroundColor: kLightBackgroundColor,
-                child: CircleAvatar(
-                  radius: 35,
-                  backgroundColor: kPrimaryColor,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
                   child: Image(
                     image: AssetImage(widget.iconAddress ?? ""),
-                    width: 90,
-                    height: 90,
+                    width: 70,
+                    height: 70,
                   ),
                 ),
               ),

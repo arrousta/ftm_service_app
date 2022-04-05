@@ -10,6 +10,7 @@ class User {
   late String? stateId;
   late String? userDetail;
   late String? token;
+  late bool? error;
 
   User(
       {this.id,
@@ -22,7 +23,8 @@ class User {
       this.role,
       this.stateId,
       this.userDetail,
-      this.token});
+      this.token,
+      this.error});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
@@ -37,6 +39,7 @@ class User {
       personnelId: json['info']['personnel_id'],
       password: json['info']['password'],
       token: json['token'],
+      error: json['err'],
     );
   }
 

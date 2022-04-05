@@ -316,20 +316,8 @@ class _StartShiftState extends State<StartShift> {
                               context,
                               PageTransition(
                                 type: PageTransitionType.rightToLeft,
-                                child: EndShiftPage(
+                                child: HomePage(
                                   operatorName: widget.operatorName,
-                                  lastDispenserData1A:
-                                      widget.lastDispenserData1A,
-                                  lastDispenserData1B:
-                                      widget.lastDispenserData1B,
-                                  lastDispenserData2A:
-                                      widget.lastDispenserData2A,
-                                  lastDispenserData2B:
-                                      widget.lastDispenserData2B,
-                                  lastDispenserData3A:
-                                      widget.lastDispenserData3A,
-                                  lastDispenserData3B:
-                                      widget.lastDispenserData3B,
                                 ),
                               ),
                             );
@@ -338,7 +326,8 @@ class _StartShiftState extends State<StartShift> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                Translations.of(context).text("edit_data"),
+                                Translations.of(context)
+                                    .text("contradiction_data"),
                                 style: const TextStyle(
                                   fontSize: 15,
                                   fontFamily: 'Yekan',
@@ -461,13 +450,17 @@ class CardWidget extends StatelessWidget {
 showAlertDialog(BuildContext context, String operatorName) {
   // set up the buttons
   Widget cancelButton = TextButton(
-    child: Text(Translations.of(context).text("no"),),
+    child: Text(
+      Translations.of(context).text("no"),
+    ),
     onPressed: () {
       Navigator.pop(context);
     },
   );
   Widget continueButton = TextButton(
-    child: Text(Translations.of(context).text("yes"),),
+    child: Text(
+      Translations.of(context).text("yes"),
+    ),
     onPressed: () {
       Navigator.pushReplacement(
         context,
@@ -482,14 +475,15 @@ showAlertDialog(BuildContext context, String operatorName) {
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
-    title:  Text(
+    title: Text(
       Translations.of(context).text("warning"),
       style: TextStyle(
         color: kErrorColor,
       ),
     ),
-    content:
-        Text(Translations.of(context).text("start_shift_mess_warning"),),
+    content: Text(
+      Translations.of(context).text("start_shift_mess_warning"),
+    ),
     actions: [
       cancelButton,
       continueButton,

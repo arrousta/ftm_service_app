@@ -97,7 +97,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void getInternetStatus() async {
-    Duration duration = const Duration(seconds: 1);
+    Duration duration = const Duration(seconds: 3);
     await Future.delayed(duration, () {
       //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
       _loadUserInfo();
@@ -123,7 +123,12 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Image.asset('assets/images/ftm.png', width: 260, height: 210),
+            Hero(
+              tag: "ftm-logo",
+              child: Image.asset('assets/images/ftm-logo.png',
+                  width: 260, height: 70),
+            ),
+            Image.asset('assets/images/ftm-type.png', width: 160, height: 70),
             const SpinKitCircle(
               color: Colors.indigo,
               size: 50.0,
@@ -139,7 +144,6 @@ class _SplashScreenState extends State<SplashScreen> {
           ],
         ),
       ),
-
     );
   }
 

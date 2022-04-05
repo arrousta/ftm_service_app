@@ -28,24 +28,31 @@ class _SignInPageState extends State<SignInPage> {
   String userName = "";
   String password = "";
 
-  Future<bool> futureGet(String _user, String _pass) async {
+  Future<String> futureGet(String _user, String _pass) async {
     futureInputUser = signInUser(userName: _user, password: _pass);
-
+    String response = "stop";
     await futureInputUser!.then((value) {
-      if (value.id != null) {
-        user.id = value.id;
-        user.firstName = value.firstName;
-        user.lastName = value.lastName;
-        user.role = value.role;
-        user.token = value.token;
-        user.phone = value.phone;
-        user.userId = value.userId;
+      user.id = value.id;
+      user.firstName = value.firstName;
+      user.lastName = value.lastName;
+      user.role = value.role;
+      user.token = value.token;
+      user.phone = value.phone;
+      user.userId = value.userId;
 
-        return true;
+      response = "ok";
+    }, onError: (e) {
+      if (e.toString().startsWith('NoSuchMethodError')) {
+        response = "er-pass";
+      } else if (e.toString().startsWith('SocketException')) {
+        response = "er-internet";
+      } else {
+        print("**" + e.toString());
+        response = "onError";
       }
     });
 
-    return false;
+    return response;
   }
 
   bool flag = false;
@@ -95,6 +102,13 @@ class _SignInPageState extends State<SignInPage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
+                        const Hero(
+                          tag: "ftm-logo",
+                          child: Image(
+                            image: AssetImage("assets/images/ftm-logo.png"),
+                            width: 250,
+                          ),
+                        ),
                         const SizedBox(
                           height: 56,
                         ),
@@ -106,17 +120,18 @@ class _SignInPageState extends State<SignInPage> {
                         ftmPasswordInput(
                           Translations.of(context).text('password'),
                         ),
-                        TextButton(
-                          onPressed: () {
-                            //ToDo : Forgot Password onPressed Here ...
-                          },
-                          child: Text(
-                              Translations.of(context).text('forgot_password'),
-                              style: kTextBoldContrast),
-                        ),
+                        // TextButton(
+                        //   onPressed: () {
+                        //     //ToDo : Forgot Password onPressed Here ...
+                        //   },
+                        //   child: Text(
+                        //       Translations.of(context).text('forgot_password'),
+                        //       style: kTextBoldContrast),
+                        // ),
+                        const SizedBox(height: 26),
                         (!flag)
                             ? SignInButton()
-                            : SpinKitThreeBounce(
+                            : const SpinKitThreeBounce(
                                 size: 30,
                                 color: kPrimaryColor,
                               ),
@@ -137,54 +152,89 @@ class _SignInPageState extends State<SignInPage> {
     return ElevatedButton(
       onPressed: () async {
         flag = true;
-        setState(() {
-          userName = personnelCodeController.text;
-          password = passwordController.text;
-          futureGet(userName, password).then((value) {
-            String name = "";
-            String token = "";
-            String role = "";
-            String phone = "";
-            String userId = "";
+        setState(
+          () {
+            userName = personnelCodeController.text;
+            password = passwordController.text;
 
-            name += user.firstName ?? "name error";
-            name += " ";
-            name += user.lastName ?? "name error";
-
-            token = user.token ?? "**null token";
-
-            role = user.role ?? "null role";
-            phone = user.phone ?? "null phone";
-            userId = user.userId ?? "null userId";
-
-            if (user.firstName == null) {
-              showSnackBar(context, 'Personnel Code or Password is incorrect');
+            if (userName == '' || password == '') {
+              flag = false;
+              setState(() {});
+              showSnackBar(context, 'لطفا فیلد ها را به درستی وارد کنید');
             } else {
-              sharedPreference.save("username", name);
-              sharedPreference.save("token", token);
-              sharedPreference.save("role", role);
-              sharedPreference.save("phone", phone);
-              sharedPreference.save("user_id", userId);
+              futureGet(userName, password).then(
+                (value) {
+                  // print(value);
+                  if (value == 'ok') {
+                    String name = "";
+                    String token = "";
+                    String role = "";
+                    String phone = "";
+                    String userId = "";
 
-              Navigator.pushReplacement(
-                context,
-                PageTransition(
-                    type: PageTransitionType.rightToLeft,
-                    child: HomePage(
-                      operatorName: name,
-                    )),
+                    name += user.firstName ?? "name error";
+                    name += " ";
+                    name += user.lastName ?? "name error";
+
+                    token = user.token ?? "**null token";
+
+                    role = user.role ?? "null role";
+                    phone = user.phone ?? "null phone";
+                    userId = user.userId ?? "null userId";
+
+                    if (user.firstName == null) {
+                      showSnackBar(
+                          context, 'Personnel Code or Password is incorrect');
+                    } else {
+                      sharedPreference.save("username", name);
+                      sharedPreference.save("token", token);
+                      sharedPreference.save("role", role);
+                      sharedPreference.save("phone", phone);
+                      sharedPreference.save("user_id", userId);
+
+                      Navigator.pushReplacement(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.rightToLeft,
+                          child: HomePage(
+                            operatorName: name,
+                          ),
+                        ),
+                      );
+                    }
+                  } else if (value == 'er-pass') {
+                    flag = false;
+                    setState(() {});
+                    showSnackBar(context,
+                        Translations.of(context).text("snackBar_Login_Error"));
+                  } else if (value == 'er-internet') {
+                    flag = false;
+                    setState(() {});
+                    showSnackBar(context, "اتصال اینترنت را بررسی کنید");
+                  } else if (value == 'onError') {
+                    flag = false;
+                    setState(() {});
+                    showSnackBar(context, "خطای نامشخص!");
+                  }
+                },
+              ).catchError(
+                (e) {
+                  print(e);
+                  flag = false;
+                  setState(() {});
+                  showSnackBar(context, e);
+                },
               );
             }
-          }).catchError((_) {
-            setState(() {
-              flag = false;
-              showSnackBar(context, 'Connecting Error');
-            });
-
-          });
-        });
+          },
+        );
       },
-      child: Text(Translations.of(context).text("enter")),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(Translations.of(context).text("enter")),
+        ],
+      ),
       style: ElevatedButton.styleFrom(
         primary: kPrimaryColor,
         padding: const EdgeInsets.all(8),
@@ -227,27 +277,31 @@ class _SignInPageState extends State<SignInPage> {
 
   void showSnackBar(BuildContext context, String text) {
     final snackBar = SnackBar(
-      content: Text(text),
-      backgroundColor: kPrimaryColor,
-      action: SnackBarAction(
-        label: "Sign Up",
-        textColor: kTextDarkColor,
-        onPressed: () {
-          setState(() {
-            flag = false;
-          });
-          // Navigator.pushReplacement(
-          //   context,
-          //   PageTransition(
-          //     type: PageTransitionType.leftToRightWithFade,
-          //     duration: const Duration(seconds: 1),
-          //     child: const SignUpPage(
-          //       pageTitle: 'SignUpPage',
-          //     ),
-          //   ),
-          // );
-        },
+      content: Text(
+        text,
+        style: TextStyle(fontFamily: 'Yekan'),
       ),
+      backgroundColor: kErrorColor,
+      // duration: const Duration(seconds: 6),
+      // action: SnackBarAction(
+      // label: "Refresh",
+      // textColor: kTextDarkColor,
+      // onPressed: () {
+      //   setState(() {
+      //     flag = false;
+      //   });
+      // Navigator.pushReplacement(
+      //   context,
+      //   PageTransition(
+      //     type: PageTransitionType.leftToRightWithFade,
+      //     duration: const Duration(seconds: 1),
+      //     child: const SignUpPage(
+      //       pageTitle: 'SignUpPage',
+      //     ),
+      //   ),
+      // );
+      // },
+      // ),
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
