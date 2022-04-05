@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ftm_service_app/screens/end_shift_page.dart';
 import 'package:ftm_service_app/widgets/input_fields.dart';
 import 'package:ftm_service_app/constructor.dart';
 import 'package:page_transition/page_transition.dart';
@@ -74,21 +73,6 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
                         onPressed: () {
                           print(confirmCodeController
                               .text); // Print name current value
-                          Navigator.pushReplacement(
-                            context,
-                            PageTransition(
-                              type: PageTransitionType.rightToLeft,
-                              child: EndShiftPage(
-                                operatorName: 'Dispenser Page',
-                                lastDispenserData1A: '10',
-                                lastDispenserData1B: '20',
-                                lastDispenserData2A: '30',
-                                lastDispenserData2B: '40',
-                                lastDispenserData3A: '50',
-                                lastDispenserData3B: '60',
-                              ),
-                            ),
-                          );
                         },
                         child: Text(Translations.of(context).text("send_code")),
                         style: ElevatedButton.styleFrom(

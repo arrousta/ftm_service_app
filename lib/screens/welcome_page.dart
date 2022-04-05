@@ -75,6 +75,9 @@ class _WelcomePageState extends State<WelcomePage> {
         Locale('fa', 'IR'),
         Locale('en', 'US'),
       ],
+      theme: ThemeData(
+        fontFamily: 'Yekan',
+      ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ftm_service_app/screens/home_page.dart';
 import 'package:ftm_service_app/services/network_adapter.dart';
 import 'package:ftm_service_app/services/shared_preference.dart';
@@ -7,7 +8,6 @@ import 'package:ftm_service_app/structures/user.dart';
 import 'package:ftm_service_app/widgets/input_fields.dart';
 import 'package:ftm_service_app/constructor.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../services/translations.dart';
 import 'sign_up_page.dart';
@@ -38,6 +38,8 @@ class _SignInPageState extends State<SignInPage> {
         user.lastName = value.lastName;
         user.role = value.role;
         user.token = value.token;
+        user.phone = value.phone;
+        user.userId = value.userId;
 
         return true;
       }
@@ -45,6 +47,8 @@ class _SignInPageState extends State<SignInPage> {
 
     return false;
   }
+
+  bool flag = false;
 
   @override
   Widget build(BuildContext context) {
@@ -110,49 +114,12 @@ class _SignInPageState extends State<SignInPage> {
                               Translations.of(context).text('forgot_password'),
                               style: kTextBoldContrast),
                         ),
-                        ElevatedButton(
-                          onPressed: () async {
-                            setState(() {
-                              userName = personnelCodeController.text;
-                              password = passwordController.text;
-                              futureGet(userName, password).then((value) {
-                                String name = "";
-                                String token = "";
-
-                                name += user.firstName ?? "name error";
-                                name += " ";
-                                name += user.lastName ?? "name error";
-
-                                token = user.token ?? "**null token";
-
-                                if (user.firstName == null) {
-                                  showSnackBar(context,
-                                      'Personnel Code or Password is incorrect');
-                                } else {
-                                  //TODO:share2
-                                  sharedPreference.save("username", name);
-                                  sharedPreference.save("token", token);
-
-                                  Navigator.pushReplacement(
-                                    context,
-                                    PageTransition(
-                                        type: PageTransitionType.rightToLeft,
-                                        child: HomePage(
-                                          operatorName: name,
-                                        )),
-                                  );
-                                }
-                              }).catchError((_) {
-                                showSnackBar(context, 'Connecting Error');
-                              });
-                            });
-                          },
-                          child: Text(Translations.of(context).text("enter")),
-                          style: ElevatedButton.styleFrom(
-                            primary: kPrimaryColor,
-                            padding: const EdgeInsets.all(8),
-                          ),
-                        ),
+                        (!flag)
+                            ? SignInButton()
+                            : SpinKitThreeBounce(
+                                size: 30,
+                                color: kPrimaryColor,
+                              ),
                       ],
                     ),
                   ],
@@ -163,6 +130,65 @@ class _SignInPageState extends State<SignInPage> {
               ),
             ],
           )),
+    );
+  }
+
+  ElevatedButton SignInButton() {
+    return ElevatedButton(
+      onPressed: () async {
+        flag = true;
+        setState(() {
+          userName = personnelCodeController.text;
+          password = passwordController.text;
+          futureGet(userName, password).then((value) {
+            String name = "";
+            String token = "";
+            String role = "";
+            String phone = "";
+            String userId = "";
+
+            name += user.firstName ?? "name error";
+            name += " ";
+            name += user.lastName ?? "name error";
+
+            token = user.token ?? "**null token";
+
+            role = user.role ?? "null role";
+            phone = user.phone ?? "null phone";
+            userId = user.userId ?? "null userId";
+
+            if (user.firstName == null) {
+              showSnackBar(context, 'Personnel Code or Password is incorrect');
+            } else {
+              sharedPreference.save("username", name);
+              sharedPreference.save("token", token);
+              sharedPreference.save("role", role);
+              sharedPreference.save("phone", phone);
+              sharedPreference.save("user_id", userId);
+
+              Navigator.pushReplacement(
+                context,
+                PageTransition(
+                    type: PageTransitionType.rightToLeft,
+                    child: HomePage(
+                      operatorName: name,
+                    )),
+              );
+            }
+          }).catchError((_) {
+            setState(() {
+              flag = false;
+              showSnackBar(context, 'Connecting Error');
+            });
+
+          });
+        });
+      },
+      child: Text(Translations.of(context).text("enter")),
+      style: ElevatedButton.styleFrom(
+        primary: kPrimaryColor,
+        padding: const EdgeInsets.all(8),
+      ),
     );
   }
 
@@ -207,14 +233,19 @@ class _SignInPageState extends State<SignInPage> {
         label: "Sign Up",
         textColor: kTextDarkColor,
         onPressed: () {
-          Navigator.pushReplacement(
-              context,
-              PageTransition(
-                  type: PageTransitionType.leftToRightWithFade,
-                  duration: const Duration(seconds: 1),
-                  child: const SignUpPage(
-                    pageTitle: 'SignUpPage',
-                  )));
+          setState(() {
+            flag = false;
+          });
+          // Navigator.pushReplacement(
+          //   context,
+          //   PageTransition(
+          //     type: PageTransitionType.leftToRightWithFade,
+          //     duration: const Duration(seconds: 1),
+          //     child: const SignUpPage(
+          //       pageTitle: 'SignUpPage',
+          //     ),
+          //   ),
+          // );
         },
       ),
     );

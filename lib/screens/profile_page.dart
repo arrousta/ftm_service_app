@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ftm_service_app/services/network_adapter.dart';
 import 'package:ftm_service_app/services/translations.dart';
-import 'package:ftm_service_app/structures/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constructor.dart';
 
@@ -20,51 +19,39 @@ class Body extends StatefulWidget {
   _BodyState createState() => _BodyState();
 }
 
+String ? _operatorName;
+String ? _phone;
+String ? _user_id;
+String ? _role;
+
 class _BodyState extends State<Body> {
-  User user = User();
-  Future<User>? futureInputUsers;
-  String userName = "کاربر";
-  String userPhone = "+98 ";
-
-
-  Future<bool> futureGet(String _user, String _pass) async {
-    futureInputUsers = signInUser(userName: _user, password: _pass);
-    await futureInputUsers!.then((value) {
-      print(value.phone);
-
-      if (value.firstName != null) {
-        user.firstName = value.firstName;
-        user.lastName = value.lastName;
-        user.phone = value.phone;
-        user.id = value.id;
-        return true;
-      }
-    });
-    return false;
-  }
-
   @override
   void initState() {
-
-    futureGet('1016', "0057").then((value) {
-      String fullName = "";
-      fullName += user.firstName ?? "fullName error";
-      fullName += " ";
-      fullName += user.lastName ?? "fullName error";
-      if (user.firstName == null) {
-        print('Personnel Code or Password is incorrect');
-      } else {
-        userName = user.firstName!;
-        userPhone = user.phone!;
-      }
-    }).catchError((e) {
-      print("**2: error"+e.toString());
-    });
-
     super.initState();
+    _loadUserInfo();
   }
+
+  _loadUserInfo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _operatorName = (prefs.getString('username')??'');
+      _phone = (prefs.getString('phone')??'');
+      _user_id = (prefs.getString('user_id')??'');
+
+      String userRole = (prefs.getString('role')??'');
+      if(userRole == 'admin'){
+        _role = 'سرپرست';
+      }
+      if(userRole == 'operator'){
+        _role = 'اپراتور';
+      }
+
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    //_loadUserInfo();
     return SafeArea(
       child: Center(
         child: Column(
@@ -77,31 +64,13 @@ class _BodyState extends State<Body> {
                 backgroundImage: AssetImage('assets/images/user.png'),
               ),
               onTap: () async {
-                setState(() {
-                  futureGet('1016', "0057").then((value) {
-                    String fullName = "";
-                    fullName += user.firstName ?? "fullName error";
-                    fullName += " ";
-                    fullName += user.lastName ?? "fullName error";
-                    if (user.firstName == null) {
-                      print('Personnel Code or Password is incorrect');
-                    } else {
-                      userName = user.firstName ?? "کاربر";
-                      userPhone = user.phone ?? "0000000";
-
-                      print("**1: "+userPhone);
-                    }
-                  }).catchError((e) {
-                    print("**2: eroor"+e.toString());
-                  });
-                });
               },
             ),
             const SizedBox(
               height: 10.0,
             ),
             Text(
-              'سلام، $userName!',
+              '$_operatorName',
               style: const TextStyle(
                 fontFamily: 'Yekan',
                 fontSize: 40.0,
@@ -131,6 +100,36 @@ class _BodyState extends State<Body> {
             Card(
               color: Colors.white,
               margin:
+              const EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.verified_user_outlined,
+                      size: 20.0,
+                      color: Colors.teal.shade900,
+                    ),
+                    const SizedBox(
+                      width: 36.0,
+                    ),
+                    Text(
+                      '$_role',
+                      style: TextStyle(
+                        color: Colors.teal.shade900,
+                        fontSize: 20.0,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              width: 10.0,
+            ),
+            Card(
+              color: Colors.white,
+              margin:
                   const EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
@@ -145,7 +144,7 @@ class _BodyState extends State<Body> {
                       width: 36.0,
                     ),
                     Text(
-                      userPhone,
+                      '$_phone',
                       style: TextStyle(
                         color: Colors.teal.shade900,
                         fontSize: 20.0,
@@ -164,12 +163,12 @@ class _BodyState extends State<Body> {
                   const EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
               child: ListTile(
                 leading: Icon(
-                  Icons.mail,
+                  Icons.credit_card,
                   color: Colors.teal.shade900,
                   size: 20.0,
                 ),
                 title: Text(
-                  'Ali3nti@gmail.com',
+                  '$_user_id',
                   style: TextStyle(color: Colors.teal.shade900, fontSize: 20.0),
                 ),
               ),
