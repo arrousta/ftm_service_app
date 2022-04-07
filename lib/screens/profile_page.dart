@@ -82,7 +82,7 @@ class _BodyState extends State<Body> {
               height: 10.0,
             ),
             Text(
-              Translations.of(context).text("welcome_home"),
+              getTranslated(context, "welcome_home"),
               style: TextStyle(
                 fontFamily: 'Yekan',
                 fontSize: 20.0,

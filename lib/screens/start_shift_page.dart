@@ -72,14 +72,14 @@ class _StartShiftState extends State<StartShift> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              Translations.of(context).text("attention"),
+                              getTranslated(context, 'attention'),
                               style: kAttention,
                             ),
                             const SizedBox(
                               height: 10,
                             ),
                             Text(
-                              Translations.of(context).text("start_shift_mess"),
+                              getTranslated(context, 'start_shift_mess'),
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                   height: 1.4, letterSpacing: 1.0),
@@ -111,7 +111,7 @@ class _StartShiftState extends State<StartShift> {
                           padding: const EdgeInsets.symmetric(
                               vertical: 6, horizontal: 16),
                           child: Text(
-                            Translations.of(context).text("dispenser") + " 1",
+                            getTranslated(context, 'dispenser') + " 1",
                             style:
                                 const TextStyle(color: kLightBackgroundColor),
                           ),
@@ -177,7 +177,7 @@ class _StartShiftState extends State<StartShift> {
                           padding: const EdgeInsets.symmetric(
                               vertical: 6, horizontal: 16),
                           child: Text(
-                            Translations.of(context).text("dispenser") + " 2",
+                            getTranslated(context, 'dispenser') + " 2",
                             style:
                                 const TextStyle(color: kLightBackgroundColor),
                           ),
@@ -243,7 +243,7 @@ class _StartShiftState extends State<StartShift> {
                           padding: const EdgeInsets.symmetric(
                               vertical: 6, horizontal: 16),
                           child: Text(
-                            Translations.of(context).text("dispenser") + " 3",
+                            getTranslated(context, 'dispenser') + " 3",
                             style:
                                 const TextStyle(color: kLightBackgroundColor),
                           ),
@@ -326,8 +326,7 @@ class _StartShiftState extends State<StartShift> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                Translations.of(context)
-                                    .text("contradiction_data"),
+                                getTranslated(context, 'contradiction_data'),
                                 style: const TextStyle(
                                   fontSize: 15,
                                   fontFamily: 'Yekan',
@@ -356,7 +355,7 @@ class _StartShiftState extends State<StartShift> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                Translations.of(context).text("start_shift"),
+                                getTranslated(context, 'start_shift'),
                                 style: const TextStyle(
                                   fontSize: 15,
                                 ),
@@ -383,11 +382,15 @@ class _StartShiftState extends State<StartShift> {
         builder: (BuildContext context) {
           return AlertDialog(
             // title: const Text("Error"),
-            content: Text(Translations.of(context).text("close_page_mess")),
+            content: Text(
+              getTranslated(context, 'close_page_mess'),
+            ),
 
             actions: <Widget>[
               TextButton(
-                child: Text(Translations.of(context).text("yes")),
+                child: Text(
+                  getTranslated(context, 'yes'),
+                ),
                 onPressed: () {
                   Navigator.pushReplacement(
                       context,
@@ -399,7 +402,9 @@ class _StartShiftState extends State<StartShift> {
                 },
               ),
               TextButton(
-                child: Text(Translations.of(context).text("no")),
+                child: Text(
+                  getTranslated(context, 'no'),
+                ),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -451,7 +456,7 @@ showAlertDialog(BuildContext context, String operatorName) {
   // set up the buttons
   Widget cancelButton = TextButton(
     child: Text(
-      Translations.of(context).text("no"),
+      getTranslated(context, 'no'),
     ),
     onPressed: () {
       Navigator.pop(context);
@@ -459,7 +464,7 @@ showAlertDialog(BuildContext context, String operatorName) {
   );
   Widget continueButton = TextButton(
     child: Text(
-      Translations.of(context).text("yes"),
+      getTranslated(context, 'yes'),
     ),
     onPressed: () {
       Navigator.pushReplacement(
@@ -476,13 +481,13 @@ showAlertDialog(BuildContext context, String operatorName) {
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
     title: Text(
-      Translations.of(context).text("warning"),
-      style: TextStyle(
+      getTranslated(context, 'warning'),
+      style: const TextStyle(
         color: kErrorColor,
       ),
     ),
     content: Text(
-      Translations.of(context).text("start_shift_mess_warning"),
+      getTranslated(context, 'start_shift_mess_warning'),
     ),
     actions: [
       cancelButton,

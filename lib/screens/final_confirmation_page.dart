@@ -129,7 +129,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        Translations.of(context).text("attention"),
+                        getTranslated(context, 'attention'),
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -139,7 +139,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                         height: 6,
                       ),
                       Text(
-                        Translations.of(context).text("final_confirm_mess"),
+                        getTranslated(context, 'final_confirm_mess'),
                       ),
                     ],
                   ),
@@ -157,7 +157,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      Translations.of(context).text("dispenser_function") +
+                      getTranslated(context, 'dispenser_function') +
                           " 1",
                     ),
                     Container(
@@ -210,7 +210,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                     ),
                     //-----------------------------------------------------------------------------------------
                     Text(
-                      Translations.of(context).text("dispenser_function") +
+                      getTranslated(context, 'dispenser_function') +
                           " 2",
                     ),
                     Container(
@@ -263,7 +263,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                     ),
                     //--------------------------------------------------------------------------------------------------------
                     Text(
-                      Translations.of(context).text("dispenser_function") +
+                      getTranslated(context, 'dispenser_function') +
                           " 3",
                     ),
                     Container(
@@ -334,8 +334,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  Translations.of(context)
-                                      .text("payment_function_mess"),
+                                  getTranslated(context, 'payment_function_mess'),
                                 ),
                                 SizedBox(
                                   width: kBoxSizeWith,
@@ -370,7 +369,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  Translations.of(context).text("cash"),
+                                  getTranslated(context, 'cash'),
                                 ),
                                 SizedBox(
                                   width: kBoxSizeWith,
@@ -402,7 +401,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  Translations.of(context).text("card_reader"),
+                                  getTranslated(context, 'card_reader'),
                                 ),
                                 SizedBox(
                                   width: kBoxSizeWith,
@@ -434,8 +433,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  Translations.of(context)
-                                      .text("payment_cost_mess"),
+                                  getTranslated(context, 'payment_cost_mess'),
                                 ),
                                 SizedBox(
                                   width: kBoxSizeWith,
@@ -457,70 +455,74 @@ class _FinalConfirmState extends State<FinalConfirm> {
                       height: 8.0,
                     ),
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                              context,
-                              PageTransition(
-                                type: PageTransitionType.rightToLeft,
-                                child: EndShiftPage(
-                                  operatorName: widget.operatorName,
-                                  lastDispenserData1A: widget.dispenser1A,
-                                  lastDispenserData1B: widget.dispenser1B,
-                                  lastDispenserData2A: widget.dispenser2A,
-                                  lastDispenserData2B: widget.dispenser2B,
-                                  lastDispenserData3A: widget.dispenser3A,
-                                  lastDispenserData3B: widget.dispenser3B,
-                                ),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            Translations.of(context).text("edit_data"),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    // ElevatedButton(
+                    //   onPressed: () {
+                    //
+                    //     Navigator.popUntil(context, (route) {
+                    //       return route.settings.name == '';
+                    //     });
+                    //
+                    //     Navigator.push(
+                    //       context,
+                    //       PageTransition(
+                    //         type: PageTransitionType.rightToLeft,
+                    //         child: EndShiftPage(
+                    //           operatorName: widget.operatorName,
+                    //           lastDispenserData1A: widget.dispenser1A,
+                    //           lastDispenserData1B: widget.dispenser1B,
+                    //           lastDispenserData2A: widget.dispenser2A,
+                    //           lastDispenserData2B: widget.dispenser2B,
+                    //           lastDispenserData3A: widget.dispenser3A,
+                    //           lastDispenserData3B: widget.dispenser3B,
+                    //         ),
+                    //       ),
+                    //     );
+                    //   },
+                    //   child: Text(
+                    //     Translations.of(context).text("edit_data"),
+                    //     style: const TextStyle(
+                    //       fontSize: 15,
+                    //     ),
+                    //   ),
+                    //   style: ElevatedButton.styleFrom(
+                    //     primary: kPrimaryColor,
+                    //     padding: const EdgeInsets.symmetric(
+                    //         vertical: 8.0, horizontal: 30.0),
+                    //   ),
+                    // ),
+                    // const SizedBox(
+                    //   width: 50.0,
+                    // ),
+                    ElevatedButton(
+                      onPressed: () {
+                        futureSendShiftData().then((value) {
+                          showAlertDialog(context, widget.operatorName);
+                        }, onError: (e) {
+                          showAlertDialog(context, widget.operatorName);
+                        });
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            getTranslated(context, 'finish'),
                             style: const TextStyle(
                               fontSize: 15,
                             ),
                           ),
-                          style: ElevatedButton.styleFrom(
-                            primary: kPrimaryColor,
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 8.0, horizontal: 30.0),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 50.0,
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            futureSendShiftData().then((value) {
-                              bool response;
-                              response = shiftData.datasaved ?? false;
-
-                              if (response) {
-                                showAlertDialog(context, widget.operatorName);
-
-                              } else {
-                                print("**response null");
-                              }
-                            });
-                          },
-                          child: Text(
-                            Translations.of(context).text("finish"),
-                            style: const TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            primary: kPrimaryColor,
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 8.0, horizontal: 30.0),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: kPrimaryColor,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 30.0),
+                      ),
                     ),
+                    // ],
+                    // ),
                   ],
                 ),
               ),
@@ -571,7 +573,7 @@ showAlertDialog(BuildContext context, String operatorName) {
   // set up the buttons
   Widget cancelButton = TextButton(
     child: Text(
-      Translations.of(context).text("exit_app"),
+      getTranslated(context, 'exit_app'),
     ),
     onPressed: () {
       SystemNavigator.pop();
@@ -579,7 +581,7 @@ showAlertDialog(BuildContext context, String operatorName) {
   );
   Widget continueButton = TextButton(
     child: Text(
-      Translations.of(context).text("login_main_page"),
+      getTranslated(context, 'login_main_page'),
     ),
     onPressed: () {
       Navigator.pushReplacement(
@@ -594,7 +596,9 @@ showAlertDialog(BuildContext context, String operatorName) {
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
-    content: Text(Translations.of(context).text("god_bless_you"),),
+    content: Text(
+      getTranslated(context, 'god_bless_you'),
+    ),
     actions: [
       cancelButton,
       continueButton,

@@ -3,9 +3,9 @@
   "title": "main page",
   "snackBar_Login_Error": "Wrong username or password",
   "welcome_home": "Welcome!",
-  "sing_in": "Sing in",
-  "sing_out": "Sing Out",
-  "sing_up": "Sing up",
+  "sign_in": "Sign in",
+  "sign_out": "Sign Out",
+  "sign_up": "Sign up",
   "forgot_password": "Forgot Password",
   
   "start_shift": "Start Shift",

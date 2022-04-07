@@ -71,9 +71,6 @@ Future<ShiftData> setShiftData({
   };
   Map<String, Map<String, dynamic>> data = {
     'shiftData' : {
-      'id' : shiftData.id,
-      'user' : shiftData.user,
-      'state_id' : shiftData.state_id,
       'start_shift' : shiftData.start_shift,
       'end_shift' : shiftData.end_shift,
       'nozzle_1': shiftData.nozzle_1,

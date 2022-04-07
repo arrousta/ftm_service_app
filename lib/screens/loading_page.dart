@@ -86,8 +86,12 @@ class _LoadingPageState extends State<LoadingPage> {
         }
       }
     }).catchError((e) {
-      showSnackBar(context,"اتصال برقرار نشد", widget.operatorName);
-      print("loading error: " + e);
+      if (e.toString().startsWith("SocketException")) {
+        showSnackBar(context, "اتصال برقرار نشد", widget.operatorName);
+      } else {
+        showSnackBar(context, "خطای نامشخص!", widget.operatorName);
+        print("loading error: " + e.toString());
+      }
     });
   }
 
@@ -102,12 +106,21 @@ class _LoadingPageState extends State<LoadingPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async => false,
-      child: const Scaffold(
+      child: Scaffold(
         backgroundColor: kLightBackgroundColor,
         body: Center(
-          child: SpinKitCircle(
-            color: kPrimaryColor,
-            size: 50.0,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              SpinKitCircle(
+                color: kPrimaryColor,
+                size: 50.0,
+              ),
+              SizedBox(height: 16),
+              Text(
+                "لطفا منتظر بمانید"
+              )
+            ],
           ),
         ),
       ),

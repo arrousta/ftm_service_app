@@ -16,72 +16,16 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   late Future<User>? futureUser;
+
   String _username = "";
   String version = "نسخه: ";
-
-  // FutureBuilder<User> futureBuilderGet(BuildContext context) {
-  //   return FutureBuilder<User>(
-  //     future: futureUser,
-  //     builder: (context, snapshot) {
-  //       if (snapshot.hasData) {
-  //         return Navigator(
-  //           onGenerateRoute: (settings) {
-  //             setState(()  {
-  //               Duration duration = const Duration(seconds: 100);
-  //               Future.delayed(duration, ()
-  //               {
-  //                 Navigator.pushReplacement(context, MaterialPageRoute(
-  //                   builder: (context) {
-  //                     return HomePage(
-  //                       pageTitle: snapshot.data!.operator.toString(),
-  //                     );
-  //                   },
-  //                 ),);
-  //               });
-  //             });
-  //           },
-  //         );
-  //       } else if (snapshot.hasError) {
-  //         return Column(
-  //           children: [
-  //             Text('errrror: ${snapshot.error}'),
-  //             // buildButtonReload(),
-  //           ],
-  //         );
-  //       }
-  //       // By default, show a loading spinner.
-  //       return const SpinKitCircle(
-  //         color: Colors.indigo,
-  //         size: 50.0,
-  //       );
-  //     },
-  //   );
-  // }
-
-  // String futureGet() {
-  //   futureUser = fetchData();
-  //   futureUser.then((value) {
-  //     if (value.name != null) {
-  //       print(value.name);
-  //       return value.name;
-  //     }
-  //   });
-  //   return "null";
-  // }
-
-  // @override
-  // void initState() {
-  //   // futureUser = fetchData();
-  //   getInternetStatus();
-  //   super.initState();
-  // }
 
   _loadUserInfo() async {
     SharedPreference sharedPreference = SharedPreference();
     _username = await sharedPreference.read('username');
     if (_username == "") {
       Navigator.pushNamedAndRemoveUntil(
-          context, '/welcome', ModalRoute.withName('/welcome'));
+          context, '/sign_in', ModalRoute.withName('/sign_in'));
     } else {
       Navigator.pushReplacement(
         context,
@@ -99,18 +43,14 @@ class _SplashScreenState extends State<SplashScreen> {
   void getInternetStatus() async {
     Duration duration = const Duration(seconds: 3);
     await Future.delayed(duration, () {
-      //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
       _loadUserInfo();
-      //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
     });
   }
 
   @override
   void initState() {
     getInternetStatus();
-
     version = version + widget.version;
-
     super.initState();
   }
 
@@ -144,13 +84,6 @@ class _SplashScreenState extends State<SplashScreen> {
           ],
         ),
       ),
-    );
-  }
-
-  TextButton BuildButtonReload() {
-    return TextButton(
-      onPressed: () {},
-      child: const Text("Reload"),
     );
   }
 }

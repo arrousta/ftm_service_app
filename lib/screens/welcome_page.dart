@@ -7,7 +7,7 @@ import 'package:ftm_service_app/constructor.dart';
 
 import 'package:page_transition/page_transition.dart';
 import 'sign_up_page.dart';
-import 'sing_in_page.dart';
+import 'sign_in_page.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-  Locale _locale = const Locale('fa');
+  late Locale _locale = Locale('en');
 
   void setLocale(Locale value) {
     setState(() {
@@ -42,14 +42,18 @@ class _WelcomePageState extends State<WelcomePage> {
 
     setLocale(_temp);
     MyApp.locale = _temp;
-    Navigator.pushReplacement(
-      context,
-      PageTransition(
-          child: const MyApp(
-            version: "0.0.0.0",
-          ),
-          type: PageTransitionType.fade),
-    );
+    setState(() {
+
+    });
+
+    // Navigator.pushReplacement(
+    //   context,
+    //   PageTransition(
+    //       child: const MyApp(
+    //         version: "0.0.0.0",
+    //       ),
+    //       type: PageTransitionType.fade),
+    // );
   }
 
   @override
@@ -89,7 +93,7 @@ class _WelcomePageState extends State<WelcomePage> {
               Container(
                 margin: const EdgeInsets.only(bottom: 10, top: 0),
                 child: Text(
-                  Translations.of(context).text('welcome_home'),
+                  getTranslated(context, "welcome_home"),
                   style: const TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 40,
@@ -100,7 +104,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 width: 200,
                 margin: const EdgeInsets.only(bottom: 0),
                 child: ftmFlatBtn(
-                  Translations.of(context).text('sing_in'),
+                  getTranslated(context, "sign_in"),
                   () {
                     Navigator.pushReplacement(
                       context,
@@ -117,7 +121,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 width: 200,
                 padding: const EdgeInsets.all(0),
                 child: ftmOutlineBtn(
-                  Translations.of(context).text('sing_up'),
+                  getTranslated(context, 'sign_up'),
                   () {
                     Navigator.pushReplacement(
                       context,
@@ -140,13 +144,17 @@ class _WelcomePageState extends State<WelcomePage> {
                     onPressed: () {
                       _changeLanguage('en');
                     },
-                    child: const Text('English'),
+                    child: const Text('English', style: TextStyle(
+                      color: kPrimaryColor
+                    ),),
                   ),
                   TextButton(
                     onPressed: () {
                       _changeLanguage('fa');
                     },
-                    child: const Text('فارسی'),
+                    child: const Text('فارسی',style: TextStyle(
+                      color: kPrimaryColor
+                    ),),
                   ),
                 ],
               ),

@@ -2,13 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:ftm_service_app/screens/end_shift_page.dart';
 import 'package:ftm_service_app/screens/welcome_page.dart';
 import 'package:ftm_service_app/screens/home_page.dart';
 import 'package:ftm_service_app/screens/splash_screen.dart';
 import 'package:ftm_service_app/services/translations.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'screens/sign_up_page.dart';
-import 'screens/sing_in_page.dart';
+import 'screens/sign_in_page.dart';
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -30,7 +31,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key, required this.version}) : super(key: key);
   final String version;
-  static late Locale locale = const Locale('fa','IR');
+  static late Locale locale = const Locale('fa', 'IR');
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -59,7 +60,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Yekan',
       ),
-      home: const WelcomePage(),
+      // home: const SplashScreen(version: "0"),
       initialRoute: '/.',
       routes: {
         '/.': (BuildContext context) => SplashScreen(version: version),

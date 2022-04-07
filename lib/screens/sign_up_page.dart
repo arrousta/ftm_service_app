@@ -4,8 +4,8 @@ import 'package:ftm_service_app/widgets/input_fields.dart';
 import 'package:ftm_service_app/constructor.dart';
 import 'package:page_transition/page_transition.dart';
 import '../services/translations.dart';
-import 'sing_in_page.dart';
-import 'confirmation_page.dart';
+import 'sign_in_page.dart';
+import 'sms_confirmation_page.dart';
 
 class SignUpPage extends StatefulWidget {
   final String pageTitle;
@@ -20,13 +20,13 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        onWillPop: _onBackPressed,
-    child: Scaffold(
+      onWillPop: _onBackPressed,
+      child: Scaffold(
         appBar: AppBar(
           elevation: 0,
           backgroundColor: kLightBackgroundColor,
           title: Text(
-            Translations.of(context).text("sing_up"),
+            getTranslated(context, 'sign_up'),
             style: const TextStyle(color: Colors.grey, fontSize: 15),
           ),
           actions: <Widget>[
@@ -40,8 +40,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 );
               },
-              child: Text(Translations.of(context).text("sing_in"),
-                  style: kTextContrast),
+              child:
+                  Text(getTranslated(context, 'sign_in'), style: kTextContrast),
             )
           ],
         ),
@@ -56,20 +56,25 @@ class _SignUpPageState extends State<SignUpPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Text(Translations.of(context).text("welcome_ftm"),
+                      Text(getTranslated(context, 'welcome_ftm'),
                           style: kHeader3),
-                      Text(Translations.of(context).text("lets_get_start"),
+                      Text(getTranslated(context, 'lets_get_start'),
                           style: taglineText),
                       ftmFullNameTextInput(
-                          Translations.of(context).text("full_name")),
+                        getTranslated(context, 'full_name'),
+                      ),
                       ftmPersonalCodeInput(
-                          Translations.of(context).text("personnel_code")),
+                        getTranslated(context, 'personnel_code'),
+                      ),
                       ftmNationalCodeInput(
-                          Translations.of(context).text("national_code")),
+                        getTranslated(context, 'national_code'),
+                      ),
                       ftmPhoneNumInput(
-                          Translations.of(context).text("phone_number")),
+                        getTranslated(context, 'phone_number'),
+                      ),
                       ftmPasswordInput(
-                          Translations.of(context).text("password")),
+                        getTranslated(context, 'password'),
+                      ),
                       // ],
                       //),
                       const SizedBox(
@@ -100,7 +105,9 @@ class _SignUpPageState extends State<SignUpPage> {
                                       pageTitle: 'ConfirmationPage',
                                     )));
                           },
-                          child: Text(Translations.of(context).text("enter")),
+                          child: Text(
+                            getTranslated(context, 'enter'),
+                          ),
                           style: ElevatedButton.styleFrom(
                             primary: kPrimaryColor,
                             padding: const EdgeInsets.all(8),
@@ -116,9 +123,11 @@ class _SignUpPageState extends State<SignUpPage> {
               decoration: authPlateDecoration,
             ),
           ],
-        ),),);
-
+        ),
+      ),
+    );
   }
+
   Future<bool> _onBackPressed() async {
     return await showDialog(
         context: context,
@@ -126,17 +135,23 @@ class _SignUpPageState extends State<SignUpPage> {
         builder: (BuildContext context) {
           return AlertDialog(
             // title: const Text("Error"),
-            content: Text(Translations.of(context).text("close_app_mess")),
+            content: Text(
+              getTranslated(context, 'close_app_mess'),
+            ),
 
             actions: <Widget>[
               TextButton(
-                child: Text(Translations.of(context).text("no")),
+                child: Text(
+                  getTranslated(context, 'no'),
+                ),
                 onPressed: () {
                   Navigator.pop(context);
                 },
               ),
               TextButton(
-                child: Text(Translations.of(context).text("yes")),
+                child: Text(
+                  getTranslated(context, 'yes'),
+                ),
                 onPressed: () {
                   SystemNavigator.pop();
                 },
@@ -145,6 +160,4 @@ class _SignUpPageState extends State<SignUpPage> {
           );
         });
   }
-
-
 }

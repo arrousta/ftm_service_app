@@ -3,7 +3,7 @@ import 'package:ftm_service_app/widgets/input_fields.dart';
 import 'package:ftm_service_app/constructor.dart';
 import 'package:page_transition/page_transition.dart';
 import '../services/translations.dart';
-import 'sing_in_page.dart';
+import 'sign_in_page.dart';
 
 class ConfirmationPage extends StatefulWidget {
   final String pageTitle;
@@ -22,7 +22,7 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
         elevation: 0,
         backgroundColor: kLightBackgroundColor,
         title: Text(
-          Translations.of(context).text("confirmation_sms"),
+          getTranslated(context, "confirmation_sms"),
           style: const TextStyle(color: Colors.grey, fontSize: 15),
         ),
         actions: <Widget>[
@@ -36,8 +36,8 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
                 ),
               );
             },
-            child: Text(Translations.of(context).text("sing_in"),
-                style: kTextContrast),
+            child:
+                Text(getTranslated(context, "sign_in"), style: kTextContrast),
           )
         ],
       ),
@@ -52,16 +52,13 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Text(
-                        Translations.of(context)
-                            .text("confirmation_sms_message1"),
+                    Text(getTranslated(context, "confirmation_sms_message1"),
                         style: kHeader7),
-                    Text(
-                        Translations.of(context)
-                            .text("confirmation_sms_message2"),
+                    Text(getTranslated(context, "confirmation_sms_message2"),
                         style: taglineText2),
-                    ftmConfirmCodeInput(Translations.of(context)
-                        .text("confirmation_sms_message3")),
+                    ftmConfirmCodeInput(
+                      getTranslated(context, "confirmation_sms_message3"),
+                    ),
                     const SizedBox(
                       height: 8.0,
                     ),
@@ -74,7 +71,9 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
                           print(confirmCodeController
                               .text); // Print name current value
                         },
-                        child: Text(Translations.of(context).text("send_code")),
+                        child: Text(
+                          getTranslated(context, "send_code"),
+                        ),
                         style: ElevatedButton.styleFrom(
                           primary: kPrimaryColor,
                           padding: const EdgeInsets.all(8),

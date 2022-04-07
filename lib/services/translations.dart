@@ -3,6 +3,10 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
+String getTranslated(BuildContext context, String key) {
+  return Translations.of(context).text(key);
+}
+
 class Translations {
   late Map localizationValues;
   Future load(Locale locale) async {

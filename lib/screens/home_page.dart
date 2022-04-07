@@ -88,9 +88,7 @@ class HomePage extends StatelessWidget {
                         height: 8,
                       ),
                       Text(
-                        Translations.of(context).text("hi_user") +
-                            operatorName +
-                            " !",
+                        getTranslated(context, 'hi_user') + operatorName + " !",
                       ),
                       const Divider(),
                       GestureDetector(
@@ -98,7 +96,7 @@ class HomePage extends StatelessWidget {
                           _handleLogout(context);
                         },
                         child: Text(
-                          Translations.of(context).text("log_out"),
+                          getTranslated(context, 'log_out'),
                           style:
                               const TextStyle(color: kErrorColor, fontSize: 11),
                         ),
@@ -114,7 +112,9 @@ class HomePage extends StatelessWidget {
                   const Icon(Icons.supervised_user_circle),
                   Padding(
                     padding: const EdgeInsets.only(right: 8),
-                    child: Text(Translations.of(context).text("profile")),
+                    child: Text(
+                      getTranslated(context, 'profile'),
+                    ),
                   ),
                 ],
               ),
@@ -134,7 +134,9 @@ class HomePage extends StatelessWidget {
                   const Icon(Icons.coffee),
                   Padding(
                     padding: const EdgeInsets.only(right: 8),
-                    child: Text(Translations.of(context).text("take_leave")),
+                    child: Text(
+                      getTranslated(context, 'take_leave'),
+                    ),
                   ),
                 ],
               ),
@@ -155,7 +157,9 @@ class HomePage extends StatelessWidget {
                   const Icon(Icons.settings),
                   Padding(
                     padding: const EdgeInsets.only(right: 8),
-                    child: Text(Translations.of(context).text("setting")),
+                    child: Text(
+                      getTranslated(context, 'setting'),
+                    ),
                   ),
                 ],
               ),
@@ -177,7 +181,9 @@ class HomePage extends StatelessWidget {
                   const Icon(Icons.call),
                   Padding(
                     padding: const EdgeInsets.only(right: 8),
-                    child: Text(Translations.of(context).text("contact_us")),
+                    child: Text(
+                      getTranslated(context, 'contact_us'),
+                    ),
                   ),
                 ],
               ),
@@ -198,7 +204,9 @@ class HomePage extends StatelessWidget {
                   const Icon(Icons.info),
                   Padding(
                     padding: const EdgeInsets.only(right: 8.0),
-                    child: Text(Translations.of(context).text("about")),
+                    child: Text(
+                      getTranslated(context, 'about'),
+                    ),
                   ),
                 ],
               ),
@@ -303,7 +311,6 @@ class _HomePageBodyState extends State<HomePageBody> {
 
   @override
   Widget build(BuildContext context) {
-    bool isStarted = false;
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: SafeArea(
@@ -407,33 +414,28 @@ class _HomePageBodyState extends State<HomePageBody> {
                   IconContent(
                     color: kGreenColor,
                     iconAddress: "assets/icon/fuel-start.png",
-                    label: Translations.of(context).text("start_shift"),
+                    label: getTranslated(context, "start_shift"),
                     onPress: () {
-                      if (isStarted) {
-                        showSnackBar(context, "شیفت شما هنوز به پایان نرسیده است");
-                      } else {
-                        setState(
-                          () {
-
-                            Navigator.pushReplacement(
-                              context,
-                              PageTransition(
-                                type: PageTransitionType.rightToLeft,
-                                child: LoadingPage(
-                                  keyPage: 'start',
-                                  operatorName: widget.operatorName,
-                                ),
+                      setState(
+                        () {
+                          Navigator.pushReplacement(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.rightToLeft,
+                              child: LoadingPage(
+                                keyPage: 'start',
+                                operatorName: widget.operatorName,
                               ),
-                            );
-                          },
-                        );
-                      }
+                            ),
+                          );
+                        },
+                      );
                     },
                   ),
                   IconContent(
                     color: kRedColor,
                     iconAddress: "assets/icon/fuel-end.png",
-                    label: Translations.of(context).text("end_shift"),
+                    label: getTranslated(context, 'end_shift'),
                     onPress: () {
                       Navigator.pushReplacement(
                         context,
@@ -461,16 +463,22 @@ class _HomePageBodyState extends State<HomePageBody> {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return AlertDialog(
-            content: Text(Translations.of(context).text("close_app_mess")),
+            content: Text(
+              getTranslated(context, 'close_app_mess'),
+            ),
             actions: <Widget>[
               TextButton(
-                child: Text(Translations.of(context).text("yes")),
+                child: Text(
+                  getTranslated(context, 'yes'),
+                ),
                 onPressed: () {
                   SystemNavigator.pop();
                 },
               ),
               TextButton(
-                child: Text(Translations.of(context).text("no")),
+                child: Text(
+                  getTranslated(context, 'no'),
+                ),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -479,8 +487,8 @@ class _HomePageBodyState extends State<HomePageBody> {
           );
         });
   }
-
 }
+
 void showSnackBar(BuildContext context, String text) {
   final snackBar = SnackBar(
     content: Text(
@@ -491,4 +499,3 @@ void showSnackBar(BuildContext context, String text) {
   );
   ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }
-

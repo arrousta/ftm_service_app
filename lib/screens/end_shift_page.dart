@@ -89,7 +89,7 @@ class _EndShiftPageState extends State<EndShiftPage> {
                           padding: const EdgeInsets.symmetric(
                               vertical: 6, horizontal: 16),
                           child: Text(
-                            Translations.of(context).text("dispenser") + " 1",
+                            getTranslated(context, "dispenser") + " 1",
                             style:
                                 const TextStyle(color: kLightBackgroundColor),
                           ),
@@ -119,7 +119,7 @@ class _EndShiftPageState extends State<EndShiftPage> {
                           padding: const EdgeInsets.symmetric(
                               vertical: 6, horizontal: 16),
                           child: Text(
-                            Translations.of(context).text("dispenser") + " 2",
+                            getTranslated(context, "dispenser") + " 2",
                             style:
                                 const TextStyle(color: kLightBackgroundColor),
                           ),
@@ -147,7 +147,7 @@ class _EndShiftPageState extends State<EndShiftPage> {
                           padding: const EdgeInsets.symmetric(
                               vertical: 6, horizontal: 16),
                           child: Text(
-                            Translations.of(context).text("dispenser") + " 3",
+                            getTranslated(context, "dispenser") + " 3",
                             style:
                                 const TextStyle(color: kLightBackgroundColor),
                           ),
@@ -171,14 +171,13 @@ class _EndShiftPageState extends State<EndShiftPage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.arrow_back_ios_sharp),
-                            SizedBox(
+                            const Icon(Icons.arrow_back_ios_sharp),
+                            const SizedBox(
                               width: 10.0,
                             ),
                             Text(
-                              Translations.of(context)
-                                  .text("confirm_and_continue"),
-                              style: TextStyle(fontFamily: 'Yekan'),
+                              getTranslated(context, "confirm_and_continue"),
+                              style: const TextStyle(fontFamily: 'Yekan'),
                             ),
                           ],
                         ),
@@ -200,8 +199,8 @@ class _EndShiftPageState extends State<EndShiftPage> {
                                 endSiftList[6] == 0) {
                               showSnackBar(
                                 context,
-                                Translations.of(context)
-                                    .text("dispenser_data_warning1"),
+                                getTranslated(
+                                    context, "dispenser_data_warning1"),
                               );
                             } else if (endSiftList[1] <
                                     int.parse(_startDispenser1A) ||
@@ -211,10 +210,9 @@ class _EndShiftPageState extends State<EndShiftPage> {
                                 endSiftList[5] < int.parse(_startDispenser3A) ||
                                 endSiftList[6] < int.parse(_startDispenser3B)) {
                               showSnackBar(
-                                context,
-                                Translations.of(context)
-                                    .text("dispenser_data_warning2"),
-                              );
+                                  context,
+                                  getTranslated(
+                                      context, "dispenser_data_warning2"));
                             } else {
                               Navigator.push(
                                 context,
@@ -223,18 +221,18 @@ class _EndShiftPageState extends State<EndShiftPage> {
                                   child: Payment(
                                     operatorName: widget.operatorName,
                                     total: '$_total',
-                                    dispenser1Ad: '${endSiftFunctionList[1]}',
-                                    dispenser1Bd: '${endSiftFunctionList[2]}',
-                                    dispenser2Ad: '${endSiftFunctionList[3]}',
-                                    dispenser2Bd: '${endSiftFunctionList[4]}',
-                                    dispenser3Ad: '${endSiftFunctionList[5]}',
-                                    dispenser3Bd: '${endSiftFunctionList[6]}',
                                     dispenser1A: '${endSiftList[1]}',
                                     dispenser1B: '${endSiftList[2]}',
                                     dispenser2A: '${endSiftList[3]}',
                                     dispenser2B: '${endSiftList[4]}',
                                     dispenser3A: '${endSiftList[5]}',
                                     dispenser3B: '${endSiftList[6]}',
+                                    dispenser1Ad: '${endSiftFunctionList[1]}',
+                                    dispenser1Bd: '${endSiftFunctionList[2]}',
+                                    dispenser2Ad: '${endSiftFunctionList[3]}',
+                                    dispenser2Bd: '${endSiftFunctionList[4]}',
+                                    dispenser3Ad: '${endSiftFunctionList[5]}',
+                                    dispenser3Bd: '${endSiftFunctionList[6]}',
                                   ),
                                 ),
                               );
@@ -242,8 +240,7 @@ class _EndShiftPageState extends State<EndShiftPage> {
                           } else if (_total == 0) {
                             showAlertDialog(
                               context,
-                              Translations.of(context)
-                                  .text("breakdown_dispenser"),
+                              getTranslated(context, "breakdown_dispenser"),
                             );
                           } else {
                             print("Error in total dispenser");
@@ -268,11 +265,15 @@ class _EndShiftPageState extends State<EndShiftPage> {
         builder: (BuildContext context) {
           return AlertDialog(
             // title: const Text("Error"),
-            content: Text(Translations.of(context).text("close_page_mess")),
+            content: Text(
+              getTranslated(context, 'close_page_mess'),
+            ),
 
             actions: <Widget>[
               TextButton(
-                child: Text(Translations.of(context).text("yes")),
+                child: Text(
+                  getTranslated(context, 'yes'),
+                ),
                 onPressed: () {
                   Navigator.pushReplacement(
                       context,
@@ -284,7 +285,7 @@ class _EndShiftPageState extends State<EndShiftPage> {
                 },
               ),
               TextButton(
-                child: Text(Translations.of(context).text("no")),
+                child: Text(getTranslated(context, 'no'),),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -347,12 +348,12 @@ class ImageCardWidget extends StatelessWidget {
           padding: const EdgeInsets.all(6),
           child: Row(
             children: [
-              Icon(Icons.camera_alt, size: 16, color: kPrimaryColor),
-              SizedBox(
+              const Icon(Icons.camera_alt, size: 16, color: kPrimaryColor),
+              const SizedBox(
                 width: 6,
               ),
-              Text(Translations.of(context).text("upload_image"),
-                  style: TextStyle(fontSize: 12, color: kPrimaryColor)),
+              Text(getTranslated(context, 'upload_image'),
+                  style: const TextStyle(fontSize: 12, color: kPrimaryColor)),
             ],
           ),
         ),
@@ -401,7 +402,7 @@ class _NozzleWidgetState extends State<NozzleWidget> {
               child: Column(
                 children: [
                   Text(
-                    Translations.of(context).text('start_shift'),
+                    getTranslated(context, 'start_shift'),
                     style: const TextStyle(
                       fontSize: 12,
                     ),
@@ -414,7 +415,7 @@ class _NozzleWidgetState extends State<NozzleWidget> {
                     ),
                   ),
                   Text(
-                    Translations.of(context).text('end_shift'),
+                    getTranslated(context, 'end_shift'),
                     style: const TextStyle(
                       fontSize: 12,
                     ),
@@ -452,7 +453,7 @@ class _NozzleWidgetState extends State<NozzleWidget> {
                           fillColor: kTextWhiteColor,
                           filled: true,
                           hintText:
-                              Translations.of(context).text('enter_number'),
+                          getTranslated(context, 'enter_number'),
                           hintStyle: inputFieldHintTextStyleDispenser,
                           focusedBorder: inputFieldFocusedBorderStyle,
                           contentPadding: const EdgeInsets.symmetric(
@@ -461,7 +462,7 @@ class _NozzleWidgetState extends State<NozzleWidget> {
                     ),
                   ),
                   Text(
-                    Translations.of(context).text('function'),
+                    getTranslated(context, 'function'),
                     style: const TextStyle(
                       fontSize: 12,
                     ),
@@ -494,7 +495,7 @@ showAlertDialog(BuildContext context, String operatorName) {
   // set up the buttons
   Widget cancelButton = TextButton(
     child: Text(
-      Translations.of(context).text("cancel"),
+      getTranslated(context, 'cancel'),
     ),
     onPressed: () {
       Navigator.pop(context);
@@ -502,7 +503,7 @@ showAlertDialog(BuildContext context, String operatorName) {
   );
   Widget continueButton = TextButton(
     child: Text(
-      Translations.of(context).text("confirm_breakdown_dispenser"),
+      getTranslated(context, 'confirm_breakdown_dispenser'),
     ),
     onPressed: () {
       Navigator.pushReplacement(

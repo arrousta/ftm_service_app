@@ -62,89 +62,92 @@ class _SignInPageState extends State<SignInPage> {
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            elevation: 0,
-            backgroundColor: kLightBackgroundColor,
-            title: Text(
-              Translations.of(context).text('sing_in'),
-              style: const TextStyle(
-                color: Colors.grey,
-                fontSize: 15,
-              ),
-            ),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                      context,
-                      PageTransition(
-                          type: PageTransitionType.rightToLeft,
-                          child: const SignUpPage(
-                            pageTitle: 'SignUpPage',
-                          )));
-                },
-                child: Text(
-                  Translations.of(context).text('sing_up'),
-                  style: const TextStyle(color: kPrimaryColor),
-                ),
-              )
-            ],
-          ),
+          // appBar: AppBar(
+          //   automaticallyImplyLeading: false,
+          //   elevation: 0,
+          //   backgroundColor: kLightBackgroundColor,
+          //   title: Text(
+          //     Translations.of(context).text('sing_in'),
+          //     style: const TextStyle(
+          //       color: Colors.grey,
+          //       fontSize: 15,
+          //     ),
+          //   ),
+          //   actions: <Widget>[
+          //     TextButton(
+          //       onPressed: () {
+          //         Navigator.pushReplacement(
+          //             context,
+          //             PageTransition(
+          //                 type: PageTransitionType.rightToLeft,
+          //                 child: const SignUpPage(
+          //                   pageTitle: 'SignUpPage',
+          //                 )));
+          //       },
+          //       child: Text(
+          //         Translations.of(context).text('sing_up'),
+          //         style: const TextStyle(color: kPrimaryColor),
+          //       ),
+          //     )
+          //   ],
+          // ),
           body: ListView(
-            shrinkWrap: true,
-            children: <Widget>[
-              Container(
-                padding: const EdgeInsets.only(left: 18, right: 18),
-                child: Stack(
+        shrinkWrap: true,
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.only(left: 18, right: 18),
+            child: Stack(
+              children: <Widget>[
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        const Hero(
-                          tag: "ftm-logo",
-                          child: Image(
-                            image: AssetImage("assets/images/ftm-logo.png"),
-                            width: 250,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 56,
-                        ),
-                        Text(Translations.of(context).text('lets_get_start'),
-                            style: taglineText),
-                        ftmPersonalCodeInput(
-                          Translations.of(context).text('personnel_code'),
-                        ),
-                        ftmPasswordInput(
-                          Translations.of(context).text('password'),
-                        ),
-                        // TextButton(
-                        //   onPressed: () {
-                        //     //ToDo : Forgot Password onPressed Here ...
-                        //   },
-                        //   child: Text(
-                        //       Translations.of(context).text('forgot_password'),
-                        //       style: kTextBoldContrast),
-                        // ),
-                        const SizedBox(height: 26),
-                        (!flag)
-                            ? SignInButton()
-                            : const SpinKitThreeBounce(
-                                size: 30,
-                                color: kPrimaryColor,
-                              ),
-                      ],
+                    const SizedBox(
+                      height: 26,
                     ),
+                    const Hero(
+                      tag: "ftm-logo",
+                      child: Image(
+                        image: AssetImage("assets/images/ftm-logo.png"),
+                        width: 250,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 56,
+                    ),
+                    Text(getTranslated(context, 'lets_get_start'),
+                        style: taglineText),
+                    ftmPersonalCodeInput(
+                      getTranslated(context, 'personnel_code'),
+                    ),
+                    ftmPasswordInput(
+                      getTranslated(context, 'password'),
+                    ),
+                    // TextButton(
+                    //   onPressed: () {
+                    //     //ToDo : Forgot Password onPressed Here ...
+                    //   },
+                    //   child: Text(
+                    //       Translations.of(context).text('forgot_password'),
+                    //       style: kTextBoldContrast),
+                    // ),
+                    const SizedBox(height: 26),
+                    (!flag)
+                        ? SignInButton()
+                        : const SpinKitThreeBounce(
+                            size: 30,
+                            color: kPrimaryColor,
+                          ),
                   ],
                 ),
-                height: 500,
-                width: double.infinity,
-                decoration: authPlateDecoration,
-              ),
-            ],
-          )),
+              ],
+            ),
+            height: 500,
+            width: double.infinity,
+            decoration: authPlateDecoration,
+          ),
+        ],
+      )),
     );
   }
 
@@ -205,8 +208,10 @@ class _SignInPageState extends State<SignInPage> {
                   } else if (value == 'er-pass') {
                     flag = false;
                     setState(() {});
-                    showSnackBar(context,
-                        Translations.of(context).text("snackBar_Login_Error"));
+                    showSnackBar(
+                      context,
+                      getTranslated(context, 'snackBar_Login_Error'),
+                    );
                   } else if (value == 'er-internet') {
                     flag = false;
                     setState(() {});
@@ -232,7 +237,9 @@ class _SignInPageState extends State<SignInPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(Translations.of(context).text("enter")),
+          Text(
+            getTranslated(context, 'enter'),
+          ),
         ],
       ),
       style: ElevatedButton.styleFrom(
@@ -250,13 +257,13 @@ class _SignInPageState extends State<SignInPage> {
           return AlertDialog(
             // title: const Text("Error"),
             content: Text(
-              Translations.of(context).text("close_app_mess"),
+              getTranslated(context, 'close_app_mess'),
             ),
 
             actions: <Widget>[
               TextButton(
                 child: Text(
-                  Translations.of(context).text("no"),
+                  getTranslated(context, 'no'),
                 ),
                 onPressed: () {
                   Navigator.pop(context);
@@ -264,7 +271,7 @@ class _SignInPageState extends State<SignInPage> {
               ),
               TextButton(
                 child: Text(
-                  Translations.of(context).text("yes"),
+                  getTranslated(context, 'yes'),
                 ),
                 onPressed: () {
                   SystemNavigator.pop();
