@@ -128,7 +128,7 @@ class DataStructures {
       result6: json['shift']['shift']['result_6'],
       totalShiftResult: json['shift']['shift']['total_shift_result'],
       handCash: json['shift']['hand_cash'],
-      cardCash: json['shift']['shift']['card_chash'],
+      cardCash: json['shift']['shift']['card_cash'],
       totalShiftCash: json['shift']['shift']['total_shift_cash'],
       flag: json['shift']['shift']['flag'],
       confirm: json['shift']['shift']['confirm'],

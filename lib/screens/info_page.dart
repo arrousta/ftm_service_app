@@ -11,7 +11,7 @@ class InfoPage extends StatelessWidget {
       child: Material(
         child: Scaffold(
           body: Center(
-            child: Scrollbar(
+            child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -23,11 +23,11 @@ class InfoPage extends StatelessWidget {
                     height: 26,
                   ),
                   const Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(30.0),
                     child: Text(
-                      "شرکت فنی مهندسی فرزین توانش مهرساد با نام تجاری FTM درسال ۱۳۹۳ با همکاری جمعی از مدیران و متخصصین و با هدف ارائه جدیدترین خدمات تخصصی برق و الکترونیک تاسیس گردیده است. این مجموعه پاسخی است به نیاز موسسات و سازمان ها و شرکت های بزرگ و متوسط واحد های صنفی بزرگ و کوچک ، شخصیت های حقیقی کشور در زمینه خدمات تخصصی برق و الکترونیک ، بر اساس شناختی دوگانه از خواست مشتری و راه حل مناسب. گروه ...... کلیه خدمات خود را با تکیه بر تخصص، دانش فنی و تجربیات کارشناسان خود در قالب یک کار گروهی و تخصصی ارائه می‌کند. این متخصصین علاوه بر دارا بودن مدارک رسمی علمی و سوابق ارزشمند کاری، دارای مدارک گوناگون از مراجع صنعت ........ دنیا می باشند.",
+                      "شرکت فنی مهندسی فرزین توانش مهرساد با نام تجاری FTM درسال ۱۳۹۳ با همکاری جمعی از مدیران و متخصصین و با هدف ارائه جدیدترین خدمات تخصصی برق و الکترونیک تاسیس گردیده است. این مجموعه پاسخی است به نیاز موسسات و سازمان ها و شرکت های بزرگ و متوسط واحد های صنفی بزرگ و کوچک ، شخصیت های حقیقی کشور در زمینه خدمات تخصصی برق و الکترونیک ، بر اساس شناختی دوگانه از خواست مشتری و راه حل مناسب. گروه کلیه خدمات خود را با تکیه بر تخصص، دانش فنی و تجربیات کارشناسان خود در قالب یک کار گروهی و تخصصی ارائه می‌کند. این متخصصین علاوه بر دارا بودن مدارک رسمی علمی و سوابق ارزشمند کاری، دارای مدارک گوناگون از مراجع صنعت دنیا می باشند.",
                       style: TextStyle(
-                        letterSpacing: 6,
+                        letterSpacing: 4,
                         height: 1.5,
                       ),
                     ),
@@ -46,7 +46,7 @@ class InfoPage extends StatelessWidget {
                       locale: Locale('EN'),
                       style: TextStyle(
                         fontFamily: 'Poppins',
-                        letterSpacing: 4,
+                        letterSpacing: 1,
                         locale: Locale('en'),
                       ),
                     ),
@@ -58,7 +58,7 @@ class InfoPage extends StatelessWidget {
                       locale: Locale('EN'),
                       style: TextStyle(
                         fontFamily: 'Poppins',
-                        letterSpacing: 4,
+                        letterSpacing: 1,
                         locale: Locale('en'),
                       ),
                     ),

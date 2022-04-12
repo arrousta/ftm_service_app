@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ftm_service_app/constructor.dart';
 import 'package:ftm_service_app/main.dart';
 import 'package:ftm_service_app/screens/home/home_page.dart';
@@ -351,6 +352,8 @@ class _StartShiftPageState extends State<StartShiftPage> {
                           onPressed: () {
                             showAlert(context,onPress: (){
                               getResponse(auth: MyApp.data.token).then((value) {
+                                Navigator.pop(context);
+                                showProgressAlertDialog(context);
                                 if (value == 'ok') {
                                   MyApp.data.shiftStatus = 'shift_start';
                                     Navigator.pushReplacement(
@@ -362,18 +365,22 @@ class _StartShiftPageState extends State<StartShiftPage> {
                                       ),
                                     );
                                 } else if (value == 'er-pass') {
+                                  Navigator.pop(context);
                                   showSnackBar(
                                     context,
                                     getTranslated(context, 'snackBar_Login_Error'),
                                   );
                                 } else if (value == 'er-internet') {
+                                  Navigator.pop(context);
                                   showSnackBar(context, "اتصال اینترنت را بررسی کنید");
                                 } else if (value == 'onError') {
+                                  Navigator.pop(context);
                                   showSnackBar(context, "خطای نامشخص!");
                                 }
                               },
                               ).catchError(
                                     (e) {
+                                      Navigator.pop(context);
                                   showSnackBar(context, e.toString());
                                 },
                               );
@@ -519,4 +526,38 @@ class CardWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+showProgressAlertDialog(BuildContext context) {
+  // set up the buttons
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    content: SizedBox(
+      height: 100,
+      width: 100,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SpinKitCircle(
+            size: 50.0,
+            color: Colors.indigo,
+          ),
+          Text(
+            'لطفا منتظر بمانید',
+          )
+        ],
+      ),
+    ),
+    actions: [],
+  );
+  // show the dialog
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

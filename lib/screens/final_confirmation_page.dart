@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ftm_service_app/constructor.dart';
 import 'package:ftm_service_app/main.dart';
 import 'package:ftm_service_app/screens/home/home_page.dart';
@@ -9,6 +10,7 @@ import 'package:ftm_service_app/structures/data_structures.dart';
 import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
 import '../services/translations.dart';
+import 'home/components/body.dart';
 
 class FinalConfirm extends StatefulWidget {
   const FinalConfirm({Key? key}) : super(key: key);
@@ -24,7 +26,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
 
   Future<dynamic>? futureShiftData;
 
-  Future<bool> sendShiftData() async {
+  Future<String> sendShiftData() async {
     SharedPreference sharedPreference = SharedPreference();
     String auth = await sharedPreference.read('token');
 
@@ -46,15 +48,25 @@ class _FinalConfirmState extends State<FinalConfirm> {
     data.totalShiftResult = MyApp.data.totalShiftResult;
 
     futureShiftData = sendData(auth: auth, shiftData: data);
-
+    String response = "stop";
     await futureShiftData!.then((value) {
       print(value["shift"]);
       print(value["serverDate"]);
-
-    }).catchError((e) {
-      print(e.toString());
+      if (value["shift" == 'end']) {
+        response = "ok";
+      }
+    }, onError: (e) {
+      if (e.toString().startsWith('NoSuchMethodError')) {
+        response = "er-pass";
+      } else if (e.toString().startsWith('SocketException')) {
+        response = "er-internet";
+      } else {
+        print("**" + e.toString());
+        showSnackBar(context, e.toString());
+        response = "onError";
+      }
     });
-    return false;
+    return response;
   }
 
   @override
@@ -407,13 +419,33 @@ class _FinalConfirmState extends State<FinalConfirm> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        MyApp.data.shiftStatus = 'shift_end';
-                        sendShiftData().then((value) {
-                          showAlertDialog(context, "Hello");
-                        }, onError: (e) {
-                          showAlertDialog(context, "Wello");
-                        }).catchError((e) {
-                          print(e.toString());
+                        showProgressAlertDialog(context);
+                        sendShiftData().then(
+                          (value) {
+                            if (value == 'ok') {
+                              Navigator.pop(context);
+                              MyApp.data.shiftStatus = 'shift_end';
+                              showAlertDialog(context, "Hello");
+                            } else if (value == 'er-pass') {
+                              Navigator.pop(context);
+
+                              showSnackBar(
+                                context,
+                                getTranslated(context, 'snackBar_Login_Error'),
+                              );
+                            } else if (value == 'er-internet') {
+                              Navigator.pop(context);
+
+                              showSnackBar(
+                                  context, "اتصال اینترنت را بررسی کنید");
+                            } else if (value == 'onError') {
+                              Navigator.pop(context);
+
+                              showSnackBar(context, "خطای نامشخص!");
+                            }
+                          },
+                        ).catchError((e) {
+                          showSnackBar(context, e.toString());
                         });
                       },
                       child: Row(
@@ -508,6 +540,41 @@ showAlertDialog(BuildContext context, String userName) {
       cancelButton,
       continueButton,
     ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+
+showProgressAlertDialog(BuildContext context) {
+  // set up the buttons
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    content: SizedBox(
+      height: 100,
+      width: 100,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SpinKitCircle(
+            size: 50.0,
+            color: Colors.indigo,
+          ),
+          Text(
+            'لطفا منتظر بمانید',
+          )
+        ],
+      ),
+    ),
+    actions: [],
   );
 
   // show the dialog
