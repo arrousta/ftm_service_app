@@ -29,7 +29,8 @@ class CallPage extends StatelessWidget {
                   height: 16,
                 ),
                 TextButton(
-                  onPressed: () => UrlLauncher.launch(
+                  onPressed: ()
+                  => UrlLauncher.launch(
                     getTranslated(context, "tel1_local_code"),),
                   child: Text(
                     getTranslated(context, "tel1"),
@@ -42,12 +43,13 @@ class CallPage extends StatelessWidget {
                   ),
                 ),
                 TextButton(
-                  onPressed: () => UrlLauncher.launch(
+                  onPressed: ()
+                  => UrlLauncher.launch(
                     getTranslated(context, "tel2_local_code"),),
                   child: Text(
                     getTranslated(context, "tel2"),
-                    locale: Locale('EN'),
-                    style: TextStyle(
+                    locale: const Locale('EN'),
+                    style: const TextStyle(
                       fontFamily: 'Poppins',
                       letterSpacing: 4,
                       locale: Locale('en'),
@@ -55,7 +57,8 @@ class CallPage extends StatelessWidget {
                   ),
                 ),
                 TextButton(
-                  onPressed: () => UrlLauncher.launch(
+                  onPressed: ()
+                  => UrlLauncher.launch(
                     getTranslated(context, "tel3_local_code"),),
                   child: Text(
                       getTranslated(context, "tel3"),

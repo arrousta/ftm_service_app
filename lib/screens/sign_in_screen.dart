@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:ftm_service_app/screens/home_page.dart';
+import 'package:ftm_service_app/screens/home/home_page.dart';
 import 'package:ftm_service_app/services/network_adapter.dart';
 import 'package:ftm_service_app/services/shared_preference.dart';
 import 'package:ftm_service_app/structures/user.dart';
@@ -28,32 +28,6 @@ class _SignInScreenState extends State<SignInScreen> {
   String userName = "";
   String password = "";
 
-  Future<String> futureGet(String _user, String _pass) async {
-    futureInputUser = signInUser(userName: _user, password: _pass);
-    String response = "stop";
-    await futureInputUser!.then((value) {
-      user.id = value.id;
-      user.firstName = value.firstName;
-      user.lastName = value.lastName;
-      user.role = value.role;
-      user.token = value.token;
-      user.phone = value.phone;
-      user.userId = value.userId;
-
-      response = "ok";
-    }, onError: (e) {
-      if (e.toString().startsWith('NoSuchMethodError')) {
-        response = "er-pass";
-      } else if (e.toString().startsWith('SocketException')) {
-        response = "er-internet";
-      } else {
-        print("**" + e.toString());
-        response = "onError";
-      }
-    });
-
-    return response;
-  }
 
   bool flag = false;
 
@@ -154,80 +128,78 @@ class _SignInScreenState extends State<SignInScreen> {
         flag = true;
         setState(
           () {
-            userName = personnelCodeController.text;
-            password = passwordController.text;
-
-            if (userName == '' || password == '') {
-              flag = false;
-              setState(() {});
-              showSnackBar(context, 'لطفا فیلد ها را به درستی وارد کنید');
-            } else {
-              futureGet(userName, password).then(
-                (value) {
-                  // print(value);
-                  if (value == 'ok') {
-                    String name = "";
-                    String token = "";
-                    String role = "";
-                    String phone = "";
-                    String userId = "";
-
-                    name += user.firstName ?? "name error";
-                    name += " ";
-                    name += user.lastName ?? "name error";
-
-                    token = user.token ?? "**null token";
-
-                    role = user.role ?? "null role";
-                    phone = user.phone ?? "null phone";
-                    userId = user.userId ?? "null userId";
-
-                    if (user.firstName == null) {
-                      showSnackBar(
-                          context, 'Personnel Code or Password is incorrect');
-                    } else {
-                      sharedPreference.save("username", name);
-                      sharedPreference.save("token", token);
-                      sharedPreference.save("role", role);
-                      sharedPreference.save("phone", phone);
-                      sharedPreference.save("user_id", userId);
-
-                      Navigator.pushReplacement(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType.rightToLeft,
-                          child: HomePage(
-                            operatorName: name,
-                          ),
-                        ),
-                      );
-                    }
-                  } else if (value == 'er-pass') {
-                    flag = false;
-                    setState(() {});
-                    showSnackBar(
-                      context,
-                      getTranslated(context, 'snackBar_Login_Error'),
-                    );
-                  } else if (value == 'er-internet') {
-                    flag = false;
-                    setState(() {});
-                    showSnackBar(context, "اتصال اینترنت را بررسی کنید");
-                  } else if (value == 'onError') {
-                    flag = false;
-                    setState(() {});
-                    showSnackBar(context, "خطای نامشخص!");
-                  }
-                },
-              ).catchError(
-                (e) {
-                  print(e);
-                  flag = false;
-                  setState(() {});
-                  showSnackBar(context, e);
-                },
-              );
-            }
+            // userName = personnelCodeController.text;
+            // password = passwordController.text;
+            //
+            // if (userName == '' || password == '') {
+            //   flag = false;
+            //   setState(() {});
+            //   showSnackBar(context, 'لطفا فیلد ها را به درستی وارد کنید');
+            // } else {
+            //   futureGet(userName, password).then(
+            //     (value) {
+            //       // print(value);
+            //       if (value == 'ok') {
+            //         String name = "";
+            //         String token = "";
+            //         String role = "";
+            //         String phone = "";
+            //         String userId = "";
+            //
+            //         name += user.firstName ?? "name error";
+            //         name += " ";
+            //         name += user.lastName ?? "name error";
+            //
+            //         token = user.token ?? "**null token";
+            //
+            //         role = user.role ?? "null role";
+            //         phone = user.phone ?? "null phone";
+            //         userId = user.userId ?? "null userId";
+            //
+            //         if (user.firstName == null) {
+            //           showSnackBar(
+            //               context, 'Personnel Code or Password is incorrect');
+            //         } else {
+            //           sharedPreference.save("username", name);
+            //           sharedPreference.save("token", token);
+            //           sharedPreference.save("role", role);
+            //           sharedPreference.save("phone", phone);
+            //           sharedPreference.save("user_id", userId);
+            //
+            //           Navigator.pushReplacement(
+            //             context,
+            //             PageTransition(
+            //               type: PageTransitionType.rightToLeft,
+            //               child: HomePage(),
+            //             ),
+            //           );
+            //         }
+            //       } else if (value == 'er-pass') {
+            //         flag = false;
+            //         setState(() {});
+            //         showSnackBar(
+            //           context,
+            //           getTranslated(context, 'snackBar_Login_Error'),
+            //         );
+            //       } else if (value == 'er-internet') {
+            //         flag = false;
+            //         setState(() {});
+            //         showSnackBar(context, "اتصال اینترنت را بررسی کنید");
+            //       } else if (value == 'onError') {
+            //         flag = false;
+            //         setState(() {});
+            //         showSnackBar(context, "خطای نامشخص!");
+            //       }
+            //     },
+            //   ).catchError(
+            //     (e) {
+            //       print(e);
+            //       flag = false;
+            //       setState(() {});
+            //       showSnackBar(context, e);
+            //     },
+            //   );
+            // }
           },
         );
       },

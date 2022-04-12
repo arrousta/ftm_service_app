@@ -1,36 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:ftm_service_app/constructor.dart';
-import 'package:ftm_service_app/screens/home_page.dart';
+import 'package:ftm_service_app/main.dart';
+import 'package:ftm_service_app/screens/home/home_page.dart';
+import 'package:ftm_service_app/services/network_adapter.dart';
 import 'package:page_transition/page_transition.dart';
 import '../services/translations.dart';
-import 'end_shift_page.dart';
+import 'edit/edit_page.dart';
 
-class StartShift extends StatefulWidget {
-  const StartShift({
+class StartShiftPage extends StatefulWidget {
+  const StartShiftPage({
     Key? key,
-    required this.operatorName,
-    required this.lastDispenserData1A,
-    required this.lastDispenserData1B,
-    required this.lastDispenserData2A,
-    required this.lastDispenserData2B,
-    required this.lastDispenserData3A,
-    required this.lastDispenserData3B,
   }) : super(key: key);
 
-  final String operatorName;
-
-  final String lastDispenserData1A;
-  final String lastDispenserData1B;
-  final String lastDispenserData2A;
-  final String lastDispenserData2B;
-  final String lastDispenserData3A;
-  final String lastDispenserData3B;
-
   @override
-  State<StartShift> createState() => _StartShiftState();
+  State<StartShiftPage> createState() => _StartShiftPageState();
 }
 
-class _StartShiftState extends State<StartShift> {
+class _StartShiftPageState extends State<StartShiftPage> {
+  late Future<dynamic>? dataResponse;
+  Future<String> getResponse({String auth = ''}) async {
+    dataResponse = start(auth: auth);
+    String response = "stop";
+    await dataResponse!.then((value) {
+      print(value["shift"]);
+      response = "ok";
+    }, onError: (e) {
+      if (e.toString().startsWith('NoSuchMethodError')) {
+        response = "er-pass";
+      } else if (e.toString().startsWith('SocketException')) {
+        response = "er-internet";
+      } else {
+        print("**" + e.toString());
+        response = "onError";
+      }
+    });
+
+    return response;
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -60,34 +67,29 @@ class _StartShiftState extends State<StartShift> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   margin: const EdgeInsets.all(6.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 12.0),
-                        alignment: Alignment.center,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              getTranslated(context, 'attention'),
-                              style: kAttention,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              getTranslated(context, 'start_shift_mess'),
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  height: 1.4, letterSpacing: 1.0),
-                            ),
-                          ],
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 12.0),
+                    alignment: Alignment.center,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          getTranslated(context, 'attention'),
+                          style: kAttention,
                         ),
-                      ),
-                    ],
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          getTranslated(context, 'start_shift_mess'),
+                          textAlign: TextAlign.center,
+                          style:
+                              const TextStyle(height: 1.4, letterSpacing: 1.0),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 //-------------------------------------------------------------------------------------------
@@ -136,7 +138,7 @@ class _StartShiftState extends State<StartShift> {
                                         width: kBoxSizeWith,
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
-                                          value: widget.lastDispenserData1A,
+                                          value: MyApp.data.nozzle1start,
                                         ),
                                       ),
                                     ],
@@ -154,7 +156,7 @@ class _StartShiftState extends State<StartShift> {
                                         width: kBoxSizeWith,
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
-                                          value: widget.lastDispenserData1B,
+                                          value: MyApp.data.nozzle2start,
                                         ),
                                       ),
                                     ],
@@ -202,7 +204,7 @@ class _StartShiftState extends State<StartShift> {
                                         width: kBoxSizeWith,
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
-                                          value: widget.lastDispenserData2A,
+                                          value: MyApp.data.nozzle3start,
                                         ),
                                       ),
                                     ],
@@ -220,7 +222,7 @@ class _StartShiftState extends State<StartShift> {
                                         width: kBoxSizeWith,
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
-                                          value: widget.lastDispenserData2B,
+                                          value: MyApp.data.nozzle4start,
                                         ),
                                       ),
                                     ],
@@ -269,7 +271,7 @@ class _StartShiftState extends State<StartShift> {
                                         width: kBoxSizeWith,
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
-                                          value: widget.lastDispenserData3A,
+                                          value: MyApp.data.nozzle5start,
                                         ),
                                       ),
                                     ],
@@ -287,7 +289,7 @@ class _StartShiftState extends State<StartShift> {
                                         width: kBoxSizeWith,
                                         height: kBoxSizeHeight,
                                         child: CardWidget(
-                                          value: widget.lastDispenserData3B,
+                                          value: MyApp.data.nozzle6start,
                                         ),
                                       ),
                                     ],
@@ -316,9 +318,7 @@ class _StartShiftState extends State<StartShift> {
                               context,
                               PageTransition(
                                 type: PageTransitionType.rightToLeft,
-                                child: HomePage(
-                                  operatorName: widget.operatorName,
-                                ),
+                                child: const EditPage(),
                               ),
                             );
                           },
@@ -349,7 +349,35 @@ class _StartShiftState extends State<StartShift> {
                                 vertical: 8.0, horizontal: 40.0),
                           ),
                           onPressed: () {
-                            showAlertDialog(context, widget.operatorName);
+                            showAlert(context,onPress: (){
+                              getResponse(auth: MyApp.data.token).then((value) {
+                                if (value == 'ok') {
+                                  MyApp.data.shiftStatus = 'shift_start';
+                                    Navigator.pushReplacement(
+                                      context,
+                                      PageTransition(
+                                        type: PageTransitionType.rightToLeft,
+                                        child: HomePage(
+                                        ),
+                                      ),
+                                    );
+                                } else if (value == 'er-pass') {
+                                  showSnackBar(
+                                    context,
+                                    getTranslated(context, 'snackBar_Login_Error'),
+                                  );
+                                } else if (value == 'er-internet') {
+                                  showSnackBar(context, "اتصال اینترنت را بررسی کنید");
+                                } else if (value == 'onError') {
+                                  showSnackBar(context, "خطای نامشخص!");
+                                }
+                              },
+                              ).catchError(
+                                    (e) {
+                                  showSnackBar(context, e.toString());
+                                },
+                              );
+                            });
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -375,6 +403,50 @@ class _StartShiftState extends State<StartShift> {
     );
   }
 
+  showAlert(BuildContext context, {required Function() onPress}) {
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: Text(
+        getTranslated(context, 'no'),
+      ),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+    Widget continueButton = TextButton(
+      child: Text(
+        getTranslated(context, 'yes'),
+      ),
+      onPressed: onPress,
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text(
+        getTranslated(context, 'warning'),
+        style: const TextStyle(
+          color: kErrorColor,
+        ),
+      ),
+      content: Text(
+        getTranslated(context, 'start_shift_mess_warning'),
+      ),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   Future<bool> _onBackPressed() async {
     return await showDialog(
         context: context,
@@ -393,12 +465,11 @@ class _StartShiftState extends State<StartShift> {
                 ),
                 onPressed: () {
                   Navigator.pushReplacement(
-                      context,
-                      PageTransition(
-                          child: HomePage(
-                            operatorName: widget.operatorName,
-                          ),
-                          type: PageTransitionType.rightToLeft));
+                    context,
+                    PageTransition(
+                        child: HomePage(),
+                        type: PageTransitionType.rightToLeft),
+                  );
                 },
               ),
               TextButton(
@@ -438,9 +509,7 @@ class CardWidget extends StatelessWidget {
         width: 100.0,
         height: 34.0,
         child: Text(
-          // '$_counter',
           value,
-          //'کارکرد 0.0',
           style: const TextStyle(
             fontFamily: 'Yekan',
             fontWeight: FontWeight.bold,
@@ -450,57 +519,4 @@ class CardWidget extends StatelessWidget {
       ),
     );
   }
-}
-
-showAlertDialog(BuildContext context, String operatorName) {
-  // set up the buttons
-  Widget cancelButton = TextButton(
-    child: Text(
-      getTranslated(context, 'no'),
-    ),
-    onPressed: () {
-      Navigator.pop(context);
-    },
-  );
-  Widget continueButton = TextButton(
-    child: Text(
-      getTranslated(context, 'yes'),
-    ),
-    onPressed: () {
-      Navigator.pushReplacement(
-        context,
-        PageTransition(
-            child: HomePage(
-              operatorName: operatorName,
-            ),
-            type: PageTransitionType.fade),
-      );
-    },
-  );
-
-  // set up the AlertDialog
-  AlertDialog alert = AlertDialog(
-    title: Text(
-      getTranslated(context, 'warning'),
-      style: const TextStyle(
-        color: kErrorColor,
-      ),
-    ),
-    content: Text(
-      getTranslated(context, 'start_shift_mess_warning'),
-    ),
-    actions: [
-      cancelButton,
-      continueButton,
-    ],
-  );
-
-  // show the dialog
-  showDialog(
-    context: context,
-    barrierDismissible: false,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
 }

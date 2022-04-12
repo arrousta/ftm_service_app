@@ -1,56 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ftm_service_app/constructor.dart';
-import 'package:ftm_service_app/screens/home_page.dart';
+import 'package:ftm_service_app/main.dart';
+import 'package:ftm_service_app/screens/home/home_page.dart';
 import 'package:ftm_service_app/services/network_adapter.dart';
 import 'package:ftm_service_app/services/shared_preference.dart';
-import 'package:ftm_service_app/structures/shift_data.dart';
+import 'package:ftm_service_app/structures/data_structures.dart';
 import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
 import '../services/translations.dart';
-import 'end_shift_page.dart';
 
 class FinalConfirm extends StatefulWidget {
-  const FinalConfirm(
-      {Key? key,
-      required this.dispenser1A,
-      required this.dispenser1B,
-      required this.dispenser2A,
-      required this.dispenser2B,
-      required this.dispenser3A,
-      required this.dispenser3B,
-      required this.dispenser1Ad,
-      required this.dispenser1Bd,
-      required this.dispenser2Ad,
-      required this.dispenser2Bd,
-      required this.dispenser3Ad,
-      required this.dispenser3Bd,
-      required this.totalShiftFunction,
-      required this.totalShiftCash,
-      required this.handShiftCash,
-      required this.cardShiftCash,
-      required this.operatorName})
-      : super(key: key);
-
-  final String operatorName;
-
-  final String dispenser1A;
-  final String dispenser1B;
-  final String dispenser2A;
-  final String dispenser2B;
-  final String dispenser3A;
-  final String dispenser3B;
-  final String dispenser1Ad;
-  final String dispenser1Bd;
-  final String dispenser2Ad;
-  final String dispenser2Bd;
-  final String dispenser3Ad;
-  final String dispenser3Bd;
-
-  final String totalShiftFunction;
-  final String totalShiftCash;
-  final String handShiftCash;
-  final String cardShiftCash;
+  const FinalConfirm({Key? key}) : super(key: key);
 
   @override
   State<FinalConfirm> createState() => _FinalConfirmState();
@@ -59,47 +20,39 @@ class FinalConfirm extends StatefulWidget {
 class _FinalConfirmState extends State<FinalConfirm> {
   var persianInUSFormat = NumberFormat.currency(locale: 'fa', symbol: '');
 
-  final ShiftData shiftData = ShiftData();
-  Future<ShiftData>? futureShiftData;
+  final DataStructures data = DataStructures();
 
-  Future<bool> futureSendShiftData() async {
+  Future<dynamic>? futureShiftData;
+
+  Future<bool> sendShiftData() async {
     SharedPreference sharedPreference = SharedPreference();
     String auth = await sharedPreference.read('token');
 
-    shiftData.id = 1;
-    shiftData.user = widget.operatorName;
-    shiftData.state_id = '1';
-    shiftData.start_shift = '1';
-    shiftData.end_shift = '2';
-    shiftData.nozzle_1 = widget.dispenser1A;
-    shiftData.nozzle_2 = widget.dispenser1B;
-    shiftData.nozzle_3 = widget.dispenser2A;
-    shiftData.nozzle_4 = widget.dispenser2B;
-    shiftData.nozzle_5 = widget.dispenser3A;
-    shiftData.nozzle_6 = widget.dispenser3B;
-    shiftData.nozzle_7 = '';
-    shiftData.nozzle_8 = '';
-    shiftData.result_1 = widget.dispenser1Ad;
-    shiftData.result_2 = widget.dispenser1Bd;
-    shiftData.result_3 = widget.dispenser2Ad;
-    shiftData.result_4 = widget.dispenser1Bd;
-    shiftData.result_5 = widget.dispenser3Ad;
-    shiftData.result_6 = widget.dispenser1Bd;
-    shiftData.result_7 = '';
-    shiftData.result_8 = '';
-    shiftData.hand_cash = widget.handShiftCash;
-    shiftData.card_cash = widget.cardShiftCash;
-    shiftData.total_shift_cash = widget.totalShiftCash;
-    shiftData.total_shift_result = widget.totalShiftFunction;
-    shiftData.contradiction = '';
-    shiftData.confirm = '00001';
+    data.nozzle1 = MyApp.data.nozzle1;
+    data.nozzle2 = MyApp.data.nozzle2;
+    data.nozzle3 = MyApp.data.nozzle3;
+    data.nozzle4 = MyApp.data.nozzle4;
+    data.nozzle5 = MyApp.data.nozzle5;
+    data.nozzle6 = MyApp.data.nozzle6;
+    data.result1 = MyApp.data.result1;
+    data.result2 = MyApp.data.result2;
+    data.result3 = MyApp.data.result3;
+    data.result4 = MyApp.data.result4;
+    data.result5 = MyApp.data.result5;
+    data.result6 = MyApp.data.result6;
+    data.handCash = MyApp.data.handCash;
+    data.cardCash = MyApp.data.cardCash;
+    data.totalShiftCash = MyApp.data.totalShiftCash;
+    data.totalShiftResult = MyApp.data.totalShiftResult;
 
-    futureShiftData = setShiftData(auth: auth, shiftData: shiftData);
+    futureShiftData = sendData(auth: auth, shiftData: data);
+
     await futureShiftData!.then((value) {
-      if (value.datasaved != null) {
-        shiftData.datasaved = value.datasaved;
-        return true;
-      }
+      print(value["shift"]);
+      print(value["serverDate"]);
+
+    }).catchError((e) {
+      print(e.toString());
     });
     return false;
   }
@@ -157,8 +110,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      getTranslated(context, 'dispenser_function') +
-                          " 1",
+                      getTranslated(context, 'dispenser_function') + " 1",
                     ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
@@ -180,7 +132,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                                       width: kBoxSizeWith,
                                       height: kBoxSizeHeight,
                                       child: CardWidget(
-                                        value: widget.dispenser1A,
+                                        value: MyApp.data.nozzle1,
                                       ),
                                     ),
                                   ],
@@ -196,7 +148,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                                       width: kBoxSizeWith,
                                       height: kBoxSizeHeight,
                                       child: CardWidget(
-                                        value: widget.dispenser1B,
+                                        value: MyApp.data.nozzle2,
                                       ),
                                     ),
                                   ],
@@ -210,8 +162,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                     ),
                     //-----------------------------------------------------------------------------------------
                     Text(
-                      getTranslated(context, 'dispenser_function') +
-                          " 2",
+                      getTranslated(context, 'dispenser_function') + " 2",
                     ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
@@ -233,7 +184,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                                       width: kBoxSizeWith,
                                       height: kBoxSizeHeight,
                                       child: CardWidget(
-                                        value: widget.dispenser2A,
+                                        value: MyApp.data.nozzle3,
                                       ),
                                     ),
                                   ],
@@ -249,7 +200,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                                       width: kBoxSizeWith,
                                       height: kBoxSizeHeight,
                                       child: CardWidget(
-                                        value: widget.dispenser2B,
+                                        value: MyApp.data.nozzle4,
                                       ),
                                     ),
                                   ],
@@ -263,8 +214,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                     ),
                     //--------------------------------------------------------------------------------------------------------
                     Text(
-                      getTranslated(context, 'dispenser_function') +
-                          " 3",
+                      getTranslated(context, 'dispenser_function') + " 3",
                     ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
@@ -286,7 +236,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                                       width: kBoxSizeWith,
                                       height: kBoxSizeHeight,
                                       child: CardWidget(
-                                        value: widget.dispenser3A,
+                                        value: MyApp.data.nozzle5,
                                       ),
                                     ),
                                   ],
@@ -302,7 +252,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                                       width: kBoxSizeWith,
                                       height: kBoxSizeHeight,
                                       child: CardWidget(
-                                        value: widget.dispenser3B,
+                                        value: MyApp.data.nozzle6,
                                       ),
                                     ),
                                   ],
@@ -334,13 +284,14 @@ class _FinalConfirmState extends State<FinalConfirm> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  getTranslated(context, 'payment_function_mess'),
+                                  getTranslated(
+                                      context, 'payment_function_mess'),
                                 ),
                                 SizedBox(
                                   width: kBoxSizeWith,
                                   height: kBoxSizeHeight,
                                   child: CardWidget(
-                                    value: widget.totalShiftFunction,
+                                    value: MyApp.data.totalShiftResult,
                                   ),
                                 ),
                               ],
@@ -375,8 +326,8 @@ class _FinalConfirmState extends State<FinalConfirm> {
                                   width: kBoxSizeWith,
                                   height: kBoxSizeHeight,
                                   child: CardWidget(
-                                    value: persianInUSFormat.format(
-                                        int.parse(widget.handShiftCash)),
+                                    value: persianInUSFormat
+                                        .format(int.parse(MyApp.data.handCash)),
                                   ),
                                 ),
                               ],
@@ -407,8 +358,8 @@ class _FinalConfirmState extends State<FinalConfirm> {
                                   width: kBoxSizeWith,
                                   height: kBoxSizeHeight,
                                   child: CardWidget(
-                                    value: persianInUSFormat.format(
-                                        int.parse(widget.cardShiftCash)),
+                                    value: persianInUSFormat
+                                        .format(int.parse(MyApp.data.cardCash)),
                                   ),
                                 ),
                               ],
@@ -440,7 +391,7 @@ class _FinalConfirmState extends State<FinalConfirm> {
                                   height: kBoxSizeHeight,
                                   child: CardWidget(
                                     value: persianInUSFormat.format(
-                                        int.parse(widget.totalShiftCash)),
+                                        int.parse(MyApp.data.totalShiftCash)),
                                   ),
                                 ),
                               ],
@@ -454,54 +405,15 @@ class _FinalConfirmState extends State<FinalConfirm> {
                     const SizedBox(
                       height: 8.0,
                     ),
-
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: [
-                    // ElevatedButton(
-                    //   onPressed: () {
-                    //
-                    //     Navigator.popUntil(context, (route) {
-                    //       return route.settings.name == '';
-                    //     });
-                    //
-                    //     Navigator.push(
-                    //       context,
-                    //       PageTransition(
-                    //         type: PageTransitionType.rightToLeft,
-                    //         child: EndShiftPage(
-                    //           operatorName: widget.operatorName,
-                    //           lastDispenserData1A: widget.dispenser1A,
-                    //           lastDispenserData1B: widget.dispenser1B,
-                    //           lastDispenserData2A: widget.dispenser2A,
-                    //           lastDispenserData2B: widget.dispenser2B,
-                    //           lastDispenserData3A: widget.dispenser3A,
-                    //           lastDispenserData3B: widget.dispenser3B,
-                    //         ),
-                    //       ),
-                    //     );
-                    //   },
-                    //   child: Text(
-                    //     Translations.of(context).text("edit_data"),
-                    //     style: const TextStyle(
-                    //       fontSize: 15,
-                    //     ),
-                    //   ),
-                    //   style: ElevatedButton.styleFrom(
-                    //     primary: kPrimaryColor,
-                    //     padding: const EdgeInsets.symmetric(
-                    //         vertical: 8.0, horizontal: 30.0),
-                    //   ),
-                    // ),
-                    // const SizedBox(
-                    //   width: 50.0,
-                    // ),
                     ElevatedButton(
                       onPressed: () {
-                        futureSendShiftData().then((value) {
-                          showAlertDialog(context, widget.operatorName);
+                        MyApp.data.shiftStatus = 'shift_end';
+                        sendShiftData().then((value) {
+                          showAlertDialog(context, "Hello");
                         }, onError: (e) {
-                          showAlertDialog(context, widget.operatorName);
+                          showAlertDialog(context, "Wello");
+                        }).catchError((e) {
+                          print(e.toString());
                         });
                       },
                       child: Row(
@@ -521,8 +433,6 @@ class _FinalConfirmState extends State<FinalConfirm> {
                             vertical: 8.0, horizontal: 30.0),
                       ),
                     ),
-                    // ],
-                    // ),
                   ],
                 ),
               ),
@@ -569,7 +479,7 @@ class CardWidget extends StatelessWidget {
   }
 }
 
-showAlertDialog(BuildContext context, String operatorName) {
+showAlertDialog(BuildContext context, String userName) {
   // set up the buttons
   Widget cancelButton = TextButton(
     child: Text(
@@ -584,13 +494,8 @@ showAlertDialog(BuildContext context, String operatorName) {
       getTranslated(context, 'login_main_page'),
     ),
     onPressed: () {
-      Navigator.pushReplacement(
-          context,
-          PageTransition(
-              child: HomePage(
-                operatorName: operatorName,
-              ),
-              type: PageTransitionType.fade));
+      Navigator.pushReplacement(context,
+          PageTransition(child: HomePage(), type: PageTransitionType.fade));
     },
   );
 

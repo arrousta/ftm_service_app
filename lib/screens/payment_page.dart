@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ftm_service_app/main.dart';
 import 'package:ftm_service_app/widgets/input_fields.dart';
 import 'package:ftm_service_app/constructor.dart';
 import 'package:intl/intl.dart';
@@ -8,38 +9,9 @@ import '../services/translations.dart';
 import 'final_confirmation_page.dart';
 
 class Payment extends StatefulWidget {
-  const Payment(
-      {Key? key,
-      required this.total,
-      required this.dispenser1A,
-      required this.dispenser1B,
-      required this.dispenser2A,
-      required this.dispenser2B,
-      required this.dispenser3A,
-      required this.dispenser3B,
-      required this.dispenser1Ad,
-      required this.dispenser1Bd,
-      required this.dispenser2Ad,
-      required this.dispenser2Bd,
-      required this.dispenser3Ad,
-      required this.dispenser3Bd,
-      required this.operatorName})
-      : super(key: key);
-
-  final String operatorName;
-  final String total;
-  final String dispenser1A;
-  final String dispenser1B;
-  final String dispenser2A;
-  final String dispenser2B;
-  final String dispenser3A;
-  final String dispenser3B;
-  final String dispenser1Ad;
-  final String dispenser1Bd;
-  final String dispenser2Ad;
-  final String dispenser2Bd;
-  final String dispenser3Ad;
-  final String dispenser3Bd;
+  const Payment({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<Payment> createState() => _PaymentState();
@@ -52,7 +24,7 @@ class _PaymentState extends State<Payment> {
   @override
   Widget build(BuildContext context) {
     String totalShiftFunction = "";
-    totalShiftFunction = widget.total;
+    totalShiftFunction = MyApp.data.totalShiftResult;
     int totalInt = int.parse(totalShiftFunction);
 
     var persianInUSFormat = NumberFormat.currency(locale: 'fa', symbol: '');
@@ -108,25 +80,28 @@ class _PaymentState extends State<Payment> {
                         margin: const EdgeInsets.all(10.0),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    getTranslated(context, 'payment_function_mess'),
+                          child: Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    getTranslated(
+                                        context, 'payment_function_mess'),
                                   ),
-                                  SizedBox(
+                                ),
+                                Expanded(
+                                  child: SizedBox(
                                     width: kBoxSizeWith,
                                     height: kBoxSizeHeight,
                                     child: CardWidget(
                                       value: totalShiftFunction,
                                     ),
                                   ),
-                                ],
-                              ),
-                            ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         decoration: dispenserPlateDecoration,
@@ -135,23 +110,22 @@ class _PaymentState extends State<Payment> {
                         margin: const EdgeInsets.all(10.0),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Column(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    getTranslated(context, 'payment_cost_mess'),
+                              Expanded(
+                                child: Text(
+                                  getTranslated(context, 'payment_cost_mess'),
+                                ),
+                              ),
+                              Expanded(
+                                child: SizedBox(
+                                  width: kBoxSizeWith,
+                                  height: kBoxSizeHeight,
+                                  child: CardWidget(
+                                    value: totalWithFormat,
                                   ),
-                                  SizedBox(
-                                    width: kBoxSizeWith,
-                                    height: kBoxSizeHeight,
-                                    child: CardWidget(
-                                      value: totalWithFormat,
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
                             ],
                           ),
@@ -172,48 +146,47 @@ class _PaymentState extends State<Payment> {
                         margin: const EdgeInsets.all(10.0),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Column(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    getTranslated(context, 'payment_user_mess'),
+                              Expanded(
+                                child: Text(
+                                  getTranslated(context, 'payment_user_mess'),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              Expanded(
+                                child: SizedBox(
+                                  width: kFieldSizeWith,
+                                  height: kFieldSizeHeight,
+                                  child: TextField(
+                                    onChanged: (value) {
+                                      setState(() {
+                                        if (value != '') {
+                                          paymentChangeValue = int.parse(value);
+                                        }
+                                      });
+                                    },
                                     textAlign: TextAlign.center,
+                                    textAlignVertical: TextAlignVertical.center,
+                                    cursorColor: kPrimaryColor,
+                                    style: inputFieldTextStyleDispenser,
+                                    controller: _textEditingController,
+                                    keyboardType: TextInputType.number,
+                                    textInputAction: TextInputAction.next,
+                                    decoration: InputDecoration(
+                                        hintText: getTranslated(
+                                            context, 'enter_number'),
+                                        hintStyle:
+                                            inputFieldHintTextStyleDispenser,
+                                        focusedBorder:
+                                            inputFieldFocusedBorderStyle,
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                horizontal: 5, vertical: 5),
+                                        border: inputFieldDefaultBorderStyle),
                                   ),
-                                  SizedBox(
-                                    width: kFieldSizeWith,
-                                    height: kFieldSizeHeight,
-                                    child: TextField(
-                                      onChanged: (value) {
-                                        setState(() {
-                                          if (value != '') {
-                                            paymentChangeValue =
-                                                int.parse(value);
-                                          }
-                                        });
-                                      },
-                                      textAlign: TextAlign.center,
-                                      textAlignVertical:
-                                          TextAlignVertical.center,
-                                      cursorColor: kPrimaryColor,
-                                      style: inputFieldTextStyleDispenser,
-                                      controller: _textEditingController,
-                                      keyboardType: TextInputType.number,
-                                      textInputAction: TextInputAction.next,
-                                      decoration: InputDecoration(
-                                          hintText: getTranslated(context, 'enter_number'),
-                                          hintStyle:
-                                              inputFieldHintTextStyleDispenser,
-                                          focusedBorder:
-                                              inputFieldFocusedBorderStyle,
-                                          contentPadding: EdgeInsets.symmetric(
-                                              horizontal: 5, vertical: 5),
-                                          border: inputFieldDefaultBorderStyle),
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
                             ],
                           ),
@@ -267,30 +240,19 @@ class _PaymentState extends State<Payment> {
                           if (_textEditingController.text == '') {
                             showSnackBar(context, "کارت خوان را وارد نمایید");
                           } else {
+                            MyApp.data.totalShiftCash =
+                                totalWithoutFormat.toString();
+                            MyApp.data.cardCash =
+                                _textEditingController.text;
+                            MyApp.data.handCash = (totalWithoutFormat -
+                                    int.parse(_textEditingController.text))
+                                .toString();
+
                             Navigator.push(
                               context,
                               PageTransition(
                                 type: PageTransitionType.rightToLeft,
-                                child: FinalConfirm(
-                                  operatorName: widget.operatorName,
-                                  dispenser1A: widget.dispenser1A,
-                                  dispenser1B: widget.dispenser1B,
-                                  dispenser2A: widget.dispenser2A,
-                                  dispenser2B: widget.dispenser2B,
-                                  dispenser3A: widget.dispenser3A,
-                                  dispenser3B: widget.dispenser3B,
-                                  dispenser1Ad: widget.dispenser1Ad,
-                                  dispenser1Bd: widget.dispenser1Bd,
-                                  dispenser2Ad: widget.dispenser2Ad,
-                                  dispenser2Bd: widget.dispenser2Bd,
-                                  dispenser3Ad: widget.dispenser3Ad,
-                                  dispenser3Bd: widget.dispenser3Bd,
-                                  totalShiftFunction: '$totalInt',
-                                  totalShiftCash: '$totalWithoutFormat',
-                                  cardShiftCash: _textEditingController.text,
-                                  handShiftCash:
-                                      '${totalWithoutFormat - int.parse(_textEditingController.text)}',
-                                ),
+                                child: const FinalConfirm(),
                               ),
                             );
                           }
@@ -354,11 +316,12 @@ class CardWidget extends StatelessWidget {
     );
   }
 }
+
 void showSnackBar(BuildContext context, String text) {
   final snackBar = SnackBar(
     content: Text(
       text,
-      style: TextStyle(fontFamily: 'Yekan'),
+      style: const TextStyle(fontFamily: 'Yekan'),
     ),
     backgroundColor: kErrorColor,
   );

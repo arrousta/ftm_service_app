@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:ftm_service_app/screens/end_shift_page.dart';
 import 'package:ftm_service_app/screens/welcome_page.dart';
-import 'package:ftm_service_app/screens/home_page.dart';
+import 'package:ftm_service_app/screens/home/home_page.dart';
 import 'package:ftm_service_app/screens/splash_screen.dart';
 import 'package:ftm_service_app/services/translations.dart';
+import 'package:ftm_service_app/structures/data_structures.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'screens/sign_up_page.dart';
 import 'screens/sign_in_page.dart';
@@ -30,7 +30,11 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key, required this.version}) : super(key: key);
+
   final String version;
+
+  static DataStructures data = DataStructures();
+
   static late Locale locale = const Locale('fa', 'IR');
   @override
   Widget build(BuildContext context) {
@@ -69,9 +73,7 @@ class MyApp extends StatelessWidget {
         '/sign_up': (BuildContext context) => const SignUpPage(
               pageTitle: 'SignUpPage',
             ),
-        '/home': (BuildContext context) => const HomePage(
-              operatorName: 'operatorName',
-            ),
+        '/home': (BuildContext context) => HomePage(),
       },
     );
   }
