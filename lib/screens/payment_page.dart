@@ -80,28 +80,26 @@ class _PaymentState extends State<Payment> {
                         margin: const EdgeInsets.all(10.0),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    getTranslated(
-                                        context, 'payment_function_mess'),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  getTranslated(
+                                      context, 'payment_function_mess'),
+                                ),
+                              ),
+                              Expanded(
+                                child: SizedBox(
+                                  width: kBoxSizeWith,
+                                  height: kBoxSizeHeight,
+                                  child: CardWidget(
+                                    value: totalShiftFunction,
                                   ),
                                 ),
-                                Expanded(
-                                  child: SizedBox(
-                                    width: kBoxSizeWith,
-                                    height: kBoxSizeHeight,
-                                    child: CardWidget(
-                                      value: totalShiftFunction,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                         decoration: dispenserPlateDecoration,
@@ -212,16 +210,20 @@ class _PaymentState extends State<Payment> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    getTranslated(context, 'payment_cash_mess'),
+                                  Expanded(
+                                    child: Text(
+                                      getTranslated(context, 'payment_cash_mess'),
+                                    ),
                                   ),
-                                  SizedBox(
-                                    width: kBoxSizeWith,
-                                    height: kBoxSizeHeight,
-                                    child: CardWidget(
-                                      value: persianInUSFormat.format(
-                                          totalWithoutFormat -
-                                              paymentChangeValue),
+                                  Expanded(
+                                    child: SizedBox(
+                                      width: kBoxSizeWith,
+                                      height: kBoxSizeHeight,
+                                      child: CardWidget(
+                                        value: persianInUSFormat.format(
+                                            totalWithoutFormat -
+                                                paymentChangeValue),
+                                      ),
                                     ),
                                   ),
                                 ],

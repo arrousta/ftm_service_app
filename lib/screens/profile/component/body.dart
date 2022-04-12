@@ -98,6 +98,9 @@ class _BodyState extends State<Body> {
       if (userRole == 'operator') {
         _role = 'اپراتور';
       }
+      if (userRole == 'master') {
+        _role = 'توسعه دهنده';
+      }
     });
   }
 }

@@ -15,9 +15,9 @@ class NozzleWidget extends StatefulWidget {
 
   const NozzleWidget(
       {Key? key,
-        required this.id,
-        required this.title,
-        required this.startShift})
+      required this.id,
+      required this.title,
+      required this.startShift})
       : super(key: key);
 
   @override
@@ -71,16 +71,20 @@ class _NozzleWidgetState extends State<NozzleWidget> {
                         setState(() {
                           if (value != '') {
                             _functionResult = int.parse(value);
+
                             if (_functionResult >=
                                 int.parse(widget.startShift)) {
+                              // print(_functionResult);
                               endSiftFunctionList[widget.id] = _functionResult -
                                   int.parse(widget.startShift);
+
                               endSiftList[widget.id] = _functionResult;
+                              print("1" + endSiftList.toString());
+                              print("2" + endSiftFunctionList.toString());
                             } else {
-                              endSiftList.insert(widget.id, _functionResult);
+                              endSiftList[widget.id] = 0;
+                              print("3" + endSiftList.toString());
                             }
-                          } else {
-                            _functionResult = 0;
                           }
                         });
                       },

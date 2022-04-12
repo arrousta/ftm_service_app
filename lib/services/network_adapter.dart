@@ -123,7 +123,7 @@ Future<DataStructures> sendData({
       'result_7': shiftData.result7,
       'result_8': shiftData.result8,
       'hand_cash': shiftData.handCash,
-      'card_chash': shiftData.cardCash,
+      'card_cash': shiftData.cardCash,
       'total_shift_cash': shiftData.totalShiftCash,
       'total_shift_result': shiftData.totalShiftResult,
   };
