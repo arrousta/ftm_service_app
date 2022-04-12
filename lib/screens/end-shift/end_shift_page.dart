@@ -261,6 +261,9 @@ class _EndShiftPageState extends State<EndShiftPage> {
                   getTranslated(context, 'yes'),
                 ),
                 onPressed: () {
+                  // set default Data for List after press YES :
+                  endSiftFunctionList = [0, 0, 0, 0, 0, 0, 0];
+                  endSiftList = [0, 0, 0, 0, 0, 0, 0];
                   Navigator.pushReplacement(
                       context,
                       PageTransition(
