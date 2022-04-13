@@ -100,7 +100,7 @@ class DataStructures {
 
   factory DataStructures.fromJson(Map<String, dynamic> json) {
     return DataStructures(
-      serverDate: json['server_date'],
+      serverDate: json['serverDate'],
       userId: json['info']['user_id'],
       firstName: json['info']['first_name'],
       lastName: json['info']['last_name'],

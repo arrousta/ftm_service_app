@@ -23,7 +23,6 @@ class _StartShiftPageState extends State<StartShiftPage> {
     dataResponse = start(auth: auth);
     String response = "stop";
     await dataResponse!.then((value) {
-      print(value["shift"]);
       response = "ok";
     }, onError: (e) {
       if (e.toString().startsWith('NoSuchMethodError')) {
@@ -351,9 +350,9 @@ class _StartShiftPageState extends State<StartShiftPage> {
                           ),
                           onPressed: () {
                             showAlert(context,onPress: (){
+                              Navigator.pop(context);
+                              showProgressAlertDialog(context);
                               getResponse(auth: MyApp.data.token).then((value) {
-                                Navigator.pop(context);
-                                showProgressAlertDialog(context);
                                 if (value == 'ok') {
                                   MyApp.data.shiftStatus = 'shift_start';
                                     Navigator.pushReplacement(
@@ -539,7 +538,7 @@ showProgressAlertDialog(BuildContext context) {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
+        children: const [
           SpinKitCircle(
             size: 50.0,
             color: Colors.indigo,

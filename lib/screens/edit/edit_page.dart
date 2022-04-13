@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ftm_service_app/main.dart';
 import 'package:ftm_service_app/screens/home/home_page.dart';
 import 'package:ftm_service_app/constructor.dart';
@@ -8,7 +9,6 @@ import 'package:ftm_service_app/screens/payment_page.dart';
 import 'package:ftm_service_app/services/network_adapter.dart';
 import 'package:ftm_service_app/services/translations.dart';
 import 'package:ftm_service_app/structures/data_structures.dart';
-import 'package:ftm_service_app/structures/shift_data.dart';
 import 'package:page_transition/page_transition.dart';
 import 'components/edit_nozzle_widget.dart';
 
@@ -179,83 +179,99 @@ class _EditPageState extends State<EditPage> {
                         height: 18.0,
                       ),
                       ElevatedButton(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(Icons.arrow_back_ios_sharp),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
-                            Text(
-                              "تایید و اعلام مغایرت",
-                              style: const TextStyle(fontFamily: 'Yekan'),
-                            ),
-                          ],
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          primary: kRedColor,
-                          padding: const EdgeInsets.all(8),
-                        ),
-                        onPressed: () {
-                          DataStructures contData = DataStructures();
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(Icons.arrow_back_ios_sharp),
+                              const SizedBox(
+                                width: 10.0,
+                              ),
+                              Text(
+                                "تایید و اعلام مغایرت",
+                                style: const TextStyle(fontFamily: 'Yekan'),
+                              ),
+                            ],
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            primary: kRedColor,
+                            padding: const EdgeInsets.all(8),
+                          ),
+                          onPressed: () {
+                            showAlert(context, onPress: () {
+                              Navigator.pop(context);
+                              showProgressAlertDialog(context);
+                              DataStructures contData = DataStructures();
 
-                          if (editShiftList[1] == 0 ||
-                              editShiftList[2] == 0 ||
-                              editShiftList[3] == 0 ||
-                              editShiftList[4] == 0 ||
-                              editShiftList[5] == 0 ||
-                              editShiftList[6] == 0) {
-                            showSnackBar(
-                              context,
-                              getTranslated(context, "dispenser_data_warning1"),
-                            );
-                          } else {
-                            contData.nozzle1 = '${editShiftList[1]}';
-                            contData.nozzle2 = '${editShiftList[2]}';
-                            contData.nozzle3 = '${editShiftList[3]}';
-                            contData.nozzle4 = '${editShiftList[4]}';
-                            contData.nozzle5 = '${editShiftList[5]}';
-                            contData.nozzle6 = '${editShiftList[6]}';
+                              if (editShiftList[1] == 0 ||
+                                  editShiftList[2] == 0 ||
+                                  editShiftList[3] == 0 ||
+                                  editShiftList[4] == 0 ||
+                                  editShiftList[5] == 0 ||
+                                  editShiftList[6] == 0) {
+                                showSnackBar(
+                                  context,
+                                  getTranslated(
+                                      context, "dispenser_data_warning1"),
+                                );
+                              } else {
+                                contData.nozzle1 = '${editShiftList[1]}';
+                                contData.nozzle2 = '${editShiftList[2]}';
+                                contData.nozzle3 = '${editShiftList[3]}';
+                                contData.nozzle4 = '${editShiftList[4]}';
+                                contData.nozzle5 = '${editShiftList[5]}';
+                                contData.nozzle6 = '${editShiftList[6]}';
 
-                            getResponse(auth: MyApp.data.token, data: contData)
-                                .then(
-                              (value) {
-                                if (value == 'ok') {
-                                  MyApp.data.shiftStatus = 'shift_start';
-                                  MyApp.data.nozzle1start = contData.nozzle1;
-                                  MyApp.data.nozzle2start = contData.nozzle2;
-                                  MyApp.data.nozzle3start = contData.nozzle3;
-                                  MyApp.data.nozzle4start = contData.nozzle4;
-                                  MyApp.data.nozzle5start = contData.nozzle5;
-                                  MyApp.data.nozzle6start = contData.nozzle6;
-                                  Navigator.pushReplacement(
-                                    context,
-                                    PageTransition(
-                                      type: PageTransitionType.rightToLeft,
-                                      child: HomePage(),
-                                    ),
-                                  );
-                                } else if (value == 'er-pass') {
-                                  showSnackBar(
-                                    context,
-                                    getTranslated(
-                                        context, 'snackBar_Login_Error'),
-                                  );
-                                } else if (value == 'er-internet') {
-                                  showSnackBar(
-                                      context, "اتصال اینترنت را بررسی کنید");
-                                } else if (value == 'onError') {
-                                  showSnackBar(context, "خطای نامشخص!");
-                                }
-                              },
-                            ).catchError(
-                              (e) {
-                                showSnackBar(context, e.toString());
-                              },
-                            );
-                          }
-                        },
-                      ),
+                                getResponse(
+                                        auth: MyApp.data.token, data: contData)
+                                    .then(
+                                  (value) {
+                                    if (value == 'ok') {
+                                      MyApp.data.shiftStatus = 'shift_start';
+                                      MyApp.data.nozzle1start =
+                                          contData.nozzle1;
+                                      MyApp.data.nozzle2start =
+                                          contData.nozzle2;
+                                      MyApp.data.nozzle3start =
+                                          contData.nozzle3;
+                                      MyApp.data.nozzle4start =
+                                          contData.nozzle4;
+                                      MyApp.data.nozzle5start =
+                                          contData.nozzle5;
+                                      MyApp.data.nozzle6start =
+                                          contData.nozzle6;
+                                      Navigator.pushReplacement(
+                                        context,
+                                        PageTransition(
+                                          type: PageTransitionType.rightToLeft,
+                                          child: HomePage(),
+                                        ),
+                                      );
+                                    } else if (value == 'er-pass') {
+                                      Navigator.pop(context);
+
+                                      showSnackBar(
+                                        context,
+                                        getTranslated(
+                                            context, 'snackBar_Login_Error'),
+                                      );
+                                    } else if (value == 'er-internet') {
+                                      Navigator.pop(context);
+                                      showSnackBar(context,
+                                          "اتصال اینترنت را بررسی کنید");
+                                    } else if (value == 'onError') {
+                                      Navigator.pop(context);
+                                      showSnackBar(context, "خطای نامشخص!");
+                                    }
+                                  },
+                                ).catchError(
+                                  (e) {
+                                    Navigator.pop(context);
+                                    showSnackBar(context, e.toString());
+                                  },
+                                );
+                              }
+                            });
+                          }),
                     ],
                   ),
                 ),
@@ -387,4 +403,82 @@ void showSnackBar(BuildContext context, String text) {
     backgroundColor: kErrorColor,
   );
   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+}
+
+showAlert(BuildContext context, {required Function() onPress}) {
+  // set up the buttons
+  Widget cancelButton = TextButton(
+    child: Text(
+      getTranslated(context, 'no'),
+    ),
+    onPressed: () {
+      Navigator.pop(context);
+    },
+  );
+  Widget continueButton = TextButton(
+    child: Text(
+      getTranslated(context, 'yes'),
+    ),
+    onPressed: onPress,
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text(
+      getTranslated(context, 'warning'),
+      style: const TextStyle(
+        color: kErrorColor,
+      ),
+    ),
+    content: Text(
+      getTranslated(context, 'start_shift_mess_warning'),
+    ),
+    actions: [
+      cancelButton,
+      continueButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+
+showProgressAlertDialog(BuildContext context) {
+  // set up the buttons
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    content: SizedBox(
+      height: 100,
+      width: 100,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: const [
+          SpinKitCircle(
+            size: 50.0,
+            color: Colors.indigo,
+          ),
+          Text(
+            'لطفا منتظر بمانید',
+          )
+        ],
+      ),
+    ),
+    actions: [],
+  );
+  // show the dialog
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:ftm_service_app/screens/home/home_page.dart';
-import 'package:ftm_service_app/services/network_adapter.dart';
 import 'package:ftm_service_app/services/shared_preference.dart';
-import 'package:ftm_service_app/structures/user.dart';
 import 'package:ftm_service_app/widgets/input_fields.dart';
 import 'package:ftm_service_app/constructor.dart';
-import 'package:page_transition/page_transition.dart';
 
 import '../services/translations.dart';
-import 'sign_up_page.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -22,12 +17,8 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   SharedPreference sharedPreference = SharedPreference();
 
-  User user = User();
-  Future<User>? futureInputUser;
-
   String userName = "";
   String password = "";
-
 
   bool flag = false;
 

@@ -50,13 +50,13 @@ class _FinalConfirmState extends State<FinalConfirm> {
     futureShiftData = sendData(auth: auth, shiftData: data);
     String response = "stop";
     await futureShiftData!.then((value) {
-      print(value["shift"]);
-      print(value["serverDate"]);
-      if (value["shift" == 'end']) {
+
+      if (value["shift"] == 'ended') {
         response = "ok";
       }
     }, onError: (e) {
       if (e.toString().startsWith('NoSuchMethodError')) {
+        print(e.toString());
         response = "er-pass";
       } else if (e.toString().startsWith('SocketException')) {
         response = "er-internet";
@@ -65,6 +65,10 @@ class _FinalConfirmState extends State<FinalConfirm> {
         showSnackBar(context, e.toString());
         response = "onError";
       }
+    }).catchError((e){
+      print("*/*" + e.toString());
+      showSnackBar(context, e.toString());
+      response = "onError";
     });
     return response;
   }
@@ -122,48 +126,44 @@ class _FinalConfirmState extends State<FinalConfirm> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      getTranslated(context, 'dispenser_function') + " 1",
+                      getTranslated(context, 'dispenser') + " 1",
                     ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Column(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      'A',
-                                      style: kHeader7,
-                                    ),
-                                    SizedBox(
-                                      width: kBoxSizeWith,
-                                      height: kBoxSizeHeight,
-                                      child: CardWidget(
-                                        value: MyApp.data.nozzle1,
-                                      ),
-                                    ),
-                                  ],
+                                const Text(
+                                  'A',
+                                  style: kHeader7,
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      'B',
-                                      style: kHeader7,
-                                    ),
-                                    SizedBox(
-                                      width: kBoxSizeWith,
-                                      height: kBoxSizeHeight,
-                                      child: CardWidget(
-                                        value: MyApp.data.nozzle2,
-                                      ),
-                                    ),
-                                  ],
+                                SizedBox(
+                                  width: kBoxSizeWith,
+                                  height: kBoxSizeHeight,
+                                  child: CardWidget(
+                                    value: MyApp.data.nozzle1,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  'B',
+                                  style: kHeader7,
+                                ),
+                                SizedBox(
+                                  width: kBoxSizeWith,
+                                  height: kBoxSizeHeight,
+                                  child: CardWidget(
+                                    value: MyApp.data.nozzle2,
+                                  ),
                                 ),
                               ],
                             ),
@@ -174,48 +174,44 @@ class _FinalConfirmState extends State<FinalConfirm> {
                     ),
                     //-----------------------------------------------------------------------------------------
                     Text(
-                      getTranslated(context, 'dispenser_function') + " 2",
+                      getTranslated(context, 'dispenser') + " 2",
                     ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Column(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      'A',
-                                      style: kHeader7,
-                                    ),
-                                    SizedBox(
-                                      width: kBoxSizeWith,
-                                      height: kBoxSizeHeight,
-                                      child: CardWidget(
-                                        value: MyApp.data.nozzle3,
-                                      ),
-                                    ),
-                                  ],
+                                const Text(
+                                  'A',
+                                  style: kHeader7,
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      'B',
-                                      style: kHeader7,
-                                    ),
-                                    SizedBox(
-                                      width: kBoxSizeWith,
-                                      height: kBoxSizeHeight,
-                                      child: CardWidget(
-                                        value: MyApp.data.nozzle4,
-                                      ),
-                                    ),
-                                  ],
+                                SizedBox(
+                                  width: kBoxSizeWith,
+                                  height: kBoxSizeHeight,
+                                  child: CardWidget(
+                                    value: MyApp.data.nozzle3,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  'B',
+                                  style: kHeader7,
+                                ),
+                                SizedBox(
+                                  width: kBoxSizeWith,
+                                  height: kBoxSizeHeight,
+                                  child: CardWidget(
+                                    value: MyApp.data.nozzle4,
+                                  ),
                                 ),
                               ],
                             ),
@@ -226,48 +222,44 @@ class _FinalConfirmState extends State<FinalConfirm> {
                     ),
                     //--------------------------------------------------------------------------------------------------------
                     Text(
-                      getTranslated(context, 'dispenser_function') + " 3",
+                      getTranslated(context, 'dispenser') + " 3",
                     ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Column(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      'A',
-                                      style: kHeader7,
-                                    ),
-                                    SizedBox(
-                                      width: kBoxSizeWith,
-                                      height: kBoxSizeHeight,
-                                      child: CardWidget(
-                                        value: MyApp.data.nozzle5,
-                                      ),
-                                    ),
-                                  ],
+                                const Text(
+                                  'A',
+                                  style: kHeader7,
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      'B',
-                                      style: kHeader7,
-                                    ),
-                                    SizedBox(
-                                      width: kBoxSizeWith,
-                                      height: kBoxSizeHeight,
-                                      child: CardWidget(
-                                        value: MyApp.data.nozzle6,
-                                      ),
-                                    ),
-                                  ],
+                                SizedBox(
+                                  width: kBoxSizeWith,
+                                  height: kBoxSizeHeight,
+                                  child: CardWidget(
+                                    value: MyApp.data.nozzle5,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  'B',
+                                  style: kHeader7,
+                                ),
+                                SizedBox(
+                                  width: kBoxSizeWith,
+                                  height: kBoxSizeHeight,
+                                  child: CardWidget(
+                                    value: MyApp.data.nozzle6,
+                                  ),
                                 ),
                               ],
                             ),
@@ -290,23 +282,25 @@ class _FinalConfirmState extends State<FinalConfirm> {
                       margin: const EdgeInsets.all(10.0),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Column(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  getTranslated(
-                                      context, 'payment_function_mess'),
+                            Expanded(
+                              flex:2,
+                              child: Text(
+                                getTranslated(
+                                    context, 'payment_function_mess'),
+                              ),
+                            ),
+                            Expanded(
+                              flex:1,
+                              child: SizedBox(
+                                width: kBoxSizeWith,
+                                height: kBoxSizeHeight,
+                                child: CardWidget(
+                                  value: MyApp.data.totalShiftResult,
                                 ),
-                                SizedBox(
-                                  width: kBoxSizeWith,
-                                  height: kBoxSizeHeight,
-                                  child: CardWidget(
-                                    value: MyApp.data.totalShiftResult,
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
                           ],
                         ),
@@ -526,15 +520,25 @@ showAlertDialog(BuildContext context, String userName) {
       getTranslated(context, 'login_main_page'),
     ),
     onPressed: () {
-      Navigator.pushReplacement(context,
-          PageTransition(child: HomePage(), type: PageTransitionType.fade));
+      // Navigator.pushReplacement(context,
+      //     PageTransition(child: HomePage(), type: PageTransitionType.fade));
+      Navigator.pushAndRemoveUntil(context, PageTransition(child: HomePage(), type: PageTransitionType.leftToRight), (route) => false);
     },
   );
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
-    content: Text(
-      getTranslated(context, 'god_bless_you'),
+    content: SizedBox(
+      height: 100,
+      width: 100,
+      child: Center(
+        child: Text(
+          getTranslated(context, 'god_bless_you'),
+          style: const TextStyle(
+            fontSize: 26,
+          ),
+        ),
+      ),
     ),
     actions: [
       cancelButton,
@@ -563,7 +567,7 @@ showProgressAlertDialog(BuildContext context) {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
+        children: const [
           SpinKitCircle(
             size: 50.0,
             color: Colors.indigo,

@@ -19,6 +19,7 @@ class Payment extends StatefulWidget {
 
 class _PaymentState extends State<Payment> {
   int aPrice = 6568;
+  bool checkedValue = false;
   final TextEditingController _textEditingController = TextEditingController();
 
   @override
@@ -202,50 +203,111 @@ class _PaymentState extends State<Payment> {
 
                       Container(
                         margin: const EdgeInsets.all(10.0),
+                        decoration: dispenserPlateDecoration,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Column(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      getTranslated(context, 'payment_cash_mess'),
-                                    ),
+                              Expanded(
+                                child: Text(
+                                  getTranslated(context, 'payment_cash_mess'),
+                                ),
+                              ),
+                              Expanded(
+                                child: SizedBox(
+                                  width: kBoxSizeWith,
+                                  height: kBoxSizeHeight,
+                                  child: CardWidget(
+                                    value: persianInUSFormat.format(
+                                        totalWithoutFormat -
+                                            paymentChangeValue),
                                   ),
-                                  Expanded(
-                                    child: SizedBox(
-                                      width: kBoxSizeWith,
-                                      height: kBoxSizeHeight,
-                                      child: CardWidget(
-                                        value: persianInUSFormat.format(
-                                            totalWithoutFormat -
-                                                paymentChangeValue),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
                             ],
                           ),
                         ),
+                      ),
+
+                      const SizedBox(
+                        height: 10.0,
+                        width: 330,
+                      ),
+
+                      Container(
+                        margin: const EdgeInsets.all(10.0),
                         decoration: dispenserPlateDecoration,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                  child: CheckboxListTile(
+                                value: checkedValue,
+                                onChanged: (value) {
+                                  setState(() {
+                                    checkedValue = value!;
+                                  });
+                                },
+                                title: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const Text(
+                                          "متعهد می شوم مبلغ ",
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                        Text(
+                                          "${persianInUSFormat.format(totalWithoutFormat - paymentChangeValue)} ریال",
+                                          style: const TextStyle(
+                                            locale: Locale('EN'),
+                                            fontSize: 16,
+                                            color: kErrorColor,
+                                            decoration:
+                                                TextDecoration.underline,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    const Text(
+                                      " را به صورت وجه نقدی تحویل دهم.",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                controlAffinity: ListTileControlAffinity
+                                    .leading, //  <-- leading Checkbox
+                              )),
+                            ],
+                          ),
+                        ),
                       ),
 
                       const SizedBox(
                         height: 8.0,
                       ),
-                      ElevatedButton(
+                      (checkedValue) ? ElevatedButton(
                         onPressed: () {
                           if (_textEditingController.text == '') {
                             showSnackBar(context, "کارت خوان را وارد نمایید");
+                          } else if (int.parse(_textEditingController.text) >
+                              totalWithoutFormat) {
+                            showSnackBar(
+                                context, "وجه نقدی نمیتواند منفی باشد");
                           } else {
                             MyApp.data.totalShiftCash =
                                 totalWithoutFormat.toString();
-                            MyApp.data.cardCash =
-                                _textEditingController.text;
+                            MyApp.data.cardCash = _textEditingController.text;
                             MyApp.data.handCash = (totalWithoutFormat -
                                     int.parse(_textEditingController.text))
                                 .toString();
@@ -269,6 +331,20 @@ class _PaymentState extends State<Payment> {
                         ),
                         style: ElevatedButton.styleFrom(
                           primary: kPrimaryColor,
+                          padding: const EdgeInsets.all(8),
+                        ),
+                      ) : ElevatedButton(
+                        onPressed: () {},
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              getTranslated(context, 'next_step'),
+                            ),
+                          ],
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          primary: const Color(0xFF777777),
                           padding: const EdgeInsets.all(8),
                         ),
                       ),

@@ -42,34 +42,6 @@ class CallPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                TextButton(
-                  onPressed: ()
-                  => UrlLauncher.launch(
-                    getTranslated(context, "tel2_local_code"),),
-                  child: Text(
-                    getTranslated(context, "tel2"),
-                    locale: const Locale('EN'),
-                    style: const TextStyle(
-                      fontFamily: 'Poppins',
-                      letterSpacing: 4,
-                      locale: Locale('en'),
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: ()
-                  => UrlLauncher.launch(
-                    getTranslated(context, "tel3_local_code"),),
-                  child: Text(
-                      getTranslated(context, "tel3"),
-                    locale: const Locale('EN'),
-                    style: const TextStyle(
-                      fontFamily: 'Poppins',
-                      letterSpacing: 4,
-                      locale: Locale('en'),
-                    ),
-                  ),
-                ),
               ],
             ),
           ),

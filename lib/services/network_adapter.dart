@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:ftm_service_app/constructor.dart';
 import 'package:ftm_service_app/structures/data_structures.dart';
-import 'package:ftm_service_app/structures/shift_data.dart';
 import 'package:http/http.dart' as http;
 
 Future<DataStructures> connect(
@@ -96,7 +95,7 @@ Future<dynamic> contradiction({
   }
 }
 
-Future<DataStructures> sendData({
+Future<dynamic> sendData({
   required String auth,
   required DataStructures shiftData,
 }) async {
@@ -133,7 +132,8 @@ Future<DataStructures> sendData({
       headers: headers, encoding: Encoding.getByName('utf-8'), body: msg);
   if (response.statusCode == 200) {
     // in My project statusCode  = 200
-    return DataStructures.fromJson(jsonDecode(response.body));
+    print(response.body);
+    return jsonDecode(response.body);
   } else {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
