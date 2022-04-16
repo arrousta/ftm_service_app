@@ -197,23 +197,28 @@ class _EditPageState extends State<EditPage> {
                             padding: const EdgeInsets.all(8),
                           ),
                           onPressed: () {
-                            showAlert(context, onPress: () {
-                              Navigator.pop(context);
-                              showProgressAlertDialog(context);
-                              DataStructures contData = DataStructures();
+                            // showAlert(context, onPress: () {
+                            //   Navigator.pop(context);
+                            //   showProgressAlertDialog(context);
+                            //   DataStructures contData = DataStructures();
 
-                              if (editShiftList[1] == 0 ||
-                                  editShiftList[2] == 0 ||
-                                  editShiftList[3] == 0 ||
-                                  editShiftList[4] == 0 ||
-                                  editShiftList[5] == 0 ||
-                                  editShiftList[6] == 0) {
-                                showSnackBar(
-                                  context,
-                                  getTranslated(
-                                      context, "dispenser_data_warning1"),
-                                );
-                              } else {
+                            if (editShiftList[1] == 0 ||
+                                editShiftList[2] == 0 ||
+                                editShiftList[3] == 0 ||
+                                editShiftList[4] == 0 ||
+                                editShiftList[5] == 0 ||
+                                editShiftList[6] == 0) {
+                              showSnackBar(
+                                context,
+                                getTranslated(
+                                    context, "dispenser_data_warning1"),
+                              );
+                            } else {
+                              showAlert(context, onPress: () {
+                                Navigator.pop(context);
+                                showProgressAlertDialog(context);
+                                DataStructures contData = DataStructures();
+
                                 contData.nozzle1 = '${editShiftList[1]}';
                                 contData.nozzle2 = '${editShiftList[2]}';
                                 contData.nozzle3 = '${editShiftList[3]}';
@@ -222,8 +227,9 @@ class _EditPageState extends State<EditPage> {
                                 contData.nozzle6 = '${editShiftList[6]}';
 
                                 getResponse(
-                                        auth: MyApp.data.token, data: contData)
-                                    .then(
+                                  auth: MyApp.data.token,
+                                  data: contData,
+                                ).then(
                                   (value) {
                                     if (value == 'ok') {
                                       MyApp.data.shiftStatus = 'shift_start';
@@ -269,8 +275,8 @@ class _EditPageState extends State<EditPage> {
                                     showSnackBar(context, e.toString());
                                   },
                                 );
-                              }
-                            });
+                              });
+                            }
                           }),
                     ],
                   ),

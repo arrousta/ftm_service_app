@@ -70,14 +70,21 @@ class _EditNozzleWidgetState extends State<EditNozzleWidget> {
                         setState(() {
                           if (value != '') {
                             _functionResult = int.parse(value);
-                            if (_functionResult >=
-                                int.parse(widget.lastShift)) {
-                              editShiftList[widget.id] = _functionResult;
-                            } else {
-                              editShiftList.insert(widget.id, _functionResult);
-                            }
+
+                            editShiftList[widget.id] = _functionResult;
+                            print("EditNozzleWidget 1 : " + editShiftList.toString());
+
+                            // if (_functionResult >= int.parse(widget.lastShift)) {
+                            //   editShiftList[widget.id] = _functionResult;
+                            //   print("EditNozzleWidget 1 : " + editShiftList.toString());
+                            // } else {//-----------------------------------------------------------------------------------------------------
+                            //   editShiftList.insert(widget.id, _functionResult);
+                            //   print("EditNozzleWidget 2 : " + editShiftList.toString());
+                            // }
                           } else {
                             _functionResult = 0;
+                            print("EditNozzleWidget 2 : " + editShiftList.toString());
+
                           }
                         });
                       },

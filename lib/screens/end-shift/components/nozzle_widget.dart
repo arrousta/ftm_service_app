@@ -79,11 +79,11 @@ class _NozzleWidgetState extends State<NozzleWidget> {
                                   int.parse(widget.startShift);
 
                               endSiftList[widget.id] = _functionResult;
-                              print("1" + endSiftList.toString());
-                              print("2" + endSiftFunctionList.toString());
+                              print("NozzleWidget 1 : " + endSiftList.toString());
+                              print("NozzleWidget 2 : " + endSiftFunctionList.toString());
                             } else {
                               endSiftList[widget.id] = 0;
-                              print("3" + endSiftList.toString());
+                              print("NozzleWidget 3 : " + endSiftList.toString());
                             }
                           }
                         });
